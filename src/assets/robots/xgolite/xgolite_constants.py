@@ -39,16 +39,18 @@ XGOLITE_XML_ACTUATOR = XmlPositionActuatorCfg(
 # Keyframes.
 ##
 
-# Stand pose derived on the URDF-generated model (build_model.py): support
-# polygon [-53, +81] mm brackets the CoM (+12 mm) with 69/65 mm margins,
-# hip height 144 mm, calf 0.24 rad from its extension limit. Note the URDF
-# zero has the calf swept ~63 deg forward — earlier hand-authored models
-# assumed straight-down zero and placed feet 50-90 mm wrong.
+# Stand pose derived on the URDF-generated model (build_model.py) and
+# user-approved against the real robot 2026-07-06: hip height 116 mm (75%
+# leg extension), support polygon margins 67/67 mm around the CoM, calf
+# 2.5 rad from extension / 0.9 rad from flexion limits. Note the URDF zero
+# has the calf swept ~63 deg forward — earlier hand-authored models assumed
+# straight-down zero and placed feet 50-90 mm wrong; a 144 mm stand tried
+# before this one was ~98% extended (near-singular, no push-off room).
 INIT_STATE = EntityCfg.InitialStateCfg(
-  pos=(0.0, 0.0, 0.15),
+  pos=(0.0, 0.0, 0.125),
   joint_pos={
-    "^(fl|fr|bl|br)_thigh_joint$": -0.15,
-    "^(fl|fr|bl|br)_calf_joint$": -0.85,
+    "^(fl|fr|bl|br)_thigh_joint$": -0.90,
+    "^(fl|fr|bl|br)_calf_joint$": 0.28,
     "^(fl|fr|bl|br)_hip_joint$": 0.0,
   },
   joint_vel={".*": 0.0},
