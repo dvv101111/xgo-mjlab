@@ -1,0 +1,153 @@
+<mujoco model="xgo_lite2">
+  <!--
+    XGO-Lite2 locomotion model (open-firmware stack).
+
+    Authored from measured data, not the vendor model:
+    - kinematics: lite2_description.urdf (SolidWorks export) — hip positions
+      (+-0.0978/-0.0683 x, +-0.0225 y, -0.0199 z), thigh standoff 0.0466 m,
+      thigh length 0.0549 m, calf length ~0.0717 m (mesh-measured foot tip)
+    - joint ranges: hardware calibration (Quadruped-robot
+      config/servo_calibration.json), symmetric conservative bounds so they
+      stay valid whichever model_sign direction verification assigns
+    - actuators: Feetech SCS 2.3 kg*cm => forcerange +-0.22 N*m; kp is a
+      PLACEHOLDER until identified from real step-response telemetry
+    - masses: mini-proportioned estimates scaled to ~0.62 kg total (URDF
+      masses cover plastic shells only and are unusable); refine after
+      weighing the robot
+    - arm: physically a planar 2-pitch arm (shoulder 53 / elbow 52) + claw
+      (51); FROZEN in the folded pose for locomotion training and lumped
+      into the base mass. Action space = 12 leg joints.
+
+    Conventions (must match Quadruped-robot config/lite2_joint_map.yaml):
+    x+ forward, y+ left, z up. qpos 0 = legs straight down = hardware
+    calibration zero. Hip positive = abduction (axis mirrored L/R); thigh
+    and calf rotate about -Y on all legs (positive = foot swings forward).
+  -->
+  <compiler angle="radian" autolimits="true" />
+
+  <default>
+    <joint damping="0.04" frictionloss="0.0001" armature="0.0025" />
+    <default class="joint_motor">
+      <geom contype="1" conaffinity="0" condim="1" />
+      <joint damping="0.05" frictionloss="0.001" armature="0.002" />
+      <position kp="0.7" kv="0.0" forcerange="-0.22 0.22" ctrlrange="-1.57 1.57" />
+    </default>
+    <default class="visual">
+      <geom contype="0" conaffinity="0" density="0" group="1" />
+    </default>
+  </default>
+
+  <sensor>
+    <framequat name="orientation" objtype="site" noise="0.001" objname="imu" />
+    <gyro name="angular-velocity" site="imu" noise="0.005" />
+    <gyro name="imu_ang_vel" site="imu" />
+    <velocimeter name="imu_lin_vel" site="imu" />
+    <accelerometer name="imu_accel" site="imu" />
+    <subtreeangmom name="root_angmom" body="base" />
+  </sensor>
+
+  <worldbody>
+    <body name="base" pos="0 0 0.13">
+      <joint name="floating_base" type="free" />
+      <!-- body box from base_link mesh bbox; mass includes electronics,
+           battery, hip servos and the folded arm -->
+      <geom name="base" type="box" size="0.0905 0.0344 0.0265" pos="0.0127 0 -0.0065"
+            mass="0.32" contype="1" conaffinity="0" condim="1" rgba="0.85 0.85 0.85 1" />
+      <!-- folded arm, visual only (mass lumped into base) -->
+      <geom name="arm_folded" type="box" size="0.012 0.030 0.020" pos="0.075 0 0.030"
+            class="visual" rgba="0.7 0.7 0.7 1" />
+      <site name="imu" pos="0 0 0" quat="1 0 0 0" />
+
+      <body name="fl_hip" pos="0.0978 0.0225 -0.0199">
+        <joint name="fl_hip_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-0.22 0.22" />
+        <geom name="fl_hip" type="box" size="0.012 0.018 0.012" pos="0 0.012 0" mass="0.015"
+              class="visual" rgba="0.75 0.75 0.75 1" />
+        <body name="fl_thigh" pos="0 0.0466 0">
+          <joint name="fl_thigh_joint" pos="0 0 0" axis="0 -1 0" range="-1.4 1.4" actuatorfrcrange="-0.22 0.22" />
+          <geom name="fl_thigh" type="capsule" fromto="0 0 0 0 0 -0.0549" size="0.009"
+                mass="0.045" contype="1" conaffinity="0" condim="1" rgba="0.8 0.8 0.8 1" />
+          <body name="fl_calf" pos="0 0 -0.0549">
+            <joint name="fl_calf_joint" pos="0 0 0" axis="0 -1 0" range="-1.1 1.1" actuatorfrcrange="-0.22 0.22" />
+            <geom name="fl_calf" type="capsule" fromto="0 0 0 0 0 -0.0717" size="0.006"
+                  mass="0.015" class="visual" rgba="0.8 0.8 0.8 1" />
+            <geom name="fl_foot_pad" type="sphere" size="0.008" pos="0 0 -0.0717"
+                  contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
+            <site name="fl" pos="0 0 -0.0717" type="sphere" size="0.004" />
+          </body>
+        </body>
+      </body>
+
+      <body name="fr_hip" pos="0.0978 -0.0225 -0.0199">
+        <joint name="fr_hip_joint" pos="0 0 0" axis="-1 0 0" range="-0.6 0.6" actuatorfrcrange="-0.22 0.22" />
+        <geom name="fr_hip" type="box" size="0.012 0.018 0.012" pos="0 -0.012 0" mass="0.015"
+              class="visual" rgba="0.75 0.75 0.75 1" />
+        <body name="fr_thigh" pos="0 -0.0466 0">
+          <joint name="fr_thigh_joint" pos="0 0 0" axis="0 -1 0" range="-1.4 1.4" actuatorfrcrange="-0.22 0.22" />
+          <geom name="fr_thigh" type="capsule" fromto="0 0 0 0 0 -0.0549" size="0.009"
+                mass="0.045" contype="1" conaffinity="0" condim="1" rgba="0.8 0.8 0.8 1" />
+          <body name="fr_calf" pos="0 0 -0.0549">
+            <joint name="fr_calf_joint" pos="0 0 0" axis="0 -1 0" range="-1.1 1.1" actuatorfrcrange="-0.22 0.22" />
+            <geom name="fr_calf" type="capsule" fromto="0 0 0 0 0 -0.0717" size="0.006"
+                  mass="0.015" class="visual" rgba="0.8 0.8 0.8 1" />
+            <geom name="fr_foot_pad" type="sphere" size="0.008" pos="0 0 -0.0717"
+                  contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
+            <site name="fr" pos="0 0 -0.0717" type="sphere" size="0.004" />
+          </body>
+        </body>
+      </body>
+
+      <body name="bl_hip" pos="-0.0683 0.0225 -0.0199">
+        <joint name="bl_hip_joint" pos="0 0 0" axis="1 0 0" range="-0.6 0.6" actuatorfrcrange="-0.22 0.22" />
+        <geom name="bl_hip" type="box" size="0.012 0.018 0.012" pos="0 0.012 0" mass="0.015"
+              class="visual" rgba="0.75 0.75 0.75 1" />
+        <body name="bl_thigh" pos="0 0.0466 0">
+          <joint name="bl_thigh_joint" pos="0 0 0" axis="0 -1 0" range="-1.4 1.4" actuatorfrcrange="-0.22 0.22" />
+          <geom name="bl_thigh" type="capsule" fromto="0 0 0 0 0 -0.0549" size="0.009"
+                mass="0.045" contype="1" conaffinity="0" condim="1" rgba="0.8 0.8 0.8 1" />
+          <body name="bl_calf" pos="0 0 -0.0549">
+            <joint name="bl_calf_joint" pos="0 0 0" axis="0 -1 0" range="-1.1 1.1" actuatorfrcrange="-0.22 0.22" />
+            <geom name="bl_calf" type="capsule" fromto="0 0 0 0 0 -0.0717" size="0.006"
+                  mass="0.015" class="visual" rgba="0.8 0.8 0.8 1" />
+            <geom name="bl_foot_pad" type="sphere" size="0.008" pos="0 0 -0.0717"
+                  contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
+            <site name="bl" pos="0 0 -0.0717" type="sphere" size="0.004" />
+          </body>
+        </body>
+      </body>
+
+      <body name="br_hip" pos="-0.0683 -0.0225 -0.0199">
+        <joint name="br_hip_joint" pos="0 0 0" axis="-1 0 0" range="-0.6 0.6" actuatorfrcrange="-0.22 0.22" />
+        <geom name="br_hip" type="box" size="0.012 0.018 0.012" pos="0 -0.012 0" mass="0.015"
+              class="visual" rgba="0.75 0.75 0.75 1" />
+        <body name="br_thigh" pos="0 -0.0466 0">
+          <joint name="br_thigh_joint" pos="0 0 0" axis="0 -1 0" range="-1.4 1.4" actuatorfrcrange="-0.22 0.22" />
+          <geom name="br_thigh" type="capsule" fromto="0 0 0 0 0 -0.0549" size="0.009"
+                mass="0.045" contype="1" conaffinity="0" condim="1" rgba="0.8 0.8 0.8 1" />
+          <body name="br_calf" pos="0 0 -0.0549">
+            <joint name="br_calf_joint" pos="0 0 0" axis="0 -1 0" range="-1.1 1.1" actuatorfrcrange="-0.22 0.22" />
+            <geom name="br_calf" type="capsule" fromto="0 0 0 0 0 -0.0717" size="0.006"
+                  mass="0.015" class="visual" rgba="0.8 0.8 0.8 1" />
+            <geom name="br_foot_pad" type="sphere" size="0.008" pos="0 0 -0.0717"
+                  contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
+            <site name="br" pos="0 0 -0.0717" type="sphere" size="0.004" />
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <actuator>
+    <position class="joint_motor" name="fl_hip_joint" joint="fl_hip_joint" />
+    <position class="joint_motor" name="fl_thigh_joint" joint="fl_thigh_joint" />
+    <position class="joint_motor" name="fl_calf_joint" joint="fl_calf_joint" />
+    <position class="joint_motor" name="fr_hip_joint" joint="fr_hip_joint" />
+    <position class="joint_motor" name="fr_thigh_joint" joint="fr_thigh_joint" />
+    <position class="joint_motor" name="fr_calf_joint" joint="fr_calf_joint" />
+    <position class="joint_motor" name="bl_hip_joint" joint="bl_hip_joint" />
+    <position class="joint_motor" name="bl_thigh_joint" joint="bl_thigh_joint" />
+    <position class="joint_motor" name="bl_calf_joint" joint="bl_calf_joint" />
+    <position class="joint_motor" name="br_hip_joint" joint="br_hip_joint" />
+    <position class="joint_motor" name="br_thigh_joint" joint="br_thigh_joint" />
+    <position class="joint_motor" name="br_calf_joint" joint="br_calf_joint" />
+  </actuator>
+</mujoco>
