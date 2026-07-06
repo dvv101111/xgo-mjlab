@@ -1,5 +1,7 @@
 # luwu_mjlab
 
+> **XGO-Lite2 fork** — see [XGOLITE.md](XGOLITE.md) for this fork's robot model, environment, and train/deploy workflow.
+
 **luwu_mjlab** is the reinforcement learning training environment for [Luwu Dynamics (陆吾智能)](https://www.xgorobot.com/), built to train and evaluate locomotion policies for quadruped robots (XGOMini) in MuJoCo simulation.
 
 The project is based on **[mjlab](https://github.com/mujocolab/mjlab)** v1.2.0, which combines Isaac Lab-style APIs with GPU-accelerated MuJoCo Warp. luwu_mjlab extends mjlab with Luwu robot models and task configurations.
