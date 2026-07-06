@@ -31,7 +31,7 @@ import mujoco
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-QUADRUPED = HERE.parents[4] / "Quadruped-robot"
+QUADRUPED = HERE.parents[4]  # luwu_mjlab is nested inside Quadruped-robot
 URDF = QUADRUPED / "assets" / "robots" / "lite2" / "urdf" / "lite2_description.urdf"
 MESH_SRC = QUADRUPED / "assets" / "robots" / "lite2" / "meshes"
 OUT_XML = HERE / "xmls" / "xgolite.xml"

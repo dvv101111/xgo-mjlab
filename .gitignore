@@ -3,3 +3,6 @@
 outputs
 logs
 wandb
+.venv/
+__pycache__/
+*.pyc
