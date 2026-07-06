@@ -6,7 +6,10 @@ Derived from the xgomini configs; differences:
   weaker servos)
 """
 
+import dataclasses
+
 from src.assets.robots import get_xgolite_robot_cfg
+from src.tasks.velocity import mdp as local_mdp
 from src.tasks.velocity.velocity_env_cfg import make_velocity_env_cfg
 
 from mjlab.envs import ManagerBasedRlEnvCfg
@@ -96,14 +99,20 @@ def xgolite_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   cfg.rewards["pose"].params["std_walking"] = _POSE_STD["walking"]
   cfg.rewards["pose"].params["std_running"] = _POSE_STD["walking"]
 
-  cfg.rewards["track_linear_velocity"].weight = 1.5
-  # Tight sigmas: with the base std the exp reward makes SMALL commands
-  # nearly free to ignore (0.15 m/s lateral error cost ~9% at std 0.5) —
-  # v8 hardware only tracked commands near the range top and ignored
-  # lateral entirely.
-  cfg.rewards["track_linear_velocity"].params["std"] = 0.25
-  cfg.rewards["track_angular_velocity"].weight = 1.5
-  cfg.rewards["track_angular_velocity"].params["std"] = 0.35
+  # Adaptive tracking sigma (sigma_eff = std + std_gain*|cmd|): a fixed
+  # sigma can't serve both ends of the command range — v8 (std 0.5)
+  # ignored small commands (lateral dead, slow turns sloppy), v9
+  # (std 0.25) flatlined on large ones (0.9 m/s never tracked, err 0.88).
+  cfg.rewards["track_linear_velocity"] = RewardTermCfg(
+    func=local_mdp.track_linear_velocity_adaptive,
+    weight=1.5,
+    params={"command_name": "twist", "std": 0.15, "std_gain": 0.5},
+  )
+  cfg.rewards["track_angular_velocity"] = RewardTermCfg(
+    func=local_mdp.track_angular_velocity_adaptive,
+    weight=1.5,
+    params={"command_name": "twist", "std": 0.2, "std_gain": 0.4},
+  )
   cfg.rewards["body_ang_vel"].weight = -0.08
   cfg.rewards["angular_momentum"].weight = -0.03
   cfg.rewards["foot_gait"].params["period"] = 0.4
@@ -167,8 +176,15 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   del cfg.observations["actor"].terms["height_scan"]
   del cfg.observations["critic"].terms["height_scan"]
 
-  twist_cmd = cfg.commands["twist"]
-  assert isinstance(twist_cmd, UniformVelocityCommandCfg)
+  # Rebuild the twist command as the FORK's class: the base cfg uses the
+  # upstream mjlab term, which silently ignores axis_focus_probs (in v8/v9
+  # the attribute was set but never read — lateral exposure stayed ~1%).
+  old_twist = cfg.commands["twist"]
+  assert isinstance(old_twist, UniformVelocityCommandCfg)
+  twist_cmd = local_mdp.UniformVelocityCommandCfg(
+    **{f.name: getattr(old_twist, f.name) for f in dataclasses.fields(old_twist)}
+  )
+  cfg.commands["twist"] = twist_cmd
   twist_cmd.heading_command = False
   twist_cmd.rel_heading_envs = 0.0
   twist_cmd.rel_standing_envs = 0.0

@@ -40,6 +40,50 @@ def track_linear_velocity(
   return torch.exp(-lin_vel_error / std**2)
 
 
+def track_linear_velocity_adaptive(
+  env: ManagerBasedRlEnv,
+  std: float,
+  std_gain: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """track_linear_velocity with sigma scaled by command magnitude.
+
+  A fixed sigma cannot serve both ends of the command range: tight makes
+  large commands flatline exp() at the initial error (no gradient, the
+  policy gives up); loose makes small commands nearly free to ignore.
+  sigma_eff = std + std_gain * |cmd_xy| keeps both regimes shaped.
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  actual = asset.data.root_link_lin_vel_b
+  xy_error = torch.sum(torch.square(command[:, :2] - actual[:, :2]), dim=1)
+  z_error = torch.square(actual[:, 2])
+  lin_vel_error = xy_error + (2 * z_error)
+  std_eff = std + std_gain * torch.norm(command[:, :2], dim=1)
+  return torch.exp(-lin_vel_error / std_eff**2)
+
+
+def track_angular_velocity_adaptive(
+  env: ManagerBasedRlEnv,
+  std: float,
+  std_gain: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """track_angular_velocity with sigma scaled by |commanded yaw rate|."""
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  actual = asset.data.root_link_ang_vel_b
+  z_error = torch.square(command[:, 2] - actual[:, 2])
+  xy_error = torch.sum(torch.square(actual[:, :2]), dim=1)
+  ang_vel_error = z_error + (0.05 * xy_error)
+  std_eff = std + std_gain * command[:, 2].abs()
+  return torch.exp(-ang_vel_error / std_eff**2)
+
+
 def track_angular_velocity(
   env: ManagerBasedRlEnv,
   std: float,
