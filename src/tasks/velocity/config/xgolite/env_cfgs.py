@@ -98,6 +98,12 @@ def xgolite_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   cfg.rewards["pose"].params["std_standing"] = _POSE_STD["standing"]
   cfg.rewards["pose"].params["std_walking"] = _POSE_STD["walking"]
   cfg.rewards["pose"].params["std_running"] = _POSE_STD["walking"]
+  # 0.05 stand thresholds everywhere (pose posture, gait reward, command
+  # zeroing, phase obs, deploy STAND_CMD_NORM): lateral commands top out
+  # at 0.08, and at the default 0.1 a sidestep command was treated as
+  # "standing" by all five gates — v11b never trained or executed lateral.
+  cfg.rewards["pose"].params["walking_threshold"] = 0.05
+  cfg.rewards["foot_gait"].params["command_threshold"] = 0.05
 
   # Adaptive tracking sigma (sigma_eff = std + std_gain*|cmd|): a fixed
   # sigma can't serve both ends of the command range — v8 (std 0.5)
@@ -191,11 +197,10 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   # Hardware is driven at up to ~1.0 fwd and fast backward; v8 trained to
   # 0.7 max and became unstable/lost traction when extrapolating past 0.8.
   twist_cmd.ranges.lin_vel_x = (-0.8, 1.0)
-  # +/-0.08: measured capability. A hand-tuned open-loop crawl tops out
-  # at ~0.045 m/s and trained policies (three reward schemes) all
-  # asymptote at ~0.04 — 0.12+ m/s sidestep exceeds what 0.22 N.m
-  # servos + point feet can do. Commands must stay trackable.
-  twist_cmd.ranges.lin_vel_y = (-0.08, 0.08)
+  # +/-0.12: open-loop probe ceiling is ~0.045 m/s but closed-loop may
+  # beat it — command past the estimate and let adaptive sigma keep
+  # partial tracking rewarding (must stay above the 0.05 stand gates).
+  twist_cmd.ranges.lin_vel_y = (-0.12, 0.12)
   twist_cmd.ranges.ang_vel_z = (-1.0, 1.0)
   twist_cmd.ranges.heading = None
   # 20% pure-rotation / 25% pure-lateral / 10% backward-only episodes

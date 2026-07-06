@@ -91,7 +91,9 @@ class UniformVelocityCommand(CommandTerm):
         env_ids[back_only], 0
       ].abs()
       self.vel_command_b[env_ids[back_only], 1:3] = 0.0
-    self.vel_command_b[env_ids, :] *= (torch.norm(self.vel_command_b[env_ids, :], dim=1) > 0.1).unsqueeze(1)
+    # 0.05 stand threshold: must sit BELOW the vy range (+/-0.08) or every
+    # pure-lateral episode is zeroed into a standing episode (v11 bug).
+    self.vel_command_b[env_ids, :] *= (torch.norm(self.vel_command_b[env_ids, :], dim=1) > 0.05).unsqueeze(1)
     if self.cfg.heading_command:
       assert self.cfg.ranges.heading is not None
       self.heading_target[env_ids] = r.uniform_(*self.cfg.ranges.heading)

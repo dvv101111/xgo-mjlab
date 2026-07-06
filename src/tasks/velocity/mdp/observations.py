@@ -49,7 +49,8 @@ def phase(env: ManagerBasedRlEnv, period: float, command_name: str) -> torch.Ten
     phase = torch.zeros(env.num_envs, 2, device=env.device)
     phase[:, 0] = torch.sin(global_phase * torch.pi * 2.0)
     phase[:, 1] = torch.cos(global_phase * torch.pi * 2.0)
-    stand_mask = torch.linalg.norm(env.command_manager.get_command(command_name), dim=1) < 0.1
+    # 0.05: below the lateral command range so sidestep keeps a gait clock.
+    stand_mask = torch.linalg.norm(env.command_manager.get_command(command_name), dim=1) < 0.05
     phase = torch.where(stand_mask.unsqueeze(1), torch.zeros_like(phase), phase)
     return phase
 
