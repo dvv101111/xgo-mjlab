@@ -29,14 +29,17 @@ SETTLE_STEPS = 100  # skip transient after reset before measuring
 # (vx, vy, wz) forced per bucket. cw/ccw separated on purpose: the br hip's
 # tighter joint limit (-0.65 rad) predicts a possible turn asymmetry.
 BUCKETS = {
-    "fwd":      (0.4, 0.0, 0.0),
-    "back":     (-0.3, 0.0, 0.0),
-    "left":     (0.0, 0.12, 0.0),
-    "right":    (0.0, -0.12, 0.0),
-    "ccw":      (0.0, 0.0, 0.8),
-    "cw":       (0.0, 0.0, -0.8),
-    "fwd_turn": (0.3, 0.0, 0.6),
-    "stand":    (0.0, 0.0, 0.0),
+    "fwd":       (0.4, 0.0, 0.0),
+    "fwd_fast":  (0.9, 0.0, 0.0),
+    "back":      (-0.3, 0.0, 0.0),
+    "back_slow": (-0.15, 0.0, 0.0),
+    "left":      (0.0, 0.12, 0.0),
+    "right":     (0.0, -0.12, 0.0),
+    "ccw":       (0.0, 0.0, 0.8),
+    "cw":        (0.0, 0.0, -0.8),
+    "ccw_slow":  (0.0, 0.0, 0.4),
+    "fwd_turn":  (0.3, 0.0, 0.6),
+    "stand":     (0.0, 0.0, 0.0),
 }
 
 configure_torch_backends()

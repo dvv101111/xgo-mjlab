@@ -97,11 +97,13 @@ def xgolite_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   cfg.rewards["pose"].params["std_running"] = _POSE_STD["walking"]
 
   cfg.rewards["track_linear_velocity"].weight = 1.5
-  # Yaw parity with linear tracking: at the base 1.0 / std 0.707 a yaw error
-  # costs ~3x less than the same linear error — v6 turned slowly because
-  # ignoring wz was cheap.
+  # Tight sigmas: with the base std the exp reward makes SMALL commands
+  # nearly free to ignore (0.15 m/s lateral error cost ~9% at std 0.5) —
+  # v8 hardware only tracked commands near the range top and ignored
+  # lateral entirely.
+  cfg.rewards["track_linear_velocity"].params["std"] = 0.25
   cfg.rewards["track_angular_velocity"].weight = 1.5
-  cfg.rewards["track_angular_velocity"].params["std"] = 0.5
+  cfg.rewards["track_angular_velocity"].params["std"] = 0.35
   cfg.rewards["body_ang_vel"].weight = -0.08
   cfg.rewards["angular_momentum"].weight = -0.03
   cfg.rewards["foot_gait"].params["period"] = 0.4
@@ -170,16 +172,19 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   twist_cmd.heading_command = False
   twist_cmd.rel_heading_envs = 0.0
   twist_cmd.rel_standing_envs = 0.0
-  twist_cmd.ranges.lin_vel_x = (-0.5, 0.7)
+  # Hardware is driven at up to ~1.0 fwd and fast backward; v8 trained to
+  # 0.7 max and became unstable/lost traction when extrapolating past 0.8.
+  twist_cmd.ranges.lin_vel_x = (-0.8, 1.0)
   # +/-0.15: hip-roll geometry gives ~6 cm lateral stride per 0.4 s gait
   # cycle; the old +/-0.25 was mechanically unreachable, teaching the
   # policy that vy tracking never pays.
   twist_cmd.ranges.lin_vel_y = (-0.15, 0.15)
   twist_cmd.ranges.ang_vel_z = (-1.0, 1.0)
   twist_cmd.ranges.heading = None
-  # 20% pure-rotation / 15% pure-lateral / 10% backward-only episodes
-  # (uniform sampling alone gives lateral ~1% and rotation ~6% exposure).
-  twist_cmd.axis_focus_probs = (0.20, 0.15, 0.10)
+  # 20% pure-rotation / 25% pure-lateral / 10% backward-only episodes
+  # (uniform sampling alone gives lateral ~1% and rotation ~6% exposure;
+  # lateral raised 15->25% after v8 hardware still ignored vy).
+  twist_cmd.axis_focus_probs = (0.20, 0.25, 0.10)
 
   cfg.curriculum.pop("terrain_levels", None)
   cfg.curriculum.pop("command_vel", None)
