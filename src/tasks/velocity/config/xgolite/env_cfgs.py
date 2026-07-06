@@ -197,10 +197,9 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   # Hardware is driven at up to ~1.0 fwd and fast backward; v8 trained to
   # 0.7 max and became unstable/lost traction when extrapolating past 0.8.
   twist_cmd.ranges.lin_vel_x = (-0.8, 1.0)
-  # +/-0.12: open-loop probe ceiling is ~0.045 m/s but closed-loop may
-  # beat it — command past the estimate and let adaptive sigma keep
-  # partial tracking rewarding (must stay above the 0.05 stand gates).
-  twist_cmd.ranges.lin_vel_y = (-0.12, 0.12)
+  # +/-0.08: just above the measured ~0.045-0.05 m/s lateral capability
+  # (and above the 0.05 stand gates, or lateral episodes become standing).
+  twist_cmd.ranges.lin_vel_y = (-0.08, 0.08)
   twist_cmd.ranges.ang_vel_z = (-1.0, 1.0)
   twist_cmd.ranges.heading = None
   # 20% pure-rotation / 25% pure-lateral / 10% backward-only episodes
