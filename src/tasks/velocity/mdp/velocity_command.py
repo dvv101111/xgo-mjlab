@@ -74,6 +74,23 @@ class UniformVelocityCommand(CommandTerm):
     self.vel_command_b[env_ids, 0] = r.uniform_(*self.cfg.ranges.lin_vel_x)
     self.vel_command_b[env_ids, 1] = r.uniform_(*self.cfg.ranges.lin_vel_y)
     self.vel_command_b[env_ids, 2] = r.uniform_(*self.cfg.ranges.ang_vel_z)
+    if self.cfg.axis_focus_probs is not None:
+      # Axis-focused episodes: force pure-rotation / pure-lateral /
+      # backward-only commands on a fraction of resamples. Independent
+      # uniform sampling gives pure-lateral ~1% exposure, so minority
+      # directions never get trained without this.
+      p_rot, p_lat, p_back = self.cfg.axis_focus_probs
+      u = torch.rand(len(env_ids), device=self.device)
+      pure_rot = u < p_rot
+      pure_lat = (u >= p_rot) & (u < p_rot + p_lat)
+      back_only = (u >= p_rot + p_lat) & (u < p_rot + p_lat + p_back)
+      self.vel_command_b[env_ids[pure_rot], 0:2] = 0.0
+      self.vel_command_b[env_ids[pure_lat], 0] = 0.0
+      self.vel_command_b[env_ids[pure_lat], 2] = 0.0
+      self.vel_command_b[env_ids[back_only], 0] = -self.vel_command_b[
+        env_ids[back_only], 0
+      ].abs()
+      self.vel_command_b[env_ids[back_only], 1:3] = 0.0
     self.vel_command_b[env_ids, :] *= (torch.norm(self.vel_command_b[env_ids, :], dim=1) > 0.1).unsqueeze(1)
     if self.cfg.heading_command:
       assert self.cfg.ranges.heading is not None
@@ -254,6 +271,9 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   rel_standing_envs: float = 0.0
   rel_heading_envs: float = 1.0
   init_velocity_prob: float = 0.0
+  # (p_pure_rotation, p_pure_lateral, p_backward_only) applied at resample;
+  # None = plain independent uniform sampling (upstream behavior).
+  axis_focus_probs: tuple[float, float, float] | None = None
 
   @dataclass
   class Ranges:
