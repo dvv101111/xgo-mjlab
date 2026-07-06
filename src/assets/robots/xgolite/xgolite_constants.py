@@ -9,7 +9,7 @@ from pathlib import Path
 import mujoco
 
 from src import SRC_PATH
-from mjlab.actuator import XmlPositionActuatorCfg
+from mjlab.actuator import DelayedActuatorCfg, XmlPositionActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
 
 ##
@@ -31,8 +31,21 @@ def get_spec() -> mujoco.MjSpec:
 # Actuator config.
 ##
 
-XGOLITE_XML_ACTUATOR = XmlPositionActuatorCfg(
-  target_names_expr=(".*",),
+# Hardware loop delay, measured 2026-07-06 with the batching-free driver
+# (tools/actuator_id.py step capture, firmware-clock timebase): ~50 ms from
+# pose command to first servo motion (host-clock p10/p50/p90 = 47/59/78 ms),
+# plus 10-30 ms observation staleness (telemetry uplink + round-robin servo
+# poll). Modeled as a slowly-varying per-env position-target delay of
+# 40-80 ms (20-40 physics steps at 2 ms).
+XGOLITE_XML_ACTUATOR = DelayedActuatorCfg(
+  base_cfg=XmlPositionActuatorCfg(
+    target_names_expr=(".*",),
+  ),
+  delay_target="position",
+  delay_min_lag=20,
+  delay_max_lag=40,
+  delay_hold_prob=0.8,
+  delay_update_period=250,   # reconsider lag every 0.5 s, staggered per env
 )
 
 ##
