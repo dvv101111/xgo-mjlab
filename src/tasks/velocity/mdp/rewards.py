@@ -84,6 +84,69 @@ def track_angular_velocity_adaptive(
   return torch.exp(-ang_vel_error / std_eff**2)
 
 
+def track_lateral_velocity(
+  env: ManagerBasedRlEnv,
+  std: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """Tight-sigma reward on the lateral (body-y) velocity component only.
+
+  v13b lateral fix: with the adaptive sigma (std 0.15 + 0.5*|cmd|), standing
+  still already earns ~84% of the tracking reward at vy=0.08, so lateral
+  asymptoted at ~0.012 m/s of the ~0.045 physical ceiling. A dedicated tight
+  sigma restores the gradient (standing -> 0.08, full capability -> 0.61).
+  Always active (no command gate).
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  vy_error = torch.square(command[:, 1] - asset.data.root_link_lin_vel_b[:, 1])
+  return torch.exp(-vy_error / std**2)
+
+
+def body_pitch_from_gravity(projected_gravity_b: torch.Tensor) -> torch.Tensor:
+  """Body pitch about the body Y axis from projected gravity, in rad.
+
+  Sign convention (v14 command contract): positive = nose UP. For a body
+  pitched nose-down by theta, projected gravity in the base frame is
+  (sin(theta), 0, -cos(theta)), so atan2(-g_x, -g_z) = -theta.
+  """
+  return torch.atan2(-projected_gravity_b[:, 0], -projected_gravity_b[:, 2])
+
+
+def track_body_pitch(
+  env: ManagerBasedRlEnv,
+  std: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """Reward tracking the commanded body pitch (command channel 3)."""
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  pitch_meas = body_pitch_from_gravity(asset.data.projected_gravity_b)
+  pitch_error = torch.square(command[:, 3] - pitch_meas)
+  return torch.exp(-pitch_error / std**2)
+
+
+def track_base_height(
+  env: ManagerBasedRlEnv,
+  std: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """Reward tracking the commanded base height (command channel 4).
+
+  Uses absolute root z: valid on flat terrain only (floor plane at z=0).
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  height_error = torch.square(command[:, 4] - asset.data.root_link_pos_w[:, 2])
+  return torch.exp(-height_error / std**2)
+
+
 def track_angular_velocity(
   env: ManagerBasedRlEnv,
   std: float,
@@ -126,6 +189,38 @@ def body_orientation_l2(
     # Use root link projected gravity.
     xy_squared = torch.sum(torch.square(asset.data.projected_gravity_b[:, :2]), dim=1)
   return xy_squared
+
+
+def body_orientation_cmd_l2(
+  env: ManagerBasedRlEnv,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """body_orientation_l2 made pitch-command-aware (v14).
+
+  The flat-orientation penalty would fight every non-zero pitch command, so
+  pitch is penalized toward the COMMANDED pitch (command channel 3) while
+  roll is still penalized toward 0. For small angles the magnitude matches
+  the upstream term (pitch_err^2 + g_y^2 ~ pitch_err^2 + roll^2), so the
+  existing weight carries over.
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+
+  # Same body_ids branch as body_orientation_l2.
+  if asset_cfg.body_ids:
+    body_quat_w = asset.data.body_link_quat_w[:, asset_cfg.body_ids, :]  # [B, N, 4]
+    body_quat_w = body_quat_w.squeeze(1)  # [B, 4]
+    gravity_w = asset.data.gravity_vec_w  # [3]
+    projected_gravity_b = quat_apply_inverse(body_quat_w, gravity_w)  # [B, 3]
+  else:
+    projected_gravity_b = asset.data.projected_gravity_b
+
+  pitch_meas = body_pitch_from_gravity(projected_gravity_b)
+  pitch_err_sq = torch.square(command[:, 3] - pitch_meas)
+  roll_sq = torch.square(projected_gravity_b[:, 1])
+  return pitch_err_sq + roll_sq
 
 
 def self_collision_cost(
@@ -248,6 +343,8 @@ def feet_gait(
     if command_name is not None:
         command = env.command_manager.get_command(command_name)
         if command is not None:
+            # Gate on the twist slice (indices 0..2) only; the v14 pose
+            # channels must not count toward the "is moving" norm.
             linear_norm = torch.norm(command[:, :2], dim=1)
             angular_norm = torch.abs(command[:, 2])
             total_command = linear_norm + angular_norm
@@ -367,6 +464,22 @@ def soft_landing(
   return cost
 
 
+def _pose_command_deviation(
+  command: torch.Tensor,
+  nominal_pose: tuple[float, float],
+  height_scale: float,
+) -> torch.Tensor:
+  """Rad-equivalent deviation of the pose command from the nominal pose.
+
+  dev = |pitch_cmd - pitch_nom| + height_scale * |h_cmd - h_nom|. The height
+  scale converts meters to a pitch-comparable magnitude (the full +/-0.019 m
+  height range maps to ~0.38 at scale 20, close to the 0.436 max pitch).
+  """
+  return (command[:, 3] - nominal_pose[0]).abs() + height_scale * (
+    command[:, 4] - nominal_pose[1]
+  ).abs()
+
+
 class variable_posture:
   """Penalize deviation from default pose with speed-dependent tolerance.
 
@@ -421,6 +534,9 @@ class variable_posture:
     command_name: str,
     walking_threshold: float = 0.5,
     running_threshold: float = 1.5,
+    pose_relax_gain: float = 0.0,
+    pose_dev_height_scale: float = 20.0,
+    nominal_pose: tuple[float, float] | None = None,
   ) -> torch.Tensor:
     del std_standing, std_walking, std_running  # Unused.
 
@@ -428,6 +544,9 @@ class variable_posture:
     command = env.command_manager.get_command(command_name)
     assert command is not None
 
+    # Speed regime from the twist slice [:3] only (indices 0..2): with the
+    # v14 pose channels appended, a full-vector norm (height ~0.116 always
+    # present) would never classify an env as standing.
     linear_speed = torch.norm(command[:, :2], dim=1)
     angular_speed = torch.abs(command[:, 2])
     total_speed = linear_speed + angular_speed
@@ -444,6 +563,18 @@ class variable_posture:
       + self.std_running * running_mask.unsqueeze(1)
     )
 
+    if pose_relax_gain > 0.0 and command.shape[1] >= 5:
+      # v14 conflict fix: the stand-default joint targets are wrong for a
+      # commanded crouch/pitch, and at std_standing tightness this term would
+      # fight the pose-tracking rewards. Scaling the stds up with the pose
+      # command's deviation from nominal (rather than gating the term off)
+      # keeps the smoothness/symmetry regularization while letting the legs
+      # move as far as the commanded pose requires: at max pitch (0.436 rad,
+      # gain 8) stds grow ~4.5x, turning a hard prior into a loose one.
+      assert nominal_pose is not None, "pose_relax_gain > 0 needs nominal_pose."
+      dev = _pose_command_deviation(command, nominal_pose, pose_dev_height_scale)
+      std = std * (1.0 + pose_relax_gain * dev.unsqueeze(1))
+
     current_joint_pos = asset.data.joint_pos[:, asset_cfg.joint_ids]
     desired_joint_pos = self.default_joint_pos[:, asset_cfg.joint_ids]
     error_squared = torch.square(current_joint_pos - desired_joint_pos)
@@ -455,6 +586,9 @@ def stand_still(
         env: ManagerBasedRlEnv,
         command_name: str,
         command_threshold: float = 0.1,
+        pose_dev_threshold: float | None = None,
+        pose_dev_height_scale: float = 20.0,
+        nominal_pose: tuple[float, float] | None = None,
         asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG
 ) -> torch.Tensor:
     asset: Entity = env.scene[asset_cfg.name]
@@ -467,6 +601,20 @@ def stand_still(
             angular_norm = torch.abs(command[:, 2])
             total_command = linear_norm + angular_norm
             scale = (total_command <= command_threshold).float()
+            if pose_dev_threshold is not None and command.shape[1] >= 5:
+                # v14 conflict fix: this term drags joints to the stand
+                # default whenever the twist is small -- which includes every
+                # pose_hold episode, where the whole point is to HOLD a
+                # non-default crouch. Only apply it when the commanded pose
+                # is (near-)nominal; posed standing is regularized by the
+                # relaxed `pose` term and action_rate instead.
+                assert nominal_pose is not None, (
+                    "pose_dev_threshold needs nominal_pose."
+                )
+                dev = _pose_command_deviation(
+                    command, nominal_pose, pose_dev_height_scale
+                )
+                scale = scale * (dev < pose_dev_threshold).float()
             reward *= scale
     return reward
 

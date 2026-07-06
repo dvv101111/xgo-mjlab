@@ -15,6 +15,8 @@ from mjlab.utils.lab_api.math import (
   wrap_to_pi,
 )
 
+from .rewards import body_pitch_from_gravity
+
 if TYPE_CHECKING:
   import viser
 
@@ -35,7 +37,25 @@ class UniformVelocityCommand(CommandTerm):
 
     self.robot: Entity = env.scene[cfg.entity_name]
 
-    self.vel_command_b = torch.zeros(self.num_envs, 3, device=self.device)
+    # v14 body-pose channels: when pose_mode_probs is set, the command grows
+    # from [vx, vy, wz] to [vx, vy, wz, body_pitch, base_height].
+    self.pose_enabled = cfg.pose_mode_probs is not None
+    if self.pose_enabled:
+      if cfg.ranges.body_pitch is None or cfg.ranges.base_height is None:
+        raise ValueError(
+          "pose_mode_probs is set but ranges.body_pitch/base_height are None."
+        )
+      if cfg.nominal_pose is None:
+        raise ValueError("pose_mode_probs is set but nominal_pose is None.")
+
+    command_dim = 5 if self.pose_enabled else 3
+    self.vel_command_b = torch.zeros(self.num_envs, command_dim, device=self.device)
+    if self.pose_enabled:
+      # Start at the nominal pose so pre-resample observations don't read a
+      # nonsense height-0 command.
+      assert self.cfg.nominal_pose is not None
+      self.vel_command_b[:, 3] = self.cfg.nominal_pose[0]
+      self.vel_command_b[:, 4] = self.cfg.nominal_pose[1]
     self.heading_target = torch.zeros(self.num_envs, device=self.device)
     self.heading_error = torch.zeros(self.num_envs, device=self.device)
     self.is_heading_env = torch.zeros(
@@ -45,6 +65,9 @@ class UniformVelocityCommand(CommandTerm):
 
     self.metrics["error_vel_xy"] = torch.zeros(self.num_envs, device=self.device)
     self.metrics["error_vel_yaw"] = torch.zeros(self.num_envs, device=self.device)
+    if self.pose_enabled:
+      self.metrics["error_pitch"] = torch.zeros(self.num_envs, device=self.device)
+      self.metrics["error_height"] = torch.zeros(self.num_envs, device=self.device)
 
     # Set by create_gui() when the viewer is active.
     self._joystick_enabled: viser.GuiCheckboxHandle | None = None
@@ -68,6 +91,15 @@ class UniformVelocityCommand(CommandTerm):
       torch.abs(self.vel_command_b[:, 2] - self.robot.data.root_link_ang_vel_b[:, 2])
       / max_command_step
     )
+    if self.pose_enabled:
+      pitch_meas = body_pitch_from_gravity(self.robot.data.projected_gravity_b)
+      self.metrics["error_pitch"] += (
+        torch.abs(self.vel_command_b[:, 3] - pitch_meas) / max_command_step
+      )
+      self.metrics["error_height"] += (
+        torch.abs(self.vel_command_b[:, 4] - self.robot.data.root_link_pos_w[:, 2])
+        / max_command_step
+      )
 
   def _resample_command(self, env_ids: torch.Tensor) -> None:
     r = torch.empty(len(env_ids), device=self.device)
@@ -91,9 +123,45 @@ class UniformVelocityCommand(CommandTerm):
         env_ids[back_only], 0
       ].abs()
       self.vel_command_b[env_ids[back_only], 1:3] = 0.0
+    if self.pose_enabled:
+      # v14 pose-mode mix, applied at resample like axis_focus. Modes
+      # (probabilities in cfg.pose_mode_probs, summing to 1):
+      #   nominal:    pose = nominal_pose exactly, twist as sampled above
+      #               (incl. axis_focus) -- keeps the v13b twist curriculum.
+      #   pose_hold:  pose ~ U(ranges), twist forced to ZERO -- learn to
+      #               reach and hold a body pose statically.
+      #   posed_walk: pose ~ U(ranges), twist scaled by 0.5 -- walk while
+      #               holding a non-nominal pose (slower: shorter legs when
+      #               crouched can't cover the full twist range).
+      assert self.cfg.pose_mode_probs is not None
+      assert self.cfg.nominal_pose is not None
+      assert self.cfg.ranges.body_pitch is not None
+      assert self.cfg.ranges.base_height is not None
+      self.vel_command_b[env_ids, 3] = r.uniform_(*self.cfg.ranges.body_pitch)
+      self.vel_command_b[env_ids, 4] = r.uniform_(*self.cfg.ranges.base_height)
+      p_nominal, p_hold, _ = self.cfg.pose_mode_probs
+      u = torch.rand(len(env_ids), device=self.device)
+      nominal = u < p_nominal
+      pose_hold = (u >= p_nominal) & (u < p_nominal + p_hold)
+      posed_walk = u >= p_nominal + p_hold
+      self.vel_command_b[env_ids[nominal], 3] = self.cfg.nominal_pose[0]
+      self.vel_command_b[env_ids[nominal], 4] = self.cfg.nominal_pose[1]
+      self.vel_command_b[env_ids[pose_hold], :3] = 0.0
+      self.vel_command_b[env_ids[posed_walk], :3] *= 0.5
     # 0.05 stand threshold: must sit BELOW the vy range (+/-0.08) or every
     # pure-lateral episode is zeroed into a standing episode (v11 bug).
-    self.vel_command_b[env_ids, :] *= (torch.norm(self.vel_command_b[env_ids, :], dim=1) > 0.05).unsqueeze(1)
+    # Twist slice [:3] ONLY: with the height channel (~0.116) always in the
+    # vector, a full-vector norm would never read "standing", and zeroing the
+    # full row would erase the pose command.
+    # Gate ordering: applied AFTER the posed_walk 0.5 scaling so the invariant
+    # "an active twist command never has norm in (0, 0.05)" holds for every
+    # gate (phase clock, gait, pose regimes, deploy STAND_CMD_NORM). Cost:
+    # ~29% of posed_walk episodes degrade to pose_hold -- all pure-lateral
+    # focus draws (0.5 * 0.08 = 0.04 < 0.05) plus slow-rotation/backward
+    # tails -- so the effective mix is ~50/32/18, and posed walking is
+    # forward/turn dominated. Accepted: 0.04 m/s posed lateral is below the
+    # hardware's useful range anyway.
+    self.vel_command_b[env_ids, :3] *= (torch.norm(self.vel_command_b[env_ids, :3], dim=1) > 0.05).unsqueeze(1)
     if self.cfg.heading_command:
       assert self.cfg.ranges.heading is not None
       self.heading_target[env_ids] = r.uniform_(*self.cfg.ranges.heading)
@@ -125,7 +193,8 @@ class UniformVelocityCommand(CommandTerm):
         max=self.cfg.ranges.ang_vel_z[1],
       )
     standing_env_ids = self.is_standing_env.nonzero(as_tuple=False).flatten()
-    self.vel_command_b[standing_env_ids, :] = 0.0
+    # Zero the twist slice only: standing envs still track their pose command.
+    self.vel_command_b[standing_env_ids, :3] = 0.0
 
   # GUI.
 
@@ -276,6 +345,14 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   # (p_pure_rotation, p_pure_lateral, p_backward_only) applied at resample;
   # None = plain independent uniform sampling (upstream behavior).
   axis_focus_probs: tuple[float, float, float] | None = None
+  # v14 body-pose channels (opt-in; all None = upstream 3-dim behavior).
+  # (p_nominal, p_pose_hold, p_posed_walk) applied at resample; must sum to 1.
+  # When set, the command is [vx, vy, wz, body_pitch, base_height] and
+  # ranges.body_pitch / ranges.base_height / nominal_pose are required.
+  pose_mode_probs: tuple[float, float, float] | None = None
+  # (body_pitch [rad, positive = nose up], base_height [m, root z above the
+  # floor plane]) used verbatim in nominal-mode episodes.
+  nominal_pose: tuple[float, float] | None = None
 
   @dataclass
   class Ranges:
@@ -283,6 +360,9 @@ class UniformVelocityCommandCfg(CommandTermCfg):
     lin_vel_y: tuple[float, float]
     ang_vel_z: tuple[float, float]
     heading: tuple[float, float] | None = None
+    # v14 pose channels; sampled uniformly in pose_hold / posed_walk modes.
+    body_pitch: tuple[float, float] | None = None
+    base_height: tuple[float, float] | None = None
 
   ranges: Ranges
 
@@ -302,3 +382,15 @@ class UniformVelocityCommandCfg(CommandTermCfg):
         "The velocity command has heading commands active (heading_command=True) but "
         "the `ranges.heading` parameter is set to None."
       )
+    if self.pose_mode_probs is not None:
+      if len(self.pose_mode_probs) != 3 or abs(sum(self.pose_mode_probs) - 1.0) > 1e-6:
+        raise ValueError(
+          f"pose_mode_probs must be 3 probabilities summing to 1, got "
+          f"{self.pose_mode_probs}."
+        )
+      if self.ranges.body_pitch is None or self.ranges.base_height is None:
+        raise ValueError(
+          "pose_mode_probs is set but ranges.body_pitch/base_height are None."
+        )
+      if self.nominal_pose is None:
+        raise ValueError("pose_mode_probs is set but nominal_pose is None.")

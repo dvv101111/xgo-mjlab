@@ -26,6 +26,10 @@ FOOT_NAMES = ("fl", "fr", "bl", "br")
 FOOT_PAD_GEOMS = tuple(f"{name}_foot_pad" for name in FOOT_NAMES)
 THIGH_GEOMS = ("fl_thigh", "fr_thigh", "bl_thigh", "br_thigh")
 
+# v14 body-pose command nominal: (body_pitch [rad, positive = nose up],
+# base_height [m, root z above the floor; "stand" keyframe root z 0.1159]).
+NOMINAL_POSE = (0.0, 0.116)
+
 _POSE_STD = {
   "standing": {
     r".*(fl|fr|bl|br)_hip_joint.*": 0.05,
@@ -190,6 +194,15 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   twist_cmd = local_mdp.UniformVelocityCommandCfg(
     **{f.name: getattr(old_twist, f.name) for f in dataclasses.fields(old_twist)}
   )
+  # Ranges too: the fork Ranges adds the v14 body_pitch/base_height fields;
+  # setting them on the copied upstream instance would only attach dynamic
+  # attributes (invisible to dataclasses.asdict / config dumps).
+  twist_cmd.ranges = local_mdp.UniformVelocityCommandCfg.Ranges(
+    **{
+      f.name: getattr(old_twist.ranges, f.name)
+      for f in dataclasses.fields(old_twist.ranges)
+    }
+  )
   cfg.commands["twist"] = twist_cmd
   twist_cmd.heading_command = False
   twist_cmd.rel_heading_envs = 0.0
@@ -206,6 +219,62 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   # (uniform sampling alone gives lateral ~1% and rotation ~6% exposure;
   # lateral raised 15->25% after v8 hardware still ignored vy).
   twist_cmd.axis_focus_probs = (0.20, 0.25, 0.10)
+
+  # v14: two body-pose command channels -> [vx, vy, wz, body_pitch,
+  # base_height]. Flat task only: the height reward uses absolute root z.
+  twist_cmd.ranges.body_pitch = (-0.436, 0.151)   # rad, positive = nose up
+  twist_cmd.ranges.base_height = (0.097, 0.120)   # m, root z above the floor
+  twist_cmd.nominal_pose = NOMINAL_POSE
+  # 50% nominal pose + twist sampled as before (incl. axis_focus) /
+  # 25% pose-hold (random pose, twist zero) /
+  # 25% posed walking (random pose, twist scaled by 0.5).
+  twist_cmd.pose_mode_probs = (0.50, 0.25, 0.25)
+
+  # v14 pose-tracking rewards (fork functions; command channels 3 and 4).
+  cfg.rewards["track_body_pitch"] = RewardTermCfg(
+    func=local_mdp.track_body_pitch,
+    weight=1.0,
+    params={"command_name": "twist", "std": 0.1},
+  )
+  cfg.rewards["track_base_height"] = RewardTermCfg(
+    func=local_mdp.track_base_height,
+    weight=1.0,
+    params={"command_name": "twist", "std": 0.015},
+  )
+  # v13b lateral fix: the adaptive sigma pays standing ~84% of the tracking
+  # reward at vy=0.08, so lateral asymptoted at ~0.012 m/s of the ~0.045
+  # physical ceiling. A dedicated tight-sigma vy term restores the gradient
+  # (standing -> 0.08, full capability -> 0.61). Always active.
+  cfg.rewards["track_lateral_velocity"] = RewardTermCfg(
+    func=local_mdp.track_lateral_velocity,
+    weight=0.5,
+    params={"command_name": "twist", "std": 0.05},
+  )
+
+  # v14 conflict fixes -- terms that would fight the pose commands:
+  # 1. body_orientation_l2 penalizes ANY non-flat body; replace with the fork
+  #    variant that penalizes pitch toward the COMMANDED pitch (roll still
+  #    toward 0). Same weight; magnitude matches for small angles.
+  ori = cfg.rewards["body_orientation_l2"]
+  ori.func = local_mdp.body_orientation_cmd_l2
+  ori.params["command_name"] = "twist"
+  # 2. `pose` holds joints near stand defaults; relax its stds as the pose
+  #    command deviates from nominal (see variable_posture docstring: at max
+  #    pitch the stds grow ~4.5x, keeping regularization without fighting
+  #    the tracking terms, which dominate near their tight sigmas).
+  cfg.rewards["pose"].params["pose_relax_gain"] = 8.0
+  cfg.rewards["pose"].params["pose_dev_height_scale"] = 20.0
+  cfg.rewards["pose"].params["nominal_pose"] = NOMINAL_POSE
+  # 3. stand_still drags joints to the stand default in every low-twist
+  #    episode, including pose_hold crouches; gate it to (near-)nominal pose
+  #    commands only. 0.02 rad-equivalent: 50% of episodes are nominal
+  #    EXACTLY (dev 0); anything past ~0.02 is a deliberate pose.
+  cfg.rewards["stand_still"].params["pose_dev_threshold"] = 0.02
+  cfg.rewards["stand_still"].params["pose_dev_height_scale"] = 20.0
+  cfg.rewards["stand_still"].params["nominal_pose"] = NOMINAL_POSE
+  # fell_over margin check: at the pitch extreme -0.436 rad, projected
+  # gravity z is -cos(0.436) = -0.906 -> acos(0.906) = 25 deg, well inside
+  # the 70 deg bad_orientation limit. No termination change needed.
 
   cfg.curriculum.pop("terrain_levels", None)
   cfg.curriculum.pop("command_vel", None)

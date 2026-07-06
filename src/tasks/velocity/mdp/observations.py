@@ -50,7 +50,10 @@ def phase(env: ManagerBasedRlEnv, period: float, command_name: str) -> torch.Ten
     phase[:, 0] = torch.sin(global_phase * torch.pi * 2.0)
     phase[:, 1] = torch.cos(global_phase * torch.pi * 2.0)
     # 0.05: below the lateral command range so sidestep keeps a gait clock.
-    stand_mask = torch.linalg.norm(env.command_manager.get_command(command_name), dim=1) < 0.05
+    # Twist slice [:3] only: with the v14 pose channels the height command
+    # (~0.116) is always in the vector, so a full norm would never read
+    # "standing" and the gait clock would tick during pose_hold episodes.
+    stand_mask = torch.linalg.norm(env.command_manager.get_command(command_name)[:, :3], dim=1) < 0.05
     phase = torch.where(stand_mask.unsqueeze(1), torch.zeros_like(phase), phase)
     return phase
 

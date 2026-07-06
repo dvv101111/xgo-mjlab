@@ -58,7 +58,7 @@ with torch.no_grad():
         illegal += int(tm.get_term("illegal_contact").sum().item())
         timeouts += int(tm.get_term("time_out").sum().item())
 
-        cmd = uenv.command_manager.get_command("twist")  # (N,3) vx vy wz
+        cmd = uenv.command_manager.get_command("twist")  # (N,5) vx vy wz pitch h
         robot = uenv.scene["robot"]
         lin_b = robot.data.root_link_lin_vel_b[:, :2]
         ang_z = robot.data.root_link_ang_vel_b[:, 2]
