@@ -112,7 +112,9 @@ def xgolite_rough_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
     weight=-3,
     params={"sensor_name": nonfoot_ground_cfg.name, "force_threshold": 0.5},
   )
-  cfg.rewards["action_rate_l2"] = RewardTermCfg(func=mdp.action_rate_l2, weight=-0.25)
+  # -0.5: hardware walk logs showed action step p50 0.32/tick at -0.25 —
+  # too twitchy through the ~70 ms real actuation lag (standing limit cycle)
+  cfg.rewards["action_rate_l2"] = RewardTermCfg(func=mdp.action_rate_l2, weight=-0.5)
   cfg.terminations["illegal_contact"] = TerminationTermCfg(
     func=mdp.illegal_contact,
     params={"sensor_name": nonfoot_ground_cfg.name, "force_threshold": 10.0},

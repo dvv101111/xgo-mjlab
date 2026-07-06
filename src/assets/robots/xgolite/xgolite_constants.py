@@ -31,19 +31,21 @@ def get_spec() -> mujoco.MjSpec:
 # Actuator config.
 ##
 
-# Hardware loop delay, measured 2026-07-06 with the batching-free driver
-# (tools/actuator_id.py step capture, firmware-clock timebase): ~50 ms from
-# pose command to first servo motion (host-clock p10/p50/p90 = 47/59/78 ms),
-# plus 10-30 ms observation staleness (telemetry uplink + round-robin servo
-# poll). Modeled as a slowly-varying per-env position-target delay of
-# 40-80 ms (20-40 physics steps at 2 ms).
+# Hardware loop delay, measured 2026-07-06: ~50 ms command->first-motion on
+# the firmware clock (servo internal processing; bus write itself ~2 ms),
+# and the 100 s walk-log lag scan puts end-to-end target->tracking lag at
+# ~100 ms (5 control ticks) — the servo's velocity-saturated rise plus
+# 10-30 ms observation staleness on top of the dead time. Transport work
+# can only shave the ~15-25 ms network share, so the policy must own the
+# rest: position-target delay 60-100 ms (30-50 physics steps at 2 ms),
+# slowly varying per env.
 XGOLITE_XML_ACTUATOR = DelayedActuatorCfg(
   base_cfg=XmlPositionActuatorCfg(
     target_names_expr=(".*",),
   ),
   delay_target="position",
-  delay_min_lag=20,
-  delay_max_lag=40,
+  delay_min_lag=30,
+  delay_max_lag=50,
   delay_hold_prob=0.8,
   delay_update_period=250,   # reconsider lag every 0.5 s, staggered per env
 )
