@@ -191,10 +191,11 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
   # Hardware is driven at up to ~1.0 fwd and fast backward; v8 trained to
   # 0.7 max and became unstable/lost traction when extrapolating past 0.8.
   twist_cmd.ranges.lin_vel_x = (-0.8, 1.0)
-  # +/-0.15: hip-roll geometry gives ~6 cm lateral stride per 0.4 s gait
-  # cycle; the old +/-0.25 was mechanically unreachable, teaching the
-  # policy that vy tracking never pays.
-  twist_cmd.ranges.lin_vel_y = (-0.15, 0.15)
+  # +/-0.08: measured capability. A hand-tuned open-loop crawl tops out
+  # at ~0.045 m/s and trained policies (three reward schemes) all
+  # asymptote at ~0.04 — 0.12+ m/s sidestep exceeds what 0.22 N.m
+  # servos + point feet can do. Commands must stay trackable.
+  twist_cmd.ranges.lin_vel_y = (-0.08, 0.08)
   twist_cmd.ranges.ang_vel_z = (-1.0, 1.0)
   twist_cmd.ranges.heading = None
   # 20% pure-rotation / 25% pure-lateral / 10% backward-only episodes
