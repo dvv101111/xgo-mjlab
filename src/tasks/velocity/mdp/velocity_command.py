@@ -56,6 +56,13 @@ class UniformVelocityCommand(CommandTerm):
       assert self.cfg.nominal_pose is not None
       self.vel_command_b[:, 3] = self.cfg.nominal_pose[0]
       self.vel_command_b[:, 4] = self.cfg.nominal_pose[1]
+    if self.pose_enabled and cfg.pose_height_band is not None:
+      band = torch.tensor(cfg.pose_height_band, device=self.device)
+      self._band_pitch = band[:, 0].contiguous()  # ascending knots
+      self._band_lo = band[:, 1].contiguous()
+      self._band_hi = band[:, 2].contiguous()
+    else:
+      self._band_pitch = None
     self.heading_target = torch.zeros(self.num_envs, device=self.device)
     self.heading_error = torch.zeros(self.num_envs, device=self.device)
     self.is_heading_env = torch.zeros(
@@ -148,6 +155,19 @@ class UniformVelocityCommand(CommandTerm):
       self.vel_command_b[env_ids[nominal], 4] = self.cfg.nominal_pose[1]
       self.vel_command_b[env_ids[pose_hold], :3] = 0.0
       self.vel_command_b[env_ids[posed_walk], :3] *= 0.5
+      if self._band_pitch is not None:
+        # v15: clamp the height command into the pitch-conditioned standable
+        # band (the workspace is not a rectangle; see cfg.pose_height_band).
+        pit = self.vel_command_b[env_ids, 3]
+        idx = torch.clamp(
+          torch.searchsorted(self._band_pitch, pit.contiguous()),
+          1, len(self._band_pitch) - 1)
+        p0, p1 = self._band_pitch[idx - 1], self._band_pitch[idx]
+        w = ((pit - p0) / (p1 - p0)).clamp(0.0, 1.0)
+        lo = self._band_lo[idx - 1] + w * (self._band_lo[idx] - self._band_lo[idx - 1])
+        hi = self._band_hi[idx - 1] + w * (self._band_hi[idx] - self._band_hi[idx - 1])
+        self.vel_command_b[env_ids, 4] = torch.maximum(
+          lo, torch.minimum(hi, self.vel_command_b[env_ids, 4]))
     # 0.05 stand threshold: must sit BELOW the vy range (+/-0.08) or every
     # pure-lateral episode is zeroed into a standing episode (v11 bug).
     # Twist slice [:3] ONLY: with the height channel (~0.116) always in the
@@ -353,6 +373,13 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   # (body_pitch [rad, positive = nose up], base_height [m, root z above the
   # floor plane]) used verbatim in nominal-mode episodes.
   nominal_pose: tuple[float, float] | None = None
+  # v15: the standable (pitch, height) workspace is NOT a rectangle — nose-up
+  # needs extended rear legs (no deep crouch), near-level pitch allows the
+  # full height range. Knots of (pitch, h_lo, h_hi) [floor convention],
+  # piecewise-linearly interpolated; sampled heights are clamped into the
+  # band for the sampled pitch. Derived from Quadruped-robot
+  # src/xgo/openfw/body.py leg IK (12% width margin per pitch).
+  pose_height_band: tuple[tuple[float, float, float], ...] | None = None
 
   @dataclass
   class Ranges:

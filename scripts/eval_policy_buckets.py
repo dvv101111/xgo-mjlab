@@ -50,6 +50,10 @@ BUCKETS = {
     "pose_down": (0.0, 0.0, 0.0, -0.35, 0.105),
     "pose_low":  (0.0, 0.0, 0.0, 0.0, 0.098),
     "pose_walk": (0.3, 0.0, 0.0, -0.2, 0.11),
+    # v15 pose buckets: nose-up hold and tall stand (both inside the
+    # pitch-conditioned height band).
+    "pose_up":   (0.0, 0.0, 0.0, 0.30, 0.116),
+    "pose_high": (0.0, 0.0, 0.0, 0.0, 0.138),
 }
 
 configure_torch_backends()

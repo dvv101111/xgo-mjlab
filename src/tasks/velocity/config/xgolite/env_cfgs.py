@@ -222,9 +222,25 @@ def xgolite_flat_env_cfg(play: bool = False) -> ManagerBasedRlEnvCfg:
 
   # v14: two body-pose command channels -> [vx, vy, wz, body_pitch,
   # base_height]. Flat task only: the height reward uses absolute root z.
-  twist_cmd.ranges.body_pitch = (-0.436, 0.151)   # rad, positive = nose up
-  twist_cmd.ranges.base_height = (0.097, 0.120)   # m, root z above the floor
+  # v15: pitch extended nose-up 0.151 -> 0.33 (high-object camera/reach) and
+  # the height range widened to the full standable envelope (0.080..0.141);
+  # the non-rectangular (pitch, height) workspace is enforced by
+  # pose_height_band below instead of shrinking the ranges to a safe box.
+  twist_cmd.ranges.body_pitch = (-0.436, 0.33)    # rad, positive = nose up
+  twist_cmd.ranges.base_height = (0.080, 0.141)   # m, root z above the floor
   twist_cmd.nominal_pose = NOMINAL_POSE
+  # Standable height band per pitch (floor convention), from Quadruped-robot
+  # body.py leg IK with 12% width margin (2026-07-07): nose-up needs extended
+  # rear legs so the deep crouch disappears; max height lives near level pitch.
+  twist_cmd.pose_height_band = (
+    (-0.436, 0.095, 0.122),
+    (-0.300, 0.088, 0.128),
+    (-0.150, 0.081, 0.134),
+    (0.000, 0.080, 0.141),
+    (0.150, 0.092, 0.131),
+    (0.250, 0.102, 0.125),
+    (0.330, 0.110, 0.121),
+  )
   # 50% nominal pose + twist sampled as before (incl. axis_focus) /
   # 25% pose-hold (random pose, twist zero) /
   # 25% posed walking (random pose, twist scaled by 0.5).
