@@ -35,7 +35,11 @@ the real servo bus.
 
 ## Train / evaluate / deploy
 
-    # train (XGOLite-Flat task; ~0.8 s/iter at 4096 envs on an RTX 5090)
+    # train (XGOLite-Flat task; ~0.8 s/iter at 4096 envs on an RTX 5090).
+    # Iteration budget (measured): resumes converge in 1000-1500 iters, fresh
+    # runs by ~2000 — run eval_policy_buckets.py on the result and extend by
+    # +1000 only if a metric is off. NOTE: --agent.max-iterations on a resume
+    # ADDS to the loaded checkpoint's count and creates a new run dir.
     .venv/bin/python scripts/train.py XGOLite-Flat --env.scene.num-envs 4096 --agent.max-iterations 1500
 
     # headless eval: fall rate + velocity tracking under full DR

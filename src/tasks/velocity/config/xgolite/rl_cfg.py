@@ -42,5 +42,9 @@ def xgolite_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
     logger="tensorboard",
     save_interval=100,
     num_steps_per_env=24,
-    max_iterations=3000,
+    # Measured convergence (curves v11b-v15 + bucket evals): resumes plateau
+    # within 1000-1500 iters, fresh runs by ~2000; only the falls rate keeps
+    # polishing later. Bucket-eval the result and extend +1000 if a metric
+    # is off, instead of defaulting to long runs.
+    max_iterations=1500,
   )
