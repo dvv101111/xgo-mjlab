@@ -65,6 +65,43 @@ def track_linear_velocity_adaptive(
   return torch.exp(-lin_vel_error / std_eff**2)
 
 
+def track_linear_velocity_relative(
+  env: ManagerBasedRlEnv,
+  rel: float,
+  std_min: float,
+  std_max: float,
+  command_name: str,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """track_linear_velocity with sigma PROPORTIONAL to the command magnitude.
+
+  XGOLite-Precision (2026-07-11 speed-accuracy analysis, R2): a fixed sigma
+  prices tracking error in absolute m/s, so the same RELATIVE shortfall is
+  ~10x cheaper at cmd 0.08 than at cmd 0.30 — the measured v17 slow-band
+  deficits (vx 0.08 -> 0.059) forfeited only ~0.065 weight-units. A sigma
+  proportional to ||cmd|| prices relative error uniformly across the range:
+
+    sigma_eff = clip(rel * ||cmd_xy||, std_min, std_max)
+
+  and for ||cmd_xy|| < 0.05 (standing / pure rotation, the STAND_CMD_NORM
+  gate) sigma_eff = std_max so stand behavior keeps the v17 shaping.
+  r = exp(-(||cmd_xy - v_xy||^2 + 2 vz^2) / sigma_eff^2). The additive-sigma
+  ``track_linear_velocity_adaptive`` above solves the opposite problem
+  (keeping a gradient at SPRINT commands); this one tightens the slow band.
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  actual = asset.data.root_link_lin_vel_b
+  xy_error = torch.sum(torch.square(command[:, :2] - actual[:, :2]), dim=1)
+  z_error = torch.square(actual[:, 2])
+  lin_vel_error = xy_error + (2 * z_error)
+  cmd_norm = torch.norm(command[:, :2], dim=1)
+  std_eff = torch.clamp(rel * cmd_norm, min=std_min, max=std_max)
+  std_eff = torch.where(cmd_norm < 0.05, torch.full_like(std_eff, std_max), std_eff)
+  return torch.exp(-lin_vel_error / std_eff**2)
+
+
 def track_angular_velocity_adaptive(
   env: ManagerBasedRlEnv,
   std: float,
@@ -103,6 +140,30 @@ def track_lateral_velocity(
   assert command is not None, f"Command '{command_name}' not found."
   vy_error = torch.square(command[:, 1] - asset.data.root_link_lin_vel_b[:, 1])
   return torch.exp(-vy_error / std**2)
+
+
+def track_yaw_zero(
+  env: ManagerBasedRlEnv,
+  std: float,
+  command_name: str,
+  command_threshold: float = 0.1,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> torch.Tensor:
+  """Tight-sigma reward on zero body yaw rate when yaw is uncommanded.
+
+  v16 drift fix (exact mirror of the v13b lateral fix): at wz_cmd = 0 the
+  adaptive angular sigma is 0.2 rad/s and body_ang_vel penalizes xy only,
+  so the measured 0.05-0.07 rad/s parasitic yaw under vx load cost only
+  ~6-12% of one term. This term makes that band expensive: at std 0.07 a
+  0.05 rad/s bias forfeits ~40% of the reward. Gated to |wz_cmd| below the
+  threshold so commanded turning is untouched.
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  command = env.command_manager.get_command(command_name)
+  assert command is not None, f"Command '{command_name}' not found."
+  wz = asset.data.root_link_ang_vel_b[:, 2]
+  gate = (command[:, 2].abs() < command_threshold).float()
+  return torch.exp(-torch.square(wz) / std**2) * gate
 
 
 def body_pitch_from_gravity(projected_gravity_b: torch.Tensor) -> torch.Tensor:

@@ -1,10 +1,24 @@
 """RL configuration for XGO-Lite2 velocity task."""
 
+from dataclasses import dataclass
+
 from mjlab.rl import (
   RslRlModelCfg,
   RslRlOnPolicyRunnerCfg,
   RslRlPpoAlgorithmCfg,
 )
+
+
+@dataclass
+class XgoLitePpoAlgorithmCfg(RslRlPpoAlgorithmCfg):
+  """PPO cfg + rsl_rl symmetry passthrough.
+
+  mjlab's cfg dataclass does not expose rsl_rl's ``symmetry_cfg`` kwarg;
+  ``asdict`` of this subclass lands it in ``cfg["algorithm"]`` where
+  ``construct_algorithm`` forwards it to PPO.
+  """
+
+  symmetry_cfg: dict | None = None
 
 
 def xgolite_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
@@ -24,7 +38,7 @@ def xgolite_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
       activation="elu",
       obs_normalization=True,
     ),
-    algorithm=RslRlPpoAlgorithmCfg(
+    algorithm=XgoLitePpoAlgorithmCfg(
       value_loss_coef=1.0,
       use_clipped_value_loss=True,
       clip_param=0.2,
@@ -37,6 +51,18 @@ def xgolite_ppo_runner_cfg() -> RslRlOnPolicyRunnerCfg:
       lam=0.95,
       desired_kl=0.01,
       max_grad_norm=1.0,
+      # v16: L/R mirror augmentation + mirror loss (arXiv 2403.04359). The
+      # v15 review found no symmetry constraint anywhere while the hardware
+      # shows sign-asymmetric strafe crosstalk and a one-sided drift; the
+      # learned component of that asymmetry is removed at the source.
+      symmetry_cfg={
+        "use_data_augmentation": True,
+        "use_mirror_loss": True,
+        "mirror_loss_coeff": 0.5,
+        "data_augmentation_func": (
+          "src.tasks.velocity.rl.symmetry:mirror_obs_actions"
+        ),
+      },
     ),
     experiment_name="xgolite_velocity",
     logger="tensorboard",

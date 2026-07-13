@@ -55,8 +55,12 @@ open-firmware link.
 
 ## Contract summary
 
-47-dim observation: gyro(3) + projected gravity(3) + command(3) +
-gait phase(2) + joint pos rel(12) + joint vel(12) + previous action(12);
-12-dim action, target = default_pose + 0.25 * action; control 50 Hz,
-gait period 0.4 s; stand pose thigh -0.90 / calf +0.28 (hip height
-116 mm).
+245-dim observation (v16): 5-frame history of the 49-dim frame
+gyro(3) + projected gravity(3) + command(5: vx, vy, wz, body_pitch,
+base_height) + gait phase(2) + joint pos rel(12) + joint vel(12) +
+previous action(12). History is TERM-MAJOR and oldest-first:
+[gyro t-4..t, pg t-4..t, command t-4..t, ...] (mjlab CircularBuffer;
+on reset the first frame backfills all 5 slots). 12-dim action,
+target = default_pose + 0.25 * action; control 50 Hz, gait period
+0.4 s; stand pose thigh -0.90 / calf +0.28 (hip height 116 mm).
+v15 and earlier used a single 49-dim frame (v13: 47-dim, 3-dim command).

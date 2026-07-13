@@ -37,6 +37,76 @@ class UniformVelocityCommand(CommandTerm):
 
     self.robot: Entity = env.scene[cfg.entity_name]
 
+    # Grid-adaptive command curriculum (Margolis et al., "Walk These Ways",
+    # RSS 2022 / IJRR 2024 RewardThresholdCurriculum). When enabled, the
+    # (vx, wz) pair is drawn from a persistent cell-weight grid instead of
+    # the box-uniform draw; vy keeps its independent uniform draw. The
+    # weights are updated by the `command_grid_adaptive` curriculum term
+    # (curriculums.py) from episodic tracking performance.
+    self.grid_enabled = cfg.grid_curriculum is not None
+    if self.grid_enabled:
+      gc = cfg.grid_curriculum
+      assert gc is not None
+      # The exclusive resample lottery (axis_focus / slow_vx / fast_vx /
+      # turn_at_speed) shapes exposure by hand; the grid owns (vx, wz)
+      # exposure entirely, so the two mechanisms must not compose. This is
+      # checked here (not only in __post_init__) because presets mutate the
+      # cfg after construction.
+      if (
+        cfg.axis_focus_probs is not None
+        or cfg.slow_vx_prob > 0.0
+        or cfg.fast_vx_prob > 0.0
+        or cfg.turn_at_speed_prob > 0.0
+      ):
+        raise ValueError(
+          "grid_curriculum is incompatible with the focus-mode lottery "
+          "(axis_focus_probs/slow_vx/fast_vx/turn_at_speed); clear them."
+        )
+      if cfg.heading_command:
+        raise ValueError(
+          "grid_curriculum is incompatible with heading_command (heading "
+          "overrides the sampled wz, breaking cell attribution)."
+        )
+      # The grid snapshots ranges.lin_vel_x / ranges.ang_vel_z at build time;
+      # stage-based range mutation (commands_vel) must not be combined with it.
+      vx_lo, vx_hi = cfg.ranges.lin_vel_x
+      wz_lo, wz_hi = cfg.ranges.ang_vel_z
+      self._grid_n_vx = max(1, round((vx_hi - vx_lo) / gc.vx_cell_size))
+      self._grid_n_wz = max(1, round((wz_hi - wz_lo) / gc.wz_cell_size))
+      # Actual cell sizes: exact tiling of the range (equals the cfg cell
+      # size when the range is an integer multiple of it).
+      self._grid_vx_lo = vx_lo
+      self._grid_wz_lo = wz_lo
+      self._grid_vx_size = (vx_hi - vx_lo) / self._grid_n_vx
+      self._grid_wz_size = (wz_hi - wz_lo) / self._grid_n_wz
+      vx_centers = vx_lo + (torch.arange(self._grid_n_vx, device=self.device) + 0.5) * self._grid_vx_size
+      wz_centers = wz_lo + (torch.arange(self._grid_n_wz, device=self.device) + 0.5) * self._grid_wz_size
+      # Seed region: weight 1.0 for cells whose CENTER falls inside the
+      # known-trackable band, 0.0 elsewhere (unlocked later by the
+      # curriculum term, +0.2 per passed episode on the cell + 4-neighbors).
+      seed_vx = (vx_centers >= gc.seed_lin_vel_x[0]) & (vx_centers <= gc.seed_lin_vel_x[1])
+      seed_wz = (wz_centers >= gc.seed_ang_vel_z[0]) & (wz_centers <= gc.seed_ang_vel_z[1])
+      self.grid_seed_mask = seed_vx.unsqueeze(1) & seed_wz.unsqueeze(0)
+      if not bool(self.grid_seed_mask.any()):
+        raise ValueError(
+          "grid_curriculum seed region contains no cell center; widen "
+          "seed_lin_vel_x/seed_ang_vel_z or shrink the cell sizes."
+        )
+      self.grid_weights = torch.where(
+        self.grid_seed_mask,
+        torch.ones((), device=self.device),
+        torch.zeros((), device=self.device),
+      ).float()
+      # Cell the env's CURRENT command belongs to (last resample), -1 when
+      # the episode must not gate cell unlocks (twist zeroed by the 0.05
+      # stand gate / pose_hold, or a rel_standing_envs standing episode).
+      self.grid_cell_index = torch.full(
+        (self.num_envs,), -1, dtype=torch.long, device=self.device
+      )
+      # Last logged seed-region tracking fraction (kept across curriculum
+      # calls with no attributable envs so the log stays continuous).
+      self.grid_seed_tracking_last = 0.0
+
     # v14 body-pose channels: when pose_mode_probs is set, the command grows
     # from [vx, vy, wz] to [vx, vy, wz, body_pitch, base_height].
     self.pose_enabled = cfg.pose_mode_probs is not None
@@ -110,9 +180,23 @@ class UniformVelocityCommand(CommandTerm):
 
   def _resample_command(self, env_ids: torch.Tensor) -> None:
     r = torch.empty(len(env_ids), device=self.device)
-    self.vel_command_b[env_ids, 0] = r.uniform_(*self.cfg.ranges.lin_vel_x)
-    self.vel_command_b[env_ids, 1] = r.uniform_(*self.cfg.ranges.lin_vel_y)
-    self.vel_command_b[env_ids, 2] = r.uniform_(*self.cfg.ranges.ang_vel_z)
+    if self.grid_enabled:
+      # Grid-adaptive draw: cell ~ Categorical(grid_weights), then uniform
+      # inside the cell. vy keeps the independent box-uniform draw. The
+      # focus-mode lottery below is structurally off (enforced in __init__).
+      flat_w = self.grid_weights.reshape(-1)
+      cell = torch.multinomial(flat_w, len(env_ids), replacement=True)
+      ix = torch.div(cell, self._grid_n_wz, rounding_mode="floor").float()
+      iz = torch.remainder(cell, self._grid_n_wz).float()
+      u_vx = torch.rand(len(env_ids), device=self.device)
+      u_wz = torch.rand(len(env_ids), device=self.device)
+      self.vel_command_b[env_ids, 0] = self._grid_vx_lo + (ix + u_vx) * self._grid_vx_size
+      self.vel_command_b[env_ids, 1] = r.uniform_(*self.cfg.ranges.lin_vel_y)
+      self.vel_command_b[env_ids, 2] = self._grid_wz_lo + (iz + u_wz) * self._grid_wz_size
+    else:
+      self.vel_command_b[env_ids, 0] = r.uniform_(*self.cfg.ranges.lin_vel_x)
+      self.vel_command_b[env_ids, 1] = r.uniform_(*self.cfg.ranges.lin_vel_y)
+      self.vel_command_b[env_ids, 2] = r.uniform_(*self.cfg.ranges.ang_vel_z)
     if self.cfg.axis_focus_probs is not None:
       # Axis-focused episodes: force pure-rotation / pure-lateral /
       # backward-only commands on a fraction of resamples. Independent
@@ -130,6 +214,63 @@ class UniformVelocityCommand(CommandTerm):
         env_ids[back_only], 0
       ].abs()
       self.vel_command_b[env_ids[back_only], 1:3] = 0.0
+      if self.cfg.slow_vx_prob > 0.0:
+        # v17 stiction-regime focus: pure-vx episodes with |vx| drawn from
+        # slow_vx_band (signed uniformly). The 2026-07-11 ladders put the
+        # worst uncorrected heading drift at the SLOW dwells (true |vx|
+        # 0.06 -> +0.05..+0.09 rad/s left yaw on 3 of 4 corrections-OFF
+        # sessions) — the regime where stiction dominates — yet uniform
+        # sampling over (-0.40, 0.45) gives the |vx| 0.06-0.12 sim band
+        # only ~5% exposure after the focus modes above. Draws share the
+        # same u as the other focus modes, so probabilities stay exclusive.
+        # Band must sit ABOVE the 0.05 stand gate below or the episodes
+        # degrade to standing.
+        p0 = p_rot + p_lat + p_back
+        slow = (u >= p0) & (u < p0 + self.cfg.slow_vx_prob)
+        slow_ids = env_ids[slow]
+        lo, hi = self.cfg.slow_vx_band
+        mag = torch.empty(len(slow_ids), device=self.device).uniform_(lo, hi)
+        sign = torch.where(
+          torch.rand(len(slow_ids), device=self.device) < 0.5, -1.0, 1.0
+        )
+        self.vel_command_b[slow_ids, 0] = mag * sign
+        self.vel_command_b[slow_ids, 1:3] = 0.0
+      # Aggressive-preset focus modes (2026-07-11), same exclusive lottery:
+      # fat sampling at high |vx| (fast_vx) and mixed vx+wz turning at speed
+      # (turn_at_speed). Uniform sampling over a sprint-wide vx range gives
+      # the top-speed band only ~15-20% exposure and vx-with-strong-wz pairs
+      # ~8%; these modes concentrate gradient where the preset's objective
+      # actually lives.
+      p_used = sum(self.cfg.axis_focus_probs) + self.cfg.slow_vx_prob
+      if self.cfg.fast_vx_prob > 0.0:
+        assert self.cfg.fast_vx_band_fwd is not None
+        assert self.cfg.fast_vx_band_back is not None
+        fast = (u >= p_used) & (u < p_used + self.cfg.fast_vx_prob)
+        fast_ids = env_ids[fast]
+        fwd = torch.rand(len(fast_ids), device=self.device) < self.cfg.fast_vx_fwd_frac
+        vx_fwd = torch.empty(len(fast_ids), device=self.device).uniform_(
+          *self.cfg.fast_vx_band_fwd
+        )
+        vx_back = torch.empty(len(fast_ids), device=self.device).uniform_(
+          *self.cfg.fast_vx_band_back
+        )
+        self.vel_command_b[fast_ids, 0] = torch.where(fwd, vx_fwd, vx_back)
+        self.vel_command_b[fast_ids, 1:3] = 0.0
+        p_used += self.cfg.fast_vx_prob
+      if self.cfg.turn_at_speed_prob > 0.0:
+        turn = (u >= p_used) & (u < p_used + self.cfg.turn_at_speed_prob)
+        turn_ids = env_ids[turn]
+        self.vel_command_b[turn_ids, 0] = torch.empty(
+          len(turn_ids), device=self.device
+        ).uniform_(*self.cfg.turn_vx_band)
+        self.vel_command_b[turn_ids, 1] = 0.0
+        wz_mag = torch.empty(len(turn_ids), device=self.device).uniform_(
+          *self.cfg.turn_wz_band
+        )
+        wz_sign = torch.where(
+          torch.rand(len(turn_ids), device=self.device) < 0.5, -1.0, 1.0
+        )
+        self.vel_command_b[turn_ids, 2] = wz_mag * wz_sign
     if self.pose_enabled:
       # v14 pose-mode mix, applied at resample like axis_focus. Modes
       # (probabilities in cfg.pose_mode_probs, summing to 1):
@@ -187,6 +328,32 @@ class UniformVelocityCommand(CommandTerm):
       self.heading_target[env_ids] = r.uniform_(*self.cfg.ranges.heading)
       self.is_heading_env[env_ids] = r.uniform_(0.0, 1.0) <= self.cfg.rel_heading_envs
     self.is_standing_env[env_ids] = r.uniform_(0.0, 1.0) <= self.cfg.rel_standing_envs
+
+    if self.grid_enabled:
+      # Cell attribution for the curriculum term: match each env to the cell
+      # CONTAINING its final post-mutation (vx, wz) — after posed_walk 0.5
+      # scaling and the 0.05 norm gate — so unlock credit lands where
+      # competence was actually demonstrated. Envs whose twist ended up
+      # zeroed (norm gate / pose_hold) or that were drawn as standing envs
+      # (rel_standing_envs; twist zeroed every step in _update_command) get
+      # -1: standing tracks a zero command trivially and must not unlock
+      # cells. Episodes spanning several resamples are attributed to the
+      # LAST drawn cell only (approximation: episodic reward sums cannot be
+      # split per command dwell).
+      vx_f = self.vel_command_b[env_ids, 0]
+      wz_f = self.vel_command_b[env_ids, 2]
+      ix = torch.clamp(
+        ((vx_f - self._grid_vx_lo) / self._grid_vx_size).floor().long(),
+        0, self._grid_n_vx - 1,
+      )
+      iz = torch.clamp(
+        ((wz_f - self._grid_wz_lo) / self._grid_wz_size).floor().long(),
+        0, self._grid_n_wz - 1,
+      )
+      cell = ix * self._grid_n_wz + iz
+      zeroed = torch.norm(self.vel_command_b[env_ids, :3], dim=1) == 0.0
+      cell[zeroed | self.is_standing_env[env_ids]] = -1
+      self.grid_cell_index[env_ids] = cell
 
     init_vel_mask = r.uniform_(0.0, 1.0) < self.cfg.init_velocity_prob
     init_vel_env_ids = env_ids[init_vel_mask]
@@ -365,6 +532,29 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   # (p_pure_rotation, p_pure_lateral, p_backward_only) applied at resample;
   # None = plain independent uniform sampling (upstream behavior).
   axis_focus_probs: tuple[float, float, float] | None = None
+  # v17: probability of a pure slow-vx episode (stiction regime), drawn from
+  # the same exclusive resample lottery as axis_focus_probs (their sum plus
+  # this must stay <= 1). |vx| ~ U(slow_vx_band), sign uniform, vy = wz = 0.
+  # Requires axis_focus_probs to be set. The band lower edge must exceed the
+  # 0.05 stand gate.
+  slow_vx_prob: float = 0.0
+  slow_vx_band: tuple[float, float] = (0.06, 0.12)
+  # Aggressive-preset focus modes (2026-07-11), drawn from the same exclusive
+  # lottery (axis_focus + slow_vx + fast_vx + turn_at_speed must sum <= 1;
+  # both require axis_focus_probs to be set).
+  # fast_vx: pure-vx episode with |vx| in the TOP band of the range — fat
+  # sampling at sprint speeds. Forward with prob fast_vx_fwd_frac, else
+  # backward (band given as (lo, hi) with lo < hi, negative for backward).
+  fast_vx_prob: float = 0.0
+  fast_vx_band_fwd: tuple[float, float] | None = None
+  fast_vx_band_back: tuple[float, float] | None = None
+  fast_vx_fwd_frac: float = 0.65
+  # turn_at_speed: forward vx from turn_vx_band combined with a strong yaw
+  # command (|wz| from turn_wz_band, sign uniform), vy zero — trains turning
+  # while moving instead of the pure-rotation / pure-vx split.
+  turn_at_speed_prob: float = 0.0
+  turn_vx_band: tuple[float, float] = (0.15, 0.45)
+  turn_wz_band: tuple[float, float] = (0.5, 1.5)
   # v14 body-pose channels (opt-in; all None = upstream 3-dim behavior).
   # (p_nominal, p_pose_hold, p_posed_walk) applied at resample; must sum to 1.
   # When set, the command is [vx, vy, wz, body_pitch, base_height] and
@@ -380,6 +570,39 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   # band for the sampled pitch. Derived from Quadruped-robot
   # src/xgo/openfw/body.py leg IK (12% width margin per pitch).
   pose_height_band: tuple[tuple[float, float, float], ...] | None = None
+
+  @dataclass
+  class GridCurriculumCfg:
+    """Grid-adaptive command curriculum (Margolis et al., RSS 2022).
+
+    Rescaled RewardThresholdCurriculum: the (vx, wz) plane is tiled into
+    cells; sampling draws a cell proportionally to a persistent weight
+    grid, then uniform inside the cell. Weights start at 1.0 inside the
+    seed region (v17's known-trackable band) and 0.0 elsewhere; the
+    ``command_grid_adaptive`` curriculum term adds +0.2 to a cell and its
+    4-connected neighbors whenever an episode attributed to that cell
+    passes BOTH tracking thresholds (weights clipped to [0, 1]). This is
+    the validated fix for the tight-tolerance from-scratch collapse
+    ("converges to jittering in place", IJRR 2024 no-curriculum ablation).
+    vy is NOT gridded (kept independent uniform: its +-0.08 range is a
+    single cell wide anyway). Incompatible with the focus-mode lottery and
+    heading_command; the grid snapshots ranges.lin_vel_x/ang_vel_z at env
+    build time.
+    """
+
+    # Nominal cell sizes; the actual size is range_span / round(span/size)
+    # so the range tiles exactly. 0.05 m/s makes the SLOW band (0.05-0.15)
+    # its own pair of cells that must individually earn competence.
+    vx_cell_size: float = 0.05
+    wz_cell_size: float = 0.25
+    # Initial weight-1.0 region (cells selected by center). Defaults:
+    # v17's known-trackable band.
+    seed_lin_vel_x: tuple[float, float] = (-0.15, 0.25)
+    seed_ang_vel_z: tuple[float, float] = (-0.5, 0.5)
+
+  # None = off: the sampler is bit-identical to the pre-grid code (all grid
+  # code is behind `if self.grid_enabled` and consumes no RNG when off).
+  grid_curriculum: GridCurriculumCfg | None = None
 
   @dataclass
   class Ranges:
@@ -409,6 +632,52 @@ class UniformVelocityCommandCfg(CommandTermCfg):
         "The velocity command has heading commands active (heading_command=True) but "
         "the `ranges.heading` parameter is set to None."
       )
+    if self.grid_curriculum is not None:
+      # Same checks as UniformVelocityCommand.__init__ (which re-validates
+      # because presets mutate cfgs after construction).
+      if (
+        self.axis_focus_probs is not None
+        or self.slow_vx_prob > 0.0
+        or self.fast_vx_prob > 0.0
+        or self.turn_at_speed_prob > 0.0
+      ):
+        raise ValueError(
+          "grid_curriculum is incompatible with the focus-mode lottery "
+          "(axis_focus_probs/slow_vx/fast_vx/turn_at_speed); clear them."
+        )
+      if self.heading_command:
+        raise ValueError("grid_curriculum is incompatible with heading_command.")
+      if self.grid_curriculum.vx_cell_size <= 0 or self.grid_curriculum.wz_cell_size <= 0:
+        raise ValueError("grid_curriculum cell sizes must be positive.")
+    if self.slow_vx_prob or self.fast_vx_prob or self.turn_at_speed_prob:
+      if self.axis_focus_probs is None:
+        raise ValueError(
+          "slow_vx/fast_vx/turn_at_speed probs require axis_focus_probs."
+        )
+      total = (
+        sum(self.axis_focus_probs)
+        + self.slow_vx_prob
+        + self.fast_vx_prob
+        + self.turn_at_speed_prob
+      )
+      if total > 1.0 + 1e-6:
+        raise ValueError(
+          f"focus-mode probabilities must sum to <= 1, got {total}."
+        )
+    if self.slow_vx_prob:
+      if self.slow_vx_band[0] <= 0.05 or self.slow_vx_band[1] <= self.slow_vx_band[0]:
+        raise ValueError(
+          f"slow_vx_band must be ascending and sit above the 0.05 stand "
+          f"gate, got {self.slow_vx_band}."
+        )
+    if self.fast_vx_prob:
+      if self.fast_vx_band_fwd is None or self.fast_vx_band_back is None:
+        raise ValueError("fast_vx_prob requires both fast_vx bands.")
+      if not (
+        self.fast_vx_band_fwd[0] < self.fast_vx_band_fwd[1]
+        and self.fast_vx_band_back[0] < self.fast_vx_band_back[1]
+      ):
+        raise ValueError("fast_vx bands must be ascending (lo, hi) tuples.")
     if self.pose_mode_probs is not None:
       if len(self.pose_mode_probs) != 3 or abs(sum(self.pose_mode_probs) - 1.0) > 1e-6:
         raise ValueError(

@@ -118,6 +118,14 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
   agent_cfg = asdict(cfg.agent)
   env_cfg = asdict(cfg.env)
 
+  # Dump BEFORE runner construction: the runner mutates agent_cfg in place
+  # (resolve_symmetry_config injects the live env under
+  # algorithm.symmetry_cfg._env), which is not YAML-serializable.
+  # Only write config files from rank 0 to avoid race conditions.
+  if rank == 0:
+    dump_yaml(log_dir / "params" / "env.yaml", env_cfg)
+    dump_yaml(log_dir / "params" / "agent.yaml", agent_cfg)
+
   runner_cls = load_runner_cls(task_id)
   if runner_cls is None:
     runner_cls = MjlabOnPolicyRunner
@@ -129,11 +137,6 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
   if resume_path is not None:
     print(f"[INFO]: Loading model checkpoint from: {resume_path}")
     runner.load(str(resume_path))
-
-  # Only write config files from rank 0 to avoid race conditions.
-  if rank == 0:
-    dump_yaml(log_dir / "params" / "env.yaml", env_cfg)
-    dump_yaml(log_dir / "params" / "agent.yaml", agent_cfg)
 
   runner.learn(
     num_learning_iterations=cfg.agent.max_iterations, init_at_random_ep_len=True
