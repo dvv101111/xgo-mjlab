@@ -1,0 +1,6063 @@
+{
+  "schema": "xgo-servo-fit/v2",
+  "created": "2026-07-14T13:04:28",
+  "sessions": [
+    {
+      "path": "/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-07-30_stand",
+      "base_pose": "stand",
+      "loaded": true,
+      "n_tests": 23
+    },
+    {
+      "path": "/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-04-06_stand",
+      "base_pose": "stand",
+      "loaded": true,
+      "n_tests": 2
+    }
+  ],
+  "settings": {
+    "mode": "shared",
+    "fit_names": [
+      "kp",
+      "kd",
+      "damping",
+      "armature",
+      "frictionloss",
+      "qd_knee",
+      "qd_max",
+      "deadband",
+      "delay_ms"
+    ],
+    "generations": 150,
+    "popsize": 64,
+    "sigma0": 0.5,
+    "seed": 0,
+    "tau_max_pinned": 0.22,
+    "sim_dt": 0.002,
+    "settle_s": 1.0,
+    "skip_ms": 300.0,
+    "regime": "loaded_free_base_contact",
+    "bounds": {
+      "kp": [
+        0.5,
+        40.0
+      ],
+      "kd": [
+        0.0,
+        2.0
+      ],
+      "damping": [
+        0.0,
+        0.4
+      ],
+      "armature": [
+        0.0,
+        0.02
+      ],
+      "frictionloss": [
+        0.0,
+        0.1
+      ],
+      "qd_knee": [
+        3.0,
+        10.0
+      ],
+      "qd_max": [
+        8.0,
+        14.0
+      ],
+      "deadband": [
+        0.0,
+        0.06
+      ],
+      "delay_ms": [
+        5.0,
+        90.0
+      ]
+    }
+  },
+  "alignment": {
+    "fl_hip__steps.npz": {
+      "offset_ms": 298002.91847700137,
+      "n_events": 833,
+      "slope": 1.0000840858231792,
+      "jitter_std_ms": 1.1624647642647519,
+      "jitter_absmax_ms": 8.07769899815321
+    },
+    "fl_thigh__steps.npz": {
+      "offset_ms": 308326.8384010006,
+      "n_events": 647,
+      "slope": 1.0000017791333213,
+      "jitter_std_ms": 2.3863550512182212,
+      "jitter_absmax_ms": 5.207523000310175
+    },
+    "fl_calf__steps.npz": {
+      "offset_ms": 318630.9041280004,
+      "n_events": 691,
+      "slope": 1.000014616672868,
+      "jitter_std_ms": 2.3775006526748412,
+      "jitter_absmax_ms": 10.973227998125367
+    },
+    "fr_hip__steps.npz": {
+      "offset_ms": 328952.90662199806,
+      "n_events": 641,
+      "slope": 0.9999521931201683,
+      "jitter_std_ms": 1.4256220313177408,
+      "jitter_absmax_ms": 7.002596000907943
+    },
+    "fr_thigh__steps.npz": {
+      "offset_ms": 339275.8718959973,
+      "n_events": 740,
+      "slope": 1.0000526659875375,
+      "jitter_std_ms": 0.7587104571833468,
+      "jitter_absmax_ms": 5.047543000546284
+    },
+    "fr_calf__steps.npz": {
+      "offset_ms": 349566.8901980008,
+      "n_events": 848,
+      "slope": 1.0000281718110071,
+      "jitter_std_ms": 1.172921591902353,
+      "jitter_absmax_ms": 5.943013998796232
+    },
+    "bl_hip__steps.npz": {
+      "offset_ms": 359880.86898800096,
+      "n_events": 841,
+      "slope": 1.0000226187767043,
+      "jitter_std_ms": 1.6274131553466857,
+      "jitter_absmax_ms": 6.140789002587553
+    },
+    "bl_thigh__steps.npz": {
+      "offset_ms": 370193.88291149907,
+      "n_events": 734,
+      "slope": 0.9999689050203905,
+      "jitter_std_ms": 1.0506692281979255,
+      "jitter_absmax_ms": 5.050084500631783
+    },
+    "bl_calf__steps.npz": {
+      "offset_ms": 380515.8583114986,
+      "n_events": 690,
+      "slope": 0.9999824813806593,
+      "jitter_std_ms": 1.2395340983320835,
+      "jitter_absmax_ms": 6.0496954986592755
+    },
+    "br_hip__steps.npz": {
+      "offset_ms": 390816.91058000276,
+      "n_events": 865,
+      "slope": 1.0000053851995159,
+      "jitter_std_ms": 1.4595631768705106,
+      "jitter_absmax_ms": 5.1112090002861805
+    },
+    "br_thigh__steps.npz": {
+      "offset_ms": 401130.89821900043,
+      "n_events": 821,
+      "slope": 0.99999626413834,
+      "jitter_std_ms": 1.9324194630811184,
+      "jitter_absmax_ms": 6.166591001441702
+    },
+    "br_calf__steps.npz": {
+      "offset_ms": 411444.97809500026,
+      "n_events": 831,
+      "slope": 1.0000134591244738,
+      "jitter_std_ms": 0.6406874555267009,
+      "jitter_absmax_ms": 4.008738001459278
+    },
+    "fl_hip__sine_grid.npz": {
+      "offset_ms": 421765.9131954974,
+      "n_events": 4194,
+      "slope": 0.9999743736194648,
+      "jitter_std_ms": 2.1905193238239,
+      "jitter_absmax_ms": 8.564515500387643
+    },
+    "fl_thigh__sine_grid.npz": {
+      "offset_ms": 108179.9087479987,
+      "n_events": 4785,
+      "slope": 0.9999993437508692,
+      "jitter_std_ms": 0.773034351876695,
+      "jitter_absmax_ms": 5.024372002080781
+    },
+    "fl_calf__sine_grid.npz": {
+      "offset_ms": 527681.9344105013,
+      "n_events": 3788,
+      "slope": 1.0000001853753935,
+      "jitter_std_ms": 1.7692787129176797,
+      "jitter_absmax_ms": 5.988750498741865
+    },
+    "fr_hip__sine_grid.npz": {
+      "offset_ms": 580636.9397415014,
+      "n_events": 4222,
+      "slope": 1.0000014790737168,
+      "jitter_std_ms": 2.629522427395695,
+      "jitter_absmax_ms": 7.87896650028415
+    },
+    "fr_thigh__sine_grid.npz": {
+      "offset_ms": 633595.8108790024,
+      "n_events": 4011,
+      "slope": 1.000002820536189,
+      "jitter_std_ms": 1.3514115090720997,
+      "jitter_absmax_ms": 6.112988001317717
+    },
+    "fr_calf__sine_grid.npz": {
+      "offset_ms": 686553.8916605001,
+      "n_events": 5072,
+      "slope": 1.0000024591751768,
+      "jitter_std_ms": 0.6089723393844146,
+      "jitter_absmax_ms": 5.029024500632659
+    },
+    "bl_hip__sine_grid.npz": {
+      "offset_ms": 739515.8917309977,
+      "n_events": 4085,
+      "slope": 1.0000018496241028,
+      "jitter_std_ms": 1.1512991456486943,
+      "jitter_absmax_ms": 5.12563999928534
+    },
+    "bl_thigh__sine_grid.npz": {
+      "offset_ms": 792464.8589869998,
+      "n_events": 3927,
+      "slope": 1.0000057330341983,
+      "jitter_std_ms": 1.302740725908531,
+      "jitter_absmax_ms": 7.014675998012535
+    },
+    "bl_calf__sine_grid.npz": {
+      "offset_ms": 845419.752488,
+      "n_events": 4903,
+      "slope": 1.0000035467885537,
+      "jitter_std_ms": 1.5530755092795316,
+      "jitter_absmax_ms": 6.03820700221695
+    },
+    "br_hip__sine_grid.npz": {
+      "offset_ms": 898378.9480855009,
+      "n_events": 4742,
+      "slope": 1.0000117587153805,
+      "jitter_std_ms": 1.5410204034286814,
+      "jitter_absmax_ms": 6.284187501296401
+    },
+    "br_thigh__sine_grid.npz": {
+      "offset_ms": 951333.898761997,
+      "n_events": 3679,
+      "slope": 1.0000012070261395,
+      "jitter_std_ms": 1.3011382259680575,
+      "jitter_absmax_ms": 6.015756997279823
+    },
+    "fl_thigh__latency_probe.npz": {
+      "offset_ms": 94861.89681200168,
+      "n_events": 48,
+      "slope": 0.9999929022842654,
+      "jitter_std_ms": 1.7252337483748277,
+      "jitter_absmax_ms": 4.997588998667197
+    }
+  },
+  "per_joint": {},
+  "shared_class": {
+    "params": {
+      "kp": 39.71292997102211,
+      "kd": 0.006763791891677418,
+      "damping": 0.011142736387168296,
+      "armature": 3.9350782431668564e-07,
+      "frictionloss": 0.000461242063302314,
+      "qd_knee": 3.646810549193537,
+      "qd_max": 12.093892538963804,
+      "deadband": 0.0009792820291604943,
+      "delay_ms": 41.38514907835543,
+      "tau_max": 0.22
+    },
+    "fitted_names": [
+      "kp",
+      "kd",
+      "damping",
+      "armature",
+      "frictionloss",
+      "qd_knee",
+      "qd_max",
+      "deadband",
+      "delay_ms"
+    ],
+    "loss": 0.0009846243933734262,
+    "baseline_loss": 0.010091386727928118,
+    "generations_run": 68,
+    "early_stopped": true,
+    "wall_s": 1752.9,
+    "loss_trace": [
+      {
+        "gen": 0,
+        "best": 0.009672198242466045,
+        "mean": 0.020493567603931787,
+        "spread": 2.1579688023755184,
+        "sigma": 0.6349597399552674
+      },
+      {
+        "gen": 1,
+        "best": 0.0040971758714867185,
+        "mean": 0.027265440945476782,
+        "spread": 139.51109317013456,
+        "sigma": 0.7861885362632554
+      },
+      {
+        "gen": 2,
+        "best": 0.0024912798979717012,
+        "mean": 0.02870702364025086,
+        "spread": 210.25529359325427,
+        "sigma": 0.9312697459777018
+      },
+      {
+        "gen": 3,
+        "best": 0.0016744477076836247,
+        "mean": 0.023624698946232807,
+        "spread": 225.41200625212227,
+        "sigma": 0.8891026851813165
+      },
+      {
+        "gen": 4,
+        "best": 0.0013088144227314117,
+        "mean": 0.014711200891067821,
+        "spread": 82.58592980513956,
+        "sigma": 0.8437459139801814
+      },
+      {
+        "gen": 5,
+        "best": 0.0014187607817815887,
+        "mean": 0.014080052049772829,
+        "spread": 89.459460838631,
+        "sigma": 0.8452891902334637
+      },
+      {
+        "gen": 6,
+        "best": 0.001331447449181741,
+        "mean": 0.010384185322076973,
+        "spread": 33.86599480585854,
+        "sigma": 0.7778162920782135
+      },
+      {
+        "gen": 7,
+        "best": 0.0016764656822751255,
+        "mean": 0.009397742403004712,
+        "spread": 38.333624924315636,
+        "sigma": 0.6587600967728519
+      },
+      {
+        "gen": 8,
+        "best": 0.0010992414448661376,
+        "mean": 0.006318056072606609,
+        "spread": 32.438559029908554,
+        "sigma": 0.6026895628148651
+      },
+      {
+        "gen": 9,
+        "best": 0.0015429476811184958,
+        "mean": 0.006759193636667469,
+        "spread": 22.212937334044845,
+        "sigma": 0.5257489160075575
+      },
+      {
+        "gen": 10,
+        "best": 0.0012863411359915812,
+        "mean": 0.005308870130895511,
+        "spread": 16.799883478020934,
+        "sigma": 0.46892539452980375
+      },
+      {
+        "gen": 11,
+        "best": 0.001377692146570258,
+        "mean": 0.004021337042943764,
+        "spread": 7.426685371804862,
+        "sigma": 0.4402005109983588
+      },
+      {
+        "gen": 12,
+        "best": 0.0012407875367450247,
+        "mean": 0.004377394362702175,
+        "spread": 8.97702583990267,
+        "sigma": 0.4138446201542306
+      },
+      {
+        "gen": 13,
+        "best": 0.001241738569372556,
+        "mean": 0.0038574143625800367,
+        "spread": 8.282121769961508,
+        "sigma": 0.3668787065531642
+      },
+      {
+        "gen": 14,
+        "best": 0.0012720704672821357,
+        "mean": 0.003058966808340594,
+        "spread": 6.129883951642993,
+        "sigma": 0.34196366477764306
+      },
+      {
+        "gen": 15,
+        "best": 0.001183298565051452,
+        "mean": 0.00281054764064632,
+        "spread": 5.004747636125231,
+        "sigma": 0.33149822840732696
+      },
+      {
+        "gen": 16,
+        "best": 0.0012427252918847359,
+        "mean": 0.0029889003965574506,
+        "spread": 4.612883640696536,
+        "sigma": 0.26910356154072695
+      },
+      {
+        "gen": 17,
+        "best": 0.0012452550702236993,
+        "mean": 0.002454058783358911,
+        "spread": 3.60053587382925,
+        "sigma": 0.2808688045474203
+      },
+      {
+        "gen": 18,
+        "best": 0.0012448182381822165,
+        "mean": 0.002754669609082273,
+        "spread": 3.369661633602769,
+        "sigma": 0.26538671952561405
+      },
+      {
+        "gen": 19,
+        "best": 0.0011244810299321226,
+        "mean": 0.002034521267087447,
+        "spread": 3.3968684015599346,
+        "sigma": 0.2517017290408522
+      },
+      {
+        "gen": 20,
+        "best": 0.0010997032247705122,
+        "mean": 0.0020580626188742004,
+        "spread": 3.6409672566422056,
+        "sigma": 0.2604221725752242
+      },
+      {
+        "gen": 21,
+        "best": 0.001149932980571033,
+        "mean": 0.002366962201798854,
+        "spread": 3.5526535177229865,
+        "sigma": 0.25718735423371886
+      },
+      {
+        "gen": 22,
+        "best": 0.0011383729392746157,
+        "mean": 0.0020703136329075326,
+        "spread": 3.1823998397472337,
+        "sigma": 0.23899241741838087
+      },
+      {
+        "gen": 23,
+        "best": 0.001122577623667142,
+        "mean": 0.001771902363805507,
+        "spread": 2.8467825535185676,
+        "sigma": 0.25116257783461415
+      },
+      {
+        "gen": 24,
+        "best": 0.0011144216947068454,
+        "mean": 0.0018826911461805801,
+        "spread": 2.7188850353136984,
+        "sigma": 0.2756350171319885
+      },
+      {
+        "gen": 25,
+        "best": 0.0011071415373180677,
+        "mean": 0.001936654028901235,
+        "spread": 3.545042638861801,
+        "sigma": 0.3273259140767572
+      },
+      {
+        "gen": 26,
+        "best": 0.0011124509977767547,
+        "mean": 0.0018200563632534913,
+        "spread": 3.067398977295358,
+        "sigma": 0.31589029916103
+      },
+      {
+        "gen": 27,
+        "best": 0.0010902796510225904,
+        "mean": 0.0018810003641439664,
+        "spread": 2.6763981860980026,
+        "sigma": 0.2956163359395789
+      },
+      {
+        "gen": 28,
+        "best": 0.001065497149253346,
+        "mean": 0.0016540107704614956,
+        "spread": 2.7885064270516597,
+        "sigma": 0.288928392233844
+      },
+      {
+        "gen": 29,
+        "best": 0.001140378564371797,
+        "mean": 0.0017927595686568812,
+        "spread": 2.3298397697052464,
+        "sigma": 0.2671080140841391
+      },
+      {
+        "gen": 30,
+        "best": 0.0011210690496627695,
+        "mean": 0.001797457930395324,
+        "spread": 2.0268875824832775,
+        "sigma": 0.24763188209896997
+      },
+      {
+        "gen": 31,
+        "best": 0.0011073222770458847,
+        "mean": 0.0014201889399310366,
+        "spread": 1.6376923623799835,
+        "sigma": 0.24521945174048895
+      },
+      {
+        "gen": 32,
+        "best": 0.001085942085550779,
+        "mean": 0.0014351625196766622,
+        "spread": 1.362244393506471,
+        "sigma": 0.23519943082801859
+      },
+      {
+        "gen": 33,
+        "best": 0.001145150429560089,
+        "mean": 0.0014579176001803156,
+        "spread": 1.4940261443003653,
+        "sigma": 0.22776819463880843
+      },
+      {
+        "gen": 34,
+        "best": 0.0010316325199453697,
+        "mean": 0.0014041388678536415,
+        "spread": 1.350288237632806,
+        "sigma": 0.20362371562742176
+      },
+      {
+        "gen": 35,
+        "best": 0.0010923617137741071,
+        "mean": 0.0014204091840835454,
+        "spread": 1.718882334407846,
+        "sigma": 0.19618414133247053
+      },
+      {
+        "gen": 36,
+        "best": 0.0010899982692828892,
+        "mean": 0.0013091634425356818,
+        "spread": 1.4818934501183774,
+        "sigma": 0.20592382950274532
+      },
+      {
+        "gen": 37,
+        "best": 0.0009924414492196738,
+        "mean": 0.0013710483695309856,
+        "spread": 1.4533595234187326,
+        "sigma": 0.20746695380680988
+      },
+      {
+        "gen": 38,
+        "best": 0.0011006975094241165,
+        "mean": 0.0013321256013352082,
+        "spread": 1.2427308521388125,
+        "sigma": 0.20500521998307006
+      },
+      {
+        "gen": 39,
+        "best": 0.0010505239376763379,
+        "mean": 0.0013010242819926033,
+        "spread": 0.9547167946576534,
+        "sigma": 0.19054754651710346
+      },
+      {
+        "gen": 40,
+        "best": 0.0011038580963076581,
+        "mean": 0.0013217754112809284,
+        "spread": 1.3515475024791626,
+        "sigma": 0.17299591212366205
+      },
+      {
+        "gen": 41,
+        "best": 0.0010881766983941333,
+        "mean": 0.0012518175789579629,
+        "spread": 0.499509795270694,
+        "sigma": 0.18097498479055596
+      },
+      {
+        "gen": 42,
+        "best": 0.0010975347257477673,
+        "mean": 0.0012360646277947043,
+        "spread": 0.7089613945709764,
+        "sigma": 0.16878954998965867
+      },
+      {
+        "gen": 43,
+        "best": 0.0010373365463931471,
+        "mean": 0.0012816432145930571,
+        "spread": 0.5861523956495318,
+        "sigma": 0.1800294084320956
+      },
+      {
+        "gen": 44,
+        "best": 0.0010547938583355804,
+        "mean": 0.0012580559336336883,
+        "spread": 0.45933606715309705,
+        "sigma": 0.16590477082901386
+      },
+      {
+        "gen": 45,
+        "best": 0.0010506320904896539,
+        "mean": 0.0012182738800403698,
+        "spread": 0.3450542351149216,
+        "sigma": 0.15736890874097118
+      },
+      {
+        "gen": 46,
+        "best": 0.0010609551487794457,
+        "mean": 0.0012375181033313976,
+        "spread": 1.6146284674325704,
+        "sigma": 0.14437431059307013
+      },
+      {
+        "gen": 47,
+        "best": 0.0010679614775367654,
+        "mean": 0.0012096955208401184,
+        "spread": 0.3704404765803197,
+        "sigma": 0.14327896072108878
+      },
+      {
+        "gen": 48,
+        "best": 0.0010626905501837202,
+        "mean": 0.0012258405418832988,
+        "spread": 0.5420657013125068,
+        "sigma": 0.151317486200815
+      },
+      {
+        "gen": 49,
+        "best": 0.0010554303230017696,
+        "mean": 0.0012102662044342345,
+        "spread": 0.38298913937046597,
+        "sigma": 0.14707792890198138
+      },
+      {
+        "gen": 50,
+        "best": 0.0010355360059882146,
+        "mean": 0.0012357587207534144,
+        "spread": 0.5024035620639509,
+        "sigma": 0.14736376525450687
+      },
+      {
+        "gen": 51,
+        "best": 0.0010867222264440083,
+        "mean": 0.001216861497151032,
+        "spread": 0.530550537495675,
+        "sigma": 0.1361940254110444
+      },
+      {
+        "gen": 52,
+        "best": 0.001057870118710684,
+        "mean": 0.0012436511808825057,
+        "spread": 1.3860381759796399,
+        "sigma": 0.13661579730276097
+      },
+      {
+        "gen": 53,
+        "best": 0.0010704198577244283,
+        "mean": 0.0012535972128479666,
+        "spread": 2.5214072944532577,
+        "sigma": 0.13836414921703122
+      },
+      {
+        "gen": 54,
+        "best": 0.0010226170258801146,
+        "mean": 0.0011911380219113764,
+        "spread": 0.40520229600407426,
+        "sigma": 0.14688642600082535
+      },
+      {
+        "gen": 55,
+        "best": 0.0010183057302188244,
+        "mean": 0.0012504734981446056,
+        "spread": 1.1907082910328282,
+        "sigma": 0.1527646032764881
+      },
+      {
+        "gen": 56,
+        "best": 0.000992639317492778,
+        "mean": 0.0012500670372122499,
+        "spread": 2.4728879845972274,
+        "sigma": 0.1704507622972806
+      },
+      {
+        "gen": 57,
+        "best": 0.0010635344627591017,
+        "mean": 0.0012933235582548719,
+        "spread": 1.823920935977634,
+        "sigma": 0.15385375726690192
+      },
+      {
+        "gen": 58,
+        "best": 0.001009962558654685,
+        "mean": 0.0012291162917091852,
+        "spread": 0.8842064425964034,
+        "sigma": 0.1468619194424002
+      },
+      {
+        "gen": 59,
+        "best": 0.0010468745146058475,
+        "mean": 0.001294487320669307,
+        "spread": 2.055198399789144,
+        "sigma": 0.15352071468608555
+      },
+      {
+        "gen": 60,
+        "best": 0.0009846243933734262,
+        "mean": 0.0012061794568646055,
+        "spread": 1.2402604846414103,
+        "sigma": 0.1909490335553202
+      },
+      {
+        "gen": 61,
+        "best": 0.0009982472746292242,
+        "mean": 0.0012304477827570872,
+        "spread": 0.8885960516584922,
+        "sigma": 0.21817255693978102
+      },
+      {
+        "gen": 62,
+        "best": 0.0010445143630820155,
+        "mean": 0.0012140798309598511,
+        "spread": 0.35614073402767404,
+        "sigma": 0.20766268840436541
+      },
+      {
+        "gen": 63,
+        "best": 0.001046089003292855,
+        "mean": 0.0012567857174540032,
+        "spread": 1.6129288983168797,
+        "sigma": 0.21071874844216343
+      },
+      {
+        "gen": 64,
+        "best": 0.0010797676530619545,
+        "mean": 0.0012848525326937818,
+        "spread": 2.5255563796490184,
+        "sigma": 0.1918295196848885
+      },
+      {
+        "gen": 65,
+        "best": 0.0010482937049392546,
+        "mean": 0.001215929197275587,
+        "spread": 0.8222231720789851,
+        "sigma": 0.19087492211867987
+      },
+      {
+        "gen": 66,
+        "best": 0.0010405774567199323,
+        "mean": 0.001276780554676471,
+        "spread": 1.2941129517160608,
+        "sigma": 0.18689371650764952
+      },
+      {
+        "gen": 67,
+        "best": 0.0010652519136446984,
+        "mean": 0.0012977106835748318,
+        "spread": 1.6733244966752838,
+        "sigma": 0.18159121602197625
+      }
+    ]
+  },
+  "held_from": "shared",
+  "global_delay_ms": 41.38514907835543,
+  "validation": {
+    "variants": [
+      "baseline",
+      "shared",
+      "per_joint"
+    ],
+    "segments": [
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.00878646358516382,
+        "rmse_shared": 0.011879663079794002,
+        "rmse_per_joint": 0.011879663079794002
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.032612315388984105,
+        "rmse_shared": 0.0127982125410203,
+        "rmse_per_joint": 0.0127982125410203
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.024760929002571062,
+        "rmse_shared": 0.018815218841922297,
+        "rmse_per_joint": 0.018815218841922297
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.01953593133311331,
+        "rmse_shared": 0.01924193671413446,
+        "rmse_per_joint": 0.01924193671413446
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.040984019262108505,
+        "rmse_shared": 0.016355818115956947,
+        "rmse_per_joint": 0.016355818115956947
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.07487570255142487,
+        "rmse_shared": 0.011124724628529956,
+        "rmse_per_joint": 0.011124724628529956
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.07340997481186537,
+        "rmse_shared": 0.00797685366157294,
+        "rmse_per_joint": 0.00797685366157294
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.06521774042940734,
+        "rmse_shared": 0.021367142628944576,
+        "rmse_per_joint": 0.021367142628944576
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.09829213731179184,
+        "rmse_shared": 0.03110868513973457,
+        "rmse_per_joint": 0.03110868513973457
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.22119518659602153,
+        "rmse_shared": 0.07597859828517331,
+        "rmse_per_joint": 0.07597859828517331
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.13565767214971303,
+        "rmse_shared": 0.0745073644816935,
+        "rmse_per_joint": 0.0745073644816935
+      },
+      {
+        "file": "fl_hip__steps.npz",
+        "joint": "fl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.21242254871130303,
+        "rmse_shared": 0.039208417133778956,
+        "rmse_per_joint": 0.039208417133778956
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 24,
+        "rmse_baseline": 0.004678495136647877,
+        "rmse_shared": 0.007473373935839858,
+        "rmse_per_joint": 0.007473373935839858
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 17,
+        "rmse_baseline": 0.016644818717781524,
+        "rmse_shared": 0.02306269922613957,
+        "rmse_per_joint": 0.02306269922613957
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.020201521066606373,
+        "rmse_shared": 0.014670974263275209,
+        "rmse_per_joint": 0.014670974263275209
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.04975855502412256,
+        "rmse_shared": 0.015098557885017265,
+        "rmse_per_joint": 0.015098557885017265
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 33,
+        "rmse_baseline": 0.0722303118976893,
+        "rmse_shared": 0.008104951177277558,
+        "rmse_per_joint": 0.008104951177277558
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.07345691535908419,
+        "rmse_shared": 0.019080384296304452,
+        "rmse_per_joint": 0.019080384296304452
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 33,
+        "rmse_baseline": 0.04881273901760242,
+        "rmse_shared": 0.018810914559740037,
+        "rmse_per_joint": 0.018810914559740037
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 17,
+        "rmse_baseline": 0.10479074729694697,
+        "rmse_shared": 0.019975585603224072,
+        "rmse_per_joint": 0.019975585603224072
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.17868655488575216,
+        "rmse_shared": 0.053473056538230555,
+        "rmse_per_joint": 0.053473056538230555
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.17500240685093726,
+        "rmse_shared": 0.03472297275728494,
+        "rmse_per_joint": 0.03472297275728494
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.12253994699548251,
+        "rmse_shared": 0.02228857956832082,
+        "rmse_per_joint": 0.02228857956832082
+      },
+      {
+        "file": "fl_thigh__steps.npz",
+        "joint": "fl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.29945024167728895,
+        "rmse_shared": 0.12857615930158384,
+        "rmse_per_joint": 0.12857615930158384
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 23,
+        "rmse_baseline": 0.01229628783216727,
+        "rmse_shared": 0.016195366160931327,
+        "rmse_per_joint": 0.016195366160931327
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.01855217418646881,
+        "rmse_shared": 0.01493386095320345,
+        "rmse_per_joint": 0.01493386095320345
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.020933499819662617,
+        "rmse_shared": 0.016340679152544665,
+        "rmse_per_joint": 0.016340679152544665
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.01577705392251054,
+        "rmse_shared": 0.02210667836490421,
+        "rmse_per_joint": 0.02210667836490421
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.033905761010041856,
+        "rmse_shared": 0.012795438965967906,
+        "rmse_per_joint": 0.012795438965967906
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 17,
+        "rmse_baseline": 0.06750136866850462,
+        "rmse_shared": 0.021455389525242185,
+        "rmse_per_joint": 0.021455389525242185
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 33,
+        "rmse_baseline": 0.047732952689423264,
+        "rmse_shared": 0.039359847391245865,
+        "rmse_per_joint": 0.039359847391245865
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.037786606620301276,
+        "rmse_shared": 0.03511210224214718,
+        "rmse_per_joint": 0.03511210224214718
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.08704683765004771,
+        "rmse_shared": 0.018576682620970016,
+        "rmse_per_joint": 0.018576682620970016
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.20798954254994992,
+        "rmse_shared": 0.06149952717896523,
+        "rmse_per_joint": 0.06149952717896523
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.16876860062766172,
+        "rmse_shared": 0.04310934888576667,
+        "rmse_per_joint": 0.04310934888576667
+      },
+      {
+        "file": "fl_calf__steps.npz",
+        "joint": "fl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.1288914288235013,
+        "rmse_shared": 0.04705791811149101,
+        "rmse_per_joint": 0.04705791811149101
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 23,
+        "rmse_baseline": 0.0036687132774012887,
+        "rmse_shared": 0.008068623633205688,
+        "rmse_per_joint": 0.008068623633205688
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.042682644358139656,
+        "rmse_shared": 0.013709053978768473,
+        "rmse_per_joint": 0.013709053978768473
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 34,
+        "rmse_baseline": 0.04371280008764183,
+        "rmse_shared": 0.017047053709509298,
+        "rmse_per_joint": 0.017047053709509298
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.022695792094039498,
+        "rmse_shared": 0.012186271669861111,
+        "rmse_per_joint": 0.012186271669861111
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.04146790193600842,
+        "rmse_shared": 0.01896662875189922,
+        "rmse_per_joint": 0.01896662875189922
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 17,
+        "rmse_baseline": 0.06944806603534144,
+        "rmse_shared": 0.010657000397337139,
+        "rmse_per_joint": 0.010657000397337139
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.06890903357847626,
+        "rmse_shared": 0.013870391085718777,
+        "rmse_per_joint": 0.013870391085718777
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.05968779066394127,
+        "rmse_shared": 0.01758837882302877,
+        "rmse_per_joint": 0.01758837882302877
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.10726839307552884,
+        "rmse_shared": 0.016928112333341967,
+        "rmse_per_joint": 0.016928112333341967
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.22947063389113098,
+        "rmse_shared": 0.05124511173646313,
+        "rmse_per_joint": 0.05124511173646313
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.15196067684143985,
+        "rmse_shared": 0.0489584501018433,
+        "rmse_per_joint": 0.0489584501018433
+      },
+      {
+        "file": "fr_hip__steps.npz",
+        "joint": "fr_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.2089316495395151,
+        "rmse_shared": 0.052414656921214706,
+        "rmse_per_joint": 0.052414656921214706
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.020260406276467573,
+        "rmse_shared": 0.013160249153526602,
+        "rmse_per_joint": 0.013160249153526602
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.03103357671261249,
+        "rmse_shared": 0.017178062349606706,
+        "rmse_per_joint": 0.017178062349606706
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.02262621402846052,
+        "rmse_shared": 0.016069197231507373,
+        "rmse_per_joint": 0.016069197231507373
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.04962694264663134,
+        "rmse_shared": 0.016017892257158724,
+        "rmse_per_joint": 0.016017892257158724
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.07403851641362338,
+        "rmse_shared": 0.02096114643497952,
+        "rmse_per_joint": 0.02096114643497952
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.0772224073524168,
+        "rmse_shared": 0.01756825646283436,
+        "rmse_per_joint": 0.01756825646283436
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.05375672389732812,
+        "rmse_shared": 0.021292625990533436,
+        "rmse_per_joint": 0.021292625990533436
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.10104845746210048,
+        "rmse_shared": 0.019680357294925094,
+        "rmse_per_joint": 0.019680357294925094
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.19220679973522828,
+        "rmse_shared": 0.02975977127733081,
+        "rmse_per_joint": 0.02975977127733081
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.20080737866303053,
+        "rmse_shared": 0.03387839754968774,
+        "rmse_per_joint": 0.03387839754968774
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.127024764148355,
+        "rmse_shared": 0.029307114735451084,
+        "rmse_per_joint": 0.029307114735451084
+      },
+      {
+        "file": "fr_thigh__steps.npz",
+        "joint": "fr_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.28432207541878346,
+        "rmse_shared": 0.10110293549353586,
+        "rmse_per_joint": 0.10110293549353586
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.007185919037036111,
+        "rmse_shared": 0.01074985880726233,
+        "rmse_per_joint": 0.01074985880726233
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.020535519665461088,
+        "rmse_shared": 0.014128395907081724,
+        "rmse_per_joint": 0.014128395907081724
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.023486546944375485,
+        "rmse_shared": 0.011545893619645175,
+        "rmse_per_joint": 0.011545893619645175
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.014527881632297172,
+        "rmse_shared": 0.014069587042798414,
+        "rmse_per_joint": 0.014069587042798414
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.031150379555248707,
+        "rmse_shared": 0.014858148617727166,
+        "rmse_per_joint": 0.014858148617727166
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.059150567886418384,
+        "rmse_shared": 0.014140562582411796,
+        "rmse_per_joint": 0.014140562582411796
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.06312661782746,
+        "rmse_shared": 0.013124795589182881,
+        "rmse_per_joint": 0.013124795589182881
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.04348695535370657,
+        "rmse_shared": 0.01526681185381593,
+        "rmse_per_joint": 0.01526681185381593
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.09475175052362962,
+        "rmse_shared": 0.018503604759889176,
+        "rmse_per_joint": 0.018503604759889176
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.19578480521901107,
+        "rmse_shared": 0.03466209497496649,
+        "rmse_per_joint": 0.03466209497496649
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.16271125860976368,
+        "rmse_shared": 0.038753176821211724,
+        "rmse_per_joint": 0.038753176821211724
+      },
+      {
+        "file": "fr_calf__steps.npz",
+        "joint": "fr_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.15119271288025596,
+        "rmse_shared": 0.02937429293035309,
+        "rmse_per_joint": 0.02937429293035309
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 21,
+        "rmse_baseline": 0.003913290034904678,
+        "rmse_shared": 0.006735092995121587,
+        "rmse_per_joint": 0.006735092995121587
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.042930398705725986,
+        "rmse_shared": 0.013994903527031177,
+        "rmse_per_joint": 0.013994903527031177
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.044442242567420104,
+        "rmse_shared": 0.0168112130661944,
+        "rmse_per_joint": 0.0168112130661944
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.02074135394269547,
+        "rmse_shared": 0.01308416715658585,
+        "rmse_per_joint": 0.01308416715658585
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.040766990549109344,
+        "rmse_shared": 0.015877527411188013,
+        "rmse_per_joint": 0.015877527411188013
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.07029513950788667,
+        "rmse_shared": 0.01448041421956766,
+        "rmse_per_joint": 0.01448041421956766
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 32,
+        "rmse_baseline": 0.0779346354622537,
+        "rmse_shared": 0.008635888573971705,
+        "rmse_per_joint": 0.008635888573971705
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.062299494887624464,
+        "rmse_shared": 0.015598911092557437,
+        "rmse_per_joint": 0.015598911092557437
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.10401000207655686,
+        "rmse_shared": 0.010030455618809655,
+        "rmse_per_joint": 0.010030455618809655
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.20827092312251402,
+        "rmse_shared": 0.006379751590349093,
+        "rmse_per_joint": 0.006379751590349093
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.1892704541316227,
+        "rmse_shared": 0.013078843401622927,
+        "rmse_per_joint": 0.013078843401622927
+      },
+      {
+        "file": "bl_hip__steps.npz",
+        "joint": "bl_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.20867493986671737,
+        "rmse_shared": 0.09273189161161811,
+        "rmse_per_joint": 0.09273189161161811
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.011948008444396287,
+        "rmse_shared": 0.007703424647107486,
+        "rmse_per_joint": 0.007703424647107486
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.025903139867568065,
+        "rmse_shared": 0.012941060542148712,
+        "rmse_per_joint": 0.012941060542148712
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.02245913807882438,
+        "rmse_shared": 0.014666057538309895,
+        "rmse_per_joint": 0.014666057538309895
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.04051909287757832,
+        "rmse_shared": 0.0088956979045754,
+        "rmse_per_joint": 0.0088956979045754
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.066317860693846,
+        "rmse_shared": 0.020677890903244293,
+        "rmse_per_joint": 0.020677890903244293
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.07920433913928863,
+        "rmse_shared": 0.024601446406758737,
+        "rmse_per_joint": 0.024601446406758737
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.05468472979741797,
+        "rmse_shared": 0.02370542736453177,
+        "rmse_per_joint": 0.02370542736453177
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.07314625157847278,
+        "rmse_shared": 0.0263054539367821,
+        "rmse_per_joint": 0.0263054539367821
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.20196175171249892,
+        "rmse_shared": 0.014398674284624338,
+        "rmse_per_joint": 0.014398674284624338
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.21318106382912166,
+        "rmse_shared": 0.08568646866908369,
+        "rmse_per_joint": 0.08568646866908369
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.23138632314793606,
+        "rmse_shared": 0.02496970994694186,
+        "rmse_per_joint": 0.02496970994694186
+      },
+      {
+        "file": "bl_thigh__steps.npz",
+        "joint": "bl_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.193344503673549,
+        "rmse_shared": 0.020631942317632136,
+        "rmse_per_joint": 0.020631942317632136
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.01347907840416573,
+        "rmse_shared": 0.014353066058421774,
+        "rmse_per_joint": 0.014353066058421774
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.026071117507152613,
+        "rmse_shared": 0.011947659231331684,
+        "rmse_per_joint": 0.011947659231331684
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.028840910988321877,
+        "rmse_shared": 0.012842497250194098,
+        "rmse_per_joint": 0.012842497250194098
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.018696051946376857,
+        "rmse_shared": 0.0199666251914939,
+        "rmse_per_joint": 0.0199666251914939
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.038845233447636754,
+        "rmse_shared": 0.013788620450304646,
+        "rmse_per_joint": 0.013788620450304646
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.07465084962321351,
+        "rmse_shared": 0.02547820916445915,
+        "rmse_per_joint": 0.02547820916445915
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.06960167484131309,
+        "rmse_shared": 0.032183288794352116,
+        "rmse_per_joint": 0.032183288794352116
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.04711007166071701,
+        "rmse_shared": 0.024214352175885957,
+        "rmse_per_joint": 0.024214352175885957
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.0925942445902807,
+        "rmse_shared": 0.030434981888986475,
+        "rmse_per_joint": 0.030434981888986475
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.2664218995069949,
+        "rmse_shared": 0.15994451580394284,
+        "rmse_per_joint": 0.15994451580394284
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.20858781474800528,
+        "rmse_shared": 0.03753350584168068,
+        "rmse_per_joint": 0.03753350584168068
+      },
+      {
+        "file": "bl_calf__steps.npz",
+        "joint": "bl_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.14713095823743438,
+        "rmse_shared": 0.02998744418318061,
+        "rmse_per_joint": 0.02998744418318061
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 22,
+        "rmse_baseline": 0.003931686434567331,
+        "rmse_shared": 0.008904433070764963,
+        "rmse_per_joint": 0.008904433070764963
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.047862820833419834,
+        "rmse_shared": 0.014101932411078818,
+        "rmse_per_joint": 0.014101932411078818
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.03563041905050028,
+        "rmse_shared": 0.009088767043862116,
+        "rmse_per_joint": 0.009088767043862116
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.025158253424004892,
+        "rmse_shared": 0.00593270017224273,
+        "rmse_per_joint": 0.00593270017224273
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.04164173933581824,
+        "rmse_shared": 0.01004707155939,
+        "rmse_per_joint": 0.01004707155939
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.08600050121374399,
+        "rmse_shared": 0.013762625314931887,
+        "rmse_per_joint": 0.013762625314931887
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.07529244883285308,
+        "rmse_shared": 0.011139685737042195,
+        "rmse_per_joint": 0.011139685737042195
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.06417472213983166,
+        "rmse_shared": 0.011107323284524226,
+        "rmse_per_joint": 0.011107323284524226
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.10728265570956833,
+        "rmse_shared": 0.013279321766893526,
+        "rmse_per_joint": 0.013279321766893526
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.22636163655312994,
+        "rmse_shared": 0.01915697993248059,
+        "rmse_per_joint": 0.01915697993248059
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.18974384652899484,
+        "rmse_shared": 0.007599474178002997,
+        "rmse_per_joint": 0.007599474178002997
+      },
+      {
+        "file": "br_hip__steps.npz",
+        "joint": "br_hip",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.20707855440837733,
+        "rmse_shared": 0.09990658965391928,
+        "rmse_per_joint": 0.09990658965391928
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 21,
+        "rmse_baseline": 0.007244178038554863,
+        "rmse_shared": 0.006658016013993971,
+        "rmse_per_joint": 0.006658016013993971
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.023362220648657898,
+        "rmse_shared": 0.016591173726504895,
+        "rmse_per_joint": 0.016591173726504895
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.0191866133054849,
+        "rmse_shared": 0.0155850906373576,
+        "rmse_per_joint": 0.0155850906373576
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.03436331697661577,
+        "rmse_shared": 0.005723327981237004,
+        "rmse_per_joint": 0.005723327981237004
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.06323744681734544,
+        "rmse_shared": 0.024154392815395574,
+        "rmse_per_joint": 0.024154392815395574
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 16,
+        "rmse_baseline": 0.08335693717754464,
+        "rmse_shared": 0.022473919527779454,
+        "rmse_per_joint": 0.022473919527779454
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.054962850149696915,
+        "rmse_shared": 0.020066900973262098,
+        "rmse_per_joint": 0.020066900973262098
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.0727467857033423,
+        "rmse_shared": 0.02422808693185604,
+        "rmse_per_joint": 0.02422808693185604
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.19877135064940146,
+        "rmse_shared": 0.014539791809336124,
+        "rmse_per_joint": 0.014539791809336124
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.2170139395981352,
+        "rmse_shared": 0.032555059395697736,
+        "rmse_per_joint": 0.032555059395697736
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 31,
+        "rmse_baseline": 0.2322333667357002,
+        "rmse_shared": 0.019183247362007758,
+        "rmse_per_joint": 0.019183247362007758
+      },
+      {
+        "file": "br_thigh__steps.npz",
+        "joint": "br_thigh",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.19184756620631654,
+        "rmse_shared": 0.011713516279549597,
+        "rmse_per_joint": 0.011713516279549597
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 21,
+        "rmse_baseline": 0.0032189607399920003,
+        "rmse_shared": 0.011179241140804498,
+        "rmse_per_joint": 0.011179241140804498
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.039697121004910914,
+        "rmse_shared": 0.006355686539201778,
+        "rmse_per_joint": 0.006355686539201778
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.1,
+          "amplitude": 0.1
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.029687752210856753,
+        "rmse_shared": 0.010414403035131569,
+        "rmse_per_joint": 0.010414403035131569
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.1
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.018192476161306315,
+        "rmse_shared": 0.018300950894683723,
+        "rmse_per_joint": 0.018300950894683723
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.0387592373704298,
+        "rmse_shared": 0.017357647379445958,
+        "rmse_per_joint": 0.017357647379445958
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.09056676807404226,
+        "rmse_shared": 0.01648317716416189,
+        "rmse_per_joint": 0.01648317716416189
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.2,
+          "amplitude": 0.2
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.07352684634707046,
+        "rmse_shared": 0.03594971397250573,
+        "rmse_per_joint": 0.03594971397250573
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.2
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.04848091107740699,
+        "rmse_shared": 0.01821542843043853,
+        "rmse_per_joint": 0.01821542843043853
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 30,
+        "rmse_baseline": 0.08791042381565309,
+        "rmse_shared": 0.024210530096537657,
+        "rmse_per_joint": 0.024210530096537657
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 15,
+        "rmse_baseline": 0.29779648732358577,
+        "rmse_shared": 0.25160391310325286,
+        "rmse_per_joint": 0.25160391310325286
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": -0.4,
+          "amplitude": 0.4
+        },
+        "n_samples": 29,
+        "rmse_baseline": 0.21875908540365643,
+        "rmse_shared": 0.0314712543726155,
+        "rmse_per_joint": 0.0314712543726155
+      },
+      {
+        "file": "br_calf__steps.npz",
+        "joint": "br_calf",
+        "kind": "steps",
+        "desc": {
+          "target": 0.0,
+          "amplitude": 0.4
+        },
+        "n_samples": 14,
+        "rmse_baseline": 0.15413174435277005,
+        "rmse_shared": 0.020878296306595233,
+        "rmse_per_joint": 0.020878296306595233
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 112,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.0164045610090261,
+        "amp_ratio_sim_baseline": 0.8343390299705787,
+        "rmse_shared": 0.013592375260280712,
+        "amp_ratio_sim_shared": 1.0065615852363408,
+        "rmse_per_joint": 0.013592375260280712,
+        "amp_ratio_sim_per_joint": 1.0065615852363408
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.894822126266624,
+        "rmse_baseline": 0.026434580952417346,
+        "amp_ratio_sim_baseline": 0.7794864161405712,
+        "rmse_shared": 0.012664602338757118,
+        "amp_ratio_sim_shared": 1.0042757424525917,
+        "rmse_per_joint": 0.012664602338757118,
+        "amp_ratio_sim_per_joint": 1.0042757424525917
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.894822126266624,
+        "rmse_baseline": 0.04614470783208943,
+        "amp_ratio_sim_baseline": 0.6662168767070398,
+        "rmse_shared": 0.009924669191326754,
+        "amp_ratio_sim_shared": 1.0013964411336929,
+        "rmse_per_joint": 0.009924669191326754,
+        "amp_ratio_sim_per_joint": 1.0013964411336929
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.894822126266624,
+        "rmse_baseline": 0.0592599720463663,
+        "amp_ratio_sim_baseline": 0.42362938984297216,
+        "rmse_shared": 0.013398524444759427,
+        "amp_ratio_sim_shared": 1.0317993815988302,
+        "rmse_per_joint": 0.013398524444759427,
+        "amp_ratio_sim_per_joint": 1.0317993815988302
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8692557798018634,
+        "rmse_baseline": 0.02577634809339014,
+        "amp_ratio_sim_baseline": 0.9271454252302647,
+        "rmse_shared": 0.012522783175562808,
+        "amp_ratio_sim_shared": 0.9880455881357194,
+        "rmse_per_joint": 0.012522783175562808,
+        "amp_ratio_sim_per_joint": 0.9880455881357194
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9037703475292902,
+        "rmse_baseline": 0.048004484412433664,
+        "amp_ratio_sim_baseline": 0.8831016470988592,
+        "rmse_shared": 0.011143994359174054,
+        "amp_ratio_sim_shared": 0.9894898918767769,
+        "rmse_per_joint": 0.011143994359174054,
+        "amp_ratio_sim_per_joint": 0.9894898918767769
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.0931665052800822,
+        "amp_ratio_sim_baseline": 0.6652186159044504,
+        "rmse_shared": 0.01395069435293093,
+        "amp_ratio_sim_shared": 0.9879312527676423,
+        "rmse_per_joint": 0.01395069435293093,
+        "amp_ratio_sim_per_joint": 0.9879312527676423
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.955755252007637,
+        "rmse_baseline": 0.11598723437688144,
+        "amp_ratio_sim_baseline": 0.3747776996654769,
+        "rmse_shared": 0.02704319643614478,
+        "amp_ratio_sim_shared": 1.002009096244971,
+        "rmse_per_joint": 0.02704319643614478,
+        "amp_ratio_sim_per_joint": 1.002009096244971
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9118663572431311,
+        "rmse_baseline": 0.0524900605182313,
+        "amp_ratio_sim_baseline": 0.9685670832792919,
+        "rmse_shared": 0.0176446082472324,
+        "amp_ratio_sim_shared": 0.9983117828766505,
+        "rmse_per_joint": 0.0176446082472324,
+        "amp_ratio_sim_per_joint": 0.9983117828766505
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.8692557798018634,
+        "rmse_baseline": 0.12505154721775621,
+        "amp_ratio_sim_baseline": 0.7961744616429011,
+        "rmse_shared": 0.023843331868514145,
+        "amp_ratio_sim_shared": 0.9993323137362797,
+        "rmse_per_joint": 0.023843331868514145,
+        "amp_ratio_sim_per_joint": 0.9993323137362797
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9885653966374133,
+        "rmse_baseline": 0.1971492912076171,
+        "amp_ratio_sim_baseline": 0.4461818605971833,
+        "rmse_shared": 0.029318677209165117,
+        "amp_ratio_sim_shared": 0.9986513753732045,
+        "rmse_per_joint": 0.029318677209165117,
+        "amp_ratio_sim_per_joint": 0.9986513753732045
+      },
+      {
+        "file": "fl_hip__sine_grid.npz",
+        "joint": "fl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9424101424651298,
+        "rmse_baseline": 0.13269596234382428,
+        "amp_ratio_sim_baseline": 0.32413701567505987,
+        "rmse_shared": 0.0319833257929426,
+        "amp_ratio_sim_shared": 1.0120732028033268,
+        "rmse_per_joint": 0.0319833257929426,
+        "amp_ratio_sim_per_joint": 1.0120732028033268
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 108,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237713,
+        "rmse_baseline": 0.013939279465157836,
+        "amp_ratio_sim_baseline": 0.844037234783173,
+        "rmse_shared": 0.01908437974510083,
+        "amp_ratio_sim_shared": 1.0337906889617443,
+        "rmse_per_joint": 0.01908437974510083,
+        "amp_ratio_sim_per_joint": 1.0337906889617443
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.02123377846690193,
+        "amp_ratio_sim_baseline": 0.7583693414926526,
+        "rmse_shared": 0.016620331499379914,
+        "amp_ratio_sim_shared": 1.0018055140972142,
+        "rmse_per_joint": 0.016620331499379914,
+        "amp_ratio_sim_per_joint": 1.0018055140972142
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8980179195747194,
+        "rmse_baseline": 0.03572917660021308,
+        "amp_ratio_sim_baseline": 0.6546136364340781,
+        "rmse_shared": 0.01666612128758089,
+        "amp_ratio_sim_shared": 1.0008180513978004,
+        "rmse_per_joint": 0.01666612128758089,
+        "amp_ratio_sim_per_joint": 1.0008180513978004
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 114,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8045409653129381,
+        "rmse_baseline": 0.051937954311961874,
+        "amp_ratio_sim_baseline": 0.45376159250736237,
+        "rmse_shared": 0.01536666965489418,
+        "amp_ratio_sim_shared": 0.983900958672166,
+        "rmse_per_joint": 0.01536666965489418,
+        "amp_ratio_sim_per_joint": 0.983900958672166
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8692557798018634,
+        "rmse_baseline": 0.026118819849494202,
+        "amp_ratio_sim_baseline": 0.9077934920787811,
+        "rmse_shared": 0.017932376294175566,
+        "amp_ratio_sim_shared": 1.0094462732474008,
+        "rmse_per_joint": 0.017932376294175566,
+        "amp_ratio_sim_per_joint": 1.0094462732474008
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8863000107783703,
+        "rmse_baseline": 0.06123060626361485,
+        "amp_ratio_sim_baseline": 0.7709039747715001,
+        "rmse_shared": 0.01599279785186677,
+        "amp_ratio_sim_shared": 0.9849528819322588,
+        "rmse_per_joint": 0.01599279785186677,
+        "amp_ratio_sim_per_joint": 0.9849528819322588
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 124,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9531986173611611,
+        "rmse_baseline": 0.0984572975072958,
+        "amp_ratio_sim_baseline": 0.5039181560277939,
+        "rmse_shared": 0.019470943156002223,
+        "amp_ratio_sim_shared": 0.9914564390977225,
+        "rmse_per_joint": 0.019470943156002223,
+        "amp_ratio_sim_per_joint": 0.9914564390977225
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9357282806102418,
+        "rmse_baseline": 0.1246325196368642,
+        "amp_ratio_sim_baseline": 0.4140573342641193,
+        "rmse_shared": 0.029986205139708382,
+        "amp_ratio_sim_shared": 1.0126156012217202,
+        "rmse_per_joint": 0.029986205139708382,
+        "amp_ratio_sim_per_joint": 1.0126156012217202
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9629990501726526,
+        "rmse_baseline": 0.06415741734072881,
+        "amp_ratio_sim_baseline": 0.9689627736806868,
+        "rmse_shared": 0.018825194878645632,
+        "amp_ratio_sim_shared": 0.9967371026674906,
+        "rmse_per_joint": 0.018825194878645632,
+        "amp_ratio_sim_per_joint": 0.9967371026674906
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.14684006431235364,
+        "amp_ratio_sim_baseline": 0.6829763079682987,
+        "rmse_shared": 0.01818266178114771,
+        "amp_ratio_sim_shared": 0.9897976641853651,
+        "rmse_per_joint": 0.01818266178114771,
+        "amp_ratio_sim_per_joint": 0.9897976641853651
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 124,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9715211656609062,
+        "rmse_baseline": 0.20950203907329404,
+        "amp_ratio_sim_baseline": 0.4526293029387794,
+        "rmse_shared": 0.030725224002500356,
+        "amp_ratio_sim_shared": 0.98946858694156,
+        "rmse_per_joint": 0.030725224002500356,
+        "amp_ratio_sim_per_joint": 0.98946858694156
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 128,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9374125129217542,
+        "rmse_baseline": 0.14591388503711306,
+        "amp_ratio_sim_baseline": 0.4191126338016991,
+        "rmse_shared": 0.05165010369789014,
+        "amp_ratio_sim_shared": 1.0012675265488706,
+        "rmse_per_joint": 0.05165010369789014,
+        "amp_ratio_sim_per_joint": 1.0012675265488706
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 113,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047223,
+        "rmse_baseline": 0.01293995003987294,
+        "amp_ratio_sim_baseline": 0.8496665768325329,
+        "rmse_shared": 0.018720214926197555,
+        "amp_ratio_sim_shared": 1.0269540548324585,
+        "rmse_per_joint": 0.018720214926197555,
+        "amp_ratio_sim_per_joint": 1.0269540548324585
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 137,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237714,
+        "rmse_baseline": 0.01764600482283112,
+        "amp_ratio_sim_baseline": 0.8134938962757589,
+        "rmse_shared": 0.02131856345596025,
+        "amp_ratio_sim_shared": 1.0874395444989204,
+        "rmse_per_joint": 0.02131856345596025,
+        "amp_ratio_sim_per_joint": 1.0874395444989204
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.026418675144501996,
+        "amp_ratio_sim_baseline": 0.7743895496241748,
+        "rmse_shared": 0.01850860321834844,
+        "amp_ratio_sim_shared": 1.0416830517351627,
+        "rmse_per_joint": 0.01850860321834844,
+        "amp_ratio_sim_per_joint": 1.0416830517351627
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.04714631731045313,
+        "amp_ratio_sim_baseline": 0.6223104288801552,
+        "rmse_shared": 0.02012998729931562,
+        "amp_ratio_sim_shared": 1.0835707932710648,
+        "rmse_per_joint": 0.02012998729931562,
+        "amp_ratio_sim_per_joint": 1.0835707932710648
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8863000107783707,
+        "rmse_baseline": 0.0161746118852315,
+        "amp_ratio_sim_baseline": 0.916532002389431,
+        "rmse_shared": 0.02135132247589889,
+        "amp_ratio_sim_shared": 1.0316109141955774,
+        "rmse_per_joint": 0.02135132247589889,
+        "amp_ratio_sim_per_joint": 1.0316109141955774
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548776,
+        "rmse_baseline": 0.030852855637552436,
+        "amp_ratio_sim_baseline": 0.9045838316281637,
+        "rmse_shared": 0.018075988071020316,
+        "amp_ratio_sim_shared": 1.0209977626800537,
+        "rmse_per_joint": 0.018075988071020316,
+        "amp_ratio_sim_per_joint": 1.0209977626800537
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.06529812673915684,
+        "amp_ratio_sim_baseline": 0.7228962580362956,
+        "rmse_shared": 0.0214083748189519,
+        "amp_ratio_sim_shared": 1.0253871480623882,
+        "rmse_per_joint": 0.0214083748189519,
+        "amp_ratio_sim_per_joint": 1.0253871480623882
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.09770584048931247,
+        "amp_ratio_sim_baseline": 0.4653092324733734,
+        "rmse_shared": 0.02869149635177703,
+        "amp_ratio_sim_shared": 0.997436712185542,
+        "rmse_per_joint": 0.02869149635177703,
+        "amp_ratio_sim_per_joint": 0.997436712185542
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9459548191961455,
+        "rmse_baseline": 0.03976733792388165,
+        "amp_ratio_sim_baseline": 0.952116353592525,
+        "rmse_shared": 0.018021225550447852,
+        "amp_ratio_sim_shared": 1.0112149147316813,
+        "rmse_per_joint": 0.018021225550447852,
+        "amp_ratio_sim_per_joint": 1.0112149147316813
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.10694158060840635,
+        "amp_ratio_sim_baseline": 0.7998794320349892,
+        "rmse_shared": 0.019820830090551408,
+        "amp_ratio_sim_shared": 1.00277943459029,
+        "rmse_per_joint": 0.019820830090551408,
+        "amp_ratio_sim_per_joint": 1.00277943459029
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9634251559470652,
+        "rmse_baseline": 0.17242006406735566,
+        "amp_ratio_sim_baseline": 0.5683374814689159,
+        "rmse_shared": 0.026209121538777455,
+        "amp_ratio_sim_shared": 0.9953809673897922,
+        "rmse_per_joint": 0.026209121538777455,
+        "amp_ratio_sim_per_joint": 0.9953809673897922
+      },
+      {
+        "file": "fl_calf__sine_grid.npz",
+        "joint": "fl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9138522593601258,
+        "rmse_baseline": 0.11993613792931318,
+        "amp_ratio_sim_baseline": 0.4271687543558371,
+        "rmse_shared": 0.036327693029373345,
+        "amp_ratio_sim_shared": 0.9956135793785786,
+        "rmse_per_joint": 0.036327693029373345,
+        "amp_ratio_sim_per_joint": 0.9956135793785786
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9587379924285258,
+        "rmse_baseline": 0.02092079969598273,
+        "amp_ratio_sim_baseline": 0.8337982813827693,
+        "rmse_shared": 0.020051658614517784,
+        "amp_ratio_sim_shared": 1.0028459201566875,
+        "rmse_per_joint": 0.020051658614517784,
+        "amp_ratio_sim_per_joint": 1.0028459201566875
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.026231341964600217,
+        "amp_ratio_sim_baseline": 0.778372148051858,
+        "rmse_shared": 0.018490048196796047,
+        "amp_ratio_sim_shared": 0.9981675539165735,
+        "rmse_per_joint": 0.018490048196796047,
+        "amp_ratio_sim_per_joint": 0.9981675539165735
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9523464058123355,
+        "rmse_baseline": 0.04487196499089312,
+        "amp_ratio_sim_baseline": 0.6685910164378583,
+        "rmse_shared": 0.021271558045705477,
+        "amp_ratio_sim_shared": 1.0119813494384289,
+        "rmse_per_joint": 0.021271558045705477,
+        "amp_ratio_sim_per_joint": 1.0119813494384289
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9587379924285258,
+        "rmse_baseline": 0.062275403975109875,
+        "amp_ratio_sim_baseline": 0.4287787972134538,
+        "rmse_shared": 0.024093250744120245,
+        "amp_ratio_sim_shared": 0.993087834212929,
+        "rmse_per_joint": 0.024093250744120245,
+        "amp_ratio_sim_per_joint": 0.993087834212929
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8522115488253562,
+        "rmse_baseline": 0.02378121209387157,
+        "amp_ratio_sim_baseline": 0.9277040511369705,
+        "rmse_shared": 0.017635043676137763,
+        "amp_ratio_sim_shared": 0.9874951591094335,
+        "rmse_per_joint": 0.017635043676137763,
+        "amp_ratio_sim_per_joint": 0.9874951591094335
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8692557798018634,
+        "rmse_baseline": 0.044781094215810516,
+        "amp_ratio_sim_baseline": 0.8830676277478537,
+        "rmse_shared": 0.019292117105443853,
+        "amp_ratio_sim_shared": 0.984186867872874,
+        "rmse_per_joint": 0.019292117105443853,
+        "amp_ratio_sim_per_joint": 0.984186867872874
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548776,
+        "rmse_baseline": 0.08309947752948353,
+        "amp_ratio_sim_baseline": 0.6701486154148977,
+        "rmse_shared": 0.01988339872272932,
+        "amp_ratio_sim_shared": 0.9934416003525256,
+        "rmse_per_joint": 0.01988339872272932,
+        "amp_ratio_sim_per_joint": 0.9934416003525256
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 124,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9191101554081468,
+        "rmse_baseline": 0.1078965811168391,
+        "amp_ratio_sim_baseline": 0.3628426423529163,
+        "rmse_shared": 0.0326568718528924,
+        "amp_ratio_sim_shared": 0.9983928998311361,
+        "rmse_per_joint": 0.0326568718528924,
+        "amp_ratio_sim_per_joint": 0.9983928998311361
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.8522115488253562,
+        "rmse_baseline": 0.047784306933974695,
+        "amp_ratio_sim_baseline": 0.9676147997379303,
+        "rmse_shared": 0.03337436409074559,
+        "amp_ratio_sim_shared": 0.9998758137226105,
+        "rmse_per_joint": 0.03337436409074559,
+        "amp_ratio_sim_per_joint": 0.9998758137226105
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9105880399198931,
+        "rmse_baseline": 0.11954176016734819,
+        "amp_ratio_sim_baseline": 0.8003933740158876,
+        "rmse_shared": 0.02431440206237302,
+        "amp_ratio_sim_shared": 0.9959490274389586,
+        "rmse_per_joint": 0.02431440206237302,
+        "amp_ratio_sim_per_joint": 0.9959490274389586
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 124,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.18847893026971818,
+        "amp_ratio_sim_baseline": 0.4528996764371792,
+        "rmse_shared": 0.028442972677382966,
+        "amp_ratio_sim_shared": 0.9961908881862958,
+        "rmse_per_joint": 0.028442972677382966,
+        "amp_ratio_sim_per_joint": 0.9961908881862958
+      },
+      {
+        "file": "fr_hip__sine_grid.npz",
+        "joint": "fr_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 130,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9138522593601258,
+        "rmse_baseline": 0.11935344300492384,
+        "amp_ratio_sim_baseline": 0.3318317889780159,
+        "rmse_shared": 0.05241654269842821,
+        "amp_ratio_sim_shared": 1.0214039070536907,
+        "rmse_per_joint": 0.05241654269842821,
+        "amp_ratio_sim_per_joint": 1.0214039070536907
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 112,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9267800593475747,
+        "rmse_baseline": 0.014518858113271853,
+        "amp_ratio_sim_baseline": 0.8444431796669954,
+        "rmse_shared": 0.017164528662634765,
+        "amp_ratio_sim_shared": 1.0084042046219106,
+        "rmse_per_joint": 0.017164528662634765,
+        "amp_ratio_sim_per_joint": 1.0084042046219106
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.893224229612577,
+        "rmse_baseline": 0.0229121338032433,
+        "amp_ratio_sim_baseline": 0.7582102529704572,
+        "rmse_shared": 0.015896100891631185,
+        "amp_ratio_sim_shared": 0.9930354170501233,
+        "rmse_per_joint": 0.015896100891631185,
+        "amp_ratio_sim_per_joint": 0.9930354170501233
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8948221262666242,
+        "rmse_baseline": 0.037127720096488716,
+        "amp_ratio_sim_baseline": 0.6512437202036383,
+        "rmse_shared": 0.01470577466456318,
+        "amp_ratio_sim_shared": 0.9932328015565872,
+        "rmse_per_joint": 0.01470577466456318,
+        "amp_ratio_sim_per_joint": 0.9932328015565872
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.862864193185673,
+        "rmse_baseline": 0.05313363856671408,
+        "amp_ratio_sim_baseline": 0.45030325651168807,
+        "rmse_shared": 0.02054645990490059,
+        "amp_ratio_sim_shared": 1.0171552002429967,
+        "rmse_per_joint": 0.02054645990490059,
+        "amp_ratio_sim_per_joint": 1.0171552002429967
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548773,
+        "rmse_baseline": 0.027475346503231527,
+        "amp_ratio_sim_baseline": 0.9079268773396809,
+        "rmse_shared": 0.015788659993951994,
+        "amp_ratio_sim_shared": 0.9823786218961084,
+        "rmse_per_joint": 0.015788659993951994,
+        "amp_ratio_sim_per_joint": 0.9823786218961084
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313846,
+        "rmse_baseline": 0.06440892330966574,
+        "amp_ratio_sim_baseline": 0.774597307046255,
+        "rmse_shared": 0.01662573395474369,
+        "amp_ratio_sim_shared": 1.0085430145263672,
+        "rmse_per_joint": 0.01662573395474369,
+        "amp_ratio_sim_per_joint": 1.0085430145263672
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548773,
+        "rmse_baseline": 0.10174629495689859,
+        "amp_ratio_sim_baseline": 0.5045019487539926,
+        "rmse_shared": 0.01732489450832841,
+        "amp_ratio_sim_shared": 1.007799754540126,
+        "rmse_per_joint": 0.01732489450832841,
+        "amp_ratio_sim_per_joint": 1.007799754540126
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.903344241754878,
+        "rmse_baseline": 0.12944240057936884,
+        "amp_ratio_sim_baseline": 0.4181154568990072,
+        "rmse_shared": 0.023071992122403937,
+        "amp_ratio_sim_shared": 0.9980688492457073,
+        "rmse_per_joint": 0.023071992122403937,
+        "amp_ratio_sim_per_joint": 0.9980688492457073
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9629990501726526,
+        "rmse_baseline": 0.06873754434907392,
+        "amp_ratio_sim_baseline": 0.968948190410932,
+        "rmse_shared": 0.013967899062101646,
+        "amp_ratio_sim_shared": 1.0067293395598729,
+        "rmse_per_joint": 0.013967899062101646,
+        "amp_ratio_sim_per_joint": 1.0067293395598729
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9723733772097314,
+        "rmse_baseline": 0.15310038112201682,
+        "amp_ratio_sim_baseline": 0.6938403348127999,
+        "rmse_shared": 0.014014624383570285,
+        "amp_ratio_sim_shared": 0.9916149973869325,
+        "rmse_per_joint": 0.014014624383570285,
+        "amp_ratio_sim_per_joint": 0.9916149973869325
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9885653966374133,
+        "rmse_baseline": 0.2184581937125669,
+        "amp_ratio_sim_baseline": 0.4557053148746491,
+        "rmse_shared": 0.03467549774743961,
+        "amp_ratio_sim_shared": 0.9890092015266418,
+        "rmse_per_joint": 0.03467549774743961,
+        "amp_ratio_sim_per_joint": 0.9890092015266418
+      },
+      {
+        "file": "fr_thigh__sine_grid.npz",
+        "joint": "fr_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9852469671226359,
+        "rmse_baseline": 0.15996156563896452,
+        "amp_ratio_sim_baseline": 0.4142580573191341,
+        "rmse_shared": 0.020422964714046556,
+        "amp_ratio_sim_shared": 0.9798688440977594,
+        "rmse_per_joint": 0.020422964714046556,
+        "amp_ratio_sim_per_joint": 0.9798688440977594
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 109,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7669903939428205,
+        "rmse_baseline": 0.013002562541334115,
+        "amp_ratio_sim_baseline": 0.8490748796612024,
+        "rmse_shared": 0.01957399275510122,
+        "amp_ratio_sim_shared": 1.1040229164063928,
+        "rmse_per_joint": 0.01957399275510122,
+        "amp_ratio_sim_per_joint": 1.1040229164063928
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8029430686588902,
+        "rmse_baseline": 0.01663377132659714,
+        "amp_ratio_sim_baseline": 0.8139733574353158,
+        "rmse_shared": 0.01688501527181984,
+        "amp_ratio_sim_shared": 1.045491744298488,
+        "rmse_per_joint": 0.01688501527181984,
+        "amp_ratio_sim_per_joint": 1.045491744298488
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8029430686588902,
+        "rmse_baseline": 0.025576759748811764,
+        "amp_ratio_sim_baseline": 0.7785612368024886,
+        "rmse_shared": 0.015607280738338936,
+        "amp_ratio_sim_shared": 1.054227806162089,
+        "rmse_per_joint": 0.015607280738338936,
+        "amp_ratio_sim_per_joint": 1.054227806162089
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8029430686588902,
+        "rmse_baseline": 0.047172187827224224,
+        "amp_ratio_sim_baseline": 0.6242726230993867,
+        "rmse_shared": 0.015195824176030362,
+        "amp_ratio_sim_shared": 1.0112488293088973,
+        "rmse_per_joint": 0.015195824176030362,
+        "amp_ratio_sim_per_joint": 1.0112488293088973
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8863000107783707,
+        "rmse_baseline": 0.01721184088126596,
+        "amp_ratio_sim_baseline": 0.916096493601799,
+        "rmse_shared": 0.015308562988205042,
+        "amp_ratio_sim_shared": 1.006518496821324,
+        "rmse_per_joint": 0.015308562988205042,
+        "amp_ratio_sim_per_joint": 1.006518496821324
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548776,
+        "rmse_baseline": 0.03288282340990483,
+        "amp_ratio_sim_baseline": 0.9013685385386149,
+        "rmse_shared": 0.014816094352205097,
+        "amp_ratio_sim_shared": 1.0031848872701328,
+        "rmse_per_joint": 0.014816094352205097,
+        "amp_ratio_sim_per_joint": 1.0031848872701328
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.0717762643018385,
+        "amp_ratio_sim_baseline": 0.725203849375248,
+        "rmse_shared": 0.01416870725190956,
+        "amp_ratio_sim_shared": 0.986199011405309,
+        "rmse_per_joint": 0.01416870725190956,
+        "amp_ratio_sim_per_joint": 0.986199011405309
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9885653966374135,
+        "rmse_baseline": 0.10818150071428378,
+        "amp_ratio_sim_baseline": 0.4558676481246948,
+        "rmse_shared": 0.021402170383569723,
+        "amp_ratio_sim_shared": 0.9606006120642027,
+        "rmse_per_joint": 0.021402170383569723,
+        "amp_ratio_sim_per_joint": 0.9606006120642027
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9459548191961453,
+        "rmse_baseline": 0.041481724332483545,
+        "amp_ratio_sim_baseline": 0.9487218734769461,
+        "rmse_shared": 0.015979906118826888,
+        "amp_ratio_sim_shared": 1.0107554134447128,
+        "rmse_per_joint": 0.015979906118826888,
+        "amp_ratio_sim_per_joint": 1.0107554134447128
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 114,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.11041705154440289,
+        "amp_ratio_sim_baseline": 0.805027534874777,
+        "rmse_shared": 0.015845705713323027,
+        "amp_ratio_sim_shared": 0.996036067372188,
+        "rmse_per_joint": 0.015845705713323027,
+        "amp_ratio_sim_per_joint": 0.996036067372188
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9470200836321773,
+        "rmse_baseline": 0.17915578874418722,
+        "amp_ratio_sim_baseline": 0.5479740165174007,
+        "rmse_shared": 0.024631410439162046,
+        "amp_ratio_sim_shared": 1.0154632331493,
+        "rmse_per_joint": 0.024631410439162046,
+        "amp_ratio_sim_per_joint": 1.0154632331493
+      },
+      {
+        "file": "fr_calf__sine_grid.npz",
+        "joint": "fr_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 113,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9881027554331362,
+        "rmse_baseline": 0.12842681970438816,
+        "amp_ratio_sim_baseline": 0.39918336296560597,
+        "rmse_shared": 0.027663865231454126,
+        "amp_ratio_sim_shared": 0.9934863981832293,
+        "rmse_per_joint": 0.027663865231454126,
+        "amp_ratio_sim_per_joint": 0.9934863981832293
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 111,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047223,
+        "rmse_baseline": 0.018085495126547727,
+        "amp_ratio_sim_baseline": 0.8288116077892482,
+        "rmse_shared": 0.017139515054061312,
+        "amp_ratio_sim_shared": 0.9876822936348617,
+        "rmse_per_joint": 0.017139515054061312,
+        "amp_ratio_sim_per_joint": 0.9876822936348617
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237714,
+        "rmse_baseline": 0.026690869643554407,
+        "amp_ratio_sim_baseline": 0.7729781983653083,
+        "rmse_shared": 0.014598485128766289,
+        "amp_ratio_sim_shared": 0.9853145305532961,
+        "rmse_per_joint": 0.014598485128766289,
+        "amp_ratio_sim_per_joint": 0.9853145305532961
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047223,
+        "rmse_baseline": 0.04756180468096522,
+        "amp_ratio_sim_baseline": 0.6524599913973361,
+        "rmse_shared": 0.012972663075654397,
+        "amp_ratio_sim_shared": 1.0035359067842364,
+        "rmse_per_joint": 0.012972663075654397,
+        "amp_ratio_sim_per_joint": 1.0035359067842364
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.993092770490548,
+        "rmse_baseline": 0.06997734959350278,
+        "amp_ratio_sim_baseline": 0.4199793218867854,
+        "rmse_shared": 0.021859577235696946,
+        "amp_ratio_sim_shared": 0.9896086703520268,
+        "rmse_per_joint": 0.021859577235696946,
+        "amp_ratio_sim_per_joint": 0.9896086703520268
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.027426288648983735,
+        "amp_ratio_sim_baseline": 0.9230021138985952,
+        "rmse_shared": 0.013327305832684246,
+        "amp_ratio_sim_shared": 0.9889686604340872,
+        "rmse_per_joint": 0.013327305832684246,
+        "amp_ratio_sim_per_joint": 0.9889686604340872
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.05246335990566478,
+        "amp_ratio_sim_baseline": 0.8688029454400142,
+        "rmse_shared": 0.014752686725790337,
+        "amp_ratio_sim_shared": 0.9871584313611189,
+        "rmse_per_joint": 0.014752686725790337,
+        "amp_ratio_sim_per_joint": 0.9871584313611189
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9715211656609062,
+        "rmse_baseline": 0.09513761650849409,
+        "amp_ratio_sim_baseline": 0.6675934294859569,
+        "rmse_shared": 0.017231302240117135,
+        "amp_ratio_sim_shared": 1.015540212392807,
+        "rmse_per_joint": 0.017231302240117135,
+        "amp_ratio_sim_per_joint": 1.015540212392807
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9715211656609062,
+        "rmse_baseline": 0.11850099542117012,
+        "amp_ratio_sim_baseline": 0.370579723501578,
+        "rmse_shared": 0.027817302726134682,
+        "amp_ratio_sim_shared": 0.995187188188235,
+        "rmse_per_joint": 0.027817302726134682,
+        "amp_ratio_sim_per_joint": 0.995187188188235
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9715211656609062,
+        "rmse_baseline": 0.05406332906152201,
+        "amp_ratio_sim_baseline": 0.9674695059657098,
+        "rmse_shared": 0.013378760973641126,
+        "amp_ratio_sim_shared": 0.9941487982869148,
+        "rmse_per_joint": 0.013378760973641126,
+        "amp_ratio_sim_per_joint": 0.9941487982869148
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.979617175374747,
+        "rmse_baseline": 0.13703204881508294,
+        "amp_ratio_sim_baseline": 0.8050005808472634,
+        "rmse_shared": 0.018863276715597416,
+        "amp_ratio_sim_shared": 0.9951767002542815,
+        "rmse_per_joint": 0.018863276715597416,
+        "amp_ratio_sim_per_joint": 0.9951767002542815
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9970875121256669,
+        "rmse_baseline": 0.20580049113194115,
+        "amp_ratio_sim_baseline": 0.4548954246565699,
+        "rmse_shared": 0.030727266303935054,
+        "amp_ratio_sim_shared": 0.9899293469885986,
+        "rmse_per_joint": 0.030727266303935054,
+        "amp_ratio_sim_per_joint": 0.9899293469885986
+      },
+      {
+        "file": "bl_hip__sine_grid.npz",
+        "joint": "bl_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 1.0002398557527628,
+        "rmse_baseline": 0.142670998848918,
+        "amp_ratio_sim_baseline": 0.3344689805901717,
+        "rmse_shared": 0.04002793101321077,
+        "amp_ratio_sim_shared": 0.9935937797512138,
+        "rmse_per_joint": 0.04002793101321077,
+        "amp_ratio_sim_per_joint": 0.9935937797512138
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.010974835052807377,
+        "amp_ratio_sim_baseline": 0.8309814333915713,
+        "rmse_shared": 0.018765283916780544,
+        "amp_ratio_sim_shared": 1.0311232879757881,
+        "rmse_per_joint": 0.018765283916780544,
+        "amp_ratio_sim_per_joint": 1.0311232879757881
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 127,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8948221262666242,
+        "rmse_baseline": 0.02105524236057309,
+        "amp_ratio_sim_baseline": 0.7406108267605307,
+        "rmse_shared": 0.017424441302332463,
+        "amp_ratio_sim_shared": 1.043899208307266,
+        "rmse_per_joint": 0.017424441302332463,
+        "amp_ratio_sim_per_joint": 1.043899208307266
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8652610381667446,
+        "rmse_baseline": 0.03195274758797225,
+        "amp_ratio_sim_baseline": 0.6516809854656462,
+        "rmse_shared": 0.014239420219873521,
+        "amp_ratio_sim_shared": 1.0413309838622806,
+        "rmse_per_joint": 0.014239420219873521,
+        "amp_ratio_sim_per_joint": 1.0413309838622806
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9267800593475755,
+        "rmse_baseline": 0.04965285382431138,
+        "amp_ratio_sim_baseline": 0.49486009404063197,
+        "rmse_shared": 0.01565915019424521,
+        "amp_ratio_sim_shared": 1.0515041649341583,
+        "rmse_per_joint": 0.01565915019424521,
+        "amp_ratio_sim_per_joint": 1.0515041649341583
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8863000107783703,
+        "rmse_baseline": 0.0265699822627578,
+        "amp_ratio_sim_baseline": 0.8997885882854462,
+        "rmse_shared": 0.017892951829160304,
+        "amp_ratio_sim_shared": 0.9866863985856374,
+        "rmse_per_joint": 0.017892951829160304,
+        "amp_ratio_sim_per_joint": 0.9866863985856374
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.919962366956972,
+        "rmse_baseline": 0.05606662456674895,
+        "amp_ratio_sim_baseline": 0.7638443013032278,
+        "rmse_shared": 0.016329888201309938,
+        "amp_ratio_sim_shared": 1.0043256183465321,
+        "rmse_per_joint": 0.016329888201309938,
+        "amp_ratio_sim_per_joint": 1.0043256183465321
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9365804921590667,
+        "rmse_baseline": 0.0925715193736031,
+        "amp_ratio_sim_baseline": 0.5221442878246307,
+        "rmse_shared": 0.016347716963279937,
+        "amp_ratio_sim_shared": 1.0242426743110022,
+        "rmse_per_joint": 0.016347716963279937,
+        "amp_ratio_sim_per_joint": 1.0242426743110022
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8713863086739264,
+        "rmse_baseline": 0.10147837239821635,
+        "amp_ratio_sim_baseline": 0.3559692700703939,
+        "rmse_shared": 0.02361543087374186,
+        "amp_ratio_sim_shared": 1.0162133971850078,
+        "rmse_per_joint": 0.02361543087374186,
+        "amp_ratio_sim_per_joint": 1.0162133971850078
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9297627997684634,
+        "rmse_baseline": 0.09687088544155067,
+        "amp_ratio_sim_baseline": 0.9621525704860688,
+        "rmse_shared": 0.017239819762631062,
+        "amp_ratio_sim_shared": 1.0009308755397797,
+        "rmse_per_joint": 0.017239819762631062,
+        "amp_ratio_sim_per_joint": 1.0009308755397797
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.1503958279636046,
+        "amp_ratio_sim_baseline": 0.6901636446515718,
+        "rmse_shared": 0.016781483952735585,
+        "amp_ratio_sim_shared": 0.9888982350627583,
+        "rmse_per_joint": 0.016781483952735585,
+        "amp_ratio_sim_per_joint": 0.9888982350627583
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9819607571340169,
+        "rmse_baseline": 0.20419185628873682,
+        "amp_ratio_sim_baseline": 0.4043650577465693,
+        "rmse_shared": 0.019889219731865616,
+        "amp_ratio_sim_shared": 0.999117168287436,
+        "rmse_per_joint": 0.019889219731865616,
+        "amp_ratio_sim_per_joint": 0.999117168287436
+      },
+      {
+        "file": "bl_thigh__sine_grid.npz",
+        "joint": "bl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9138522593601259,
+        "rmse_baseline": 0.12981373447580133,
+        "amp_ratio_sim_baseline": 0.35157115261533095,
+        "rmse_shared": 0.025503088510021303,
+        "amp_ratio_sim_shared": 0.9897924314649101,
+        "rmse_per_joint": 0.025503088510021303,
+        "amp_ratio_sim_per_joint": 0.9897924314649101
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 112,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237714,
+        "rmse_baseline": 0.01532870773659921,
+        "amp_ratio_sim_baseline": 0.8363641961477697,
+        "rmse_shared": 0.021242479706788626,
+        "amp_ratio_sim_shared": 1.0493906727060673,
+        "rmse_per_joint": 0.021242479706788626,
+        "amp_ratio_sim_per_joint": 1.0493906727060673
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.019291222925893654,
+        "amp_ratio_sim_baseline": 0.8076254860498011,
+        "rmse_shared": 0.020385227566682027,
+        "amp_ratio_sim_shared": 1.045210144948214,
+        "rmse_per_joint": 0.020385227566682027,
+        "amp_ratio_sim_per_joint": 1.045210144948214
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856732,
+        "rmse_baseline": 0.028333433684561544,
+        "amp_ratio_sim_baseline": 0.7524686073884368,
+        "rmse_shared": 0.01795575766409684,
+        "amp_ratio_sim_shared": 1.0314724221825597,
+        "rmse_per_joint": 0.01795575766409684,
+        "amp_ratio_sim_per_joint": 1.0314724221825597
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237714,
+        "rmse_baseline": 0.05162533672360416,
+        "amp_ratio_sim_baseline": 0.5112273618578911,
+        "rmse_shared": 0.020160183675965403,
+        "amp_ratio_sim_shared": 1.0933062992990017,
+        "rmse_per_joint": 0.020160183675965403,
+        "amp_ratio_sim_per_joint": 1.0933062992990017
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8863000107783707,
+        "rmse_baseline": 0.019636540566000428,
+        "amp_ratio_sim_baseline": 0.916115939617157,
+        "rmse_shared": 0.018852305310650592,
+        "amp_ratio_sim_shared": 1.031301369269689,
+        "rmse_per_joint": 0.018852305310650592,
+        "amp_ratio_sim_per_joint": 1.031301369269689
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.04116232585630798,
+        "amp_ratio_sim_baseline": 0.8784319050610067,
+        "rmse_shared": 0.0190365892542919,
+        "amp_ratio_sim_shared": 0.9706042086084684,
+        "rmse_per_joint": 0.0190365892542919,
+        "amp_ratio_sim_per_joint": 0.9706042086084684
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.08322074232759015,
+        "amp_ratio_sim_baseline": 0.6917382553219795,
+        "rmse_shared": 0.014912118119887501,
+        "amp_ratio_sim_shared": 0.9914663583040236,
+        "rmse_per_joint": 0.014912118119887501,
+        "amp_ratio_sim_per_joint": 0.9914663583040236
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.10745824795388642,
+        "amp_ratio_sim_baseline": 0.41807730992635095,
+        "rmse_shared": 0.04808073542649958,
+        "amp_ratio_sim_shared": 0.9653632963697116,
+        "rmse_per_joint": 0.04808073542649958,
+        "amp_ratio_sim_per_joint": 0.9653632963697116
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9459548191961453,
+        "rmse_baseline": 0.05654543710293602,
+        "amp_ratio_sim_baseline": 0.9540067058211814,
+        "rmse_shared": 0.016678637983895322,
+        "amp_ratio_sim_shared": 0.9961462333643188,
+        "rmse_per_joint": 0.016678637983895322,
+        "amp_ratio_sim_per_joint": 0.9961462333643188
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9378588094823045,
+        "rmse_baseline": 0.14912716873756543,
+        "amp_ratio_sim_baseline": 0.7038266013065975,
+        "rmse_shared": 0.017696825792607857,
+        "amp_ratio_sim_shared": 0.9940214352682233,
+        "rmse_per_joint": 0.017696825792607857,
+        "amp_ratio_sim_per_joint": 0.9940214352682233
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.1971437678182271,
+        "amp_ratio_sim_baseline": 0.5125004549821218,
+        "rmse_shared": 0.15799967544247737,
+        "amp_ratio_sim_shared": 0.9966228902339935,
+        "rmse_per_joint": 0.15799967544247737,
+        "amp_ratio_sim_per_joint": 0.9966228902339935
+      },
+      {
+        "file": "bl_calf__sine_grid.npz",
+        "joint": "bl_calf",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9142092328989384,
+        "rmse_baseline": 0.1302039762475828,
+        "amp_ratio_sim_baseline": 0.36187583001209356,
+        "rmse_shared": 0.06404390633882379,
+        "amp_ratio_sim_shared": 0.9486620623641978,
+        "rmse_per_joint": 0.06404390633882379,
+        "amp_ratio_sim_per_joint": 0.9486620623641978
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 113,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237714,
+        "rmse_baseline": 0.016686253790535777,
+        "amp_ratio_sim_baseline": 0.8277309779077767,
+        "rmse_shared": 0.016567620913055178,
+        "amp_ratio_sim_shared": 1.0027691535651684,
+        "rmse_per_joint": 0.016567620913055178,
+        "amp_ratio_sim_per_joint": 1.0027691535651684
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047223,
+        "rmse_baseline": 0.02650658022579511,
+        "amp_ratio_sim_baseline": 0.7763605425134301,
+        "rmse_shared": 0.014741142942239714,
+        "amp_ratio_sim_shared": 0.9874740696977824,
+        "rmse_per_joint": 0.014741142942239714,
+        "amp_ratio_sim_per_joint": 0.9874740696977824
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.9267800593475749,
+        "rmse_baseline": 0.04663252566286908,
+        "amp_ratio_sim_baseline": 0.6437269214075059,
+        "rmse_shared": 0.011147771963077974,
+        "amp_ratio_sim_shared": 0.9929892781656235,
+        "rmse_per_joint": 0.011147771963077974,
+        "amp_ratio_sim_per_joint": 0.9929892781656235
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.93636743927186,
+        "rmse_baseline": 0.06331490609215516,
+        "amp_ratio_sim_baseline": 0.4232820078323129,
+        "rmse_shared": 0.011296028090865311,
+        "amp_ratio_sim_shared": 0.9860732220113277,
+        "rmse_per_joint": 0.011296028090865311,
+        "amp_ratio_sim_per_joint": 0.9860732220113277
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313848,
+        "rmse_baseline": 0.025398811143646925,
+        "amp_ratio_sim_baseline": 0.9248230854670207,
+        "rmse_shared": 0.013080298270086064,
+        "amp_ratio_sim_shared": 0.9936815003554027,
+        "rmse_per_joint": 0.013080298270086064,
+        "amp_ratio_sim_per_joint": 0.9936815003554027
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9216667900546227,
+        "rmse_baseline": 0.049579662385969565,
+        "amp_ratio_sim_baseline": 0.8718327550838392,
+        "rmse_shared": 0.012423833359762972,
+        "amp_ratio_sim_shared": 0.9877337800959746,
+        "rmse_per_joint": 0.012423833359762972,
+        "amp_ratio_sim_per_joint": 0.9877337800959746
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.09116542712496677,
+        "amp_ratio_sim_baseline": 0.6622383122642835,
+        "rmse_shared": 0.014524277897424874,
+        "amp_ratio_sim_shared": 1.0002633432547252,
+        "rmse_per_joint": 0.014524277897424874,
+        "amp_ratio_sim_per_joint": 1.0002633432547252
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 123,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313848,
+        "rmse_baseline": 0.11032680588584996,
+        "amp_ratio_sim_baseline": 0.3587232263137897,
+        "rmse_shared": 0.019463988733485354,
+        "amp_ratio_sim_shared": 0.9884147867560388,
+        "rmse_per_joint": 0.019463988733485354,
+        "amp_ratio_sim_per_joint": 0.9884147867560388
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.04887617914631581,
+        "amp_ratio_sim_baseline": 0.9688912928104401,
+        "rmse_shared": 0.013266382735609192,
+        "amp_ratio_sim_shared": 0.9959942884743216,
+        "rmse_per_joint": 0.013266382735609192,
+        "amp_ratio_sim_per_joint": 0.9959942884743216
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9800432811491596,
+        "rmse_baseline": 0.1290820630997311,
+        "amp_ratio_sim_baseline": 0.807080864906311,
+        "rmse_shared": 0.014942342443822674,
+        "amp_ratio_sim_shared": 0.9845453500747681,
+        "rmse_per_joint": 0.014942342443822674,
+        "amp_ratio_sim_per_joint": 0.9845453500747681
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9800432811491596,
+        "rmse_baseline": 0.1920903468718152,
+        "amp_ratio_sim_baseline": 0.45523375847066444,
+        "rmse_shared": 0.02427332198390114,
+        "amp_ratio_sim_shared": 0.9891993974645934,
+        "rmse_per_joint": 0.02427332198390114,
+        "amp_ratio_sim_per_joint": 0.9891993974645934
+      },
+      {
+        "file": "br_hip__sine_grid.npz",
+        "joint": "br_hip",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 127,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9666843431043831,
+        "rmse_baseline": 0.13120227383193256,
+        "amp_ratio_sim_baseline": 0.34145760563629785,
+        "rmse_shared": 0.033667794070999985,
+        "amp_ratio_sim_shared": 1.012518597770291,
+        "rmse_per_joint": 0.033667794070999985,
+        "amp_ratio_sim_per_joint": 1.012518597770291
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7669903939428208,
+        "rmse_baseline": 0.010038417435113335,
+        "amp_ratio_sim_baseline": 0.8305105753242968,
+        "rmse_shared": 0.021002338989764092,
+        "amp_ratio_sim_shared": 1.0551811568439005,
+        "rmse_per_joint": 0.021002338989764092,
+        "amp_ratio_sim_per_joint": 1.0551811568439005
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7669903939428208,
+        "rmse_baseline": 0.016965245903713864,
+        "amp_ratio_sim_baseline": 0.7398143410682678,
+        "rmse_shared": 0.01770330737139638,
+        "amp_ratio_sim_shared": 1.0031484067440033,
+        "rmse_per_joint": 0.01770330737139638,
+        "amp_ratio_sim_per_joint": 1.0031484067440033
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 122,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.7989483270237719,
+        "rmse_baseline": 0.027584631557670995,
+        "amp_ratio_sim_baseline": 0.6529384385794402,
+        "rmse_shared": 0.016788842465818434,
+        "amp_ratio_sim_shared": 0.9830838069319725,
+        "rmse_per_joint": 0.016788842465818434,
+        "amp_ratio_sim_per_joint": 0.9830838069319725
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.04300306607921427,
+        "amp_ratio_sim_baseline": 0.49863196909427643,
+        "rmse_shared": 0.01658276068590305,
+        "amp_ratio_sim_shared": 1.0171644389629364,
+        "rmse_per_joint": 0.01658276068590305,
+        "amp_ratio_sim_per_joint": 1.0171644389629364
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.869255779801863,
+        "rmse_baseline": 0.023682329562965215,
+        "amp_ratio_sim_baseline": 0.9024683634440105,
+        "rmse_shared": 0.018807819457473937,
+        "amp_ratio_sim_shared": 1.0201307137807212,
+        "rmse_per_joint": 0.018807819457473937,
+        "amp_ratio_sim_per_joint": 1.0201307137807212
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 121,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.8351673178488491,
+        "rmse_baseline": 0.05350953718094152,
+        "amp_ratio_sim_baseline": 0.7632368803024292,
+        "rmse_shared": 0.017093559078810328,
+        "amp_ratio_sim_shared": 0.9981850783030193,
+        "rmse_per_joint": 0.017093559078810328,
+        "amp_ratio_sim_per_joint": 0.9981850783030193
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 125,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9016398186572272,
+        "rmse_baseline": 0.08993873872680147,
+        "amp_ratio_sim_baseline": 0.5197585423787436,
+        "rmse_shared": 0.017609220573655403,
+        "amp_ratio_sim_shared": 0.9926325480143224,
+        "rmse_per_joint": 0.017609220573655403,
+        "amp_ratio_sim_per_joint": 0.9926325480143224
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9203884727313849,
+        "rmse_baseline": 0.09855327703158542,
+        "amp_ratio_sim_baseline": 0.38125719130039226,
+        "rmse_shared": 0.026284219807936358,
+        "amp_ratio_sim_shared": 1.008884449799856,
+        "rmse_per_joint": 0.026284219807936358,
+        "amp_ratio_sim_per_joint": 1.008884449799856
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9374327037078919,
+        "rmse_baseline": 0.09611285158133565,
+        "amp_ratio_sim_baseline": 0.9623677680889766,
+        "rmse_shared": 0.01670291929576936,
+        "amp_ratio_sim_shared": 0.992205999791622,
+        "rmse_per_joint": 0.01670291929576936,
+        "amp_ratio_sim_per_joint": 0.992205999791622
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 119,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.14708824899004885,
+        "amp_ratio_sim_baseline": 0.6888918181260427,
+        "rmse_shared": 0.01722020433314817,
+        "amp_ratio_sim_shared": 1.0062247266372046,
+        "rmse_per_joint": 0.01722020433314817,
+        "amp_ratio_sim_per_joint": 1.0062247266372046
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 120,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9546899875716053,
+        "rmse_baseline": 0.1998795140346819,
+        "amp_ratio_sim_baseline": 0.4141755600770314,
+        "rmse_shared": 0.020346985542883264,
+        "amp_ratio_sim_shared": 0.9986246849099795,
+        "rmse_per_joint": 0.020346985542883264,
+        "amp_ratio_sim_per_joint": 0.9986246849099795
+      },
+      {
+        "file": "br_thigh__sine_grid.npz",
+        "joint": "br_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.8995733178076242,
+        "rmse_baseline": 0.1271361950503433,
+        "amp_ratio_sim_baseline": 0.34449022339573027,
+        "rmse_shared": 0.026198874538120687,
+        "amp_ratio_sim_shared": 0.9924396843286658,
+        "rmse_per_joint": 0.026198874538120687,
+        "amp_ratio_sim_per_joint": 0.9924396843286658
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": 0.0,
+          "edge": true
+        },
+        "n_samples": 9,
+        "rmse_baseline": 0.05803011263983773,
+        "rmse_shared": 0.07764943357432624,
+        "rmse_per_joint": 0.07764943357432624
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.07301824954073932,
+        "rmse_shared": 0.09715148404659313,
+        "rmse_per_joint": 0.09715148404659313
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.058260944706441956,
+        "rmse_shared": 0.09264915447829249,
+        "rmse_per_joint": 0.09264915447829249
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06703133634654919,
+        "rmse_shared": 0.0947537194358044,
+        "rmse_per_joint": 0.0947537194358044
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.05937323129690768,
+        "rmse_shared": 0.08512576364021643,
+        "rmse_per_joint": 0.08512576364021643
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06977966369876823,
+        "rmse_shared": 0.08918194290115082,
+        "rmse_per_joint": 0.08918194290115082
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.05456246854091788,
+        "rmse_shared": 0.08223267302928847,
+        "rmse_per_joint": 0.08223267302928847
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06332040453263939,
+        "rmse_shared": 0.08830879242546195,
+        "rmse_per_joint": 0.08830879242546195
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.052251885707807824,
+        "rmse_shared": 0.08232677509978986,
+        "rmse_per_joint": 0.08232677509978986
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.06653457628513887,
+        "rmse_shared": 0.09001527751871222,
+        "rmse_per_joint": 0.09001527751871222
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.0577422014563703,
+        "rmse_shared": 0.08891956015138572,
+        "rmse_per_joint": 0.08891956015138572
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06466275595297147,
+        "rmse_shared": 0.08634518709877939,
+        "rmse_per_joint": 0.08634518709877939
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05550692953777823,
+        "rmse_shared": 0.08799124181576687,
+        "rmse_per_joint": 0.08799124181576687
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06886149727558094,
+        "rmse_shared": 0.09532390843541418,
+        "rmse_per_joint": 0.09532390843541418
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.058001249097186056,
+        "rmse_shared": 0.08280916956339988,
+        "rmse_per_joint": 0.08280916956339988
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.07149309607052622,
+        "rmse_shared": 0.09165108674746895,
+        "rmse_per_joint": 0.09165108674746895
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.055847938711440975,
+        "rmse_shared": 0.08413811849746142,
+        "rmse_per_joint": 0.08413811849746142
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.068956676337657,
+        "rmse_shared": 0.0895787917145827,
+        "rmse_per_joint": 0.0895787917145827
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.06047571572014989,
+        "rmse_shared": 0.08724897097028497,
+        "rmse_per_joint": 0.08724897097028497
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06916814787951825,
+        "rmse_shared": 0.09217773598351295,
+        "rmse_per_joint": 0.09217773598351295
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.054294863815404944,
+        "rmse_shared": 0.08104800226089781,
+        "rmse_per_joint": 0.08104800226089781
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.0698935816409179,
+        "rmse_shared": 0.08351826581440995,
+        "rmse_per_joint": 0.08351826581440995
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.055489031346422864,
+        "rmse_shared": 0.08420470721436375,
+        "rmse_per_joint": 0.08420470721436375
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.07068960364344952,
+        "rmse_shared": 0.09182330638996623,
+        "rmse_per_joint": 0.09182330638996623
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05722208338016129,
+        "rmse_shared": 0.08346800549772905,
+        "rmse_per_joint": 0.08346800549772905
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.06939237308449957,
+        "rmse_shared": 0.09825644257807363,
+        "rmse_per_joint": 0.09825644257807363
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05561965871553016,
+        "rmse_shared": 0.08479373377888082,
+        "rmse_per_joint": 0.08479373377888082
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.0679224518859785,
+        "rmse_shared": 0.09119122526022674,
+        "rmse_per_joint": 0.09119122526022674
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05504795903863266,
+        "rmse_shared": 0.08414911157895066,
+        "rmse_per_joint": 0.08414911157895066
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.07186099520826447,
+        "rmse_shared": 0.09270775743354201,
+        "rmse_per_joint": 0.09270775743354201
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.056208961295845766,
+        "rmse_shared": 0.08592687482244811,
+        "rmse_per_joint": 0.08592687482244811
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 10,
+        "rmse_baseline": 0.06396623415957643,
+        "rmse_shared": 0.08339037192243892,
+        "rmse_per_joint": 0.08339037192243892
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05392266409110434,
+        "rmse_shared": 0.07842266676257027,
+        "rmse_per_joint": 0.07842266676257027
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.0707741004257811,
+        "rmse_shared": 0.09405019266349451,
+        "rmse_per_joint": 0.09405019266349451
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05700613471790552,
+        "rmse_shared": 0.08549179930214376,
+        "rmse_per_joint": 0.08549179930214376
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06634471157957006,
+        "rmse_shared": 0.09389809427629747,
+        "rmse_per_joint": 0.09389809427629747
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.05640538268535728,
+        "rmse_shared": 0.08241795020180183,
+        "rmse_per_joint": 0.08241795020180183
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06718347884651897,
+        "rmse_shared": 0.08694295488328227,
+        "rmse_per_joint": 0.08694295488328227
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.053365893853522764,
+        "rmse_shared": 0.08454987923219645,
+        "rmse_per_joint": 0.08454987923219645
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.07034472135295249,
+        "rmse_shared": 0.09233396893787499,
+        "rmse_per_joint": 0.09233396893787499
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06163240954265763,
+        "rmse_shared": 0.08860914510022125,
+        "rmse_per_joint": 0.08860914510022125
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.06671551292457707,
+        "rmse_shared": 0.08780554326514743,
+        "rmse_per_joint": 0.08780554326514743
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05422659706310884,
+        "rmse_shared": 0.08782526013024533,
+        "rmse_per_joint": 0.08782526013024533
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.06654240023057395,
+        "rmse_shared": 0.09264335111066382,
+        "rmse_per_joint": 0.09264335111066382
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05453680137080219,
+        "rmse_shared": 0.08369212254036625,
+        "rmse_per_joint": 0.08369212254036625
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 12,
+        "rmse_baseline": 0.06842964280089289,
+        "rmse_shared": 0.09390557577512061,
+        "rmse_per_joint": 0.09390557577512061
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.05,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.05466711670176797,
+        "rmse_shared": 0.08934276084371491,
+        "rmse_per_joint": 0.08934276084371491
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": -0.05,
+          "prev": 0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.04725142352854434,
+        "rmse_shared": 0.06282137318449281,
+        "rmse_per_joint": 0.06282137318449281
+      },
+      {
+        "file": "fl_thigh__latency_probe.npz",
+        "joint": "fl_thigh",
+        "kind": "latency_probe",
+        "desc": {
+          "target": 0.0,
+          "prev": -0.05,
+          "edge": true
+        },
+        "n_samples": 11,
+        "rmse_baseline": 0.033965649738556654,
+        "rmse_shared": 0.026690563859625302,
+        "rmse_per_joint": 0.026690563859625302
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 0.5
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.014110752817647364,
+        "amp_ratio_sim_baseline": 0.8474210835993291,
+        "rmse_shared": 0.020946402071794053,
+        "amp_ratio_sim_shared": 1.0582575760781767,
+        "rmse_per_joint": 0.020946402071794053,
+        "amp_ratio_sim_per_joint": 1.0582575760781767
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 1.0
+        },
+        "n_samples": 118,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.021196694646581353,
+        "amp_ratio_sim_baseline": 0.7585198152810335,
+        "rmse_shared": 0.017864443045589113,
+        "amp_ratio_sim_shared": 1.0127492155879734,
+        "rmse_per_joint": 0.017864443045589113,
+        "amp_ratio_sim_per_joint": 1.0127492155879734
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 2.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8628641931856736,
+        "rmse_baseline": 0.035365034723588706,
+        "amp_ratio_sim_baseline": 0.6520497612655163,
+        "rmse_shared": 0.016928394464078098,
+        "amp_ratio_sim_shared": 1.0156155563890934,
+        "rmse_per_joint": 0.016928394464078098,
+        "amp_ratio_sim_per_joint": 1.0156155563890934
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.08,
+          "amplitude_requested": 0.08,
+          "freq_hz": 4.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.08,
+        "amp_ratio_real": 0.8309062601047225,
+        "rmse_baseline": 0.05033604668400318,
+        "amp_ratio_sim_baseline": 0.44715399853885174,
+        "rmse_shared": 0.01758129802087234,
+        "amp_ratio_sim_shared": 1.039380021393299,
+        "rmse_per_joint": 0.01758129802087234,
+        "amp_ratio_sim_per_joint": 1.039380021393299
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 0.5
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9033442417548773,
+        "rmse_baseline": 0.026374138954265058,
+        "amp_ratio_sim_baseline": 0.9073573748270669,
+        "rmse_shared": 0.01679545320120826,
+        "amp_ratio_sim_shared": 1.0059425036112468,
+        "rmse_per_joint": 0.01679545320120826,
+        "amp_ratio_sim_per_joint": 1.0059425036112468
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 1.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.903344241754878,
+        "rmse_baseline": 0.06302964022077355,
+        "amp_ratio_sim_baseline": 0.7697549710671108,
+        "rmse_shared": 0.015956498267774236,
+        "amp_ratio_sim_shared": 0.9916279961665472,
+        "rmse_per_joint": 0.015956498267774236,
+        "amp_ratio_sim_per_joint": 0.9916279961665472
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 2.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9391371268055431,
+        "rmse_baseline": 0.10320073391006371,
+        "amp_ratio_sim_baseline": 0.5041924317677812,
+        "rmse_shared": 0.014786798202360861,
+        "amp_ratio_sim_shared": 1.004997034867605,
+        "rmse_per_joint": 0.014786798202360861,
+        "amp_ratio_sim_per_joint": 1.004997034867605
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.15,
+          "amplitude_requested": 0.15,
+          "freq_hz": 4.0
+        },
+        "n_samples": 115,
+        "amp_cmd": 0.15,
+        "amp_ratio_real": 0.9280583766708133,
+        "rmse_baseline": 0.12646840263092782,
+        "amp_ratio_sim_baseline": 0.4227970043818149,
+        "rmse_shared": 0.02385774722776738,
+        "amp_ratio_sim_shared": 0.9928534428278606,
+        "rmse_per_joint": 0.02385774722776738,
+        "amp_ratio_sim_per_joint": 0.9928534428278606
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 0.5
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.954476934684399,
+        "rmse_baseline": 0.06664853509750043,
+        "amp_ratio_sim_baseline": 0.9689944609999657,
+        "rmse_shared": 0.016442300123024608,
+        "amp_ratio_sim_shared": 0.9943847358226776,
+        "rmse_per_joint": 0.016442300123024608,
+        "amp_ratio_sim_per_joint": 0.9943847358226776
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 1.0
+        },
+        "n_samples": 114,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9629990501726526,
+        "rmse_baseline": 0.15177291695756864,
+        "amp_ratio_sim_baseline": 0.69698961575826,
+        "rmse_shared": 0.013739412622017924,
+        "amp_ratio_sim_shared": 0.9796417181690535,
+        "rmse_per_joint": 0.013739412622017924,
+        "amp_ratio_sim_per_joint": 0.9796417181690535
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.3,
+          "amplitude_requested": 0.3,
+          "freq_hz": 2.0
+        },
+        "n_samples": 116,
+        "amp_cmd": 0.3,
+        "amp_ratio_real": 0.9715211656609062,
+        "rmse_baseline": 0.2185916329886539,
+        "amp_ratio_sim_baseline": 0.45383901645739877,
+        "rmse_shared": 0.028903255358244697,
+        "amp_ratio_sim_shared": 0.9911850218971571,
+        "rmse_per_joint": 0.028903255358244697,
+        "amp_ratio_sim_per_joint": 0.9911850218971571
+      },
+      {
+        "file": "fl_thigh__sine_grid.npz",
+        "joint": "fl_thigh",
+        "kind": "sine_grid",
+        "desc": {
+          "amplitude": 0.17904931097838225,
+          "amplitude_requested": 0.3,
+          "freq_hz": 4.0
+        },
+        "n_samples": 117,
+        "amp_cmd": 0.17904931097838225,
+        "amp_ratio_real": 0.9866748612778858,
+        "rmse_baseline": 0.15506502838079253,
+        "amp_ratio_sim_baseline": 0.41270354938490866,
+        "rmse_shared": 0.026468136914705655,
+        "amp_ratio_sim_shared": 1.0176868301308346,
+        "rmse_per_joint": 0.026468136914705655,
+        "amp_ratio_sim_per_joint": 1.0176868301308346
+      }
+    ]
+  }
+}

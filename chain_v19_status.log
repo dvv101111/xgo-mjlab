@@ -1,0 +1,6 @@
+[chain] 2026-07-14T16:21:48 v19 chain pid 2999785 starting
+[chain] 2026-07-14T16:21:48 START XGOLite-V19 (2500 iters, 4096 envs) -> train_v19_v1.log
+[chain] 2026-07-14T17:02:28 END XGOLite-V19 rc=0
+[chain] 2026-07-14T17:02:28 EVAL v19_v1 ckpt=logs/rsl_rl/xgolite_v19/2026-07-14_16-21-51_v19_v1/model_2499.pt
+[chain] 2026-07-14T17:06:02 EVAL-END v19_v1 rc=0
+[chain] 2026-07-14T17:06:02 CHAIN COMPLETE (V19_DONE written)

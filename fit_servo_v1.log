@@ -1,0 +1,2296 @@
+session /home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-07-30_stand: LOADED (stand), 23 tests
+session /home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-04-06_stand: LOADED (stand), 2 tests
+  fl_hip__steps.npz: joints ('fl_hip',), cmd offset 298002.9 ms, receipt jitter std 1.16 ms (absmax 8.1)
+  fl_thigh__steps.npz: joints ('fl_thigh',), cmd offset 308326.8 ms, receipt jitter std 2.39 ms (absmax 5.2)
+  fl_calf__steps.npz: joints ('fl_calf',), cmd offset 318630.9 ms, receipt jitter std 2.38 ms (absmax 11.0)
+  fr_hip__steps.npz: joints ('fr_hip',), cmd offset 328952.9 ms, receipt jitter std 1.43 ms (absmax 7.0)
+  fr_thigh__steps.npz: joints ('fr_thigh',), cmd offset 339275.9 ms, receipt jitter std 0.76 ms (absmax 5.0)
+  fr_calf__steps.npz: joints ('fr_calf',), cmd offset 349566.9 ms, receipt jitter std 1.17 ms (absmax 5.9)
+  bl_hip__steps.npz: joints ('bl_hip',), cmd offset 359880.9 ms, receipt jitter std 1.63 ms (absmax 6.1)
+  bl_thigh__steps.npz: joints ('bl_thigh',), cmd offset 370193.9 ms, receipt jitter std 1.05 ms (absmax 5.1)
+  bl_calf__steps.npz: joints ('bl_calf',), cmd offset 380515.9 ms, receipt jitter std 1.24 ms (absmax 6.0)
+  br_hip__steps.npz: joints ('br_hip',), cmd offset 390816.9 ms, receipt jitter std 1.46 ms (absmax 5.1)
+  br_thigh__steps.npz: joints ('br_thigh',), cmd offset 401130.9 ms, receipt jitter std 1.93 ms (absmax 6.2)
+  br_calf__steps.npz: joints ('br_calf',), cmd offset 411445.0 ms, receipt jitter std 0.64 ms (absmax 4.0)
+  fl_hip__sine_grid.npz: joints ('fl_hip',), cmd offset 421765.9 ms, receipt jitter std 2.19 ms (absmax 8.6)
+  fl_thigh__sine_grid.npz: joints ('fl_thigh',), cmd offset 474722.8 ms, receipt jitter std 1.49 ms (absmax 6.0)
+  fl_calf__sine_grid.npz: joints ('fl_calf',), cmd offset 527681.9 ms, receipt jitter std 1.77 ms (absmax 6.0)
+  fr_hip__sine_grid.npz: joints ('fr_hip',), cmd offset 580636.9 ms, receipt jitter std 2.63 ms (absmax 7.9)
+  fr_thigh__sine_grid.npz: joints ('fr_thigh',), cmd offset 633595.8 ms, receipt jitter std 1.35 ms (absmax 6.1)
+  fr_calf__sine_grid.npz: joints ('fr_calf',), cmd offset 686553.9 ms, receipt jitter std 0.61 ms (absmax 5.0)
+  bl_hip__sine_grid.npz: joints ('bl_hip',), cmd offset 739515.9 ms, receipt jitter std 1.15 ms (absmax 5.1)
+  bl_thigh__sine_grid.npz: joints ('bl_thigh',), cmd offset 792464.9 ms, receipt jitter std 1.30 ms (absmax 7.0)
+  bl_calf__sine_grid.npz: joints ('bl_calf',), cmd offset 845419.8 ms, receipt jitter std 1.55 ms (absmax 6.0)
+  br_hip__sine_grid.npz: joints ('br_hip',), cmd offset 898378.9 ms, receipt jitter std 1.54 ms (absmax 6.3)
+  br_thigh__sine_grid.npz: joints ('br_thigh',), cmd offset 951333.9 ms, receipt jitter std 1.30 ms (absmax 6.0)
+  fl_thigh__latency_probe.npz: joints ('fl_thigh',), cmd offset 94861.9 ms, receipt jitter std 1.73 ms (absmax 5.0)
+  fl_thigh__sine_grid.npz: joints ('fl_thigh',), cmd offset 108179.9 ms, receipt jitter std 0.77 ms (absmax 5.0)
+fitting fl_hip on 2 captures ...
+  [fl_hip] gen 1/150 best 7.160e-03 mean 1.775e-02 spread 2.716 sigma 0.676
+  [fl_hip] gen 2/150 best 3.937e-03 mean 1.347e-02 spread 5.742 sigma 0.884
+  [fl_hip] gen 3/150 best 1.796e-03 mean 1.252e-02 spread 13.022 sigma 0.965
+  [fl_hip] gen 4/150 best 1.722e-03 mean 1.115e-02 spread 12.999 sigma 0.939
+  [fl_hip] gen 5/150 best 1.717e-03 mean 7.593e-03 spread 11.849 sigma 0.913
+  [fl_hip] gen 6/150 best 1.561e-03 mean 6.200e-03 spread 9.673 sigma 0.893
+  [fl_hip] gen 7/150 best 1.744e-03 mean 6.067e-03 spread 8.578 sigma 0.736
+  [fl_hip] gen 8/150 best 1.564e-03 mean 3.932e-03 spread 5.444 sigma 0.655
+  [fl_hip] gen 9/150 best 1.582e-03 mean 3.352e-03 spread 4.214 sigma 0.696
+  [fl_hip] gen 10/150 best 1.577e-03 mean 3.383e-03 spread 4.576 sigma 0.719
+  [fl_hip] gen 11/150 best 1.556e-03 mean 3.395e-03 spread 5.538 sigma 0.638
+  [fl_hip] gen 12/150 best 1.549e-03 mean 2.851e-03 spread 3.252 sigma 0.579
+  [fl_hip] gen 13/150 best 1.538e-03 mean 2.456e-03 spread 4.667 sigma 0.575
+  [fl_hip] gen 14/150 best 1.547e-03 mean 2.191e-03 spread 1.952 sigma 0.575
+  [fl_hip] gen 15/150 best 1.529e-03 mean 2.172e-03 spread 1.591 sigma 0.542
+  [fl_hip] gen 16/150 best 1.545e-03 mean 2.087e-03 spread 2.917 sigma 0.481
+  [fl_hip] gen 17/150 best 1.521e-03 mean 1.945e-03 spread 1.049 sigma 0.410
+  [fl_hip] gen 18/150 best 1.533e-03 mean 1.770e-03 spread 0.869 sigma 0.383
+  [fl_hip] gen 19/150 best 1.530e-03 mean 1.699e-03 spread 1.063 sigma 0.382
+  [fl_hip] gen 20/150 best 1.534e-03 mean 1.661e-03 spread 0.357 sigma 0.397
+  [fl_hip] gen 21/150 best 1.528e-03 mean 1.660e-03 spread 0.400 sigma 0.402
+  [fl_hip] gen 22/150 best 1.530e-03 mean 1.617e-03 spread 0.267 sigma 0.411
+  [fl_hip] gen 23/150 best 1.528e-03 mean 1.618e-03 spread 0.178 sigma 0.375
+  [fl_hip] gen 24/150 best 1.516e-03 mean 1.582e-03 spread 0.116 sigma 0.374
+  [fl_hip] gen 25/150 best 1.508e-03 mean 1.571e-03 spread 0.127 sigma 0.370
+  [fl_hip] gen 26/150 best 1.508e-03 mean 1.566e-03 spread 0.097 sigma 0.362
+  [fl_hip] gen 27/150 best 1.508e-03 mean 1.554e-03 spread 0.085 sigma 0.378
+  [fl_hip] gen 28/150 best 1.508e-03 mean 1.539e-03 spread 0.088 sigma 0.365
+  [fl_hip] gen 29/150 best 1.511e-03 mean 1.541e-03 spread 0.046 sigma 0.364
+  [fl_hip] gen 30/150 best 1.507e-03 mean 1.538e-03 spread 0.069 sigma 0.343
+  [fl_hip] gen 31/150 best 1.510e-03 mean 1.531e-03 spread 0.037 sigma 0.307
+  [fl_hip] gen 32/150 best 1.503e-03 mean 1.524e-03 spread 0.044 sigma 0.279
+  [fl_hip] gen 33/150 best 1.498e-03 mean 1.520e-03 spread 0.031 sigma 0.229
+  [fl_hip] gen 34/150 best 1.504e-03 mean 1.515e-03 spread 0.020 sigma 0.202
+  [fl_hip] gen 35/150 best 1.499e-03 mean 1.511e-03 spread 0.016 sigma 0.177
+  [fl_hip] gen 36/150 best 1.500e-03 mean 1.511e-03 spread 0.015 sigma 0.163
+  [fl_hip] gen 37/150 best 1.501e-03 mean 1.510e-03 spread 0.015 sigma 0.159
+  [fl_hip] gen 38/150 best 1.502e-03 mean 1.509e-03 spread 0.010 sigma 0.165
+fitting fl_thigh on 4 captures ...
+  [fl_thigh] gen 1/150 best 7.350e-03 mean 1.462e-02 spread 1.503 sigma 0.678
+  [fl_thigh] gen 2/150 best 5.335e-03 mean 1.275e-02 spread 2.344 sigma 0.793
+  [fl_thigh] gen 3/150 best 2.675e-03 mean 1.055e-02 spread 5.426 sigma 0.938
+  [fl_thigh] gen 4/150 best 2.771e-03 mean 9.196e-03 spread 5.129 sigma 0.936
+  [fl_thigh] gen 5/150 best 2.710e-03 mean 6.523e-03 spread 5.069 sigma 0.929
+  [fl_thigh] gen 6/150 best 2.857e-03 mean 6.218e-03 spread 4.616 sigma 0.846
+  [fl_thigh] gen 7/150 best 2.746e-03 mean 6.511e-03 spread 4.308 sigma 0.735
+  [fl_thigh] gen 8/150 best 2.741e-03 mean 5.027e-03 spread 3.631 sigma 0.608
+  [fl_thigh] gen 9/150 best 2.805e-03 mean 4.409e-03 spread 3.234 sigma 0.563
+  [fl_thigh] gen 10/150 best 2.658e-03 mean 4.212e-03 spread 2.031 sigma 0.467
+  [fl_thigh] gen 11/150 best 2.749e-03 mean 3.812e-03 spread 1.104 sigma 0.456
+  [fl_thigh] gen 12/150 best 2.698e-03 mean 3.633e-03 spread 1.160 sigma 0.389
+  [fl_thigh] gen 13/150 best 2.707e-03 mean 3.604e-03 spread 0.944 sigma 0.346
+  [fl_thigh] gen 14/150 best 2.712e-03 mean 3.253e-03 spread 0.877 sigma 0.337
+  [fl_thigh] gen 15/150 best 2.648e-03 mean 3.312e-03 spread 0.649 sigma 0.301
+  [fl_thigh] gen 16/150 best 2.538e-03 mean 3.232e-03 spread 0.746 sigma 0.275
+  [fl_thigh] gen 17/150 best 2.719e-03 mean 3.160e-03 spread 0.599 sigma 0.246
+  [fl_thigh] gen 18/150 best 2.682e-03 mean 3.107e-03 spread 0.537 sigma 0.231
+  [fl_thigh] gen 19/150 best 2.678e-03 mean 2.958e-03 spread 0.352 sigma 0.216
+  [fl_thigh] gen 20/150 best 2.653e-03 mean 2.998e-03 spread 0.365 sigma 0.195
+  [fl_thigh] gen 21/150 best 2.671e-03 mean 2.958e-03 spread 0.385 sigma 0.168
+  [fl_thigh] gen 22/150 best 2.681e-03 mean 2.906e-03 spread 0.279 sigma 0.166
+  [fl_thigh] gen 23/150 best 2.660e-03 mean 2.899e-03 spread 0.263 sigma 0.174
+  [fl_thigh] gen 24/150 best 2.677e-03 mean 2.862e-03 spread 0.192 sigma 0.177
+  [fl_thigh] gen 25/150 best 2.655e-03 mean 2.852e-03 spread 0.249 sigma 0.167
+  [fl_thigh] gen 26/150 best 2.673e-03 mean 2.835e-03 spread 0.190 sigma 0.160
+  [fl_thigh] gen 27/150 best 2.643e-03 mean 2.843e-03 spread 0.206 sigma 0.156
+  [fl_thigh] gen 28/150 best 2.552e-03 mean 2.808e-03 spread 0.179 sigma 0.149
+  [fl_thigh] gen 29/150 best 2.409e-03 mean 2.803e-03 spread 0.262 sigma 0.146
+  [fl_thigh] gen 30/150 best 2.411e-03 mean 2.790e-03 spread 0.222 sigma 0.130
+  [fl_thigh] gen 31/150 best 2.435e-03 mean 2.776e-03 spread 0.199 sigma 0.120
+  [fl_thigh] gen 32/150 best 2.313e-03 mean 2.756e-03 spread 0.264 sigma 0.112
+  [fl_thigh] gen 33/150 best 2.391e-03 mean 2.752e-03 spread 0.216 sigma 0.102
+  [fl_thigh] gen 34/150 best 2.420e-03 mean 2.743e-03 spread 0.164 sigma 0.092
+  [fl_thigh] gen 35/150 best 2.433e-03 mean 2.745e-03 spread 0.169 sigma 0.091
+  [fl_thigh] gen 36/150 best 2.366e-03 mean 2.733e-03 spread 0.193 sigma 0.096
+  [fl_thigh] gen 37/150 best 2.645e-03 mean 2.736e-03 spread 0.068 sigma 0.083
+  [fl_thigh] gen 38/150 best 2.439e-03 mean 2.728e-03 spread 0.164 sigma 0.077
+  [fl_thigh] gen 39/150 best 2.300e-03 mean 2.717e-03 spread 0.222 sigma 0.076
+  [fl_thigh] gen 40/150 best 2.435e-03 mean 2.704e-03 spread 0.145 sigma 0.072
+  [fl_thigh] gen 41/150 best 2.323e-03 mean 2.726e-03 spread 0.215 sigma 0.070
+  [fl_thigh] gen 42/150 best 2.646e-03 mean 2.718e-03 spread 0.055 sigma 0.068
+  [fl_thigh] gen 43/150 best 2.644e-03 mean 2.724e-03 spread 0.061 sigma 0.065
+  [fl_thigh] gen 44/150 best 2.358e-03 mean 2.704e-03 spread 0.190 sigma 0.063
+  [fl_thigh] gen 45/150 best 2.419e-03 mean 2.707e-03 spread 0.154 sigma 0.059
+  [fl_thigh] gen 46/150 best 2.436e-03 mean 2.701e-03 spread 0.132 sigma 0.057
+  [fl_thigh] gen 47/150 best 2.599e-03 mean 2.710e-03 spread 0.069 sigma 0.056
+  [fl_thigh] gen 48/150 best 2.639e-03 mean 2.697e-03 spread 0.055 sigma 0.063
+  [fl_thigh] gen 49/150 best 2.651e-03 mean 2.718e-03 spread 0.052 sigma 0.067
+  [fl_thigh] gen 50/150 best 2.632e-03 mean 2.714e-03 spread 0.066 sigma 0.061
+  [fl_thigh] gen 51/150 best 2.628e-03 mean 2.708e-03 spread 0.051 sigma 0.063
+  [fl_thigh] gen 52/150 best 2.383e-03 mean 2.698e-03 spread 0.166 sigma 0.069
+  [fl_thigh] gen 53/150 best 2.368e-03 mean 2.703e-03 spread 0.175 sigma 0.064
+  [fl_thigh] gen 54/150 best 2.282e-03 mean 2.699e-03 spread 0.212 sigma 0.058
+  [fl_thigh] gen 55/150 best 2.219e-03 mean 2.692e-03 spread 0.254 sigma 0.059
+  [fl_thigh] gen 56/150 best 2.369e-03 mean 2.698e-03 spread 0.177 sigma 0.059
+  [fl_thigh] gen 57/150 best 2.614e-03 mean 2.709e-03 spread 0.061 sigma 0.056
+  [fl_thigh] gen 58/150 best 2.402e-03 mean 2.684e-03 spread 0.156 sigma 0.060
+  [fl_thigh] gen 59/150 best 2.648e-03 mean 2.706e-03 spread 0.050 sigma 0.065
+  [fl_thigh] gen 60/150 best 2.640e-03 mean 2.704e-03 spread 0.059 sigma 0.069
+  [fl_thigh] gen 61/150 best 2.650e-03 mean 2.706e-03 spread 0.045 sigma 0.074
+  [fl_thigh] gen 62/150 best 2.529e-03 mean 2.703e-03 spread 0.104 sigma 0.069
+  [fl_thigh] gen 63/150 best 2.641e-03 mean 2.698e-03 spread 0.043 sigma 0.070
+  [fl_thigh] gen 64/150 best 2.320e-03 mean 2.694e-03 spread 0.195 sigma 0.070
+  [fl_thigh] gen 65/150 best 2.305e-03 mean 2.687e-03 spread 0.195 sigma 0.071
+  [fl_thigh] gen 66/150 best 2.625e-03 mean 2.702e-03 spread 0.063 sigma 0.071
+  [fl_thigh] gen 67/150 best 2.618e-03 mean 2.701e-03 spread 0.051 sigma 0.064
+  [fl_thigh] gen 68/150 best 2.365e-03 mean 2.694e-03 spread 0.174 sigma 0.064
+  [fl_thigh] gen 69/150 best 2.349e-03 mean 2.688e-03 spread 0.175 sigma 0.078
+  [fl_thigh] gen 70/150 best 2.644e-03 mean 2.708e-03 spread 0.043 sigma 0.072
+  [fl_thigh] gen 71/150 best 2.631e-03 mean 2.695e-03 spread 0.051 sigma 0.087
+  [fl_thigh] gen 72/150 best 2.614e-03 mean 2.698e-03 spread 0.063 sigma 0.096
+  [fl_thigh] gen 73/150 best 2.364e-03 mean 2.696e-03 spread 0.181 sigma 0.103
+  [fl_thigh] gen 74/150 best 2.639e-03 mean 2.714e-03 spread 0.052 sigma 0.097
+  [fl_thigh] gen 75/150 best 2.621e-03 mean 2.701e-03 spread 0.065 sigma 0.097
+  [fl_thigh] gen 76/150 best 2.641e-03 mean 2.701e-03 spread 0.044 sigma 0.098
+  [fl_thigh] gen 77/150 best 2.388e-03 mean 2.704e-03 spread 0.160 sigma 0.087
+  [fl_thigh] gen 78/150 best 2.403e-03 mean 2.696e-03 spread 0.151 sigma 0.080
+  [fl_thigh] gen 79/150 best 2.348e-03 mean 2.697e-03 spread 0.190 sigma 0.072
+  [fl_thigh] gen 80/150 best 2.623e-03 mean 2.699e-03 spread 0.055 sigma 0.069
+  [fl_thigh] gen 81/150 best 2.630e-03 mean 2.701e-03 spread 0.056 sigma 0.069
+  [fl_thigh] gen 82/150 best 2.385e-03 mean 2.695e-03 spread 0.160 sigma 0.062
+  [fl_thigh] gen 83/150 best 2.334e-03 mean 2.694e-03 spread 0.195 sigma 0.057
+  [fl_thigh] gen 84/150 best 2.637e-03 mean 2.706e-03 spread 0.053 sigma 0.056
+  [fl_thigh] gen 85/150 best 2.627e-03 mean 2.695e-03 spread 0.052 sigma 0.058
+  [fl_thigh] gen 86/150 best 2.349e-03 mean 2.700e-03 spread 0.180 sigma 0.059
+  [fl_thigh] gen 87/150 best 2.402e-03 mean 2.686e-03 spread 0.144 sigma 0.056
+  [fl_thigh] gen 88/150 best 2.636e-03 mean 2.700e-03 spread 0.047 sigma 0.059
+  [fl_thigh] gen 89/150 best 2.411e-03 mean 2.688e-03 spread 0.145 sigma 0.060
+  [fl_thigh] gen 90/150 best 2.631e-03 mean 2.696e-03 spread 0.048 sigma 0.062
+  [fl_thigh] gen 91/150 best 2.428e-03 mean 2.689e-03 spread 0.139 sigma 0.065
+  [fl_thigh] gen 92/150 best 2.612e-03 mean 2.690e-03 spread 0.063 sigma 0.070
+  [fl_thigh] gen 93/150 best 2.636e-03 mean 2.693e-03 spread 0.045 sigma 0.066
+  [fl_thigh] gen 94/150 best 2.625e-03 mean 2.695e-03 spread 0.054 sigma 0.068
+  [fl_thigh] gen 95/150 best 2.362e-03 mean 2.691e-03 spread 0.168 sigma 0.070
+  [fl_thigh] gen 96/150 best 2.628e-03 mean 2.688e-03 spread 0.050 sigma 0.071
+  [fl_thigh] gen 97/150 best 2.638e-03 mean 2.697e-03 spread 0.057 sigma 0.067
+  [fl_thigh] gen 98/150 best 2.400e-03 mean 2.682e-03 spread 0.150 sigma 0.076
+  [fl_thigh] gen 99/150 best 2.308e-03 mean 2.684e-03 spread 0.200 sigma 0.081
+  [fl_thigh] gen 100/150 best 2.235e-03 mean 2.674e-03 spread 0.250 sigma 0.074
+  [fl_thigh] gen 101/150 best 2.309e-03 mean 2.682e-03 spread 0.199 sigma 0.069
+  [fl_thigh] gen 102/150 best 2.619e-03 mean 2.693e-03 spread 0.058 sigma 0.066
+  [fl_thigh] gen 103/150 best 2.256e-03 mean 2.685e-03 spread 0.240 sigma 0.067
+  [fl_thigh] gen 104/150 best 2.293e-03 mean 2.684e-03 spread 0.200 sigma 0.074
+  [fl_thigh] gen 105/150 best 2.611e-03 mean 2.694e-03 spread 0.056 sigma 0.085
+  [fl_thigh] gen 106/150 best 2.404e-03 mean 2.684e-03 spread 0.143 sigma 0.107
+  [fl_thigh] gen 107/150 best 2.273e-03 mean 2.686e-03 spread 0.219 sigma 0.123
+  [fl_thigh] gen 108/150 best 2.614e-03 mean 2.690e-03 spread 0.055 sigma 0.126
+  [fl_thigh] gen 109/150 best 2.362e-03 mean 2.691e-03 spread 0.175 sigma 0.128
+  [fl_thigh] gen 110/150 best 2.626e-03 mean 2.694e-03 spread 0.048 sigma 0.124
+  [fl_thigh] gen 111/150 best 2.623e-03 mean 2.693e-03 spread 0.049 sigma 0.124
+  [fl_thigh] gen 112/150 best 2.605e-03 mean 2.699e-03 spread 0.060 sigma 0.114
+  [fl_thigh] gen 113/150 best 2.617e-03 mean 2.689e-03 spread 0.046 sigma 0.103
+  [fl_thigh] gen 114/150 best 2.606e-03 mean 2.690e-03 spread 0.060 sigma 0.103
+  [fl_thigh] gen 115/150 best 2.345e-03 mean 2.680e-03 spread 0.182 sigma 0.092
+  [fl_thigh] gen 116/150 best 2.621e-03 mean 2.690e-03 spread 0.047 sigma 0.086
+  [fl_thigh] gen 117/150 best 2.611e-03 mean 2.687e-03 spread 0.060 sigma 0.084
+  [fl_thigh] gen 118/150 best 2.308e-03 mean 2.682e-03 spread 0.202 sigma 0.095
+  [fl_thigh] gen 119/150 best 2.608e-03 mean 2.685e-03 spread 0.056 sigma 0.101
+  [fl_thigh] gen 120/150 best 2.369e-03 mean 2.688e-03 spread 0.172 sigma 0.104
+  [fl_thigh] gen 121/150 best 2.303e-03 mean 2.680e-03 spread 0.195 sigma 0.108
+  [fl_thigh] gen 122/150 best 2.598e-03 mean 2.692e-03 spread 0.072 sigma 0.103
+  [fl_thigh] gen 123/150 best 2.386e-03 mean 2.684e-03 spread 0.148 sigma 0.110
+  [fl_thigh] gen 124/150 best 2.629e-03 mean 2.684e-03 spread 0.062 sigma 0.109
+  [fl_thigh] gen 125/150 best 2.613e-03 mean 2.687e-03 spread 0.048 sigma 0.104
+  [fl_thigh] gen 126/150 best 2.253e-03 mean 2.688e-03 spread 0.229 sigma 0.103
+  [fl_thigh] gen 127/150 best 2.615e-03 mean 2.694e-03 spread 0.059 sigma 0.101
+  [fl_thigh] gen 128/150 best 2.616e-03 mean 2.695e-03 spread 0.054 sigma 0.097
+  [fl_thigh] gen 129/150 best 2.636e-03 mean 2.691e-03 spread 0.046 sigma 0.100
+  [fl_thigh] gen 130/150 best 2.328e-03 mean 2.687e-03 spread 0.199 sigma 0.095
+  [fl_thigh] gen 131/150 best 2.639e-03 mean 2.695e-03 spread 0.051 sigma 0.100
+  [fl_thigh] gen 132/150 best 2.312e-03 mean 2.685e-03 spread 0.198 sigma 0.104
+  [fl_thigh] gen 133/150 best 2.368e-03 mean 2.688e-03 spread 0.173 sigma 0.108
+  [fl_thigh] gen 134/150 best 2.309e-03 mean 2.681e-03 spread 0.204 sigma 0.117
+  [fl_thigh] gen 135/150 best 2.619e-03 mean 2.698e-03 spread 0.054 sigma 0.109
+  [fl_thigh] gen 136/150 best 2.632e-03 mean 2.693e-03 spread 0.048 sigma 0.106
+  [fl_thigh] gen 137/150 best 2.387e-03 mean 2.687e-03 spread 0.162 sigma 0.113
+  [fl_thigh] gen 138/150 best 2.338e-03 mean 2.686e-03 spread 0.182 sigma 0.102
+  [fl_thigh] gen 139/150 best 2.434e-03 mean 2.690e-03 spread 0.140 sigma 0.099
+  [fl_thigh] gen 140/150 best 2.340e-03 mean 2.678e-03 spread 0.180 sigma 0.104
+  [fl_thigh] gen 141/150 best 2.577e-03 mean 2.682e-03 spread 0.066 sigma 0.101
+  [fl_thigh] gen 142/150 best 2.424e-03 mean 2.685e-03 spread 0.139 sigma 0.092
+  [fl_thigh] gen 143/150 best 2.630e-03 mean 2.692e-03 spread 0.056 sigma 0.089
+  [fl_thigh] gen 144/150 best 2.414e-03 mean 2.680e-03 spread 0.134 sigma 0.084
+  [fl_thigh] gen 145/150 best 2.283e-03 mean 2.678e-03 spread 0.205 sigma 0.086
+  [fl_thigh] gen 146/150 best 2.451e-03 mean 2.686e-03 spread 0.122 sigma 0.081
+  [fl_thigh] gen 147/150 best 2.629e-03 mean 2.690e-03 spread 0.047 sigma 0.075
+  [fl_thigh] gen 148/150 best 2.218e-03 mean 2.675e-03 spread 0.250 sigma 0.076
+  [fl_thigh] gen 149/150 best 2.602e-03 mean 2.688e-03 spread 0.053 sigma 0.080
+  [fl_thigh] gen 150/150 best 2.288e-03 mean 2.684e-03 spread 0.212 sigma 0.075
+fitting fl_calf on 2 captures ...
+  [fl_calf] gen 1/150 best 5.292e-03 mean 1.796e-02 spread 5.288 sigma 0.672
+  [fl_calf] gen 2/150 best 1.236e-03 mean 1.120e-02 spread 20.396 sigma 0.890
+  [fl_calf] gen 3/150 best 1.114e-03 mean 1.307e-02 spread 25.127 sigma 0.967
+  [fl_calf] gen 4/150 best 1.053e-03 mean 8.672e-03 spread 25.133 sigma 0.909
+  [fl_calf] gen 5/150 best 1.335e-03 mean 7.585e-03 spread 16.861 sigma 0.939
+  [fl_calf] gen 6/150 best 1.186e-03 mean 5.377e-03 spread 17.898 sigma 0.887
+  [fl_calf] gen 7/150 best 9.670e-04 mean 4.441e-03 spread 20.264 sigma 0.838
+  [fl_calf] gen 8/150 best 9.136e-04 mean 3.633e-03 spread 14.777 sigma 0.758
+  [fl_calf] gen 9/150 best 9.025e-04 mean 3.799e-03 spread 10.685 sigma 0.628
+  [fl_calf] gen 10/150 best 8.755e-04 mean 2.680e-03 spread 15.198 sigma 0.572
+  [fl_calf] gen 11/150 best 8.169e-04 mean 1.938e-03 spread 7.374 sigma 0.515
+  [fl_calf] gen 12/150 best 6.991e-04 mean 1.583e-03 spread 7.674 sigma 0.482
+  [fl_calf] gen 13/150 best 6.239e-04 mean 1.356e-03 spread 8.667 sigma 0.503
+  [fl_calf] gen 14/150 best 6.564e-04 mean 1.281e-03 spread 3.207 sigma 0.526
+  [fl_calf] gen 15/150 best 7.457e-04 mean 1.218e-03 spread 3.469 sigma 0.597
+  [fl_calf] gen 16/150 best 7.309e-04 mean 1.326e-03 spread 3.597 sigma 0.574
+  [fl_calf] gen 17/150 best 7.163e-04 mean 1.176e-03 spread 2.133 sigma 0.562
+  [fl_calf] gen 18/150 best 6.842e-04 mean 1.235e-03 spread 4.188 sigma 0.580
+  [fl_calf] gen 19/150 best 6.565e-04 mean 1.226e-03 spread 6.024 sigma 0.552
+  [fl_calf] gen 20/150 best 6.921e-04 mean 1.223e-03 spread 7.582 sigma 0.553
+  [fl_calf] gen 21/150 best 7.076e-04 mean 1.136e-03 spread 6.701 sigma 0.512
+  [fl_calf] gen 22/150 best 6.772e-04 mean 9.109e-04 spread 3.668 sigma 0.528
+  [fl_calf] gen 23/150 best 6.582e-04 mean 1.075e-03 spread 5.941 sigma 0.517
+  [fl_calf] gen 24/150 best 6.667e-04 mean 1.136e-03 spread 19.599 sigma 0.499
+  [fl_calf] gen 25/150 best 6.768e-04 mean 1.231e-03 spread 15.293 sigma 0.463
+  [fl_calf] gen 26/150 best 6.530e-04 mean 9.199e-04 spread 8.084 sigma 0.449
+  [fl_calf] gen 27/150 best 6.591e-04 mean 8.791e-04 spread 5.316 sigma 0.489
+  [fl_calf] gen 28/150 best 6.653e-04 mean 9.342e-04 spread 4.958 sigma 0.485
+  [fl_calf] gen 29/150 best 6.543e-04 mean 9.210e-04 spread 6.166 sigma 0.445
+  [fl_calf] gen 30/150 best 6.665e-04 mean 8.462e-04 spread 13.181 sigma 0.401
+  [fl_calf] gen 31/150 best 6.427e-04 mean 6.930e-04 spread 0.422 sigma 0.388
+  [fl_calf] gen 32/150 best 6.598e-04 mean 8.085e-04 spread 4.495 sigma 0.373
+  [fl_calf] gen 33/150 best 6.619e-04 mean 7.441e-04 spread 3.584 sigma 0.361
+  [fl_calf] gen 34/150 best 6.568e-04 mean 6.764e-04 spread 0.147 sigma 0.349
+  [fl_calf] gen 35/150 best 6.566e-04 mean 6.746e-04 spread 0.054 sigma 0.329
+  [fl_calf] gen 36/150 best 6.549e-04 mean 6.718e-04 spread 0.069 sigma 0.316
+  [fl_calf] gen 37/150 best 6.549e-04 mean 6.708e-04 spread 0.138 sigma 0.285
+  [fl_calf] gen 38/150 best 6.565e-04 mean 6.689e-04 spread 0.057 sigma 0.242
+  [fl_calf] gen 39/150 best 6.519e-04 mean 6.668e-04 spread 0.060 sigma 0.227
+  [fl_calf] gen 40/150 best 6.508e-04 mean 6.655e-04 spread 0.047 sigma 0.227
+  [fl_calf] gen 41/150 best 6.519e-04 mean 6.631e-04 spread 0.038 sigma 0.235
+  [fl_calf] gen 42/150 best 6.503e-04 mean 6.630e-04 spread 0.044 sigma 0.219
+  [fl_calf] gen 43/150 best 6.536e-04 mean 6.639e-04 spread 0.034 sigma 0.192
+  [fl_calf] gen 44/150 best 6.484e-04 mean 6.635e-04 spread 0.047 sigma 0.187
+  [fl_calf] gen 45/150 best 6.462e-04 mean 6.608e-04 spread 0.042 sigma 0.174
+  [fl_calf] gen 46/150 best 6.516e-04 mean 6.610e-04 spread 0.030 sigma 0.157
+  [fl_calf] gen 47/150 best 6.507e-04 mean 6.608e-04 spread 0.028 sigma 0.141
+  [fl_calf] gen 48/150 best 6.475e-04 mean 6.605e-04 spread 0.048 sigma 0.135
+  [fl_calf] gen 49/150 best 6.491e-04 mean 6.598e-04 spread 0.034 sigma 0.128
+  [fl_calf] gen 50/150 best 6.484e-04 mean 6.595e-04 spread 0.038 sigma 0.122
+  [fl_calf] gen 51/150 best 6.488e-04 mean 6.601e-04 spread 0.036 sigma 0.108
+  [fl_calf] gen 52/150 best 6.485e-04 mean 6.594e-04 spread 0.034 sigma 0.109
+  [fl_calf] gen 53/150 best 6.508e-04 mean 6.595e-04 spread 0.034 sigma 0.104
+  [fl_calf] gen 54/150 best 6.438e-04 mean 6.578e-04 spread 0.050 sigma 0.100
+  [fl_calf] gen 55/150 best 6.493e-04 mean 6.590e-04 spread 0.029 sigma 0.092
+  [fl_calf] gen 56/150 best 6.489e-04 mean 6.590e-04 spread 0.030 sigma 0.095
+  [fl_calf] gen 57/150 best 6.482e-04 mean 6.593e-04 spread 0.034 sigma 0.093
+  [fl_calf] gen 58/150 best 6.492e-04 mean 6.590e-04 spread 0.033 sigma 0.083
+  [fl_calf] gen 59/150 best 6.464e-04 mean 6.579e-04 spread 0.034 sigma 0.082
+  [fl_calf] gen 60/150 best 6.485e-04 mean 6.578e-04 spread 0.029 sigma 0.088
+  [fl_calf] gen 61/150 best 6.438e-04 mean 6.584e-04 spread 0.037 sigma 0.086
+  [fl_calf] gen 62/150 best 6.487e-04 mean 6.591e-04 spread 0.031 sigma 0.081
+  [fl_calf] gen 63/150 best 6.448e-04 mean 6.579e-04 spread 0.035 sigma 0.092
+  [fl_calf] gen 64/150 best 6.453e-04 mean 6.570e-04 spread 0.034 sigma 0.093
+  [fl_calf] gen 65/150 best 6.483e-04 mean 6.573e-04 spread 0.029 sigma 0.093
+  [fl_calf] gen 66/150 best 6.470e-04 mean 6.579e-04 spread 0.033 sigma 0.094
+  [fl_calf] gen 67/150 best 6.488e-04 mean 6.569e-04 spread 0.026 sigma 0.096
+  [fl_calf] gen 68/150 best 6.470e-04 mean 6.577e-04 spread 0.037 sigma 0.093
+  [fl_calf] gen 69/150 best 6.457e-04 mean 6.570e-04 spread 0.031 sigma 0.086
+  [fl_calf] gen 70/150 best 6.457e-04 mean 6.576e-04 spread 0.046 sigma 0.080
+  [fl_calf] gen 71/150 best 6.464e-04 mean 6.582e-04 spread 0.034 sigma 0.078
+  [fl_calf] gen 72/150 best 6.483e-04 mean 6.566e-04 spread 0.026 sigma 0.077
+  [fl_calf] gen 73/150 best 6.459e-04 mean 6.576e-04 spread 0.036 sigma 0.078
+  [fl_calf] gen 74/150 best 6.451e-04 mean 6.569e-04 spread 0.035 sigma 0.079
+  [fl_calf] gen 75/150 best 6.429e-04 mean 6.571e-04 spread 0.040 sigma 0.081
+  [fl_calf] gen 76/150 best 6.440e-04 mean 6.567e-04 spread 0.036 sigma 0.072
+  [fl_calf] gen 77/150 best 6.473e-04 mean 6.566e-04 spread 0.030 sigma 0.065
+  [fl_calf] gen 78/150 best 6.469e-04 mean 6.563e-04 spread 0.030 sigma 0.064
+  [fl_calf] gen 79/150 best 6.479e-04 mean 6.570e-04 spread 0.029 sigma 0.068
+  [fl_calf] gen 80/150 best 6.469e-04 mean 6.565e-04 spread 0.032 sigma 0.065
+  [fl_calf] gen 81/150 best 6.475e-04 mean 6.571e-04 spread 0.031 sigma 0.062
+  [fl_calf] gen 82/150 best 6.466e-04 mean 6.572e-04 spread 0.036 sigma 0.071
+  [fl_calf] gen 83/150 best 6.448e-04 mean 6.572e-04 spread 0.034 sigma 0.078
+  [fl_calf] gen 84/150 best 6.465e-04 mean 6.569e-04 spread 0.032 sigma 0.080
+  [fl_calf] gen 85/150 best 6.464e-04 mean 6.569e-04 spread 0.032 sigma 0.077
+  [fl_calf] gen 86/150 best 6.479e-04 mean 6.561e-04 spread 0.032 sigma 0.078
+  [fl_calf] gen 87/150 best 6.458e-04 mean 6.561e-04 spread 0.034 sigma 0.073
+  [fl_calf] gen 88/150 best 6.485e-04 mean 6.560e-04 spread 0.030 sigma 0.072
+  [fl_calf] gen 89/150 best 6.466e-04 mean 6.567e-04 spread 0.033 sigma 0.076
+  [fl_calf] gen 90/150 best 6.463e-04 mean 6.570e-04 spread 0.034 sigma 0.071
+  [fl_calf] gen 91/150 best 6.453e-04 mean 6.551e-04 spread 0.032 sigma 0.068
+  [fl_calf] gen 92/150 best 6.476e-04 mean 6.575e-04 spread 0.027 sigma 0.059
+  [fl_calf] gen 93/150 best 6.472e-04 mean 6.554e-04 spread 0.031 sigma 0.056
+  [fl_calf] gen 94/150 best 6.478e-04 mean 6.559e-04 spread 0.031 sigma 0.055
+  [fl_calf] gen 95/150 best 6.445e-04 mean 6.562e-04 spread 0.033 sigma 0.055
+  [fl_calf] gen 96/150 best 6.469e-04 mean 6.558e-04 spread 0.033 sigma 0.053
+  [fl_calf] gen 97/150 best 6.485e-04 mean 6.567e-04 spread 0.031 sigma 0.046
+  [fl_calf] gen 98/150 best 6.457e-04 mean 6.554e-04 spread 0.032 sigma 0.051
+  [fl_calf] gen 99/150 best 6.453e-04 mean 6.549e-04 spread 0.027 sigma 0.050
+  [fl_calf] gen 100/150 best 6.474e-04 mean 6.557e-04 spread 0.025 sigma 0.050
+  [fl_calf] gen 101/150 best 6.470e-04 mean 6.551e-04 spread 0.031 sigma 0.048
+  [fl_calf] gen 102/150 best 6.457e-04 mean 6.562e-04 spread 0.031 sigma 0.053
+  [fl_calf] gen 103/150 best 6.460e-04 mean 6.559e-04 spread 0.035 sigma 0.053
+  [fl_calf] gen 104/150 best 6.450e-04 mean 6.558e-04 spread 0.031 sigma 0.057
+  [fl_calf] gen 105/150 best 6.451e-04 mean 6.566e-04 spread 0.035 sigma 0.053
+  [fl_calf] gen 106/150 best 6.469e-04 mean 6.554e-04 spread 0.028 sigma 0.055
+  [fl_calf] gen 107/150 best 6.459e-04 mean 6.551e-04 spread 0.035 sigma 0.059
+  [fl_calf] gen 108/150 best 6.468e-04 mean 6.545e-04 spread 0.027 sigma 0.060
+  [fl_calf] gen 109/150 best 6.487e-04 mean 6.563e-04 spread 0.029 sigma 0.066
+  [fl_calf] gen 110/150 best 6.499e-04 mean 6.572e-04 spread 0.027 sigma 0.073
+  [fl_calf] gen 111/150 best 6.458e-04 mean 6.564e-04 spread 0.031 sigma 0.080
+  [fl_calf] gen 112/150 best 6.430e-04 mean 6.566e-04 spread 0.036 sigma 0.073
+  [fl_calf] gen 113/150 best 6.443e-04 mean 6.563e-04 spread 0.038 sigma 0.073
+  [fl_calf] gen 114/150 best 6.454e-04 mean 6.555e-04 spread 0.030 sigma 0.069
+  [fl_calf] gen 115/150 best 6.487e-04 mean 6.559e-04 spread 0.027 sigma 0.064
+  [fl_calf] gen 116/150 best 6.480e-04 mean 6.554e-04 spread 0.029 sigma 0.071
+  [fl_calf] gen 117/150 best 6.439e-04 mean 6.555e-04 spread 0.034 sigma 0.066
+  [fl_calf] gen 118/150 best 6.475e-04 mean 6.571e-04 spread 0.030 sigma 0.061
+  [fl_calf] gen 119/150 best 6.471e-04 mean 6.555e-04 spread 0.028 sigma 0.059
+  [fl_calf] gen 120/150 best 6.472e-04 mean 6.566e-04 spread 0.031 sigma 0.059
+  [fl_calf] gen 121/150 best 6.458e-04 mean 6.556e-04 spread 0.030 sigma 0.054
+  [fl_calf] gen 122/150 best 6.468e-04 mean 6.553e-04 spread 0.030 sigma 0.050
+  [fl_calf] gen 123/150 best 6.470e-04 mean 6.560e-04 spread 0.028 sigma 0.054
+  [fl_calf] gen 124/150 best 6.464e-04 mean 6.557e-04 spread 0.029 sigma 0.053
+  [fl_calf] gen 125/150 best 6.408e-04 mean 6.556e-04 spread 0.040 sigma 0.050
+  [fl_calf] gen 126/150 best 6.440e-04 mean 6.554e-04 spread 0.033 sigma 0.048
+  [fl_calf] gen 127/150 best 6.453e-04 mean 6.549e-04 spread 0.035 sigma 0.051
+  [fl_calf] gen 128/150 best 6.476e-04 mean 6.560e-04 spread 0.029 sigma 0.057
+  [fl_calf] gen 129/150 best 6.481e-04 mean 6.556e-04 spread 0.028 sigma 0.053
+  [fl_calf] gen 130/150 best 6.467e-04 mean 6.563e-04 spread 0.032 sigma 0.054
+  [fl_calf] gen 131/150 best 6.451e-04 mean 6.550e-04 spread 0.033 sigma 0.057
+  [fl_calf] gen 132/150 best 6.473e-04 mean 6.544e-04 spread 0.025 sigma 0.059
+  [fl_calf] gen 133/150 best 6.439e-04 mean 6.547e-04 spread 0.032 sigma 0.064
+  [fl_calf] gen 134/150 best 6.476e-04 mean 6.551e-04 spread 0.029 sigma 0.061
+  [fl_calf] gen 135/150 best 6.445e-04 mean 6.555e-04 spread 0.032 sigma 0.059
+  [fl_calf] gen 136/150 best 6.457e-04 mean 6.547e-04 spread 0.030 sigma 0.060
+  [fl_calf] gen 137/150 best 6.460e-04 mean 6.558e-04 spread 0.031 sigma 0.060
+  [fl_calf] gen 138/150 best 6.474e-04 mean 6.556e-04 spread 0.028 sigma 0.064
+  [fl_calf] gen 139/150 best 6.442e-04 mean 6.547e-04 spread 0.031 sigma 0.060
+  [fl_calf] gen 140/150 best 6.450e-04 mean 6.552e-04 spread 0.036 sigma 0.055
+  [fl_calf] gen 141/150 best 6.465e-04 mean 6.550e-04 spread 0.034 sigma 0.054
+  [fl_calf] gen 142/150 best 6.434e-04 mean 6.544e-04 spread 0.028 sigma 0.052
+  [fl_calf] gen 143/150 best 6.454e-04 mean 6.551e-04 spread 0.029 sigma 0.055
+  [fl_calf] gen 144/150 best 6.426e-04 mean 6.551e-04 spread 0.034 sigma 0.055
+  [fl_calf] gen 145/150 best 6.444e-04 mean 6.541e-04 spread 0.029 sigma 0.053
+  [fl_calf] gen 146/150 best 6.464e-04 mean 6.541e-04 spread 0.029 sigma 0.051
+  [fl_calf] gen 147/150 best 6.470e-04 mean 6.539e-04 spread 0.028 sigma 0.050
+  [fl_calf] gen 148/150 best 6.437e-04 mean 6.541e-04 spread 0.030 sigma 0.044
+  [fl_calf] gen 149/150 best 6.444e-04 mean 6.534e-04 spread 0.030 sigma 0.041
+  [fl_calf] gen 150/150 best 6.467e-04 mean 6.537e-04 spread 0.026 sigma 0.035
+fitting fr_hip on 2 captures ...
+  [fr_hip] gen 1/150 best 7.007e-03 mean 1.787e-02 spread 2.845 sigma 0.676
+  [fr_hip] gen 2/150 best 3.128e-03 mean 1.302e-02 spread 6.208 sigma 0.902
+  [fr_hip] gen 3/150 best 1.715e-03 mean 1.303e-02 spread 14.134 sigma 0.964
+  [fr_hip] gen 4/150 best 1.773e-03 mean 1.055e-02 spread 12.452 sigma 0.902
+  [fr_hip] gen 5/150 best 1.729e-03 mean 6.201e-03 spread 11.886 sigma 0.851
+  [fr_hip] gen 6/150 best 1.738e-03 mean 5.638e-03 spread 7.791 sigma 0.758
+  [fr_hip] gen 7/150 best 1.659e-03 mean 4.560e-03 spread 8.585 sigma 0.765
+  [fr_hip] gen 8/150 best 1.752e-03 mean 4.183e-03 spread 4.635 sigma 0.686
+  [fr_hip] gen 9/150 best 1.663e-03 mean 3.679e-03 spread 4.155 sigma 0.638
+  [fr_hip] gen 10/150 best 1.642e-03 mean 2.870e-03 spread 2.787 sigma 0.585
+  [fr_hip] gen 11/150 best 1.657e-03 mean 2.870e-03 spread 2.244 sigma 0.531
+  [fr_hip] gen 12/150 best 1.665e-03 mean 2.523e-03 spread 2.330 sigma 0.492
+  [fr_hip] gen 13/150 best 1.662e-03 mean 2.288e-03 spread 1.982 sigma 0.451
+  [fr_hip] gen 14/150 best 1.649e-03 mean 2.131e-03 spread 1.245 sigma 0.396
+  [fr_hip] gen 15/150 best 1.671e-03 mean 1.987e-03 spread 0.535 sigma 0.358
+  [fr_hip] gen 16/150 best 1.710e-03 mean 1.964e-03 spread 0.612 sigma 0.340
+  [fr_hip] gen 17/150 best 1.651e-03 mean 1.914e-03 spread 0.757 sigma 0.292
+  [fr_hip] gen 18/150 best 1.646e-03 mean 1.873e-03 spread 0.367 sigma 0.260
+  [fr_hip] gen 19/150 best 1.637e-03 mean 1.800e-03 spread 0.288 sigma 0.254
+  [fr_hip] gen 20/150 best 1.636e-03 mean 1.807e-03 spread 0.236 sigma 0.266
+  [fr_hip] gen 21/150 best 1.654e-03 mean 1.799e-03 spread 0.270 sigma 0.289
+  [fr_hip] gen 22/150 best 1.646e-03 mean 1.773e-03 spread 0.194 sigma 0.306
+  [fr_hip] gen 23/150 best 1.639e-03 mean 1.800e-03 spread 0.329 sigma 0.285
+  [fr_hip] gen 24/150 best 1.635e-03 mean 1.777e-03 spread 0.262 sigma 0.255
+  [fr_hip] gen 25/150 best 1.628e-03 mean 1.770e-03 spread 0.218 sigma 0.235
+  [fr_hip] gen 26/150 best 1.656e-03 mean 1.772e-03 spread 0.207 sigma 0.213
+  [fr_hip] gen 27/150 best 1.639e-03 mean 1.739e-03 spread 0.189 sigma 0.182
+  [fr_hip] gen 28/150 best 1.642e-03 mean 1.711e-03 spread 0.139 sigma 0.175
+  [fr_hip] gen 29/150 best 1.633e-03 mean 1.711e-03 spread 0.156 sigma 0.184
+  [fr_hip] gen 30/150 best 1.637e-03 mean 1.711e-03 spread 0.115 sigma 0.184
+  [fr_hip] gen 31/150 best 1.639e-03 mean 1.701e-03 spread 0.127 sigma 0.170
+  [fr_hip] gen 32/150 best 1.641e-03 mean 1.695e-03 spread 0.102 sigma 0.157
+  [fr_hip] gen 33/150 best 1.628e-03 mean 1.692e-03 spread 0.098 sigma 0.139
+  [fr_hip] gen 34/150 best 1.639e-03 mean 1.680e-03 spread 0.064 sigma 0.125
+  [fr_hip] gen 35/150 best 1.640e-03 mean 1.682e-03 spread 0.058 sigma 0.123
+  [fr_hip] gen 36/150 best 1.640e-03 mean 1.676e-03 spread 0.049 sigma 0.115
+  [fr_hip] gen 37/150 best 1.645e-03 mean 1.678e-03 spread 0.050 sigma 0.104
+  [fr_hip] gen 38/150 best 1.638e-03 mean 1.674e-03 spread 0.053 sigma 0.102
+  [fr_hip] gen 39/150 best 1.632e-03 mean 1.673e-03 spread 0.060 sigma 0.084
+  [fr_hip] gen 40/150 best 1.634e-03 mean 1.675e-03 spread 0.045 sigma 0.081
+  [fr_hip] gen 41/150 best 1.630e-03 mean 1.671e-03 spread 0.064 sigma 0.076
+  [fr_hip] gen 42/150 best 1.636e-03 mean 1.677e-03 spread 0.056 sigma 0.072
+  [fr_hip] gen 43/150 best 1.628e-03 mean 1.672e-03 spread 0.051 sigma 0.070
+  [fr_hip] gen 44/150 best 1.631e-03 mean 1.672e-03 spread 0.045 sigma 0.069
+  [fr_hip] gen 45/150 best 1.625e-03 mean 1.669e-03 spread 0.054 sigma 0.067
+  [fr_hip] gen 46/150 best 1.638e-03 mean 1.671e-03 spread 0.047 sigma 0.067
+  [fr_hip] gen 47/150 best 1.616e-03 mean 1.671e-03 spread 0.071 sigma 0.062
+  [fr_hip] gen 48/150 best 1.625e-03 mean 1.672e-03 spread 0.057 sigma 0.059
+  [fr_hip] gen 49/150 best 1.628e-03 mean 1.670e-03 spread 0.055 sigma 0.061
+  [fr_hip] gen 50/150 best 1.628e-03 mean 1.671e-03 spread 0.049 sigma 0.059
+  [fr_hip] gen 51/150 best 1.628e-03 mean 1.671e-03 spread 0.046 sigma 0.058
+  [fr_hip] gen 52/150 best 1.626e-03 mean 1.669e-03 spread 0.055 sigma 0.070
+  [fr_hip] gen 53/150 best 1.629e-03 mean 1.666e-03 spread 0.051 sigma 0.071
+  [fr_hip] gen 54/150 best 1.617e-03 mean 1.668e-03 spread 0.057 sigma 0.071
+  [fr_hip] gen 55/150 best 1.641e-03 mean 1.670e-03 spread 0.039 sigma 0.072
+  [fr_hip] gen 56/150 best 1.623e-03 mean 1.670e-03 spread 0.054 sigma 0.065
+  [fr_hip] gen 57/150 best 1.616e-03 mean 1.665e-03 spread 0.057 sigma 0.057
+  [fr_hip] gen 58/150 best 1.615e-03 mean 1.663e-03 spread 0.057 sigma 0.055
+  [fr_hip] gen 59/150 best 1.618e-03 mean 1.665e-03 spread 0.067 sigma 0.050
+  [fr_hip] gen 60/150 best 1.624e-03 mean 1.661e-03 spread 0.048 sigma 0.047
+  [fr_hip] gen 61/150 best 1.633e-03 mean 1.666e-03 spread 0.043 sigma 0.048
+  [fr_hip] gen 62/150 best 1.615e-03 mean 1.665e-03 spread 0.054 sigma 0.049
+  [fr_hip] gen 63/150 best 1.629e-03 mean 1.666e-03 spread 0.049 sigma 0.052
+  [fr_hip] gen 64/150 best 1.634e-03 mean 1.668e-03 spread 0.041 sigma 0.056
+  [fr_hip] gen 65/150 best 1.620e-03 mean 1.664e-03 spread 0.064 sigma 0.059
+  [fr_hip] gen 66/150 best 1.612e-03 mean 1.662e-03 spread 0.061 sigma 0.067
+  [fr_hip] gen 67/150 best 1.628e-03 mean 1.666e-03 spread 0.049 sigma 0.059
+  [fr_hip] gen 68/150 best 1.629e-03 mean 1.664e-03 spread 0.037 sigma 0.056
+  [fr_hip] gen 69/150 best 1.618e-03 mean 1.663e-03 spread 0.058 sigma 0.051
+  [fr_hip] gen 70/150 best 1.616e-03 mean 1.663e-03 spread 0.053 sigma 0.056
+  [fr_hip] gen 71/150 best 1.629e-03 mean 1.665e-03 spread 0.042 sigma 0.055
+  [fr_hip] gen 72/150 best 1.604e-03 mean 1.661e-03 spread 0.057 sigma 0.054
+  [fr_hip] gen 73/150 best 1.625e-03 mean 1.658e-03 spread 0.043 sigma 0.053
+  [fr_hip] gen 74/150 best 1.619e-03 mean 1.665e-03 spread 0.053 sigma 0.050
+  [fr_hip] gen 75/150 best 1.614e-03 mean 1.664e-03 spread 0.051 sigma 0.053
+  [fr_hip] gen 76/150 best 1.626e-03 mean 1.660e-03 spread 0.052 sigma 0.054
+  [fr_hip] gen 77/150 best 1.629e-03 mean 1.667e-03 spread 0.056 sigma 0.052
+  [fr_hip] gen 78/150 best 1.628e-03 mean 1.663e-03 spread 0.047 sigma 0.053
+  [fr_hip] gen 79/150 best 1.626e-03 mean 1.667e-03 spread 0.050 sigma 0.058
+  [fr_hip] gen 80/150 best 1.606e-03 mean 1.664e-03 spread 0.057 sigma 0.057
+  [fr_hip] gen 81/150 best 1.606e-03 mean 1.662e-03 spread 0.062 sigma 0.052
+  [fr_hip] gen 82/150 best 1.609e-03 mean 1.663e-03 spread 0.049 sigma 0.053
+  [fr_hip] gen 83/150 best 1.629e-03 mean 1.666e-03 spread 0.045 sigma 0.048
+  [fr_hip] gen 84/150 best 1.633e-03 mean 1.666e-03 spread 0.040 sigma 0.054
+  [fr_hip] gen 85/150 best 1.610e-03 mean 1.660e-03 spread 0.061 sigma 0.055
+  [fr_hip] gen 86/150 best 1.619e-03 mean 1.663e-03 spread 0.049 sigma 0.059
+  [fr_hip] gen 87/150 best 1.615e-03 mean 1.663e-03 spread 0.056 sigma 0.061
+  [fr_hip] gen 88/150 best 1.621e-03 mean 1.665e-03 spread 0.053 sigma 0.057
+  [fr_hip] gen 89/150 best 1.627e-03 mean 1.664e-03 spread 0.044 sigma 0.052
+  [fr_hip] gen 90/150 best 1.615e-03 mean 1.664e-03 spread 0.060 sigma 0.049
+  [fr_hip] gen 91/150 best 1.618e-03 mean 1.664e-03 spread 0.052 sigma 0.052
+  [fr_hip] gen 92/150 best 1.627e-03 mean 1.663e-03 spread 0.047 sigma 0.051
+  [fr_hip] gen 93/150 best 1.633e-03 mean 1.667e-03 spread 0.041 sigma 0.051
+  [fr_hip] gen 94/150 best 1.615e-03 mean 1.664e-03 spread 0.050 sigma 0.047
+  [fr_hip] gen 95/150 best 1.623e-03 mean 1.660e-03 spread 0.049 sigma 0.047
+  [fr_hip] gen 96/150 best 1.631e-03 mean 1.662e-03 spread 0.040 sigma 0.045
+  [fr_hip] gen 97/150 best 1.631e-03 mean 1.664e-03 spread 0.045 sigma 0.047
+  [fr_hip] gen 98/150 best 1.614e-03 mean 1.664e-03 spread 0.055 sigma 0.045
+  [fr_hip] gen 99/150 best 1.623e-03 mean 1.663e-03 spread 0.051 sigma 0.044
+  [fr_hip] gen 100/150 best 1.616e-03 mean 1.665e-03 spread 0.061 sigma 0.043
+  [fr_hip] gen 101/150 best 1.623e-03 mean 1.664e-03 spread 0.047 sigma 0.039
+  [fr_hip] gen 102/150 best 1.609e-03 mean 1.666e-03 spread 0.064 sigma 0.040
+  [fr_hip] gen 103/150 best 1.624e-03 mean 1.662e-03 spread 0.047 sigma 0.036
+  [fr_hip] gen 104/150 best 1.609e-03 mean 1.663e-03 spread 0.059 sigma 0.033
+  [fr_hip] gen 105/150 best 1.628e-03 mean 1.664e-03 spread 0.044 sigma 0.031
+  [fr_hip] gen 106/150 best 1.622e-03 mean 1.664e-03 spread 0.039 sigma 0.028
+  [fr_hip] gen 107/150 best 1.632e-03 mean 1.663e-03 spread 0.044 sigma 0.030
+  [fr_hip] gen 108/150 best 1.629e-03 mean 1.664e-03 spread 0.044 sigma 0.030
+  [fr_hip] gen 109/150 best 1.621e-03 mean 1.661e-03 spread 0.051 sigma 0.030
+  [fr_hip] gen 110/150 best 1.635e-03 mean 1.663e-03 spread 0.041 sigma 0.029
+  [fr_hip] gen 111/150 best 1.618e-03 mean 1.660e-03 spread 0.044 sigma 0.031
+  [fr_hip] gen 112/150 best 1.627e-03 mean 1.660e-03 spread 0.045 sigma 0.028
+  [fr_hip] gen 113/150 best 1.617e-03 mean 1.662e-03 spread 0.049 sigma 0.027
+  [fr_hip] gen 114/150 best 1.620e-03 mean 1.664e-03 spread 0.051 sigma 0.026
+  [fr_hip] gen 115/150 best 1.616e-03 mean 1.660e-03 spread 0.053 sigma 0.026
+  [fr_hip] gen 116/150 best 1.621e-03 mean 1.662e-03 spread 0.049 sigma 0.027
+  [fr_hip] gen 117/150 best 1.635e-03 mean 1.667e-03 spread 0.037 sigma 0.025
+  [fr_hip] gen 118/150 best 1.623e-03 mean 1.662e-03 spread 0.052 sigma 0.026
+  [fr_hip] gen 119/150 best 1.627e-03 mean 1.667e-03 spread 0.048 sigma 0.025
+  [fr_hip] gen 120/150 best 1.620e-03 mean 1.661e-03 spread 0.053 sigma 0.024
+  [fr_hip] gen 121/150 best 1.614e-03 mean 1.661e-03 spread 0.055 sigma 0.022
+  [fr_hip] gen 122/150 best 1.634e-03 mean 1.664e-03 spread 0.038 sigma 0.021
+  [fr_hip] gen 123/150 best 1.632e-03 mean 1.662e-03 spread 0.044 sigma 0.020
+  [fr_hip] gen 124/150 best 1.620e-03 mean 1.661e-03 spread 0.052 sigma 0.021
+  [fr_hip] gen 125/150 best 1.630e-03 mean 1.662e-03 spread 0.045 sigma 0.021
+  [fr_hip] gen 126/150 best 1.620e-03 mean 1.661e-03 spread 0.053 sigma 0.022
+  [fr_hip] gen 127/150 best 1.625e-03 mean 1.660e-03 spread 0.045 sigma 0.026
+  [fr_hip] gen 128/150 best 1.619e-03 mean 1.663e-03 spread 0.053 sigma 0.027
+  [fr_hip] gen 129/150 best 1.626e-03 mean 1.663e-03 spread 0.044 sigma 0.024
+  [fr_hip] gen 130/150 best 1.607e-03 mean 1.664e-03 spread 0.055 sigma 0.024
+  [fr_hip] gen 131/150 best 1.616e-03 mean 1.666e-03 spread 0.054 sigma 0.026
+  [fr_hip] gen 132/150 best 1.615e-03 mean 1.659e-03 spread 0.051 sigma 0.029
+  [fr_hip] gen 133/150 best 1.617e-03 mean 1.663e-03 spread 0.062 sigma 0.027
+  [fr_hip] gen 134/150 best 1.637e-03 mean 1.666e-03 spread 0.037 sigma 0.027
+  [fr_hip] gen 135/150 best 1.615e-03 mean 1.665e-03 spread 0.055 sigma 0.026
+  [fr_hip] gen 136/150 best 1.623e-03 mean 1.666e-03 spread 0.053 sigma 0.026
+  [fr_hip] gen 137/150 best 1.624e-03 mean 1.663e-03 spread 0.046 sigma 0.024
+  [fr_hip] gen 138/150 best 1.622e-03 mean 1.663e-03 spread 0.048 sigma 0.025
+  [fr_hip] gen 139/150 best 1.626e-03 mean 1.662e-03 spread 0.066 sigma 0.023
+  [fr_hip] gen 140/150 best 1.612e-03 mean 1.662e-03 spread 0.055 sigma 0.028
+  [fr_hip] gen 141/150 best 1.625e-03 mean 1.664e-03 spread 0.049 sigma 0.029
+  [fr_hip] gen 142/150 best 1.617e-03 mean 1.664e-03 spread 0.054 sigma 0.028
+  [fr_hip] gen 143/150 best 1.618e-03 mean 1.663e-03 spread 0.056 sigma 0.029
+  [fr_hip] gen 144/150 best 1.637e-03 mean 1.664e-03 spread 0.037 sigma 0.031
+  [fr_hip] gen 145/150 best 1.624e-03 mean 1.662e-03 spread 0.046 sigma 0.031
+  [fr_hip] gen 146/150 best 1.622e-03 mean 1.661e-03 spread 0.042 sigma 0.029
+  [fr_hip] gen 147/150 best 1.629e-03 mean 1.660e-03 spread 0.040 sigma 0.027
+  [fr_hip] gen 148/150 best 1.621e-03 mean 1.663e-03 spread 0.048 sigma 0.028
+  [fr_hip] gen 149/150 best 1.625e-03 mean 1.662e-03 spread 0.050 sigma 0.030
+  [fr_hip] gen 150/150 best 1.621e-03 mean 1.661e-03 spread 0.047 sigma 0.031
+fitting fr_thigh on 2 captures ...
+  [fr_thigh] gen 1/150 best 9.622e-03 mean 2.227e-02 spread 1.994 sigma 0.678
+  [fr_thigh] gen 2/150 best 6.523e-03 mean 1.862e-02 spread 3.257 sigma 0.818
+  [fr_thigh] gen 3/150 best 4.234e-03 mean 1.712e-02 spread 5.771 sigma 0.841
+  [fr_thigh] gen 4/150 best 2.613e-03 mean 1.423e-02 spread 9.390 sigma 0.858
+  [fr_thigh] gen 5/150 best 2.410e-03 mean 9.495e-03 spread 9.797 sigma 0.895
+  [fr_thigh] gen 6/150 best 2.419e-03 mean 8.509e-03 spread 7.577 sigma 0.803
+  [fr_thigh] gen 7/150 best 2.591e-03 mean 7.293e-03 spread 6.301 sigma 0.766
+  [fr_thigh] gen 8/150 best 2.713e-03 mean 6.601e-03 spread 4.622 sigma 0.629
+  [fr_thigh] gen 9/150 best 2.613e-03 mean 5.474e-03 spread 4.597 sigma 0.622
+  [fr_thigh] gen 10/150 best 2.542e-03 mean 4.806e-03 spread 3.048 sigma 0.633
+  [fr_thigh] gen 11/150 best 2.608e-03 mean 4.516e-03 spread 2.263 sigma 0.620
+  [fr_thigh] gen 12/150 best 2.316e-03 mean 4.324e-03 spread 2.853 sigma 0.591
+  [fr_thigh] gen 13/150 best 2.562e-03 mean 3.911e-03 spread 1.832 sigma 0.536
+  [fr_thigh] gen 14/150 best 2.483e-03 mean 3.570e-03 spread 1.465 sigma 0.525
+  [fr_thigh] gen 15/150 best 2.397e-03 mean 3.337e-03 spread 1.409 sigma 0.542
+  [fr_thigh] gen 16/150 best 2.250e-03 mean 3.137e-03 spread 0.916 sigma 0.625
+  [fr_thigh] gen 17/150 best 2.279e-03 mean 3.277e-03 spread 1.923 sigma 0.693
+  [fr_thigh] gen 18/150 best 2.255e-03 mean 3.190e-03 spread 1.257 sigma 0.604
+  [fr_thigh] gen 19/150 best 2.254e-03 mean 2.866e-03 spread 1.140 sigma 0.548
+  [fr_thigh] gen 20/150 best 2.275e-03 mean 2.789e-03 spread 0.631 sigma 0.453
+  [fr_thigh] gen 21/150 best 2.220e-03 mean 2.698e-03 spread 0.629 sigma 0.419
+  [fr_thigh] gen 22/150 best 2.210e-03 mean 2.569e-03 spread 0.385 sigma 0.392
+  [fr_thigh] gen 23/150 best 2.197e-03 mean 2.589e-03 spread 0.396 sigma 0.358
+  [fr_thigh] gen 24/150 best 2.252e-03 mean 2.533e-03 spread 0.318 sigma 0.304
+  [fr_thigh] gen 25/150 best 2.254e-03 mean 2.431e-03 spread 0.229 sigma 0.264
+  [fr_thigh] gen 26/150 best 2.223e-03 mean 2.376e-03 spread 0.238 sigma 0.250
+  [fr_thigh] gen 27/150 best 2.231e-03 mean 2.367e-03 spread 0.198 sigma 0.218
+  [fr_thigh] gen 28/150 best 2.218e-03 mean 2.327e-03 spread 0.155 sigma 0.207
+  [fr_thigh] gen 29/150 best 2.231e-03 mean 2.321e-03 spread 0.143 sigma 0.214
+  [fr_thigh] gen 30/150 best 2.230e-03 mean 2.301e-03 spread 0.105 sigma 0.204
+  [fr_thigh] gen 31/150 best 2.201e-03 mean 2.288e-03 spread 0.098 sigma 0.207
+  [fr_thigh] gen 32/150 best 2.218e-03 mean 2.287e-03 spread 0.099 sigma 0.190
+  [fr_thigh] gen 33/150 best 2.204e-03 mean 2.280e-03 spread 0.113 sigma 0.172
+  [fr_thigh] gen 34/150 best 2.227e-03 mean 2.273e-03 spread 0.058 sigma 0.165
+  [fr_thigh] gen 35/150 best 2.213e-03 mean 2.264e-03 spread 0.052 sigma 0.154
+  [fr_thigh] gen 36/150 best 2.210e-03 mean 2.260e-03 spread 0.047 sigma 0.153
+  [fr_thigh] gen 37/150 best 2.216e-03 mean 2.261e-03 spread 0.042 sigma 0.141
+  [fr_thigh] gen 38/150 best 2.208e-03 mean 2.258e-03 spread 0.049 sigma 0.145
+  [fr_thigh] gen 39/150 best 2.219e-03 mean 2.256e-03 spread 0.042 sigma 0.141
+  [fr_thigh] gen 40/150 best 2.208e-03 mean 2.250e-03 spread 0.041 sigma 0.130
+  [fr_thigh] gen 41/150 best 2.205e-03 mean 2.247e-03 spread 0.044 sigma 0.123
+  [fr_thigh] gen 42/150 best 2.207e-03 mean 2.253e-03 spread 0.042 sigma 0.126
+  [fr_thigh] gen 43/150 best 2.200e-03 mean 2.251e-03 spread 0.046 sigma 0.124
+  [fr_thigh] gen 44/150 best 2.210e-03 mean 2.252e-03 spread 0.043 sigma 0.131
+  [fr_thigh] gen 45/150 best 2.191e-03 mean 2.248e-03 spread 0.041 sigma 0.124
+  [fr_thigh] gen 46/150 best 2.207e-03 mean 2.251e-03 spread 0.036 sigma 0.121
+  [fr_thigh] gen 47/150 best 2.209e-03 mean 2.252e-03 spread 0.050 sigma 0.116
+  [fr_thigh] gen 48/150 best 2.199e-03 mean 2.249e-03 spread 0.040 sigma 0.117
+  [fr_thigh] gen 49/150 best 2.202e-03 mean 2.246e-03 spread 0.042 sigma 0.110
+  [fr_thigh] gen 50/150 best 2.197e-03 mean 2.251e-03 spread 0.047 sigma 0.103
+  [fr_thigh] gen 51/150 best 2.212e-03 mean 2.247e-03 spread 0.034 sigma 0.096
+  [fr_thigh] gen 52/150 best 2.202e-03 mean 2.247e-03 spread 0.043 sigma 0.096
+  [fr_thigh] gen 53/150 best 2.201e-03 mean 2.244e-03 spread 0.043 sigma 0.087
+  [fr_thigh] gen 54/150 best 2.195e-03 mean 2.244e-03 spread 0.054 sigma 0.083
+  [fr_thigh] gen 55/150 best 2.220e-03 mean 2.246e-03 spread 0.030 sigma 0.090
+  [fr_thigh] gen 56/150 best 2.198e-03 mean 2.245e-03 spread 0.047 sigma 0.092
+  [fr_thigh] gen 57/150 best 2.198e-03 mean 2.249e-03 spread 0.043 sigma 0.085
+  [fr_thigh] gen 58/150 best 2.211e-03 mean 2.248e-03 spread 0.046 sigma 0.080
+  [fr_thigh] gen 59/150 best 2.201e-03 mean 2.249e-03 spread 0.049 sigma 0.085
+  [fr_thigh] gen 60/150 best 2.195e-03 mean 2.242e-03 spread 0.040 sigma 0.084
+  [fr_thigh] gen 61/150 best 2.201e-03 mean 2.247e-03 spread 0.040 sigma 0.087
+  [fr_thigh] gen 62/150 best 2.202e-03 mean 2.246e-03 spread 0.042 sigma 0.095
+  [fr_thigh] gen 63/150 best 2.214e-03 mean 2.250e-03 spread 0.045 sigma 0.098
+  [fr_thigh] gen 64/150 best 2.204e-03 mean 2.248e-03 spread 0.059 sigma 0.094
+  [fr_thigh] gen 65/150 best 2.202e-03 mean 2.251e-03 spread 0.056 sigma 0.098
+  [fr_thigh] gen 66/150 best 2.208e-03 mean 2.246e-03 spread 0.034 sigma 0.097
+  [fr_thigh] gen 67/150 best 2.187e-03 mean 2.245e-03 spread 0.060 sigma 0.096
+  [fr_thigh] gen 68/150 best 2.190e-03 mean 2.243e-03 spread 0.046 sigma 0.108
+  [fr_thigh] gen 69/150 best 2.211e-03 mean 2.243e-03 spread 0.039 sigma 0.103
+  [fr_thigh] gen 70/150 best 2.210e-03 mean 2.246e-03 spread 0.035 sigma 0.099
+  [fr_thigh] gen 71/150 best 2.190e-03 mean 2.250e-03 spread 0.054 sigma 0.094
+  [fr_thigh] gen 72/150 best 2.190e-03 mean 2.246e-03 spread 0.059 sigma 0.094
+  [fr_thigh] gen 73/150 best 2.204e-03 mean 2.247e-03 spread 0.047 sigma 0.096
+  [fr_thigh] gen 74/150 best 2.200e-03 mean 2.249e-03 spread 0.049 sigma 0.094
+  [fr_thigh] gen 75/150 best 2.191e-03 mean 2.245e-03 spread 0.044 sigma 0.088
+  [fr_thigh] gen 76/150 best 2.205e-03 mean 2.246e-03 spread 0.046 sigma 0.085
+  [fr_thigh] gen 77/150 best 2.205e-03 mean 2.242e-03 spread 0.046 sigma 0.088
+  [fr_thigh] gen 78/150 best 2.206e-03 mean 2.243e-03 spread 0.046 sigma 0.080
+  [fr_thigh] gen 79/150 best 2.203e-03 mean 2.247e-03 spread 0.043 sigma 0.084
+  [fr_thigh] gen 80/150 best 2.199e-03 mean 2.243e-03 spread 0.042 sigma 0.083
+  [fr_thigh] gen 81/150 best 2.202e-03 mean 2.245e-03 spread 0.044 sigma 0.082
+  [fr_thigh] gen 82/150 best 2.212e-03 mean 2.245e-03 spread 0.035 sigma 0.080
+  [fr_thigh] gen 83/150 best 2.203e-03 mean 2.249e-03 spread 0.044 sigma 0.080
+  [fr_thigh] gen 84/150 best 2.205e-03 mean 2.243e-03 spread 0.037 sigma 0.081
+  [fr_thigh] gen 85/150 best 2.208e-03 mean 2.240e-03 spread 0.036 sigma 0.084
+  [fr_thigh] gen 86/150 best 2.187e-03 mean 2.243e-03 spread 0.055 sigma 0.076
+  [fr_thigh] gen 87/150 best 2.207e-03 mean 2.245e-03 spread 0.038 sigma 0.069
+  [fr_thigh] gen 88/150 best 2.210e-03 mean 2.247e-03 spread 0.047 sigma 0.067
+  [fr_thigh] gen 89/150 best 2.188e-03 mean 2.243e-03 spread 0.045 sigma 0.063
+  [fr_thigh] gen 90/150 best 2.199e-03 mean 2.242e-03 spread 0.034 sigma 0.060
+  [fr_thigh] gen 91/150 best 2.202e-03 mean 2.242e-03 spread 0.043 sigma 0.058
+  [fr_thigh] gen 92/150 best 2.196e-03 mean 2.250e-03 spread 0.061 sigma 0.054
+  [fr_thigh] gen 93/150 best 2.195e-03 mean 2.243e-03 spread 0.037 sigma 0.053
+  [fr_thigh] gen 94/150 best 2.194e-03 mean 2.249e-03 spread 0.054 sigma 0.053
+  [fr_thigh] gen 95/150 best 2.202e-03 mean 2.243e-03 spread 0.036 sigma 0.060
+  [fr_thigh] gen 96/150 best 2.188e-03 mean 2.247e-03 spread 0.054 sigma 0.059
+  [fr_thigh] gen 97/150 best 2.203e-03 mean 2.244e-03 spread 0.055 sigma 0.062
+  [fr_thigh] gen 98/150 best 2.193e-03 mean 2.245e-03 spread 0.041 sigma 0.070
+  [fr_thigh] gen 99/150 best 2.205e-03 mean 2.245e-03 spread 0.044 sigma 0.070
+  [fr_thigh] gen 100/150 best 2.204e-03 mean 2.243e-03 spread 0.043 sigma 0.077
+  [fr_thigh] gen 101/150 best 2.201e-03 mean 2.243e-03 spread 0.045 sigma 0.068
+  [fr_thigh] gen 102/150 best 2.170e-03 mean 2.245e-03 spread 0.059 sigma 0.066
+  [fr_thigh] gen 103/150 best 2.210e-03 mean 2.245e-03 spread 0.034 sigma 0.066
+  [fr_thigh] gen 104/150 best 2.178e-03 mean 2.242e-03 spread 0.058 sigma 0.064
+  [fr_thigh] gen 105/150 best 2.204e-03 mean 2.243e-03 spread 0.047 sigma 0.065
+  [fr_thigh] gen 106/150 best 2.204e-03 mean 2.242e-03 spread 0.032 sigma 0.060
+  [fr_thigh] gen 107/150 best 2.191e-03 mean 2.241e-03 spread 0.042 sigma 0.058
+  [fr_thigh] gen 108/150 best 2.200e-03 mean 2.246e-03 spread 0.047 sigma 0.057
+  [fr_thigh] gen 109/150 best 2.199e-03 mean 2.243e-03 spread 0.041 sigma 0.057
+  [fr_thigh] gen 110/150 best 2.188e-03 mean 2.240e-03 spread 0.056 sigma 0.055
+  [fr_thigh] gen 111/150 best 2.210e-03 mean 2.248e-03 spread 0.041 sigma 0.055
+  [fr_thigh] gen 112/150 best 2.198e-03 mean 2.242e-03 spread 0.042 sigma 0.051
+  [fr_thigh] gen 113/150 best 2.206e-03 mean 2.245e-03 spread 0.044 sigma 0.046
+  [fr_thigh] gen 114/150 best 2.203e-03 mean 2.248e-03 spread 0.053 sigma 0.044
+  [fr_thigh] gen 115/150 best 2.208e-03 mean 2.243e-03 spread 0.041 sigma 0.040
+  [fr_thigh] gen 116/150 best 2.196e-03 mean 2.241e-03 spread 0.052 sigma 0.038
+  [fr_thigh] gen 117/150 best 2.199e-03 mean 2.240e-03 spread 0.035 sigma 0.034
+  [fr_thigh] gen 118/150 best 2.193e-03 mean 2.243e-03 spread 0.045 sigma 0.030
+  [fr_thigh] gen 119/150 best 2.199e-03 mean 2.243e-03 spread 0.033 sigma 0.029
+  [fr_thigh] gen 120/150 best 2.196e-03 mean 2.243e-03 spread 0.034 sigma 0.028
+  [fr_thigh] gen 121/150 best 2.195e-03 mean 2.241e-03 spread 0.041 sigma 0.029
+  [fr_thigh] gen 122/150 best 2.214e-03 mean 2.243e-03 spread 0.035 sigma 0.036
+  [fr_thigh] gen 123/150 best 2.196e-03 mean 2.246e-03 spread 0.053 sigma 0.040
+  [fr_thigh] gen 124/150 best 2.208e-03 mean 2.247e-03 spread 0.043 sigma 0.042
+  [fr_thigh] gen 125/150 best 2.226e-03 mean 2.248e-03 spread 0.026 sigma 0.042
+  [fr_thigh] gen 126/150 best 2.195e-03 mean 2.243e-03 spread 0.056 sigma 0.045
+  [fr_thigh] gen 127/150 best 2.195e-03 mean 2.246e-03 spread 0.037 sigma 0.044
+  [fr_thigh] gen 128/150 best 2.203e-03 mean 2.247e-03 spread 0.046 sigma 0.045
+  [fr_thigh] gen 129/150 best 2.197e-03 mean 2.244e-03 spread 0.041 sigma 0.042
+  [fr_thigh] gen 130/150 best 2.201e-03 mean 2.242e-03 spread 0.037 sigma 0.040
+  [fr_thigh] gen 131/150 best 2.186e-03 mean 2.244e-03 spread 0.039 sigma 0.040
+  [fr_thigh] gen 132/150 best 2.204e-03 mean 2.243e-03 spread 0.037 sigma 0.039
+  [fr_thigh] gen 133/150 best 2.199e-03 mean 2.245e-03 spread 0.039 sigma 0.041
+  [fr_thigh] gen 134/150 best 2.200e-03 mean 2.243e-03 spread 0.041 sigma 0.040
+  [fr_thigh] gen 135/150 best 2.204e-03 mean 2.241e-03 spread 0.039 sigma 0.041
+  [fr_thigh] gen 136/150 best 2.206e-03 mean 2.241e-03 spread 0.048 sigma 0.038
+  [fr_thigh] gen 137/150 best 2.204e-03 mean 2.243e-03 spread 0.037 sigma 0.037
+  [fr_thigh] gen 138/150 best 2.177e-03 mean 2.242e-03 spread 0.058 sigma 0.040
+  [fr_thigh] gen 139/150 best 2.207e-03 mean 2.241e-03 spread 0.037 sigma 0.036
+  [fr_thigh] gen 140/150 best 2.192e-03 mean 2.241e-03 spread 0.046 sigma 0.033
+  [fr_thigh] gen 141/150 best 2.199e-03 mean 2.245e-03 spread 0.040 sigma 0.028
+  [fr_thigh] gen 142/150 best 2.198e-03 mean 2.243e-03 spread 0.039 sigma 0.028
+  [fr_thigh] gen 143/150 best 2.186e-03 mean 2.242e-03 spread 0.044 sigma 0.029
+  [fr_thigh] gen 144/150 best 2.184e-03 mean 2.236e-03 spread 0.040 sigma 0.029
+  [fr_thigh] gen 145/150 best 2.197e-03 mean 2.239e-03 spread 0.037 sigma 0.031
+  [fr_thigh] gen 146/150 best 2.202e-03 mean 2.248e-03 spread 0.042 sigma 0.029
+  [fr_thigh] gen 147/150 best 2.197e-03 mean 2.243e-03 spread 0.044 sigma 0.028
+  [fr_thigh] gen 148/150 best 2.183e-03 mean 2.240e-03 spread 0.047 sigma 0.030
+  [fr_thigh] gen 149/150 best 2.205e-03 mean 2.241e-03 spread 0.039 sigma 0.032
+  [fr_thigh] gen 150/150 best 2.189e-03 mean 2.246e-03 spread 0.043 sigma 0.036
+fitting fr_calf on 2 captures ...
+  [fr_calf] gen 1/150 best 5.664e-03 mean 1.822e-02 spread 4.900 sigma 0.672
+  [fr_calf] gen 2/150 best 1.317e-03 mean 1.253e-02 spread 20.565 sigma 0.859
+  [fr_calf] gen 3/150 best 8.686e-04 mean 1.010e-02 spread 30.983 sigma 1.024
+  [fr_calf] gen 4/150 best 8.884e-04 mean 8.693e-03 spread 30.400 sigma 1.041
+  [fr_calf] gen 5/150 best 7.718e-04 mean 8.438e-03 spread 35.149 sigma 0.971
+  [fr_calf] gen 6/150 best 5.953e-04 mean 5.944e-03 spread 31.556 sigma 0.861
+  [fr_calf] gen 7/150 best 7.055e-04 mean 4.423e-03 spread 34.220 sigma 0.764
+  [fr_calf] gen 8/150 best 6.403e-04 mean 3.395e-03 spread 21.158 sigma 0.751
+  [fr_calf] gen 9/150 best 7.675e-04 mean 3.526e-03 spread 19.252 sigma 0.716
+  [fr_calf] gen 10/150 best 6.536e-04 mean 2.229e-03 spread 18.544 sigma 0.673
+  [fr_calf] gen 11/150 best 5.747e-04 mean 1.553e-03 spread 8.795 sigma 0.645
+  [fr_calf] gen 12/150 best 6.672e-04 mean 1.795e-03 spread 10.659 sigma 0.576
+  [fr_calf] gen 13/150 best 6.010e-04 mean 1.605e-03 spread 7.193 sigma 0.524
+  [fr_calf] gen 14/150 best 5.760e-04 mean 1.151e-03 spread 4.116 sigma 0.576
+  [fr_calf] gen 15/150 best 6.172e-04 mean 1.124e-03 spread 5.636 sigma 0.557
+  [fr_calf] gen 16/150 best 5.663e-04 mean 1.223e-03 spread 6.153 sigma 0.565
+  [fr_calf] gen 17/150 best 6.082e-04 mean 1.076e-03 spread 6.240 sigma 0.530
+  [fr_calf] gen 18/150 best 5.551e-04 mean 9.137e-04 spread 2.430 sigma 0.528
+  [fr_calf] gen 19/150 best 5.273e-04 mean 8.752e-04 spread 6.096 sigma 0.549
+  [fr_calf] gen 20/150 best 5.259e-04 mean 9.975e-04 spread 10.158 sigma 0.565
+  [fr_calf] gen 21/150 best 5.309e-04 mean 1.116e-03 spread 19.026 sigma 0.521
+  [fr_calf] gen 22/150 best 5.242e-04 mean 8.401e-04 spread 4.500 sigma 0.463
+  [fr_calf] gen 23/150 best 5.264e-04 mean 8.109e-04 spread 8.650 sigma 0.447
+  [fr_calf] gen 24/150 best 5.198e-04 mean 7.081e-04 spread 3.591 sigma 0.403
+  [fr_calf] gen 25/150 best 5.203e-04 mean 5.899e-04 spread 1.180 sigma 0.421
+  [fr_calf] gen 26/150 best 5.166e-04 mean 7.337e-04 spread 6.383 sigma 0.411
+  [fr_calf] gen 27/150 best 5.143e-04 mean 7.518e-04 spread 5.041 sigma 0.387
+  [fr_calf] gen 28/150 best 5.125e-04 mean 6.070e-04 spread 4.057 sigma 0.410
+  [fr_calf] gen 29/150 best 5.096e-04 mean 7.166e-04 spread 5.049 sigma 0.405
+  [fr_calf] gen 30/150 best 5.209e-04 mean 6.155e-04 spread 2.923 sigma 0.390
+  [fr_calf] gen 31/150 best 5.110e-04 mean 5.573e-04 spread 1.346 sigma 0.372
+  [fr_calf] gen 32/150 best 5.097e-04 mean 5.826e-04 spread 3.928 sigma 0.373
+  [fr_calf] gen 33/150 best 5.099e-04 mean 5.355e-04 spread 0.270 sigma 0.304
+  [fr_calf] gen 34/150 best 5.100e-04 mean 5.244e-04 spread 0.066 sigma 0.278
+  [fr_calf] gen 35/150 best 5.093e-04 mean 5.231e-04 spread 0.103 sigma 0.253
+  [fr_calf] gen 36/150 best 5.043e-04 mean 5.218e-04 spread 0.125 sigma 0.245
+  [fr_calf] gen 37/150 best 5.052e-04 mean 5.225e-04 spread 0.227 sigma 0.238
+  [fr_calf] gen 38/150 best 5.012e-04 mean 5.192e-04 spread 0.149 sigma 0.208
+  [fr_calf] gen 39/150 best 5.047e-04 mean 5.157e-04 spread 0.044 sigma 0.187
+  [fr_calf] gen 40/150 best 5.044e-04 mean 5.137e-04 spread 0.043 sigma 0.184
+  [fr_calf] gen 41/150 best 5.004e-04 mean 5.134e-04 spread 0.049 sigma 0.166
+  [fr_calf] gen 42/150 best 5.033e-04 mean 5.130e-04 spread 0.039 sigma 0.150
+  [fr_calf] gen 43/150 best 5.036e-04 mean 5.129e-04 spread 0.038 sigma 0.145
+  [fr_calf] gen 44/150 best 5.044e-04 mean 5.122e-04 spread 0.047 sigma 0.136
+  [fr_calf] gen 45/150 best 4.983e-04 mean 5.108e-04 spread 0.050 sigma 0.136
+  [fr_calf] gen 46/150 best 5.025e-04 mean 5.102e-04 spread 0.032 sigma 0.132
+  [fr_calf] gen 47/150 best 5.019e-04 mean 5.103e-04 spread 0.035 sigma 0.127
+  [fr_calf] gen 48/150 best 5.029e-04 mean 5.093e-04 spread 0.035 sigma 0.124
+  [fr_calf] gen 49/150 best 5.025e-04 mean 5.092e-04 spread 0.030 sigma 0.111
+  [fr_calf] gen 50/150 best 5.032e-04 mean 5.088e-04 spread 0.031 sigma 0.099
+  [fr_calf] gen 51/150 best 5.026e-04 mean 5.098e-04 spread 0.037 sigma 0.095
+  [fr_calf] gen 52/150 best 5.014e-04 mean 5.082e-04 spread 0.026 sigma 0.090
+  [fr_calf] gen 53/150 best 5.014e-04 mean 5.085e-04 spread 0.033 sigma 0.087
+  [fr_calf] gen 54/150 best 5.028e-04 mean 5.088e-04 spread 0.023 sigma 0.083
+  [fr_calf] gen 55/150 best 5.013e-04 mean 5.097e-04 spread 0.036 sigma 0.076
+  [fr_calf] gen 56/150 best 5.009e-04 mean 5.087e-04 spread 0.038 sigma 0.074
+  [fr_calf] gen 57/150 best 5.026e-04 mean 5.086e-04 spread 0.037 sigma 0.081
+  [fr_calf] gen 58/150 best 5.007e-04 mean 5.080e-04 spread 0.035 sigma 0.081
+  [fr_calf] gen 59/150 best 5.016e-04 mean 5.081e-04 spread 0.034 sigma 0.080
+  [fr_calf] gen 60/150 best 5.020e-04 mean 5.083e-04 spread 0.030 sigma 0.079
+  [fr_calf] gen 61/150 best 5.014e-04 mean 5.079e-04 spread 0.032 sigma 0.083
+  [fr_calf] gen 62/150 best 4.988e-04 mean 5.081e-04 spread 0.039 sigma 0.086
+  [fr_calf] gen 63/150 best 5.040e-04 mean 5.099e-04 spread 0.029 sigma 0.097
+  [fr_calf] gen 64/150 best 5.017e-04 mean 5.092e-04 spread 0.034 sigma 0.103
+  [fr_calf] gen 65/150 best 5.019e-04 mean 5.094e-04 spread 0.038 sigma 0.098
+  [fr_calf] gen 66/150 best 4.960e-04 mean 5.094e-04 spread 0.045 sigma 0.093
+  [fr_calf] gen 67/150 best 5.015e-04 mean 5.085e-04 spread 0.036 sigma 0.100
+  [fr_calf] gen 68/150 best 5.011e-04 mean 5.079e-04 spread 0.029 sigma 0.090
+  [fr_calf] gen 69/150 best 5.012e-04 mean 5.082e-04 spread 0.034 sigma 0.092
+  [fr_calf] gen 70/150 best 5.007e-04 mean 5.077e-04 spread 0.029 sigma 0.092
+  [fr_calf] gen 71/150 best 5.012e-04 mean 5.079e-04 spread 0.030 sigma 0.090
+  [fr_calf] gen 72/150 best 5.007e-04 mean 5.078e-04 spread 0.033 sigma 0.083
+  [fr_calf] gen 73/150 best 5.017e-04 mean 5.079e-04 spread 0.032 sigma 0.088
+  [fr_calf] gen 74/150 best 4.980e-04 mean 5.077e-04 spread 0.042 sigma 0.087
+  [fr_calf] gen 75/150 best 5.004e-04 mean 5.074e-04 spread 0.028 sigma 0.082
+  [fr_calf] gen 76/150 best 5.025e-04 mean 5.079e-04 spread 0.029 sigma 0.087
+  [fr_calf] gen 77/150 best 4.981e-04 mean 5.074e-04 spread 0.035 sigma 0.081
+  [fr_calf] gen 78/150 best 5.004e-04 mean 5.080e-04 spread 0.035 sigma 0.082
+  [fr_calf] gen 79/150 best 5.012e-04 mean 5.092e-04 spread 0.037 sigma 0.079
+  [fr_calf] gen 80/150 best 4.981e-04 mean 5.079e-04 spread 0.042 sigma 0.069
+  [fr_calf] gen 81/150 best 5.005e-04 mean 5.070e-04 spread 0.030 sigma 0.062
+  [fr_calf] gen 82/150 best 5.009e-04 mean 5.081e-04 spread 0.031 sigma 0.061
+  [fr_calf] gen 83/150 best 5.000e-04 mean 5.070e-04 spread 0.040 sigma 0.062
+  [fr_calf] gen 84/150 best 5.000e-04 mean 5.091e-04 spread 0.037 sigma 0.065
+  [fr_calf] gen 85/150 best 5.004e-04 mean 5.076e-04 spread 0.030 sigma 0.065
+  [fr_calf] gen 86/150 best 4.996e-04 mean 5.079e-04 spread 0.042 sigma 0.061
+  [fr_calf] gen 87/150 best 4.985e-04 mean 5.062e-04 spread 0.038 sigma 0.061
+  [fr_calf] gen 88/150 best 4.983e-04 mean 5.080e-04 spread 0.045 sigma 0.060
+  [fr_calf] gen 89/150 best 4.974e-04 mean 5.078e-04 spread 0.041 sigma 0.053
+  [fr_calf] gen 90/150 best 4.992e-04 mean 5.052e-04 spread 0.039 sigma 0.055
+  [fr_calf] gen 91/150 best 4.991e-04 mean 5.061e-04 spread 0.034 sigma 0.055
+  [fr_calf] gen 92/150 best 4.978e-04 mean 5.057e-04 spread 0.043 sigma 0.054
+  [fr_calf] gen 93/150 best 4.981e-04 mean 5.057e-04 spread 0.037 sigma 0.050
+  [fr_calf] gen 94/150 best 4.964e-04 mean 5.047e-04 spread 0.039 sigma 0.048
+  [fr_calf] gen 95/150 best 4.989e-04 mean 5.038e-04 spread 0.030 sigma 0.048
+  [fr_calf] gen 96/150 best 4.994e-04 mean 5.039e-04 spread 0.035 sigma 0.044
+  [fr_calf] gen 97/150 best 4.989e-04 mean 5.031e-04 spread 0.030 sigma 0.047
+  [fr_calf] gen 98/150 best 4.987e-04 mean 5.032e-04 spread 0.028 sigma 0.046
+  [fr_calf] gen 99/150 best 4.988e-04 mean 5.036e-04 spread 0.024 sigma 0.043
+  [fr_calf] gen 100/150 best 4.983e-04 mean 5.029e-04 spread 0.032 sigma 0.040
+  [fr_calf] gen 101/150 best 4.972e-04 mean 5.032e-04 spread 0.035 sigma 0.038
+  [fr_calf] gen 102/150 best 4.987e-04 mean 5.026e-04 spread 0.023 sigma 0.041
+  [fr_calf] gen 103/150 best 4.988e-04 mean 5.026e-04 spread 0.017 sigma 0.043
+  [fr_calf] gen 104/150 best 4.980e-04 mean 5.032e-04 spread 0.028 sigma 0.042
+  [fr_calf] gen 105/150 best 4.979e-04 mean 5.031e-04 spread 0.036 sigma 0.050
+  [fr_calf] gen 106/150 best 4.991e-04 mean 5.038e-04 spread 0.029 sigma 0.050
+  [fr_calf] gen 107/150 best 4.970e-04 mean 5.027e-04 spread 0.031 sigma 0.056
+  [fr_calf] gen 108/150 best 4.964e-04 mean 5.030e-04 spread 0.036 sigma 0.054
+  [fr_calf] gen 109/150 best 4.980e-04 mean 5.027e-04 spread 0.020 sigma 0.053
+  [fr_calf] gen 110/150 best 4.991e-04 mean 5.030e-04 spread 0.026 sigma 0.058
+  [fr_calf] gen 111/150 best 4.963e-04 mean 5.032e-04 spread 0.035 sigma 0.060
+  [fr_calf] gen 112/150 best 4.979e-04 mean 5.027e-04 spread 0.028 sigma 0.058
+  [fr_calf] gen 113/150 best 4.975e-04 mean 5.023e-04 spread 0.022 sigma 0.051
+  [fr_calf] gen 114/150 best 4.987e-04 mean 5.023e-04 spread 0.015 sigma 0.048
+  [fr_calf] gen 115/150 best 4.982e-04 mean 5.027e-04 spread 0.027 sigma 0.045
+  [fr_calf] gen 116/150 best 4.998e-04 mean 5.028e-04 spread 0.012 sigma 0.047
+  [fr_calf] gen 117/150 best 4.987e-04 mean 5.026e-04 spread 0.025 sigma 0.044
+  [fr_calf] gen 118/150 best 4.986e-04 mean 5.021e-04 spread 0.018 sigma 0.042
+  [fr_calf] gen 119/150 best 4.980e-04 mean 5.021e-04 spread 0.019 sigma 0.040
+  [fr_calf] gen 120/150 best 4.988e-04 mean 5.026e-04 spread 0.014 sigma 0.040
+  [fr_calf] gen 121/150 best 4.975e-04 mean 5.024e-04 spread 0.028 sigma 0.038
+  [fr_calf] gen 122/150 best 4.978e-04 mean 5.018e-04 spread 0.019 sigma 0.038
+  [fr_calf] gen 123/150 best 4.984e-04 mean 5.025e-04 spread 0.017 sigma 0.040
+  [fr_calf] gen 124/150 best 4.964e-04 mean 5.021e-04 spread 0.019 sigma 0.037
+  [fr_calf] gen 125/150 best 4.969e-04 mean 5.020e-04 spread 0.020 sigma 0.041
+  [fr_calf] gen 126/150 best 4.982e-04 mean 5.018e-04 spread 0.018 sigma 0.039
+  [fr_calf] gen 127/150 best 4.969e-04 mean 5.020e-04 spread 0.019 sigma 0.039
+  [fr_calf] gen 128/150 best 4.982e-04 mean 5.020e-04 spread 0.021 sigma 0.040
+  [fr_calf] gen 129/150 best 4.977e-04 mean 5.020e-04 spread 0.018 sigma 0.041
+  [fr_calf] gen 130/150 best 4.987e-04 mean 5.021e-04 spread 0.016 sigma 0.042
+  [fr_calf] gen 131/150 best 4.994e-04 mean 5.026e-04 spread 0.023 sigma 0.040
+  [fr_calf] gen 132/150 best 4.973e-04 mean 5.024e-04 spread 0.022 sigma 0.040
+  [fr_calf] gen 133/150 best 4.976e-04 mean 5.022e-04 spread 0.019 sigma 0.036
+  [fr_calf] gen 134/150 best 4.971e-04 mean 5.022e-04 spread 0.021 sigma 0.036
+  [fr_calf] gen 135/150 best 4.970e-04 mean 5.024e-04 spread 0.022 sigma 0.036
+  [fr_calf] gen 136/150 best 4.968e-04 mean 5.023e-04 spread 0.020 sigma 0.039
+  [fr_calf] gen 137/150 best 4.965e-04 mean 5.021e-04 spread 0.021 sigma 0.037
+  [fr_calf] gen 138/150 best 4.974e-04 mean 5.020e-04 spread 0.022 sigma 0.035
+  [fr_calf] gen 139/150 best 4.983e-04 mean 5.022e-04 spread 0.023 sigma 0.037
+  [fr_calf] gen 140/150 best 4.982e-04 mean 5.025e-04 spread 0.032 sigma 0.035
+  [fr_calf] gen 141/150 best 4.981e-04 mean 5.023e-04 spread 0.026 sigma 0.035
+  [fr_calf] gen 142/150 best 4.972e-04 mean 5.029e-04 spread 0.033 sigma 0.036
+  [fr_calf] gen 143/150 best 4.980e-04 mean 5.029e-04 spread 0.036 sigma 0.035
+  [fr_calf] gen 144/150 best 4.978e-04 mean 5.024e-04 spread 0.030 sigma 0.038
+  [fr_calf] gen 145/150 best 4.987e-04 mean 5.034e-04 spread 0.034 sigma 0.035
+  [fr_calf] gen 146/150 best 4.978e-04 mean 5.024e-04 spread 0.028 sigma 0.035
+  [fr_calf] gen 147/150 best 4.991e-04 mean 5.024e-04 spread 0.022 sigma 0.036
+  [fr_calf] gen 148/150 best 4.955e-04 mean 5.025e-04 spread 0.028 sigma 0.036
+  [fr_calf] gen 149/150 best 4.973e-04 mean 5.024e-04 spread 0.026 sigma 0.040
+  [fr_calf] gen 150/150 best 4.978e-04 mean 5.020e-04 spread 0.019 sigma 0.044
+fitting bl_hip on 2 captures ...
+  [bl_hip] gen 1/150 best 8.290e-03 mean 2.137e-02 spread 2.801 sigma 0.679
+  [bl_hip] gen 2/150 best 3.619e-03 mean 1.578e-02 spread 6.903 sigma 0.877
+  [bl_hip] gen 3/150 best 3.517e-03 mean 1.517e-02 spread 7.504 sigma 0.918
+  [bl_hip] gen 4/150 best 2.271e-03 mean 1.315e-02 spread 11.873 sigma 0.910
+  [bl_hip] gen 5/150 best 1.857e-03 mean 9.726e-03 spread 13.684 sigma 0.939
+  [bl_hip] gen 6/150 best 1.913e-03 mean 7.723e-03 spread 13.382 sigma 0.880
+  [bl_hip] gen 7/150 best 1.875e-03 mean 7.410e-03 spread 8.400 sigma 0.792
+  [bl_hip] gen 8/150 best 1.928e-03 mean 5.935e-03 spread 6.435 sigma 0.679
+  [bl_hip] gen 9/150 best 1.730e-03 mean 4.596e-03 spread 5.712 sigma 0.628
+  [bl_hip] gen 10/150 best 1.753e-03 mean 3.549e-03 spread 3.733 sigma 0.544
+  [bl_hip] gen 11/150 best 1.697e-03 mean 3.354e-03 spread 4.107 sigma 0.528
+  [bl_hip] gen 12/150 best 1.770e-03 mean 3.181e-03 spread 4.980 sigma 0.521
+  [bl_hip] gen 13/150 best 1.734e-03 mean 2.989e-03 spread 4.129 sigma 0.504
+  [bl_hip] gen 14/150 best 1.733e-03 mean 2.930e-03 spread 4.458 sigma 0.470
+  [bl_hip] gen 15/150 best 1.765e-03 mean 2.529e-03 spread 2.003 sigma 0.473
+  [bl_hip] gen 16/150 best 1.873e-03 mean 2.418e-03 spread 1.023 sigma 0.439
+  [bl_hip] gen 17/150 best 1.765e-03 mean 2.269e-03 spread 0.987 sigma 0.417
+  [bl_hip] gen 18/150 best 1.748e-03 mean 2.262e-03 spread 1.468 sigma 0.387
+  [bl_hip] gen 19/150 best 1.734e-03 mean 2.165e-03 spread 1.569 sigma 0.385
+  [bl_hip] gen 20/150 best 1.755e-03 mean 2.132e-03 spread 0.531 sigma 0.338
+  [bl_hip] gen 21/150 best 1.720e-03 mean 2.056e-03 spread 0.419 sigma 0.303
+  [bl_hip] gen 22/150 best 1.785e-03 mean 2.025e-03 spread 0.385 sigma 0.307
+  [bl_hip] gen 23/150 best 1.759e-03 mean 2.041e-03 spread 0.367 sigma 0.297
+  [bl_hip] gen 24/150 best 1.754e-03 mean 2.010e-03 spread 0.482 sigma 0.271
+  [bl_hip] gen 25/150 best 1.740e-03 mean 1.972e-03 spread 0.265 sigma 0.259
+  [bl_hip] gen 26/150 best 1.738e-03 mean 1.946e-03 spread 0.277 sigma 0.252
+  [bl_hip] gen 27/150 best 1.747e-03 mean 1.929e-03 spread 0.237 sigma 0.254
+  [bl_hip] gen 28/150 best 1.729e-03 mean 1.919e-03 spread 0.255 sigma 0.276
+  [bl_hip] gen 29/150 best 1.731e-03 mean 1.929e-03 spread 0.278 sigma 0.278
+  [bl_hip] gen 30/150 best 1.709e-03 mean 1.891e-03 spread 0.227 sigma 0.304
+  [bl_hip] gen 31/150 best 1.735e-03 mean 1.904e-03 spread 0.206 sigma 0.337
+  [bl_hip] gen 32/150 best 1.712e-03 mean 1.863e-03 spread 0.204 sigma 0.292
+  [bl_hip] gen 33/150 best 1.700e-03 mean 1.876e-03 spread 0.205 sigma 0.276
+  [bl_hip] gen 34/150 best 1.709e-03 mean 1.878e-03 spread 0.196 sigma 0.300
+  [bl_hip] gen 35/150 best 1.699e-03 mean 1.854e-03 spread 0.189 sigma 0.310
+  [bl_hip] gen 36/150 best 1.703e-03 mean 1.846e-03 spread 0.196 sigma 0.344
+  [bl_hip] gen 37/150 best 1.707e-03 mean 1.851e-03 spread 0.204 sigma 0.359
+  [bl_hip] gen 38/150 best 1.701e-03 mean 1.852e-03 spread 0.209 sigma 0.357
+  [bl_hip] gen 39/150 best 1.695e-03 mean 1.839e-03 spread 0.199 sigma 0.323
+  [bl_hip] gen 40/150 best 1.694e-03 mean 1.817e-03 spread 0.193 sigma 0.301
+  [bl_hip] gen 41/150 best 1.673e-03 mean 1.791e-03 spread 0.209 sigma 0.279
+  [bl_hip] gen 42/150 best 1.678e-03 mean 1.789e-03 spread 0.198 sigma 0.274
+  [bl_hip] gen 43/150 best 1.693e-03 mean 1.782e-03 spread 0.174 sigma 0.270
+  [bl_hip] gen 44/150 best 1.685e-03 mean 1.761e-03 spread 0.173 sigma 0.277
+  [bl_hip] gen 45/150 best 1.668e-03 mean 1.755e-03 spread 0.195 sigma 0.263
+  [bl_hip] gen 46/150 best 1.667e-03 mean 1.729e-03 spread 0.099 sigma 0.256
+  [bl_hip] gen 47/150 best 1.667e-03 mean 1.748e-03 spread 0.183 sigma 0.285
+  [bl_hip] gen 48/150 best 1.682e-03 mean 1.735e-03 spread 0.154 sigma 0.287
+  [bl_hip] gen 49/150 best 1.671e-03 mean 1.745e-03 spread 0.161 sigma 0.320
+  [bl_hip] gen 50/150 best 1.675e-03 mean 1.726e-03 spread 0.140 sigma 0.340
+  [bl_hip] gen 51/150 best 1.657e-03 mean 1.734e-03 spread 0.174 sigma 0.343
+  [bl_hip] gen 52/150 best 1.663e-03 mean 1.731e-03 spread 0.170 sigma 0.324
+  [bl_hip] gen 53/150 best 1.661e-03 mean 1.733e-03 spread 0.188 sigma 0.316
+  [bl_hip] gen 54/150 best 1.667e-03 mean 1.732e-03 spread 0.164 sigma 0.271
+  [bl_hip] gen 55/150 best 1.677e-03 mean 1.720e-03 spread 0.151 sigma 0.274
+  [bl_hip] gen 56/150 best 1.663e-03 mean 1.723e-03 spread 0.177 sigma 0.238
+  [bl_hip] gen 57/150 best 1.677e-03 mean 1.721e-03 spread 0.142 sigma 0.227
+  [bl_hip] gen 58/150 best 1.676e-03 mean 1.718e-03 spread 0.138 sigma 0.224
+  [bl_hip] gen 59/150 best 1.667e-03 mean 1.725e-03 spread 0.132 sigma 0.220
+  [bl_hip] gen 60/150 best 1.670e-03 mean 1.717e-03 spread 0.174 sigma 0.195
+  [bl_hip] gen 61/150 best 1.664e-03 mean 1.714e-03 spread 0.104 sigma 0.198
+  [bl_hip] gen 62/150 best 1.671e-03 mean 1.716e-03 spread 0.113 sigma 0.216
+  [bl_hip] gen 63/150 best 1.658e-03 mean 1.714e-03 spread 0.167 sigma 0.224
+  [bl_hip] gen 64/150 best 1.636e-03 mean 1.711e-03 spread 0.116 sigma 0.264
+  [bl_hip] gen 65/150 best 1.656e-03 mean 1.716e-03 spread 0.152 sigma 0.311
+  [bl_hip] gen 66/150 best 1.637e-03 mean 1.707e-03 spread 0.152 sigma 0.355
+  [bl_hip] gen 67/150 best 1.646e-03 mean 1.718e-03 spread 0.180 sigma 0.443
+  [bl_hip] gen 68/150 best 1.651e-03 mean 1.712e-03 spread 0.145 sigma 0.539
+  [bl_hip] gen 69/150 best 1.646e-03 mean 1.732e-03 spread 0.178 sigma 0.690
+  [bl_hip] gen 70/150 best 1.636e-03 mean 1.721e-03 spread 0.164 sigma 0.761
+  [bl_hip] gen 71/150 best 1.643e-03 mean 1.716e-03 spread 0.160 sigma 0.913
+  [bl_hip] gen 72/150 best 1.618e-03 mean 1.735e-03 spread 0.200 sigma 1.115
+  [bl_hip] gen 73/150 best 1.639e-03 mean 1.727e-03 spread 0.164 sigma 1.320
+  [bl_hip] gen 74/150 best 1.629e-03 mean 1.725e-03 spread 0.179 sigma 1.503
+  [bl_hip] gen 75/150 best 1.619e-03 mean 1.737e-03 spread 0.195 sigma 1.401
+  [bl_hip] gen 76/150 best 1.630e-03 mean 1.745e-03 spread 0.177 sigma 1.370
+  [bl_hip] gen 77/150 best 1.638e-03 mean 1.735e-03 spread 0.177 sigma 1.227
+  [bl_hip] gen 78/150 best 1.602e-03 mean 1.726e-03 spread 0.209 sigma 1.230
+  [bl_hip] gen 79/150 best 1.641e-03 mean 1.725e-03 spread 0.172 sigma 1.141
+  [bl_hip] gen 80/150 best 1.618e-03 mean 1.722e-03 spread 0.187 sigma 1.099
+  [bl_hip] gen 81/150 best 1.630e-03 mean 1.701e-03 spread 0.192 sigma 1.007
+  [bl_hip] gen 82/150 best 1.622e-03 mean 1.724e-03 spread 0.186 sigma 1.011
+  [bl_hip] gen 83/150 best 1.632e-03 mean 1.730e-03 spread 0.171 sigma 0.980
+  [bl_hip] gen 84/150 best 1.629e-03 mean 1.731e-03 spread 0.186 sigma 0.948
+  [bl_hip] gen 85/150 best 1.635e-03 mean 1.712e-03 spread 0.182 sigma 0.907
+  [bl_hip] gen 86/150 best 1.617e-03 mean 1.725e-03 spread 0.182 sigma 0.866
+  [bl_hip] gen 87/150 best 1.637e-03 mean 1.733e-03 spread 0.179 sigma 0.756
+  [bl_hip] gen 88/150 best 1.636e-03 mean 1.720e-03 spread 0.182 sigma 0.794
+  [bl_hip] gen 89/150 best 1.634e-03 mean 1.718e-03 spread 0.172 sigma 0.811
+  [bl_hip] gen 90/150 best 1.624e-03 mean 1.703e-03 spread 0.161 sigma 0.775
+  [bl_hip] gen 91/150 best 1.625e-03 mean 1.703e-03 spread 0.182 sigma 0.757
+  [bl_hip] gen 92/150 best 1.628e-03 mean 1.690e-03 spread 0.172 sigma 0.737
+  [bl_hip] gen 93/150 best 1.615e-03 mean 1.681e-03 spread 0.096 sigma 0.678
+  [bl_hip] gen 94/150 best 1.633e-03 mean 1.693e-03 spread 0.175 sigma 0.673
+  [bl_hip] gen 95/150 best 1.626e-03 mean 1.704e-03 spread 0.160 sigma 0.713
+  [bl_hip] gen 96/150 best 1.620e-03 mean 1.695e-03 spread 0.175 sigma 0.744
+  [bl_hip] gen 97/150 best 1.611e-03 mean 1.697e-03 spread 0.173 sigma 0.720
+  [bl_hip] gen 98/150 best 1.614e-03 mean 1.700e-03 spread 0.181 sigma 0.723
+  [bl_hip] gen 99/150 best 1.638e-03 mean 1.686e-03 spread 0.153 sigma 0.735
+  [bl_hip] gen 100/150 best 1.636e-03 mean 1.707e-03 spread 0.154 sigma 0.673
+  [bl_hip] gen 101/150 best 1.616e-03 mean 1.706e-03 spread 0.175 sigma 0.627
+  [bl_hip] gen 102/150 best 1.618e-03 mean 1.686e-03 spread 0.152 sigma 0.604
+  [bl_hip] gen 103/150 best 1.621e-03 mean 1.685e-03 spread 0.164 sigma 0.583
+  [bl_hip] gen 104/150 best 1.623e-03 mean 1.689e-03 spread 0.187 sigma 0.596
+  [bl_hip] gen 105/150 best 1.628e-03 mean 1.692e-03 spread 0.140 sigma 0.683
+  [bl_hip] gen 106/150 best 1.610e-03 mean 1.683e-03 spread 0.188 sigma 0.651
+  [bl_hip] gen 107/150 best 1.629e-03 mean 1.680e-03 spread 0.173 sigma 0.715
+  [bl_hip] gen 108/150 best 1.604e-03 mean 1.668e-03 spread 0.105 sigma 0.758
+  [bl_hip] gen 109/150 best 1.615e-03 mean 1.684e-03 spread 0.163 sigma 0.665
+  [bl_hip] gen 110/150 best 1.614e-03 mean 1.679e-03 spread 0.166 sigma 0.596
+  [bl_hip] gen 111/150 best 1.621e-03 mean 1.682e-03 spread 0.181 sigma 0.592
+  [bl_hip] gen 112/150 best 1.612e-03 mean 1.679e-03 spread 0.171 sigma 0.569
+  [bl_hip] gen 113/150 best 1.610e-03 mean 1.672e-03 spread 0.163 sigma 0.535
+  [bl_hip] gen 114/150 best 1.609e-03 mean 1.683e-03 spread 0.173 sigma 0.534
+  [bl_hip] gen 115/150 best 1.604e-03 mean 1.667e-03 spread 0.151 sigma 0.570
+  [bl_hip] gen 116/150 best 1.612e-03 mean 1.670e-03 spread 0.163 sigma 0.614
+  [bl_hip] gen 117/150 best 1.620e-03 mean 1.684e-03 spread 0.149 sigma 0.572
+  [bl_hip] gen 118/150 best 1.603e-03 mean 1.675e-03 spread 0.172 sigma 0.562
+  [bl_hip] gen 119/150 best 1.614e-03 mean 1.667e-03 spread 0.147 sigma 0.526
+  [bl_hip] gen 120/150 best 1.610e-03 mean 1.666e-03 spread 0.147 sigma 0.489
+  [bl_hip] gen 121/150 best 1.602e-03 mean 1.666e-03 spread 0.161 sigma 0.469
+  [bl_hip] gen 122/150 best 1.593e-03 mean 1.656e-03 spread 0.177 sigma 0.425
+  [bl_hip] gen 123/150 best 1.601e-03 mean 1.665e-03 spread 0.168 sigma 0.467
+  [bl_hip] gen 124/150 best 1.584e-03 mean 1.660e-03 spread 0.156 sigma 0.470
+  [bl_hip] gen 125/150 best 1.612e-03 mean 1.661e-03 spread 0.146 sigma 0.432
+  [bl_hip] gen 126/150 best 1.611e-03 mean 1.653e-03 spread 0.145 sigma 0.401
+  [bl_hip] gen 127/150 best 1.598e-03 mean 1.661e-03 spread 0.153 sigma 0.410
+  [bl_hip] gen 128/150 best 1.612e-03 mean 1.662e-03 spread 0.143 sigma 0.459
+  [bl_hip] gen 129/150 best 1.608e-03 mean 1.655e-03 spread 0.163 sigma 0.479
+  [bl_hip] gen 130/150 best 1.604e-03 mean 1.661e-03 spread 0.145 sigma 0.499
+  [bl_hip] gen 131/150 best 1.612e-03 mean 1.663e-03 spread 0.155 sigma 0.531
+  [bl_hip] gen 132/150 best 1.604e-03 mean 1.668e-03 spread 0.175 sigma 0.507
+  [bl_hip] gen 133/150 best 1.593e-03 mean 1.662e-03 spread 0.178 sigma 0.516
+  [bl_hip] gen 134/150 best 1.607e-03 mean 1.674e-03 spread 0.165 sigma 0.526
+  [bl_hip] gen 135/150 best 1.587e-03 mean 1.649e-03 spread 0.100 sigma 0.549
+  [bl_hip] gen 136/150 best 1.598e-03 mean 1.656e-03 spread 0.128 sigma 0.586
+  [bl_hip] gen 137/150 best 1.615e-03 mean 1.657e-03 spread 0.157 sigma 0.636
+  [bl_hip] gen 138/150 best 1.584e-03 mean 1.649e-03 spread 0.115 sigma 0.670
+  [bl_hip] gen 139/150 best 1.595e-03 mean 1.661e-03 spread 0.173 sigma 0.674
+  [bl_hip] gen 140/150 best 1.601e-03 mean 1.669e-03 spread 0.192 sigma 0.629
+  [bl_hip] gen 141/150 best 1.605e-03 mean 1.660e-03 spread 0.098 sigma 0.594
+  [bl_hip] gen 142/150 best 1.602e-03 mean 1.665e-03 spread 0.159 sigma 0.539
+  [bl_hip] gen 143/150 best 1.589e-03 mean 1.659e-03 spread 0.185 sigma 0.524
+  [bl_hip] gen 144/150 best 1.597e-03 mean 1.651e-03 spread 0.153 sigma 0.487
+  [bl_hip] gen 145/150 best 1.599e-03 mean 1.642e-03 spread 0.139 sigma 0.461
+  [bl_hip] gen 146/150 best 1.604e-03 mean 1.659e-03 spread 0.156 sigma 0.524
+  [bl_hip] gen 147/150 best 1.608e-03 mean 1.654e-03 spread 0.138 sigma 0.517
+  [bl_hip] gen 148/150 best 1.591e-03 mean 1.654e-03 spread 0.161 sigma 0.509
+  [bl_hip] gen 149/150 best 1.601e-03 mean 1.656e-03 spread 0.142 sigma 0.488
+  [bl_hip] gen 150/150 best 1.597e-03 mean 1.664e-03 spread 0.148 sigma 0.471
+fitting bl_thigh on 2 captures ...
+  [bl_thigh] gen 1/150 best 9.301e-03 mean 2.147e-02 spread 1.827 sigma 0.634
+  [bl_thigh] gen 2/150 best 5.665e-03 mean 1.790e-02 spread 3.662 sigma 0.802
+  [bl_thigh] gen 3/150 best 7.332e-04 mean 1.604e-02 spread 34.993 sigma 0.919
+  [bl_thigh] gen 4/150 best 5.978e-04 mean 1.306e-02 spread 43.495 sigma 0.966
+  [bl_thigh] gen 5/150 best 5.568e-04 mean 9.293e-03 spread 42.286 sigma 0.982
+  [bl_thigh] gen 6/150 best 5.651e-04 mean 7.862e-03 spread 40.531 sigma 0.941
+  [bl_thigh] gen 7/150 best 6.344e-04 mean 6.946e-03 spread 37.953 sigma 0.841
+  [bl_thigh] gen 8/150 best 6.388e-04 mean 6.417e-03 spread 32.732 sigma 0.762
+  [bl_thigh] gen 9/150 best 5.625e-04 mean 4.500e-03 spread 22.042 sigma 0.668
+  [bl_thigh] gen 10/150 best 5.216e-04 mean 2.545e-03 spread 22.588 sigma 0.718
+  [bl_thigh] gen 11/150 best 5.414e-04 mean 3.266e-03 spread 20.080 sigma 0.642
+  [bl_thigh] gen 12/150 best 5.755e-04 mean 2.570e-03 spread 14.847 sigma 0.562
+  [bl_thigh] gen 13/150 best 5.416e-04 mean 1.610e-03 spread 10.869 sigma 0.529
+  [bl_thigh] gen 14/150 best 5.373e-04 mean 1.521e-03 spread 7.214 sigma 0.462
+  [bl_thigh] gen 15/150 best 5.742e-04 mean 1.103e-03 spread 3.537 sigma 0.398
+  [bl_thigh] gen 16/150 best 5.486e-04 mean 9.261e-04 spread 4.808 sigma 0.346
+  [bl_thigh] gen 17/150 best 5.551e-04 mean 8.204e-04 spread 3.332 sigma 0.300
+  [bl_thigh] gen 18/150 best 5.349e-04 mean 7.371e-04 spread 1.476 sigma 0.280
+  [bl_thigh] gen 19/150 best 5.394e-04 mean 6.481e-04 spread 0.788 sigma 0.262
+  [bl_thigh] gen 20/150 best 5.305e-04 mean 6.435e-04 spread 0.616 sigma 0.234
+  [bl_thigh] gen 21/150 best 5.186e-04 mean 6.220e-04 spread 0.558 sigma 0.212
+  [bl_thigh] gen 22/150 best 5.148e-04 mean 6.040e-04 spread 0.362 sigma 0.196
+  [bl_thigh] gen 23/150 best 5.269e-04 mean 5.879e-04 spread 0.352 sigma 0.197
+  [bl_thigh] gen 24/150 best 5.262e-04 mean 5.852e-04 spread 0.318 sigma 0.210
+  [bl_thigh] gen 25/150 best 5.008e-04 mean 5.867e-04 spread 0.413 sigma 0.216
+  [bl_thigh] gen 26/150 best 5.069e-04 mean 5.911e-04 spread 0.314 sigma 0.209
+  [bl_thigh] gen 27/150 best 5.228e-04 mean 5.784e-04 spread 0.258 sigma 0.191
+  [bl_thigh] gen 28/150 best 5.135e-04 mean 5.746e-04 spread 0.251 sigma 0.186
+  [bl_thigh] gen 29/150 best 5.272e-04 mean 5.734e-04 spread 0.208 sigma 0.171
+  [bl_thigh] gen 30/150 best 5.270e-04 mean 5.644e-04 spread 0.175 sigma 0.162
+  [bl_thigh] gen 31/150 best 5.104e-04 mean 5.666e-04 spread 0.214 sigma 0.153
+  [bl_thigh] gen 32/150 best 5.167e-04 mean 5.612e-04 spread 0.174 sigma 0.146
+  [bl_thigh] gen 33/150 best 5.258e-04 mean 5.575e-04 spread 0.129 sigma 0.130
+  [bl_thigh] gen 34/150 best 5.206e-04 mean 5.589e-04 spread 0.144 sigma 0.119
+  [bl_thigh] gen 35/150 best 5.150e-04 mean 5.538e-04 spread 0.149 sigma 0.117
+  [bl_thigh] gen 36/150 best 5.062e-04 mean 5.481e-04 spread 0.151 sigma 0.107
+  [bl_thigh] gen 37/150 best 5.073e-04 mean 5.479e-04 spread 0.150 sigma 0.098
+  [bl_thigh] gen 38/150 best 5.236e-04 mean 5.473e-04 spread 0.115 sigma 0.097
+  [bl_thigh] gen 39/150 best 5.167e-04 mean 5.475e-04 spread 0.139 sigma 0.086
+  [bl_thigh] gen 40/150 best 5.123e-04 mean 5.448e-04 spread 0.143 sigma 0.096
+  [bl_thigh] gen 41/150 best 4.991e-04 mean 5.452e-04 spread 0.137 sigma 0.099
+  [bl_thigh] gen 42/150 best 5.151e-04 mean 5.419e-04 spread 0.125 sigma 0.099
+  [bl_thigh] gen 43/150 best 5.178e-04 mean 5.480e-04 spread 0.115 sigma 0.116
+  [bl_thigh] gen 44/150 best 5.218e-04 mean 5.431e-04 spread 0.114 sigma 0.108
+  [bl_thigh] gen 45/150 best 5.057e-04 mean 5.463e-04 spread 0.145 sigma 0.104
+  [bl_thigh] gen 46/150 best 5.157e-04 mean 5.445e-04 spread 0.151 sigma 0.094
+  [bl_thigh] gen 47/150 best 5.156e-04 mean 5.443e-04 spread 0.117 sigma 0.095
+  [bl_thigh] gen 48/150 best 5.123e-04 mean 5.404e-04 spread 0.125 sigma 0.091
+  [bl_thigh] gen 49/150 best 5.077e-04 mean 5.428e-04 spread 0.137 sigma 0.086
+  [bl_thigh] gen 50/150 best 5.100e-04 mean 5.428e-04 spread 0.129 sigma 0.080
+  [bl_thigh] gen 51/150 best 5.025e-04 mean 5.376e-04 spread 0.138 sigma 0.074
+  [bl_thigh] gen 52/150 best 5.100e-04 mean 5.394e-04 spread 0.145 sigma 0.069
+  [bl_thigh] gen 53/150 best 5.142e-04 mean 5.401e-04 spread 0.133 sigma 0.066
+  [bl_thigh] gen 54/150 best 5.092e-04 mean 5.377e-04 spread 0.146 sigma 0.061
+  [bl_thigh] gen 55/150 best 5.113e-04 mean 5.396e-04 spread 0.125 sigma 0.054
+  [bl_thigh] gen 56/150 best 5.091e-04 mean 5.385e-04 spread 0.131 sigma 0.055
+  [bl_thigh] gen 57/150 best 5.073e-04 mean 5.434e-04 spread 0.153 sigma 0.054
+  [bl_thigh] gen 58/150 best 5.087e-04 mean 5.403e-04 spread 0.133 sigma 0.047
+  [bl_thigh] gen 59/150 best 5.141e-04 mean 5.426e-04 spread 0.125 sigma 0.045
+  [bl_thigh] gen 60/150 best 5.071e-04 mean 5.394e-04 spread 0.128 sigma 0.042
+  [bl_thigh] gen 61/150 best 5.087e-04 mean 5.406e-04 spread 0.137 sigma 0.041
+  [bl_thigh] gen 62/150 best 5.184e-04 mean 5.376e-04 spread 0.105 sigma 0.039
+  [bl_thigh] gen 63/150 best 5.098e-04 mean 5.395e-04 spread 0.145 sigma 0.040
+  [bl_thigh] gen 64/150 best 5.124e-04 mean 5.382e-04 spread 0.109 sigma 0.040
+  [bl_thigh] gen 65/150 best 4.943e-04 mean 5.357e-04 spread 0.150 sigma 0.043
+  [bl_thigh] gen 66/150 best 5.139e-04 mean 5.380e-04 spread 0.111 sigma 0.043
+  [bl_thigh] gen 67/150 best 5.123e-04 mean 5.376e-04 spread 0.107 sigma 0.039
+  [bl_thigh] gen 68/150 best 5.118e-04 mean 5.395e-04 spread 0.128 sigma 0.042
+  [bl_thigh] gen 69/150 best 5.130e-04 mean 5.364e-04 spread 0.106 sigma 0.044
+  [bl_thigh] gen 70/150 best 5.060e-04 mean 5.392e-04 spread 0.144 sigma 0.042
+  [bl_thigh] gen 71/150 best 5.023e-04 mean 5.391e-04 spread 0.157 sigma 0.043
+  [bl_thigh] gen 72/150 best 5.109e-04 mean 5.367e-04 spread 0.117 sigma 0.042
+  [bl_thigh] gen 73/150 best 5.172e-04 mean 5.382e-04 spread 0.130 sigma 0.040
+  [bl_thigh] gen 74/150 best 5.169e-04 mean 5.398e-04 spread 0.113 sigma 0.038
+  [bl_thigh] gen 75/150 best 5.099e-04 mean 5.361e-04 spread 0.137 sigma 0.039
+  [bl_thigh] gen 76/150 best 5.094e-04 mean 5.393e-04 spread 0.127 sigma 0.038
+  [bl_thigh] gen 77/150 best 5.048e-04 mean 5.380e-04 spread 0.142 sigma 0.035
+  [bl_thigh] gen 78/150 best 5.099e-04 mean 5.395e-04 spread 0.138 sigma 0.037
+  [bl_thigh] gen 79/150 best 5.001e-04 mean 5.362e-04 spread 0.134 sigma 0.038
+  [bl_thigh] gen 80/150 best 5.092e-04 mean 5.360e-04 spread 0.139 sigma 0.035
+  [bl_thigh] gen 81/150 best 5.018e-04 mean 5.365e-04 spread 0.139 sigma 0.036
+  [bl_thigh] gen 82/150 best 5.141e-04 mean 5.410e-04 spread 0.134 sigma 0.037
+  [bl_thigh] gen 83/150 best 5.093e-04 mean 5.366e-04 spread 0.126 sigma 0.035
+  [bl_thigh] gen 84/150 best 5.082e-04 mean 5.363e-04 spread 0.159 sigma 0.036
+  [bl_thigh] gen 85/150 best 5.105e-04 mean 5.401e-04 spread 0.131 sigma 0.040
+  [bl_thigh] gen 86/150 best 5.087e-04 mean 5.374e-04 spread 0.138 sigma 0.039
+  [bl_thigh] gen 87/150 best 5.083e-04 mean 5.379e-04 spread 0.149 sigma 0.039
+  [bl_thigh] gen 88/150 best 5.018e-04 mean 5.366e-04 spread 0.141 sigma 0.039
+  [bl_thigh] gen 89/150 best 5.179e-04 mean 5.397e-04 spread 0.108 sigma 0.040
+  [bl_thigh] gen 90/150 best 5.101e-04 mean 5.396e-04 spread 0.120 sigma 0.039
+  [bl_thigh] gen 91/150 best 5.102e-04 mean 5.362e-04 spread 0.111 sigma 0.036
+  [bl_thigh] gen 92/150 best 5.021e-04 mean 5.351e-04 spread 0.156 sigma 0.038
+  [bl_thigh] gen 93/150 best 5.069e-04 mean 5.387e-04 spread 0.140 sigma 0.040
+  [bl_thigh] gen 94/150 best 5.125e-04 mean 5.391e-04 spread 0.139 sigma 0.041
+  [bl_thigh] gen 95/150 best 5.010e-04 mean 5.354e-04 spread 0.146 sigma 0.040
+  [bl_thigh] gen 96/150 best 5.040e-04 mean 5.388e-04 spread 0.148 sigma 0.039
+  [bl_thigh] gen 97/150 best 5.024e-04 mean 5.380e-04 spread 0.161 sigma 0.039
+  [bl_thigh] gen 98/150 best 5.069e-04 mean 5.362e-04 spread 0.130 sigma 0.038
+  [bl_thigh] gen 99/150 best 5.120e-04 mean 5.369e-04 spread 0.130 sigma 0.041
+  [bl_thigh] gen 100/150 best 5.128e-04 mean 5.345e-04 spread 0.119 sigma 0.042
+  [bl_thigh] gen 101/150 best 5.168e-04 mean 5.348e-04 spread 0.099 sigma 0.049
+  [bl_thigh] gen 102/150 best 5.121e-04 mean 5.377e-04 spread 0.109 sigma 0.052
+  [bl_thigh] gen 103/150 best 5.200e-04 mean 5.433e-04 spread 0.096 sigma 0.057
+  [bl_thigh] gen 104/150 best 5.197e-04 mean 5.399e-04 spread 0.110 sigma 0.061
+  [bl_thigh] gen 105/150 best 5.027e-04 mean 5.360e-04 spread 0.140 sigma 0.058
+  [bl_thigh] gen 106/150 best 5.203e-04 mean 5.390e-04 spread 0.102 sigma 0.063
+  [bl_thigh] gen 107/150 best 5.091e-04 mean 5.396e-04 spread 0.129 sigma 0.060
+  [bl_thigh] gen 108/150 best 5.139e-04 mean 5.357e-04 spread 0.108 sigma 0.064
+  [bl_thigh] gen 109/150 best 5.166e-04 mean 5.405e-04 spread 0.112 sigma 0.071
+  [bl_thigh] gen 110/150 best 5.161e-04 mean 5.376e-04 spread 0.118 sigma 0.073
+  [bl_thigh] gen 111/150 best 5.136e-04 mean 5.369e-04 spread 0.123 sigma 0.074
+  [bl_thigh] gen 112/150 best 5.157e-04 mean 5.383e-04 spread 0.113 sigma 0.078
+  [bl_thigh] gen 113/150 best 5.072e-04 mean 5.351e-04 spread 0.144 sigma 0.080
+  [bl_thigh] gen 114/150 best 5.108e-04 mean 5.388e-04 spread 0.124 sigma 0.074
+  [bl_thigh] gen 115/150 best 5.023e-04 mean 5.353e-04 spread 0.148 sigma 0.069
+  [bl_thigh] gen 116/150 best 5.016e-04 mean 5.375e-04 spread 0.150 sigma 0.072
+  [bl_thigh] gen 117/150 best 5.039e-04 mean 5.395e-04 spread 0.145 sigma 0.080
+  [bl_thigh] gen 118/150 best 5.030e-04 mean 5.363e-04 spread 0.143 sigma 0.076
+  [bl_thigh] gen 119/150 best 5.075e-04 mean 5.378e-04 spread 0.142 sigma 0.071
+  [bl_thigh] gen 120/150 best 5.098e-04 mean 5.394e-04 spread 0.135 sigma 0.074
+  [bl_thigh] gen 121/150 best 4.950e-04 mean 5.357e-04 spread 0.155 sigma 0.073
+  [bl_thigh] gen 122/150 best 5.121e-04 mean 5.372e-04 spread 0.132 sigma 0.073
+  [bl_thigh] gen 123/150 best 5.159e-04 mean 5.410e-04 spread 0.106 sigma 0.077
+  [bl_thigh] gen 124/150 best 5.117e-04 mean 5.390e-04 spread 0.126 sigma 0.077
+  [bl_thigh] gen 125/150 best 5.092e-04 mean 5.374e-04 spread 0.120 sigma 0.075
+  [bl_thigh] gen 126/150 best 5.097e-04 mean 5.379e-04 spread 0.125 sigma 0.086
+  [bl_thigh] gen 127/150 best 5.089e-04 mean 5.332e-04 spread 0.122 sigma 0.083
+  [bl_thigh] gen 128/150 best 5.063e-04 mean 5.385e-04 spread 0.131 sigma 0.088
+  [bl_thigh] gen 129/150 best 5.092e-04 mean 5.362e-04 spread 0.123 sigma 0.083
+  [bl_thigh] gen 130/150 best 5.113e-04 mean 5.377e-04 spread 0.133 sigma 0.083
+  [bl_thigh] gen 131/150 best 5.071e-04 mean 5.379e-04 spread 0.145 sigma 0.084
+  [bl_thigh] gen 132/150 best 5.050e-04 mean 5.371e-04 spread 0.132 sigma 0.087
+  [bl_thigh] gen 133/150 best 5.099e-04 mean 5.375e-04 spread 0.135 sigma 0.100
+  [bl_thigh] gen 134/150 best 4.992e-04 mean 5.364e-04 spread 0.141 sigma 0.103
+  [bl_thigh] gen 135/150 best 5.098e-04 mean 5.352e-04 spread 0.132 sigma 0.102
+  [bl_thigh] gen 136/150 best 5.112e-04 mean 5.363e-04 spread 0.115 sigma 0.101
+  [bl_thigh] gen 137/150 best 5.046e-04 mean 5.346e-04 spread 0.121 sigma 0.107
+  [bl_thigh] gen 138/150 best 5.029e-04 mean 5.382e-04 spread 0.139 sigma 0.113
+  [bl_thigh] gen 139/150 best 5.087e-04 mean 5.383e-04 spread 0.135 sigma 0.117
+  [bl_thigh] gen 140/150 best 4.991e-04 mean 5.357e-04 spread 0.145 sigma 0.120
+  [bl_thigh] gen 141/150 best 5.118e-04 mean 5.374e-04 spread 0.120 sigma 0.125
+  [bl_thigh] gen 142/150 best 5.006e-04 mean 5.369e-04 spread 0.135 sigma 0.110
+  [bl_thigh] gen 143/150 best 5.068e-04 mean 5.372e-04 spread 0.117 sigma 0.126
+  [bl_thigh] gen 144/150 best 5.083e-04 mean 5.390e-04 spread 0.120 sigma 0.128
+  [bl_thigh] gen 145/150 best 5.052e-04 mean 5.357e-04 spread 0.134 sigma 0.123
+  [bl_thigh] gen 146/150 best 5.058e-04 mean 5.357e-04 spread 0.136 sigma 0.139
+  [bl_thigh] gen 147/150 best 5.085e-04 mean 5.404e-04 spread 0.144 sigma 0.159
+  [bl_thigh] gen 148/150 best 5.115e-04 mean 5.371e-04 spread 0.130 sigma 0.181
+  [bl_thigh] gen 149/150 best 5.142e-04 mean 5.377e-04 spread 0.137 sigma 0.195
+  [bl_thigh] gen 150/150 best 5.073e-04 mean 5.365e-04 spread 0.131 sigma 0.178
+fitting bl_calf on 2 captures ...
+  [bl_calf] gen 1/150 best 7.813e-03 mean 2.585e-02 spread 5.103 sigma 0.688
+  [bl_calf] gen 2/150 best 3.834e-03 mean 1.823e-02 spread 10.282 sigma 0.889
+  [bl_calf] gen 3/150 best 4.818e-03 mean 2.099e-02 spread 19.930 sigma 0.895
+  [bl_calf] gen 4/150 best 3.037e-03 mean 1.767e-02 spread 31.050 sigma 0.852
+  [bl_calf] gen 5/150 best 3.441e-03 mean 1.185e-02 spread 7.520 sigma 0.859
+  [bl_calf] gen 6/150 best 2.764e-03 mean 1.110e-02 spread 20.116 sigma 0.910
+  [bl_calf] gen 7/150 best 2.676e-03 mean 8.895e-03 spread 36.690 sigma 0.856
+  [bl_calf] gen 8/150 best 2.598e-03 mean 6.028e-03 spread 5.299 sigma 0.829
+  [bl_calf] gen 9/150 best 2.595e-03 mean 5.484e-03 spread 5.094 sigma 0.738
+  [bl_calf] gen 10/150 best 2.495e-03 mean 5.455e-03 spread 9.339 sigma 0.678
+  [bl_calf] gen 11/150 best 2.622e-03 mean 4.329e-03 spread 2.588 sigma 0.559
+  [bl_calf] gen 12/150 best 2.296e-03 mean 3.807e-03 spread 3.041 sigma 0.499
+  [bl_calf] gen 13/150 best 2.380e-03 mean 3.625e-03 spread 3.605 sigma 0.436
+  [bl_calf] gen 14/150 best 2.239e-03 mean 3.258e-03 spread 2.240 sigma 0.420
+  [bl_calf] gen 15/150 best 2.273e-03 mean 3.037e-03 spread 0.950 sigma 0.379
+  [bl_calf] gen 16/150 best 1.879e-03 mean 3.222e-03 spread 9.987 sigma 0.353
+  [bl_calf] gen 17/150 best 2.184e-03 mean 2.876e-03 spread 0.821 sigma 0.337
+  [bl_calf] gen 18/150 best 1.771e-03 mean 2.841e-03 spread 0.957 sigma 0.340
+  [bl_calf] gen 19/150 best 2.255e-03 mean 2.820e-03 spread 0.624 sigma 0.328
+  [bl_calf] gen 20/150 best 2.244e-03 mean 2.793e-03 spread 0.581 sigma 0.306
+  [bl_calf] gen 21/150 best 1.988e-03 mean 2.693e-03 spread 0.675 sigma 0.279
+  [bl_calf] gen 22/150 best 2.192e-03 mean 2.693e-03 spread 0.504 sigma 0.263
+  [bl_calf] gen 23/150 best 2.251e-03 mean 2.683e-03 spread 0.493 sigma 0.244
+  [bl_calf] gen 24/150 best 2.255e-03 mean 2.702e-03 spread 0.464 sigma 0.219
+  [bl_calf] gen 25/150 best 2.204e-03 mean 2.610e-03 spread 0.476 sigma 0.215
+  [bl_calf] gen 26/150 best 2.233e-03 mean 2.613e-03 spread 0.436 sigma 0.216
+  [bl_calf] gen 27/150 best 2.213e-03 mean 2.630e-03 spread 0.489 sigma 0.224
+  [bl_calf] gen 28/150 best 2.220e-03 mean 2.567e-03 spread 0.508 sigma 0.214
+  [bl_calf] gen 29/150 best 2.177e-03 mean 2.611e-03 spread 0.469 sigma 0.210
+  [bl_calf] gen 30/150 best 2.197e-03 mean 2.550e-03 spread 0.434 sigma 0.215
+  [bl_calf] gen 31/150 best 2.204e-03 mean 2.535e-03 spread 0.412 sigma 0.203
+  [bl_calf] gen 32/150 best 2.179e-03 mean 2.476e-03 spread 0.360 sigma 0.204
+  [bl_calf] gen 33/150 best 2.123e-03 mean 2.460e-03 spread 0.378 sigma 0.187
+  [bl_calf] gen 34/150 best 2.214e-03 mean 2.491e-03 spread 0.367 sigma 0.177
+  [bl_calf] gen 35/150 best 2.202e-03 mean 2.457e-03 spread 0.323 sigma 0.170
+  [bl_calf] gen 36/150 best 2.187e-03 mean 2.431e-03 spread 0.351 sigma 0.181
+  [bl_calf] gen 37/150 best 2.164e-03 mean 2.405e-03 spread 0.331 sigma 0.188
+  [bl_calf] gen 38/150 best 2.116e-03 mean 2.375e-03 spread 0.386 sigma 0.203
+  [bl_calf] gen 39/150 best 2.147e-03 mean 2.390e-03 spread 0.332 sigma 0.212
+  [bl_calf] gen 40/150 best 2.084e-03 mean 2.392e-03 spread 0.357 sigma 0.210
+  [bl_calf] gen 41/150 best 2.168e-03 mean 2.381e-03 spread 0.303 sigma 0.201
+  [bl_calf] gen 42/150 best 2.191e-03 mean 2.395e-03 spread 0.255 sigma 0.183
+  [bl_calf] gen 43/150 best 2.165e-03 mean 2.371e-03 spread 0.252 sigma 0.170
+  [bl_calf] gen 44/150 best 2.119e-03 mean 2.362e-03 spread 0.305 sigma 0.169
+  [bl_calf] gen 45/150 best 2.089e-03 mean 2.343e-03 spread 0.320 sigma 0.172
+  [bl_calf] gen 46/150 best 2.123e-03 mean 2.363e-03 spread 0.271 sigma 0.164
+  [bl_calf] gen 47/150 best 2.096e-03 mean 2.342e-03 spread 0.330 sigma 0.151
+  [bl_calf] gen 48/150 best 2.095e-03 mean 2.339e-03 spread 0.269 sigma 0.143
+  [bl_calf] gen 49/150 best 2.155e-03 mean 2.378e-03 spread 0.468 sigma 0.144
+  [bl_calf] gen 50/150 best 2.140e-03 mean 2.368e-03 spread 0.283 sigma 0.129
+  [bl_calf] gen 51/150 best 2.129e-03 mean 2.377e-03 spread 0.323 sigma 0.118
+  [bl_calf] gen 52/150 best 2.126e-03 mean 2.350e-03 spread 0.319 sigma 0.108
+  [bl_calf] gen 53/150 best 2.135e-03 mean 2.364e-03 spread 0.263 sigma 0.103
+  [bl_calf] gen 54/150 best 2.095e-03 mean 2.375e-03 spread 0.302 sigma 0.099
+  [bl_calf] gen 55/150 best 2.124e-03 mean 2.317e-03 spread 0.310 sigma 0.106
+  [bl_calf] gen 56/150 best 2.133e-03 mean 2.309e-03 spread 0.274 sigma 0.103
+  [bl_calf] gen 57/150 best 2.088e-03 mean 2.351e-03 spread 0.284 sigma 0.100
+  [bl_calf] gen 58/150 best 2.072e-03 mean 2.346e-03 spread 0.296 sigma 0.089
+  [bl_calf] gen 59/150 best 2.104e-03 mean 2.336e-03 spread 0.327 sigma 0.092
+  [bl_calf] gen 60/150 best 2.036e-03 mean 2.345e-03 spread 0.361 sigma 0.097
+  [bl_calf] gen 61/150 best 2.118e-03 mean 2.348e-03 spread 0.270 sigma 0.093
+  [bl_calf] gen 62/150 best 2.101e-03 mean 2.325e-03 spread 0.314 sigma 0.087
+  [bl_calf] gen 63/150 best 2.072e-03 mean 2.324e-03 spread 0.359 sigma 0.084
+  [bl_calf] gen 64/150 best 2.104e-03 mean 2.341e-03 spread 0.309 sigma 0.073
+  [bl_calf] gen 65/150 best 2.052e-03 mean 2.311e-03 spread 0.315 sigma 0.078
+  [bl_calf] gen 66/150 best 2.074e-03 mean 2.312e-03 spread 0.310 sigma 0.079
+  [bl_calf] gen 67/150 best 2.108e-03 mean 2.302e-03 spread 0.281 sigma 0.088
+  [bl_calf] gen 68/150 best 2.071e-03 mean 2.312e-03 spread 0.357 sigma 0.087
+  [bl_calf] gen 69/150 best 2.099e-03 mean 2.290e-03 spread 0.319 sigma 0.090
+  [bl_calf] gen 70/150 best 2.089e-03 mean 2.351e-03 spread 0.287 sigma 0.083
+  [bl_calf] gen 71/150 best 2.122e-03 mean 2.354e-03 spread 0.293 sigma 0.074
+  [bl_calf] gen 72/150 best 2.107e-03 mean 2.328e-03 spread 0.331 sigma 0.072
+  [bl_calf] gen 73/150 best 2.057e-03 mean 2.315e-03 spread 0.335 sigma 0.074
+  [bl_calf] gen 74/150 best 2.149e-03 mean 2.332e-03 spread 0.265 sigma 0.076
+  [bl_calf] gen 75/150 best 2.088e-03 mean 2.338e-03 spread 0.287 sigma 0.081
+  [bl_calf] gen 76/150 best 2.100e-03 mean 2.319e-03 spread 0.280 sigma 0.075
+  [bl_calf] gen 77/150 best 2.057e-03 mean 2.319e-03 spread 0.316 sigma 0.072
+  [bl_calf] gen 78/150 best 2.081e-03 mean 2.297e-03 spread 0.301 sigma 0.076
+  [bl_calf] gen 79/150 best 2.114e-03 mean 2.314e-03 spread 0.249 sigma 0.077
+  [bl_calf] gen 80/150 best 2.076e-03 mean 2.285e-03 spread 0.311 sigma 0.074
+  [bl_calf] gen 81/150 best 2.142e-03 mean 2.332e-03 spread 0.254 sigma 0.076
+  [bl_calf] gen 82/150 best 2.097e-03 mean 2.302e-03 spread 0.271 sigma 0.074
+  [bl_calf] gen 83/150 best 2.106e-03 mean 2.336e-03 spread 0.300 sigma 0.077
+  [bl_calf] gen 84/150 best 2.077e-03 mean 2.331e-03 spread 0.331 sigma 0.074
+  [bl_calf] gen 85/150 best 2.098e-03 mean 2.284e-03 spread 0.271 sigma 0.077
+  [bl_calf] gen 86/150 best 2.026e-03 mean 2.303e-03 spread 0.395 sigma 0.073
+  [bl_calf] gen 87/150 best 2.114e-03 mean 2.359e-03 spread 0.277 sigma 0.069
+  [bl_calf] gen 88/150 best 2.094e-03 mean 2.338e-03 spread 0.284 sigma 0.075
+  [bl_calf] gen 89/150 best 2.074e-03 mean 2.295e-03 spread 0.320 sigma 0.087
+  [bl_calf] gen 90/150 best 2.100e-03 mean 2.278e-03 spread 0.264 sigma 0.095
+  [bl_calf] gen 91/150 best 2.088e-03 mean 2.308e-03 spread 0.321 sigma 0.105
+  [bl_calf] gen 92/150 best 2.062e-03 mean 2.300e-03 spread 0.315 sigma 0.101
+  [bl_calf] gen 93/150 best 2.063e-03 mean 2.309e-03 spread 0.286 sigma 0.103
+  [bl_calf] gen 94/150 best 2.117e-03 mean 2.329e-03 spread 0.264 sigma 0.107
+  [bl_calf] gen 95/150 best 2.132e-03 mean 2.300e-03 spread 0.239 sigma 0.110
+  [bl_calf] gen 96/150 best 2.082e-03 mean 2.296e-03 spread 0.302 sigma 0.116
+  [bl_calf] gen 97/150 best 2.103e-03 mean 2.286e-03 spread 0.281 sigma 0.122
+  [bl_calf] gen 98/150 best 2.059e-03 mean 2.278e-03 spread 0.281 sigma 0.110
+  [bl_calf] gen 99/150 best 2.074e-03 mean 2.287e-03 spread 0.317 sigma 0.103
+  [bl_calf] gen 100/150 best 2.133e-03 mean 2.313e-03 spread 0.272 sigma 0.099
+  [bl_calf] gen 101/150 best 2.102e-03 mean 2.281e-03 spread 0.241 sigma 0.099
+  [bl_calf] gen 102/150 best 2.099e-03 mean 2.288e-03 spread 0.236 sigma 0.097
+  [bl_calf] gen 103/150 best 2.065e-03 mean 2.279e-03 spread 0.282 sigma 0.098
+  [bl_calf] gen 104/150 best 2.145e-03 mean 2.301e-03 spread 0.252 sigma 0.088
+  [bl_calf] gen 105/150 best 2.074e-03 mean 2.304e-03 spread 0.274 sigma 0.087
+  [bl_calf] gen 106/150 best 2.058e-03 mean 2.283e-03 spread 0.284 sigma 0.088
+  [bl_calf] gen 107/150 best 2.113e-03 mean 2.279e-03 spread 0.252 sigma 0.087
+  [bl_calf] gen 108/150 best 2.064e-03 mean 2.279e-03 spread 0.300 sigma 0.090
+  [bl_calf] gen 109/150 best 2.111e-03 mean 2.283e-03 spread 0.272 sigma 0.093
+  [bl_calf] gen 110/150 best 2.088e-03 mean 2.297e-03 spread 0.310 sigma 0.088
+  [bl_calf] gen 111/150 best 2.046e-03 mean 2.260e-03 spread 0.296 sigma 0.083
+  [bl_calf] gen 112/150 best 2.078e-03 mean 2.255e-03 spread 0.239 sigma 0.091
+  [bl_calf] gen 113/150 best 2.099e-03 mean 2.293e-03 spread 0.262 sigma 0.091
+  [bl_calf] gen 114/150 best 2.078e-03 mean 2.303e-03 spread 0.279 sigma 0.085
+  [bl_calf] gen 115/150 best 2.100e-03 mean 2.273e-03 spread 0.254 sigma 0.080
+  [bl_calf] gen 116/150 best 2.105e-03 mean 2.257e-03 spread 0.253 sigma 0.082
+  [bl_calf] gen 117/150 best 2.106e-03 mean 2.286e-03 spread 0.237 sigma 0.080
+  [bl_calf] gen 118/150 best 2.098e-03 mean 2.297e-03 spread 0.280 sigma 0.086
+  [bl_calf] gen 119/150 best 2.110e-03 mean 2.275e-03 spread 0.253 sigma 0.085
+  [bl_calf] gen 120/150 best 2.117e-03 mean 2.254e-03 spread 0.258 sigma 0.082
+  [bl_calf] gen 121/150 best 2.089e-03 mean 2.284e-03 spread 0.255 sigma 0.078
+  [bl_calf] gen 122/150 best 2.092e-03 mean 2.267e-03 spread 0.241 sigma 0.085
+  [bl_calf] gen 123/150 best 2.103e-03 mean 2.253e-03 spread 0.262 sigma 0.084
+  [bl_calf] gen 124/150 best 2.058e-03 mean 2.268e-03 spread 0.283 sigma 0.080
+  [bl_calf] gen 125/150 best 2.089e-03 mean 2.242e-03 spread 0.243 sigma 0.080
+  [bl_calf] gen 126/150 best 2.070e-03 mean 2.284e-03 spread 0.284 sigma 0.080
+  [bl_calf] gen 127/150 best 2.076e-03 mean 2.243e-03 spread 0.265 sigma 0.076
+  [bl_calf] gen 128/150 best 2.113e-03 mean 2.287e-03 spread 0.249 sigma 0.073
+  [bl_calf] gen 129/150 best 2.111e-03 mean 2.273e-03 spread 0.253 sigma 0.073
+  [bl_calf] gen 130/150 best 2.084e-03 mean 2.265e-03 spread 0.228 sigma 0.076
+  [bl_calf] gen 131/150 best 2.105e-03 mean 2.250e-03 spread 0.261 sigma 0.067
+  [bl_calf] gen 132/150 best 2.092e-03 mean 2.260e-03 spread 0.280 sigma 0.068
+  [bl_calf] gen 133/150 best 2.098e-03 mean 2.279e-03 spread 0.249 sigma 0.063
+  [bl_calf] gen 134/150 best 2.082e-03 mean 2.258e-03 spread 0.256 sigma 0.062
+  [bl_calf] gen 135/150 best 2.058e-03 mean 2.235e-03 spread 0.264 sigma 0.058
+  [bl_calf] gen 136/150 best 2.105e-03 mean 2.280e-03 spread 0.234 sigma 0.055
+  [bl_calf] gen 137/150 best 2.112e-03 mean 2.255e-03 spread 0.235 sigma 0.058
+  [bl_calf] gen 138/150 best 2.068e-03 mean 2.253e-03 spread 0.239 sigma 0.059
+  [bl_calf] gen 139/150 best 2.103e-03 mean 2.255e-03 spread 0.277 sigma 0.054
+  [bl_calf] gen 140/150 best 2.115e-03 mean 2.290e-03 spread 0.236 sigma 0.054
+  [bl_calf] gen 141/150 best 2.091e-03 mean 2.261e-03 spread 0.265 sigma 0.056
+  [bl_calf] gen 142/150 best 2.083e-03 mean 2.254e-03 spread 0.305 sigma 0.059
+  [bl_calf] gen 143/150 best 2.026e-03 mean 2.250e-03 spread 0.250 sigma 0.056
+  [bl_calf] gen 144/150 best 2.068e-03 mean 2.258e-03 spread 0.251 sigma 0.055
+  [bl_calf] gen 145/150 best 2.032e-03 mean 2.266e-03 spread 0.294 sigma 0.054
+  [bl_calf] gen 146/150 best 2.064e-03 mean 2.274e-03 spread 0.266 sigma 0.049
+  [bl_calf] gen 147/150 best 2.088e-03 mean 2.257e-03 spread 0.283 sigma 0.049
+  [bl_calf] gen 148/150 best 2.108e-03 mean 2.250e-03 spread 0.235 sigma 0.052
+  [bl_calf] gen 149/150 best 2.060e-03 mean 2.249e-03 spread 0.256 sigma 0.061
+  [bl_calf] gen 150/150 best 2.115e-03 mean 2.250e-03 spread 0.210 sigma 0.059
+fitting br_hip on 2 captures ...
+  [br_hip] gen 1/150 best 8.021e-03 mean 2.111e-02 spread 2.897 sigma 0.679
+  [br_hip] gen 2/150 best 5.196e-03 mean 1.580e-02 spread 4.074 sigma 0.865
+  [br_hip] gen 3/150 best 1.857e-03 mean 1.301e-02 spread 14.328 sigma 1.003
+  [br_hip] gen 4/150 best 2.420e-03 mean 1.082e-02 spread 12.100 sigma 0.981
+  [br_hip] gen 5/150 best 1.782e-03 mean 8.244e-03 spread 15.182 sigma 0.883
+  [br_hip] gen 6/150 best 1.786e-03 mean 6.657e-03 spread 8.179 sigma 0.796
+  [br_hip] gen 7/150 best 1.696e-03 mean 5.759e-03 spread 7.535 sigma 0.711
+  [br_hip] gen 8/150 best 1.785e-03 mean 4.758e-03 spread 6.924 sigma 0.620
+  [br_hip] gen 9/150 best 1.691e-03 mean 4.119e-03 spread 4.596 sigma 0.597
+  [br_hip] gen 10/150 best 1.674e-03 mean 3.047e-03 spread 2.904 sigma 0.537
+  [br_hip] gen 11/150 best 1.715e-03 mean 2.930e-03 spread 2.345 sigma 0.500
+  [br_hip] gen 12/150 best 1.672e-03 mean 2.777e-03 spread 1.920 sigma 0.423
+  [br_hip] gen 13/150 best 1.690e-03 mean 2.439e-03 spread 1.307 sigma 0.404
+  [br_hip] gen 14/150 best 1.700e-03 mean 2.362e-03 spread 1.262 sigma 0.358
+  [br_hip] gen 15/150 best 1.691e-03 mean 2.137e-03 spread 0.902 sigma 0.309
+  [br_hip] gen 16/150 best 1.653e-03 mean 2.115e-03 spread 0.908 sigma 0.289
+  [br_hip] gen 17/150 best 1.663e-03 mean 2.005e-03 spread 0.607 sigma 0.281
+  [br_hip] gen 18/150 best 1.652e-03 mean 1.968e-03 spread 0.571 sigma 0.261
+  [br_hip] gen 19/150 best 1.673e-03 mean 1.944e-03 spread 0.494 sigma 0.223
+  [br_hip] gen 20/150 best 1.652e-03 mean 1.902e-03 spread 0.393 sigma 0.192
+  [br_hip] gen 21/150 best 1.644e-03 mean 1.840e-03 spread 0.377 sigma 0.187
+  [br_hip] gen 22/150 best 1.653e-03 mean 1.811e-03 spread 0.301 sigma 0.177
+  [br_hip] gen 23/150 best 1.661e-03 mean 1.816e-03 spread 0.270 sigma 0.158
+  [br_hip] gen 24/150 best 1.660e-03 mean 1.762e-03 spread 0.252 sigma 0.153
+  [br_hip] gen 25/150 best 1.662e-03 mean 1.741e-03 spread 0.263 sigma 0.137
+  [br_hip] gen 26/150 best 1.661e-03 mean 1.725e-03 spread 0.202 sigma 0.113
+  [br_hip] gen 27/150 best 1.662e-03 mean 1.726e-03 spread 0.172 sigma 0.111
+  [br_hip] gen 28/150 best 1.656e-03 mean 1.707e-03 spread 0.079 sigma 0.116
+  [br_hip] gen 29/150 best 1.658e-03 mean 1.711e-03 spread 0.084 sigma 0.109
+  [br_hip] gen 30/150 best 1.647e-03 mean 1.703e-03 spread 0.093 sigma 0.103
+  [br_hip] gen 31/150 best 1.640e-03 mean 1.699e-03 spread 0.059 sigma 0.108
+  [br_hip] gen 32/150 best 1.661e-03 mean 1.698e-03 spread 0.050 sigma 0.115
+  [br_hip] gen 33/150 best 1.627e-03 mean 1.696e-03 spread 0.099 sigma 0.113
+  [br_hip] gen 34/150 best 1.628e-03 mean 1.697e-03 spread 0.078 sigma 0.114
+  [br_hip] gen 35/150 best 1.650e-03 mean 1.697e-03 spread 0.059 sigma 0.120
+  [br_hip] gen 36/150 best 1.649e-03 mean 1.697e-03 spread 0.066 sigma 0.123
+  [br_hip] gen 37/150 best 1.645e-03 mean 1.695e-03 spread 0.063 sigma 0.110
+  [br_hip] gen 38/150 best 1.639e-03 mean 1.694e-03 spread 0.067 sigma 0.094
+  [br_hip] gen 39/150 best 1.652e-03 mean 1.691e-03 spread 0.050 sigma 0.089
+  [br_hip] gen 40/150 best 1.640e-03 mean 1.689e-03 spread 0.068 sigma 0.094
+  [br_hip] gen 41/150 best 1.628e-03 mean 1.688e-03 spread 0.074 sigma 0.095
+  [br_hip] gen 42/150 best 1.643e-03 mean 1.684e-03 spread 0.056 sigma 0.087
+  [br_hip] gen 43/150 best 1.643e-03 mean 1.689e-03 spread 0.067 sigma 0.093
+  [br_hip] gen 44/150 best 1.645e-03 mean 1.687e-03 spread 0.070 sigma 0.097
+  [br_hip] gen 45/150 best 1.637e-03 mean 1.687e-03 spread 0.079 sigma 0.089
+  [br_hip] gen 46/150 best 1.648e-03 mean 1.690e-03 spread 0.063 sigma 0.082
+  [br_hip] gen 47/150 best 1.629e-03 mean 1.685e-03 spread 0.077 sigma 0.087
+  [br_hip] gen 48/150 best 1.650e-03 mean 1.687e-03 spread 0.055 sigma 0.084
+  [br_hip] gen 49/150 best 1.633e-03 mean 1.687e-03 spread 0.065 sigma 0.071
+  [br_hip] gen 50/150 best 1.628e-03 mean 1.685e-03 spread 0.075 sigma 0.070
+  [br_hip] gen 51/150 best 1.633e-03 mean 1.681e-03 spread 0.065 sigma 0.068
+  [br_hip] gen 52/150 best 1.632e-03 mean 1.683e-03 spread 0.069 sigma 0.065
+  [br_hip] gen 53/150 best 1.626e-03 mean 1.680e-03 spread 0.077 sigma 0.059
+  [br_hip] gen 54/150 best 1.631e-03 mean 1.681e-03 spread 0.078 sigma 0.053
+  [br_hip] gen 55/150 best 1.624e-03 mean 1.683e-03 spread 0.071 sigma 0.048
+  [br_hip] gen 56/150 best 1.635e-03 mean 1.683e-03 spread 0.069 sigma 0.047
+  [br_hip] gen 57/150 best 1.630e-03 mean 1.679e-03 spread 0.060 sigma 0.058
+  [br_hip] gen 58/150 best 1.630e-03 mean 1.680e-03 spread 0.064 sigma 0.062
+  [br_hip] gen 59/150 best 1.632e-03 mean 1.678e-03 spread 0.063 sigma 0.067
+  [br_hip] gen 60/150 best 1.627e-03 mean 1.687e-03 spread 0.090 sigma 0.063
+  [br_hip] gen 61/150 best 1.625e-03 mean 1.686e-03 spread 0.072 sigma 0.058
+  [br_hip] gen 62/150 best 1.627e-03 mean 1.679e-03 spread 0.076 sigma 0.054
+  [br_hip] gen 63/150 best 1.628e-03 mean 1.685e-03 spread 0.065 sigma 0.057
+  [br_hip] gen 64/150 best 1.621e-03 mean 1.683e-03 spread 0.074 sigma 0.054
+  [br_hip] gen 65/150 best 1.640e-03 mean 1.684e-03 spread 0.063 sigma 0.049
+  [br_hip] gen 66/150 best 1.637e-03 mean 1.687e-03 spread 0.065 sigma 0.049
+  [br_hip] gen 67/150 best 1.646e-03 mean 1.683e-03 spread 0.060 sigma 0.049
+  [br_hip] gen 68/150 best 1.635e-03 mean 1.679e-03 spread 0.069 sigma 0.044
+  [br_hip] gen 69/150 best 1.623e-03 mean 1.680e-03 spread 0.070 sigma 0.044
+  [br_hip] gen 70/150 best 1.641e-03 mean 1.685e-03 spread 0.065 sigma 0.045
+  [br_hip] gen 71/150 best 1.611e-03 mean 1.687e-03 spread 0.077 sigma 0.042
+  [br_hip] gen 72/150 best 1.633e-03 mean 1.682e-03 spread 0.102 sigma 0.041
+  [br_hip] gen 73/150 best 1.628e-03 mean 1.681e-03 spread 0.070 sigma 0.039
+  [br_hip] gen 74/150 best 1.629e-03 mean 1.687e-03 spread 0.072 sigma 0.039
+  [br_hip] gen 75/150 best 1.634e-03 mean 1.686e-03 spread 0.066 sigma 0.039
+  [br_hip] gen 76/150 best 1.619e-03 mean 1.681e-03 spread 0.074 sigma 0.038
+  [br_hip] gen 77/150 best 1.627e-03 mean 1.690e-03 spread 0.086 sigma 0.040
+  [br_hip] gen 78/150 best 1.626e-03 mean 1.678e-03 spread 0.081 sigma 0.035
+  [br_hip] gen 79/150 best 1.634e-03 mean 1.682e-03 spread 0.067 sigma 0.031
+  [br_hip] gen 80/150 best 1.633e-03 mean 1.678e-03 spread 0.057 sigma 0.033
+  [br_hip] gen 81/150 best 1.640e-03 mean 1.682e-03 spread 0.061 sigma 0.033
+  [br_hip] gen 82/150 best 1.632e-03 mean 1.681e-03 spread 0.071 sigma 0.037
+  [br_hip] gen 83/150 best 1.625e-03 mean 1.683e-03 spread 0.072 sigma 0.033
+  [br_hip] gen 84/150 best 1.636e-03 mean 1.682e-03 spread 0.086 sigma 0.035
+  [br_hip] gen 85/150 best 1.624e-03 mean 1.683e-03 spread 0.082 sigma 0.036
+  [br_hip] gen 86/150 best 1.626e-03 mean 1.678e-03 spread 0.061 sigma 0.035
+  [br_hip] gen 87/150 best 1.623e-03 mean 1.686e-03 spread 0.099 sigma 0.032
+  [br_hip] gen 88/150 best 1.634e-03 mean 1.677e-03 spread 0.059 sigma 0.034
+  [br_hip] gen 89/150 best 1.610e-03 mean 1.683e-03 spread 0.090 sigma 0.036
+  [br_hip] gen 90/150 best 1.631e-03 mean 1.681e-03 spread 0.073 sigma 0.039
+  [br_hip] gen 91/150 best 1.638e-03 mean 1.681e-03 spread 0.069 sigma 0.040
+  [br_hip] gen 92/150 best 1.620e-03 mean 1.681e-03 spread 0.090 sigma 0.041
+  [br_hip] gen 93/150 best 1.617e-03 mean 1.677e-03 spread 0.076 sigma 0.046
+  [br_hip] gen 94/150 best 1.621e-03 mean 1.675e-03 spread 0.071 sigma 0.053
+  [br_hip] gen 95/150 best 1.623e-03 mean 1.684e-03 spread 0.071 sigma 0.049
+  [br_hip] gen 96/150 best 1.638e-03 mean 1.681e-03 spread 0.055 sigma 0.042
+  [br_hip] gen 97/150 best 1.632e-03 mean 1.689e-03 spread 0.093 sigma 0.041
+  [br_hip] gen 98/150 best 1.636e-03 mean 1.679e-03 spread 0.066 sigma 0.040
+  [br_hip] gen 99/150 best 1.629e-03 mean 1.682e-03 spread 0.071 sigma 0.038
+  [br_hip] gen 100/150 best 1.621e-03 mean 1.675e-03 spread 0.067 sigma 0.038
+  [br_hip] gen 101/150 best 1.640e-03 mean 1.681e-03 spread 0.060 sigma 0.040
+  [br_hip] gen 102/150 best 1.635e-03 mean 1.686e-03 spread 0.070 sigma 0.039
+  [br_hip] gen 103/150 best 1.619e-03 mean 1.685e-03 spread 0.090 sigma 0.034
+  [br_hip] gen 104/150 best 1.633e-03 mean 1.687e-03 spread 0.074 sigma 0.036
+  [br_hip] gen 105/150 best 1.625e-03 mean 1.678e-03 spread 0.070 sigma 0.041
+  [br_hip] gen 106/150 best 1.628e-03 mean 1.681e-03 spread 0.073 sigma 0.049
+  [br_hip] gen 107/150 best 1.633e-03 mean 1.685e-03 spread 0.058 sigma 0.046
+  [br_hip] gen 108/150 best 1.631e-03 mean 1.686e-03 spread 0.066 sigma 0.046
+  [br_hip] gen 109/150 best 1.628e-03 mean 1.684e-03 spread 0.069 sigma 0.051
+  [br_hip] gen 110/150 best 1.627e-03 mean 1.680e-03 spread 0.058 sigma 0.050
+  [br_hip] gen 111/150 best 1.622e-03 mean 1.679e-03 spread 0.070 sigma 0.046
+  [br_hip] gen 112/150 best 1.631e-03 mean 1.681e-03 spread 0.065 sigma 0.049
+  [br_hip] gen 113/150 best 1.628e-03 mean 1.684e-03 spread 0.068 sigma 0.050
+  [br_hip] gen 114/150 best 1.626e-03 mean 1.682e-03 spread 0.073 sigma 0.053
+  [br_hip] gen 115/150 best 1.640e-03 mean 1.681e-03 spread 0.059 sigma 0.051
+  [br_hip] gen 116/150 best 1.625e-03 mean 1.681e-03 spread 0.066 sigma 0.050
+  [br_hip] gen 117/150 best 1.609e-03 mean 1.677e-03 spread 0.078 sigma 0.046
+  [br_hip] gen 118/150 best 1.625e-03 mean 1.681e-03 spread 0.078 sigma 0.043
+  [br_hip] gen 119/150 best 1.624e-03 mean 1.680e-03 spread 0.092 sigma 0.042
+  [br_hip] gen 120/150 best 1.626e-03 mean 1.682e-03 spread 0.074 sigma 0.041
+  [br_hip] gen 121/150 best 1.614e-03 mean 1.676e-03 spread 0.072 sigma 0.042
+  [br_hip] gen 122/150 best 1.641e-03 mean 1.680e-03 spread 0.063 sigma 0.039
+  [br_hip] gen 123/150 best 1.620e-03 mean 1.678e-03 spread 0.077 sigma 0.035
+  [br_hip] gen 124/150 best 1.629e-03 mean 1.688e-03 spread 0.093 sigma 0.031
+  [br_hip] gen 125/150 best 1.629e-03 mean 1.678e-03 spread 0.065 sigma 0.035
+  [br_hip] gen 126/150 best 1.623e-03 mean 1.683e-03 spread 0.085 sigma 0.032
+  [br_hip] gen 127/150 best 1.637e-03 mean 1.686e-03 spread 0.052 sigma 0.031
+  [br_hip] gen 128/150 best 1.631e-03 mean 1.688e-03 spread 0.073 sigma 0.029
+  [br_hip] gen 129/150 best 1.619e-03 mean 1.683e-03 spread 0.075 sigma 0.026
+  [br_hip] gen 130/150 best 1.634e-03 mean 1.681e-03 spread 0.059 sigma 0.027
+  [br_hip] gen 131/150 best 1.629e-03 mean 1.680e-03 spread 0.078 sigma 0.026
+  [br_hip] gen 132/150 best 1.631e-03 mean 1.676e-03 spread 0.062 sigma 0.026
+  [br_hip] gen 133/150 best 1.619e-03 mean 1.679e-03 spread 0.083 sigma 0.028
+  [br_hip] gen 134/150 best 1.632e-03 mean 1.685e-03 spread 0.072 sigma 0.027
+  [br_hip] gen 135/150 best 1.621e-03 mean 1.679e-03 spread 0.068 sigma 0.029
+  [br_hip] gen 136/150 best 1.629e-03 mean 1.680e-03 spread 0.082 sigma 0.031
+  [br_hip] gen 137/150 best 1.635e-03 mean 1.682e-03 spread 0.075 sigma 0.037
+  [br_hip] gen 138/150 best 1.629e-03 mean 1.685e-03 spread 0.073 sigma 0.039
+  [br_hip] gen 139/150 best 1.631e-03 mean 1.674e-03 spread 0.060 sigma 0.036
+  [br_hip] gen 140/150 best 1.646e-03 mean 1.686e-03 spread 0.046 sigma 0.037
+  [br_hip] gen 141/150 best 1.635e-03 mean 1.680e-03 spread 0.072 sigma 0.033
+  [br_hip] gen 142/150 best 1.628e-03 mean 1.676e-03 spread 0.056 sigma 0.031
+  [br_hip] gen 143/150 best 1.635e-03 mean 1.685e-03 spread 0.073 sigma 0.032
+  [br_hip] gen 144/150 best 1.605e-03 mean 1.674e-03 spread 0.079 sigma 0.032
+  [br_hip] gen 145/150 best 1.633e-03 mean 1.686e-03 spread 0.068 sigma 0.029
+  [br_hip] gen 146/150 best 1.622e-03 mean 1.677e-03 spread 0.062 sigma 0.030
+  [br_hip] gen 147/150 best 1.619e-03 mean 1.670e-03 spread 0.079 sigma 0.027
+  [br_hip] gen 148/150 best 1.626e-03 mean 1.684e-03 spread 0.075 sigma 0.027
+  [br_hip] gen 149/150 best 1.633e-03 mean 1.683e-03 spread 0.063 sigma 0.025
+  [br_hip] gen 150/150 best 1.641e-03 mean 1.678e-03 spread 0.054 sigma 0.025
+fitting br_thigh on 2 captures ...
+  [br_thigh] gen 1/150 best 9.069e-03 mean 2.140e-02 spread 1.931 sigma 0.633
+  [br_thigh] gen 2/150 best 3.737e-03 mean 1.742e-02 spread 6.184 sigma 0.851
+  [br_thigh] gen 3/150 best 1.119e-03 mean 1.539e-02 spread 23.432 sigma 0.990
+  [br_thigh] gen 4/150 best 6.422e-04 mean 1.394e-02 spread 39.346 sigma 0.960
+  [br_thigh] gen 5/150 best 5.855e-04 mean 7.663e-03 spread 44.796 sigma 0.995
+  [br_thigh] gen 6/150 best 5.744e-04 mean 7.858e-03 spread 43.362 sigma 0.905
+  [br_thigh] gen 7/150 best 4.960e-04 mean 7.070e-03 spread 44.622 sigma 0.820
+  [br_thigh] gen 8/150 best 5.876e-04 mean 4.120e-03 spread 30.236 sigma 0.711
+  [br_thigh] gen 9/150 best 5.412e-04 mean 3.820e-03 spread 31.072 sigma 0.682
+  [br_thigh] gen 10/150 best 5.116e-04 mean 2.401e-03 spread 15.629 sigma 0.596
+  [br_thigh] gen 11/150 best 5.283e-04 mean 2.028e-03 spread 15.522 sigma 0.487
+  [br_thigh] gen 12/150 best 5.170e-04 mean 1.505e-03 spread 7.572 sigma 0.426
+  [br_thigh] gen 13/150 best 5.065e-04 mean 1.149e-03 spread 11.056 sigma 0.352
+  [br_thigh] gen 14/150 best 5.192e-04 mean 9.004e-04 spread 3.393 sigma 0.334
+  [br_thigh] gen 15/150 best 5.079e-04 mean 7.355e-04 spread 2.166 sigma 0.334
+  [br_thigh] gen 16/150 best 5.039e-04 mean 7.410e-04 spread 1.885 sigma 0.326
+  [br_thigh] gen 17/150 best 5.130e-04 mean 6.760e-04 spread 1.285 sigma 0.288
+  [br_thigh] gen 18/150 best 5.030e-04 mean 6.347e-04 spread 0.968 sigma 0.260
+  [br_thigh] gen 19/150 best 5.009e-04 mean 5.805e-04 spread 0.444 sigma 0.222
+  [br_thigh] gen 20/150 best 4.944e-04 mean 5.706e-04 spread 0.468 sigma 0.205
+  [br_thigh] gen 21/150 best 4.905e-04 mean 5.604e-04 spread 0.392 sigma 0.178
+  [br_thigh] gen 22/150 best 5.006e-04 mean 5.505e-04 spread 0.272 sigma 0.162
+  [br_thigh] gen 23/150 best 5.032e-04 mean 5.417e-04 spread 0.231 sigma 0.143
+  [br_thigh] gen 24/150 best 4.905e-04 mean 5.344e-04 spread 0.182 sigma 0.130
+  [br_thigh] gen 25/150 best 4.989e-04 mean 5.287e-04 spread 0.135 sigma 0.112
+  [br_thigh] gen 26/150 best 4.933e-04 mean 5.293e-04 spread 0.155 sigma 0.099
+  [br_thigh] gen 27/150 best 4.971e-04 mean 5.244e-04 spread 0.119 sigma 0.106
+  [br_thigh] gen 28/150 best 4.934e-04 mean 5.202e-04 spread 0.103 sigma 0.101
+  [br_thigh] gen 29/150 best 4.941e-04 mean 5.235e-04 spread 0.122 sigma 0.097
+  [br_thigh] gen 30/150 best 4.974e-04 mean 5.185e-04 spread 0.105 sigma 0.092
+  [br_thigh] gen 31/150 best 4.952e-04 mean 5.196e-04 spread 0.117 sigma 0.089
+  [br_thigh] gen 32/150 best 4.981e-04 mean 5.188e-04 spread 0.092 sigma 0.087
+  [br_thigh] gen 33/150 best 4.930e-04 mean 5.164e-04 spread 0.103 sigma 0.087
+  [br_thigh] gen 34/150 best 4.982e-04 mean 5.196e-04 spread 0.099 sigma 0.089
+  [br_thigh] gen 35/150 best 4.913e-04 mean 5.167e-04 spread 0.094 sigma 0.083
+  [br_thigh] gen 36/150 best 4.995e-04 mean 5.185e-04 spread 0.075 sigma 0.085
+  [br_thigh] gen 37/150 best 4.967e-04 mean 5.167e-04 spread 0.089 sigma 0.081
+  [br_thigh] gen 38/150 best 4.825e-04 mean 5.168e-04 spread 0.120 sigma 0.075
+  [br_thigh] gen 39/150 best 4.964e-04 mean 5.178e-04 spread 0.091 sigma 0.078
+  [br_thigh] gen 40/150 best 4.942e-04 mean 5.156e-04 spread 0.101 sigma 0.075
+  [br_thigh] gen 41/150 best 5.012e-04 mean 5.160e-04 spread 0.087 sigma 0.077
+  [br_thigh] gen 42/150 best 4.967e-04 mean 5.160e-04 spread 0.087 sigma 0.076
+  [br_thigh] gen 43/150 best 4.883e-04 mean 5.141e-04 spread 0.105 sigma 0.074
+  [br_thigh] gen 44/150 best 4.816e-04 mean 5.150e-04 spread 0.107 sigma 0.075
+  [br_thigh] gen 45/150 best 4.913e-04 mean 5.121e-04 spread 0.093 sigma 0.065
+  [br_thigh] gen 46/150 best 4.919e-04 mean 5.133e-04 spread 0.085 sigma 0.065
+  [br_thigh] gen 47/150 best 4.926e-04 mean 5.120e-04 spread 0.084 sigma 0.062
+  [br_thigh] gen 48/150 best 4.814e-04 mean 5.112e-04 spread 0.127 sigma 0.062
+  [br_thigh] gen 49/150 best 4.920e-04 mean 5.118e-04 spread 0.082 sigma 0.070
+  [br_thigh] gen 50/150 best 4.966e-04 mean 5.121e-04 spread 0.072 sigma 0.077
+  [br_thigh] gen 51/150 best 4.910e-04 mean 5.115e-04 spread 0.077 sigma 0.079
+  [br_thigh] gen 52/150 best 4.849e-04 mean 5.144e-04 spread 0.098 sigma 0.077
+  [br_thigh] gen 53/150 best 4.917e-04 mean 5.118e-04 spread 0.096 sigma 0.072
+  [br_thigh] gen 54/150 best 4.905e-04 mean 5.115e-04 spread 0.085 sigma 0.067
+  [br_thigh] gen 55/150 best 4.934e-04 mean 5.110e-04 spread 0.087 sigma 0.063
+  [br_thigh] gen 56/150 best 4.913e-04 mean 5.093e-04 spread 0.091 sigma 0.059
+  [br_thigh] gen 57/150 best 4.883e-04 mean 5.079e-04 spread 0.079 sigma 0.057
+  [br_thigh] gen 58/150 best 4.909e-04 mean 5.097e-04 spread 0.099 sigma 0.054
+  [br_thigh] gen 59/150 best 4.926e-04 mean 5.095e-04 spread 0.072 sigma 0.051
+  [br_thigh] gen 60/150 best 4.938e-04 mean 5.097e-04 spread 0.072 sigma 0.052
+  [br_thigh] gen 61/150 best 4.938e-04 mean 5.076e-04 spread 0.071 sigma 0.052
+  [br_thigh] gen 62/150 best 4.921e-04 mean 5.093e-04 spread 0.080 sigma 0.052
+  [br_thigh] gen 63/150 best 4.795e-04 mean 5.081e-04 spread 0.115 sigma 0.057
+  [br_thigh] gen 64/150 best 4.867e-04 mean 5.078e-04 spread 0.090 sigma 0.054
+  [br_thigh] gen 65/150 best 4.887e-04 mean 5.104e-04 spread 0.087 sigma 0.059
+  [br_thigh] gen 66/150 best 4.927e-04 mean 5.095e-04 spread 0.068 sigma 0.059
+  [br_thigh] gen 67/150 best 4.888e-04 mean 5.103e-04 spread 0.089 sigma 0.062
+  [br_thigh] gen 68/150 best 4.832e-04 mean 5.075e-04 spread 0.091 sigma 0.059
+  [br_thigh] gen 69/150 best 4.842e-04 mean 5.070e-04 spread 0.087 sigma 0.061
+  [br_thigh] gen 70/150 best 4.907e-04 mean 5.076e-04 spread 0.073 sigma 0.050
+  [br_thigh] gen 71/150 best 4.890e-04 mean 5.077e-04 spread 0.073 sigma 0.053
+  [br_thigh] gen 72/150 best 4.934e-04 mean 5.097e-04 spread 0.077 sigma 0.048
+  [br_thigh] gen 73/150 best 4.888e-04 mean 5.077e-04 spread 0.077 sigma 0.048
+  [br_thigh] gen 74/150 best 4.896e-04 mean 5.073e-04 spread 0.079 sigma 0.044
+  [br_thigh] gen 75/150 best 4.888e-04 mean 5.083e-04 spread 0.081 sigma 0.048
+  [br_thigh] gen 76/150 best 4.928e-04 mean 5.082e-04 spread 0.072 sigma 0.048
+  [br_thigh] gen 77/150 best 4.883e-04 mean 5.071e-04 spread 0.085 sigma 0.043
+  [br_thigh] gen 78/150 best 4.895e-04 mean 5.074e-04 spread 0.079 sigma 0.042
+  [br_thigh] gen 79/150 best 4.898e-04 mean 5.065e-04 spread 0.060 sigma 0.040
+  [br_thigh] gen 80/150 best 4.852e-04 mean 5.079e-04 spread 0.092 sigma 0.049
+  [br_thigh] gen 81/150 best 4.805e-04 mean 5.058e-04 spread 0.095 sigma 0.050
+  [br_thigh] gen 82/150 best 4.842e-04 mean 5.079e-04 spread 0.091 sigma 0.045
+  [br_thigh] gen 83/150 best 4.855e-04 mean 5.068e-04 spread 0.082 sigma 0.044
+  [br_thigh] gen 84/150 best 4.921e-04 mean 5.081e-04 spread 0.068 sigma 0.045
+  [br_thigh] gen 85/150 best 4.916e-04 mean 5.098e-04 spread 0.088 sigma 0.043
+  [br_thigh] gen 86/150 best 4.912e-04 mean 5.080e-04 spread 0.075 sigma 0.046
+  [br_thigh] gen 87/150 best 4.839e-04 mean 5.070e-04 spread 0.094 sigma 0.045
+  [br_thigh] gen 88/150 best 4.816e-04 mean 5.061e-04 spread 0.103 sigma 0.047
+  [br_thigh] gen 89/150 best 4.795e-04 mean 5.073e-04 spread 0.110 sigma 0.051
+  [br_thigh] gen 90/150 best 4.886e-04 mean 5.099e-04 spread 0.088 sigma 0.050
+  [br_thigh] gen 91/150 best 4.832e-04 mean 5.073e-04 spread 0.093 sigma 0.049
+  [br_thigh] gen 92/150 best 4.924e-04 mean 5.072e-04 spread 0.072 sigma 0.048
+  [br_thigh] gen 93/150 best 4.919e-04 mean 5.062e-04 spread 0.066 sigma 0.044
+  [br_thigh] gen 94/150 best 4.929e-04 mean 5.082e-04 spread 0.074 sigma 0.044
+  [br_thigh] gen 95/150 best 4.833e-04 mean 5.075e-04 spread 0.093 sigma 0.038
+  [br_thigh] gen 96/150 best 4.894e-04 mean 5.086e-04 spread 0.081 sigma 0.037
+  [br_thigh] gen 97/150 best 4.875e-04 mean 5.076e-04 spread 0.089 sigma 0.037
+  [br_thigh] gen 98/150 best 4.881e-04 mean 5.066e-04 spread 0.081 sigma 0.039
+  [br_thigh] gen 99/150 best 4.945e-04 mean 5.096e-04 spread 0.074 sigma 0.034
+  [br_thigh] gen 100/150 best 4.937e-04 mean 5.084e-04 spread 0.063 sigma 0.034
+  [br_thigh] gen 101/150 best 4.877e-04 mean 5.082e-04 spread 0.088 sigma 0.032
+  [br_thigh] gen 102/150 best 4.910e-04 mean 5.070e-04 spread 0.075 sigma 0.031
+  [br_thigh] gen 103/150 best 4.935e-04 mean 5.073e-04 spread 0.070 sigma 0.031
+  [br_thigh] gen 104/150 best 4.846e-04 mean 5.062e-04 spread 0.095 sigma 0.031
+  [br_thigh] gen 105/150 best 4.882e-04 mean 5.058e-04 spread 0.068 sigma 0.029
+  [br_thigh] gen 106/150 best 4.907e-04 mean 5.070e-04 spread 0.075 sigma 0.032
+  [br_thigh] gen 107/150 best 4.859e-04 mean 5.051e-04 spread 0.086 sigma 0.032
+  [br_thigh] gen 108/150 best 4.865e-04 mean 5.078e-04 spread 0.087 sigma 0.030
+  [br_thigh] gen 109/150 best 4.860e-04 mean 5.071e-04 spread 0.083 sigma 0.033
+  [br_thigh] gen 110/150 best 4.860e-04 mean 5.073e-04 spread 0.090 sigma 0.033
+  [br_thigh] gen 111/150 best 4.875e-04 mean 5.067e-04 spread 0.070 sigma 0.036
+  [br_thigh] gen 112/150 best 4.856e-04 mean 5.073e-04 spread 0.084 sigma 0.036
+  [br_thigh] gen 113/150 best 4.883e-04 mean 5.062e-04 spread 0.071 sigma 0.034
+  [br_thigh] gen 114/150 best 4.900e-04 mean 5.059e-04 spread 0.079 sigma 0.032
+  [br_thigh] gen 115/150 best 4.880e-04 mean 5.075e-04 spread 0.083 sigma 0.031
+  [br_thigh] gen 116/150 best 4.918e-04 mean 5.083e-04 spread 0.066 sigma 0.030
+  [br_thigh] gen 117/150 best 4.858e-04 mean 5.064e-04 spread 0.083 sigma 0.028
+  [br_thigh] gen 118/150 best 4.836e-04 mean 5.055e-04 spread 0.078 sigma 0.028
+  [br_thigh] gen 119/150 best 4.861e-04 mean 5.084e-04 spread 0.081 sigma 0.027
+  [br_thigh] gen 120/150 best 4.930e-04 mean 5.075e-04 spread 0.067 sigma 0.026
+  [br_thigh] gen 121/150 best 4.884e-04 mean 5.068e-04 spread 0.073 sigma 0.025
+  [br_thigh] gen 122/150 best 4.821e-04 mean 5.064e-04 spread 0.089 sigma 0.025
+  [br_thigh] gen 123/150 best 4.866e-04 mean 5.064e-04 spread 0.085 sigma 0.026
+  [br_thigh] gen 124/150 best 4.783e-04 mean 5.078e-04 spread 0.098 sigma 0.027
+  [br_thigh] gen 125/150 best 4.815e-04 mean 5.073e-04 spread 0.100 sigma 0.027
+  [br_thigh] gen 126/150 best 4.927e-04 mean 5.078e-04 spread 0.071 sigma 0.026
+  [br_thigh] gen 127/150 best 4.866e-04 mean 5.075e-04 spread 0.080 sigma 0.027
+  [br_thigh] gen 128/150 best 4.894e-04 mean 5.082e-04 spread 0.075 sigma 0.028
+  [br_thigh] gen 129/150 best 4.874e-04 mean 5.075e-04 spread 0.085 sigma 0.027
+  [br_thigh] gen 130/150 best 4.854e-04 mean 5.065e-04 spread 0.096 sigma 0.026
+  [br_thigh] gen 131/150 best 4.814e-04 mean 5.063e-04 spread 0.093 sigma 0.026
+  [br_thigh] gen 132/150 best 4.797e-04 mean 5.085e-04 spread 0.099 sigma 0.029
+  [br_thigh] gen 133/150 best 4.883e-04 mean 5.079e-04 spread 0.076 sigma 0.029
+  [br_thigh] gen 134/150 best 4.834e-04 mean 5.053e-04 spread 0.080 sigma 0.028
+  [br_thigh] gen 135/150 best 4.881e-04 mean 5.081e-04 spread 0.084 sigma 0.028
+  [br_thigh] gen 136/150 best 4.821e-04 mean 5.075e-04 spread 0.099 sigma 0.027
+  [br_thigh] gen 137/150 best 4.797e-04 mean 5.061e-04 spread 0.103 sigma 0.028
+  [br_thigh] gen 138/150 best 4.878e-04 mean 5.072e-04 spread 0.078 sigma 0.027
+  [br_thigh] gen 139/150 best 4.928e-04 mean 5.079e-04 spread 0.065 sigma 0.025
+  [br_thigh] gen 140/150 best 4.845e-04 mean 5.067e-04 spread 0.079 sigma 0.025
+  [br_thigh] gen 141/150 best 4.795e-04 mean 5.057e-04 spread 0.099 sigma 0.025
+  [br_thigh] gen 142/150 best 4.784e-04 mean 5.075e-04 spread 0.095 sigma 0.025
+  [br_thigh] gen 143/150 best 4.866e-04 mean 5.079e-04 spread 0.079 sigma 0.026
+  [br_thigh] gen 144/150 best 4.852e-04 mean 5.062e-04 spread 0.078 sigma 0.026
+  [br_thigh] gen 145/150 best 4.821e-04 mean 5.071e-04 spread 0.099 sigma 0.027
+  [br_thigh] gen 146/150 best 4.810e-04 mean 5.058e-04 spread 0.110 sigma 0.025
+  [br_thigh] gen 147/150 best 4.804e-04 mean 5.076e-04 spread 0.105 sigma 0.023
+  [br_thigh] gen 148/150 best 4.862e-04 mean 5.070e-04 spread 0.075 sigma 0.022
+  [br_thigh] gen 149/150 best 4.893e-04 mean 5.057e-04 spread 0.068 sigma 0.022
+  [br_thigh] gen 150/150 best 4.852e-04 mean 5.057e-04 spread 0.086 sigma 0.021
+fitting br_calf on 1 captures ...
+  [br_calf] gen 1/150 best 1.063e-02 mean 4.148e-02 spread 6.554 sigma 0.688
+  [br_calf] gen 2/150 best 4.382e-03 mean 2.774e-02 spread 22.228 sigma 0.904
+  [br_calf] gen 3/150 best 3.614e-03 mean 2.789e-02 spread 34.474 sigma 0.967
+  [br_calf] gen 4/150 best 3.073e-03 mean 2.640e-02 spread 53.985 sigma 0.904
+  [br_calf] gen 5/150 best 2.902e-03 mean 1.524e-02 spread 56.703 sigma 0.939
+  [br_calf] gen 6/150 best 3.191e-03 mean 1.121e-02 spread 17.662 sigma 0.839
+  [br_calf] gen 7/150 best 2.750e-03 mean 7.559e-03 spread 11.178 sigma 0.831
+  [br_calf] gen 8/150 best 2.975e-03 mean 7.595e-03 spread 8.689 sigma 0.737
+  [br_calf] gen 9/150 best 2.109e-03 mean 5.883e-03 spread 7.011 sigma 0.672
+  [br_calf] gen 10/150 best 2.910e-03 mean 5.127e-03 spread 4.081 sigma 0.576
+  [br_calf] gen 11/150 best 2.623e-03 mean 4.830e-03 spread 3.383 sigma 0.531
+  [br_calf] gen 12/150 best 2.592e-03 mean 6.102e-03 spread 34.630 sigma 0.503
+  [br_calf] gen 13/150 best 2.653e-03 mean 4.017e-03 spread 1.517 sigma 0.485
+  [br_calf] gen 14/150 best 2.573e-03 mean 3.694e-03 spread 1.073 sigma 0.451
+  [br_calf] gen 15/150 best 2.558e-03 mean 3.681e-03 spread 2.175 sigma 0.403
+  [br_calf] gen 16/150 best 2.420e-03 mean 3.333e-03 spread 0.966 sigma 0.388
+  [br_calf] gen 17/150 best 2.544e-03 mean 3.316e-03 spread 0.881 sigma 0.371
+  [br_calf] gen 18/150 best 1.972e-03 mean 3.335e-03 spread 1.387 sigma 0.411
+  [br_calf] gen 19/150 best 2.506e-03 mean 3.356e-03 spread 0.672 sigma 0.411
+  [br_calf] gen 20/150 best 2.441e-03 mean 3.301e-03 spread 0.893 sigma 0.353
+  [br_calf] gen 21/150 best 2.514e-03 mean 3.255e-03 spread 0.589 sigma 0.353
+  [br_calf] gen 22/150 best 2.446e-03 mean 3.237e-03 spread 0.726 sigma 0.376
+  [br_calf] gen 23/150 best 2.457e-03 mean 3.129e-03 spread 0.684 sigma 0.372
+  [br_calf] gen 24/150 best 2.492e-03 mean 3.130e-03 spread 0.595 sigma 0.318
+  [br_calf] gen 25/150 best 2.401e-03 mean 3.052e-03 spread 0.607 sigma 0.311
+  [br_calf] gen 26/150 best 2.391e-03 mean 3.024e-03 spread 0.631 sigma 0.310
+  [br_calf] gen 27/150 best 2.464e-03 mean 3.039e-03 spread 0.520 sigma 0.305
+  [br_calf] gen 28/150 best 2.447e-03 mean 2.918e-03 spread 0.491 sigma 0.277
+  [br_calf] gen 29/150 best 2.383e-03 mean 2.892e-03 spread 0.568 sigma 0.278
+  [br_calf] gen 30/150 best 2.423e-03 mean 3.035e-03 spread 0.529 sigma 0.271
+  [br_calf] gen 31/150 best 2.403e-03 mean 2.905e-03 spread 0.554 sigma 0.273
+  [br_calf] gen 32/150 best 2.394e-03 mean 2.850e-03 spread 0.517 sigma 0.296
+  [br_calf] gen 33/150 best 2.395e-03 mean 2.906e-03 spread 0.572 sigma 0.263
+  [br_calf] gen 34/150 best 2.403e-03 mean 2.814e-03 spread 0.480 sigma 0.236
+  [br_calf] gen 35/150 best 2.350e-03 mean 2.724e-03 spread 0.457 sigma 0.244
+  [br_calf] gen 36/150 best 2.406e-03 mean 2.731e-03 spread 0.368 sigma 0.237
+  [br_calf] gen 37/150 best 2.395e-03 mean 2.695e-03 spread 0.455 sigma 0.236
+  [br_calf] gen 38/150 best 2.396e-03 mean 2.657e-03 spread 0.380 sigma 0.250
+  [br_calf] gen 39/150 best 2.404e-03 mean 2.672e-03 spread 0.448 sigma 0.234
+  [br_calf] gen 40/150 best 2.374e-03 mean 2.599e-03 spread 0.458 sigma 0.235
+  [br_calf] gen 41/150 best 2.324e-03 mean 2.557e-03 spread 0.412 sigma 0.211
+  [br_calf] gen 42/150 best 2.370e-03 mean 2.587e-03 spread 0.291 sigma 0.190
+  [br_calf] gen 43/150 best 2.322e-03 mean 2.553e-03 spread 0.383 sigma 0.200
+  [br_calf] gen 44/150 best 2.358e-03 mean 2.530e-03 spread 0.382 sigma 0.183
+  [br_calf] gen 45/150 best 2.344e-03 mean 2.526e-03 spread 0.398 sigma 0.187
+  [br_calf] gen 46/150 best 2.344e-03 mean 2.595e-03 spread 0.428 sigma 0.176
+  [br_calf] gen 47/150 best 2.346e-03 mean 2.586e-03 spread 0.455 sigma 0.178
+  [br_calf] gen 48/150 best 2.334e-03 mean 2.556e-03 spread 0.452 sigma 0.210
+  [br_calf] gen 49/150 best 2.365e-03 mean 2.590e-03 spread 0.433 sigma 0.224
+  [br_calf] gen 50/150 best 2.292e-03 mean 2.594e-03 spread 0.385 sigma 0.214
+  [br_calf] gen 51/150 best 2.325e-03 mean 2.598e-03 spread 0.356 sigma 0.229
+  [br_calf] gen 52/150 best 2.330e-03 mean 2.591e-03 spread 0.452 sigma 0.253
+  [br_calf] gen 53/150 best 2.365e-03 mean 2.597e-03 spread 0.423 sigma 0.273
+  [br_calf] gen 54/150 best 2.392e-03 mean 2.638e-03 spread 0.362 sigma 0.290
+  [br_calf] gen 55/150 best 2.344e-03 mean 2.546e-03 spread 0.290 sigma 0.319
+  [br_calf] gen 56/150 best 2.370e-03 mean 2.608e-03 spread 0.465 sigma 0.335
+  [br_calf] gen 57/150 best 2.331e-03 mean 2.628e-03 spread 0.525 sigma 0.320
+  [br_calf] gen 58/150 best 2.378e-03 mean 2.558e-03 spread 0.330 sigma 0.297
+  [br_calf] gen 59/150 best 2.353e-03 mean 2.555e-03 spread 0.382 sigma 0.291
+  [br_calf] gen 60/150 best 2.361e-03 mean 2.517e-03 spread 0.247 sigma 0.304
+  [br_calf] gen 61/150 best 2.377e-03 mean 2.525e-03 spread 0.332 sigma 0.308
+  [br_calf] gen 62/150 best 2.395e-03 mean 2.589e-03 spread 0.387 sigma 0.337
+  [br_calf] gen 63/150 best 2.355e-03 mean 2.570e-03 spread 0.385 sigma 0.356
+  [br_calf] gen 64/150 best 2.361e-03 mean 2.590e-03 spread 0.364 sigma 0.381
+  [br_calf] gen 65/150 best 2.345e-03 mean 2.567e-03 spread 0.400 sigma 0.424
+  [br_calf] gen 66/150 best 2.346e-03 mean 2.573e-03 spread 0.368 sigma 0.468
+  [br_calf] gen 67/150 best 2.331e-03 mean 2.609e-03 spread 0.465 sigma 0.433
+  [br_calf] gen 68/150 best 2.345e-03 mean 2.555e-03 spread 0.319 sigma 0.432
+  [br_calf] gen 69/150 best 2.343e-03 mean 2.570e-03 spread 0.360 sigma 0.461
+  [br_calf] gen 70/150 best 2.350e-03 mean 2.547e-03 spread 0.340 sigma 0.445
+  [br_calf] gen 71/150 best 2.352e-03 mean 2.540e-03 spread 0.316 sigma 0.476
+  [br_calf] gen 72/150 best 2.324e-03 mean 2.573e-03 spread 0.388 sigma 0.439
+  [br_calf] gen 73/150 best 2.320e-03 mean 2.525e-03 spread 0.339 sigma 0.447
+  [br_calf] gen 74/150 best 2.355e-03 mean 2.568e-03 spread 0.296 sigma 0.442
+  [br_calf] gen 75/150 best 2.347e-03 mean 2.561e-03 spread 0.361 sigma 0.438
+  [br_calf] gen 76/150 best 2.343e-03 mean 2.584e-03 spread 0.321 sigma 0.399
+  [br_calf] gen 77/150 best 2.332e-03 mean 2.561e-03 spread 0.341 sigma 0.378
+  [br_calf] gen 78/150 best 2.324e-03 mean 2.528e-03 spread 0.356 sigma 0.409
+  [br_calf] gen 79/150 best 2.328e-03 mean 2.526e-03 spread 0.374 sigma 0.426
+  [br_calf] gen 80/150 best 2.308e-03 mean 2.518e-03 spread 0.353 sigma 0.393
+  [br_calf] gen 81/150 best 2.328e-03 mean 2.542e-03 spread 0.384 sigma 0.444
+  [br_calf] gen 82/150 best 2.331e-03 mean 2.510e-03 spread 0.371 sigma 0.481
+  [br_calf] gen 83/150 best 2.289e-03 mean 2.507e-03 spread 0.392 sigma 0.516
+  [br_calf] gen 84/150 best 2.334e-03 mean 2.566e-03 spread 0.362 sigma 0.503
+  [br_calf] gen 85/150 best 2.311e-03 mean 2.497e-03 spread 0.235 sigma 0.498
+  [br_calf] gen 86/150 best 2.353e-03 mean 2.539e-03 spread 0.246 sigma 0.452
+  [br_calf] gen 87/150 best 2.336e-03 mean 2.558e-03 spread 0.322 sigma 0.409
+  [br_calf] gen 88/150 best 2.345e-03 mean 2.530e-03 spread 0.310 sigma 0.361
+  [br_calf] gen 89/150 best 2.325e-03 mean 2.519e-03 spread 0.349 sigma 0.347
+  [br_calf] gen 90/150 best 2.293e-03 mean 2.520e-03 spread 0.384 sigma 0.337
+  [br_calf] gen 91/150 best 2.299e-03 mean 2.471e-03 spread 0.336 sigma 0.353
+  [br_calf] gen 92/150 best 2.342e-03 mean 2.482e-03 spread 0.298 sigma 0.375
+  [br_calf] gen 93/150 best 2.334e-03 mean 2.482e-03 spread 0.211 sigma 0.366
+  [br_calf] gen 94/150 best 2.319e-03 mean 2.511e-03 spread 0.355 sigma 0.382
+  [br_calf] gen 95/150 best 2.323e-03 mean 2.503e-03 spread 0.339 sigma 0.374
+  [br_calf] gen 96/150 best 2.331e-03 mean 2.489e-03 spread 0.263 sigma 0.363
+  [br_calf] gen 97/150 best 2.336e-03 mean 2.473e-03 spread 0.233 sigma 0.334
+  [br_calf] gen 98/150 best 2.316e-03 mean 2.496e-03 spread 0.295 sigma 0.314
+  [br_calf] gen 99/150 best 2.317e-03 mean 2.449e-03 spread 0.338 sigma 0.325
+  [br_calf] gen 100/150 best 2.325e-03 mean 2.505e-03 spread 0.274 sigma 0.311
+  [br_calf] gen 101/150 best 2.341e-03 mean 2.473e-03 spread 0.202 sigma 0.343
+  [br_calf] gen 102/150 best 2.311e-03 mean 2.463e-03 spread 0.255 sigma 0.367
+  [br_calf] gen 103/150 best 2.315e-03 mean 2.497e-03 spread 0.289 sigma 0.363
+  [br_calf] gen 104/150 best 2.301e-03 mean 2.493e-03 spread 0.287 sigma 0.389
+  [br_calf] gen 105/150 best 2.321e-03 mean 2.518e-03 spread 0.273 sigma 0.391
+  [br_calf] gen 106/150 best 2.302e-03 mean 2.517e-03 spread 0.281 sigma 0.426
+  [br_calf] gen 107/150 best 2.336e-03 mean 2.509e-03 spread 0.266 sigma 0.459
+  [br_calf] gen 108/150 best 2.313e-03 mean 2.468e-03 spread 0.247 sigma 0.445
+  [br_calf] gen 109/150 best 2.329e-03 mean 2.463e-03 spread 0.211 sigma 0.399
+  [br_calf] gen 110/150 best 2.323e-03 mean 2.470e-03 spread 0.248 sigma 0.397
+  [br_calf] gen 111/150 best 2.335e-03 mean 2.498e-03 spread 0.221 sigma 0.364
+  [br_calf] gen 112/150 best 2.318e-03 mean 2.485e-03 spread 0.270 sigma 0.328
+  [br_calf] gen 113/150 best 2.310e-03 mean 2.434e-03 spread 0.246 sigma 0.298
+  [br_calf] gen 114/150 best 2.336e-03 mean 2.474e-03 spread 0.255 sigma 0.275
+  [br_calf] gen 115/150 best 2.300e-03 mean 2.459e-03 spread 0.331 sigma 0.281
+  [br_calf] gen 116/150 best 2.287e-03 mean 2.474e-03 spread 0.268 sigma 0.279
+  [br_calf] gen 117/150 best 2.316e-03 mean 2.439e-03 spread 0.177 sigma 0.263
+  [br_calf] gen 118/150 best 2.307e-03 mean 2.500e-03 spread 0.319 sigma 0.250
+  [br_calf] gen 119/150 best 2.311e-03 mean 2.505e-03 spread 0.289 sigma 0.234
+  [br_calf] gen 120/150 best 2.306e-03 mean 2.440e-03 spread 0.213 sigma 0.206
+  [br_calf] gen 121/150 best 2.325e-03 mean 2.464e-03 spread 0.203 sigma 0.210
+  [br_calf] gen 122/150 best 2.280e-03 mean 2.485e-03 spread 0.241 sigma 0.222
+  [br_calf] gen 123/150 best 2.322e-03 mean 2.444e-03 spread 0.187 sigma 0.238
+  [br_calf] gen 124/150 best 2.313e-03 mean 2.462e-03 spread 0.235 sigma 0.241
+  [br_calf] gen 125/150 best 2.315e-03 mean 2.480e-03 spread 0.243 sigma 0.271
+  [br_calf] gen 126/150 best 2.288e-03 mean 2.466e-03 spread 0.277 sigma 0.295
+  [br_calf] gen 127/150 best 2.271e-03 mean 2.459e-03 spread 0.267 sigma 0.307
+  [br_calf] gen 128/150 best 2.283e-03 mean 2.458e-03 spread 0.227 sigma 0.331
+  [br_calf] gen 129/150 best 2.307e-03 mean 2.479e-03 spread 0.258 sigma 0.381
+  [br_calf] gen 130/150 best 2.290e-03 mean 2.473e-03 spread 0.252 sigma 0.366
+  [br_calf] gen 131/150 best 2.327e-03 mean 2.473e-03 spread 0.233 sigma 0.341
+  [br_calf] gen 132/150 best 2.324e-03 mean 2.500e-03 spread 0.246 sigma 0.321
+  [br_calf] gen 133/150 best 2.308e-03 mean 2.458e-03 spread 0.210 sigma 0.314
+  [br_calf] gen 134/150 best 2.292e-03 mean 2.450e-03 spread 0.234 sigma 0.319
+  [br_calf] gen 135/150 best 2.286e-03 mean 2.434e-03 spread 0.243 sigma 0.290
+  [br_calf] gen 136/150 best 2.326e-03 mean 2.438e-03 spread 0.223 sigma 0.309
+  [br_calf] gen 137/150 best 2.292e-03 mean 2.463e-03 spread 0.210 sigma 0.311
+  [br_calf] gen 138/150 best 2.304e-03 mean 2.467e-03 spread 0.243 sigma 0.334
+  [br_calf] gen 139/150 best 2.307e-03 mean 2.457e-03 spread 0.239 sigma 0.307
+  [br_calf] gen 140/150 best 2.292e-03 mean 2.465e-03 spread 0.308 sigma 0.309
+  [br_calf] gen 141/150 best 2.310e-03 mean 2.446e-03 spread 0.269 sigma 0.344
+  [br_calf] gen 142/150 best 2.307e-03 mean 2.412e-03 spread 0.162 sigma 0.367
+  [br_calf] gen 143/150 best 2.308e-03 mean 2.462e-03 spread 0.296 sigma 0.393
+  [br_calf] gen 144/150 best 2.324e-03 mean 2.448e-03 spread 0.202 sigma 0.448
+  [br_calf] gen 145/150 best 2.326e-03 mean 2.485e-03 spread 0.255 sigma 0.523
+  [br_calf] gen 146/150 best 2.308e-03 mean 2.460e-03 spread 0.239 sigma 0.557
+  [br_calf] gen 147/150 best 2.322e-03 mean 2.456e-03 spread 0.247 sigma 0.567
+  [br_calf] gen 148/150 best 2.310e-03 mean 2.471e-03 spread 0.264 sigma 0.614
+  [br_calf] gen 149/150 best 2.290e-03 mean 2.479e-03 spread 0.243 sigma 0.674
+  [br_calf] gen 150/150 best 2.303e-03 mean 2.502e-03 spread 0.255 sigma 0.717
+fitting shared class on 25 captures ...
+  [shared] gen 1/150 best 8.568e-03 mean 2.117e-02 spread 2.581 sigma 0.688
+  [shared] gen 2/150 best 4.290e-03 mean 1.676e-02 spread 5.864 sigma 0.876
+  [shared] gen 3/150 best 1.715e-03 mean 2.326e-02 spread 100.875 sigma 0.951
+  [shared] gen 4/150 best 1.477e-03 mean 1.721e-02 spread 53.388 sigma 0.919
+  [shared] gen 5/150 best 1.807e-03 mean 1.901e-02 spread 125.952 sigma 0.857
+  [shared] gen 6/150 best 1.148e-03 mean 9.581e-03 spread 20.053 sigma 0.846
+  [shared] gen 7/150 best 1.520e-03 mean 9.087e-03 spread 16.547 sigma 0.770
+  [shared] gen 8/150 best 1.324e-03 mean 8.427e-03 spread 54.865 sigma 0.733
+  [shared] gen 9/150 best 1.456e-03 mean 5.481e-03 spread 10.135 sigma 0.661
+  [shared] gen 10/150 best 1.491e-03 mean 4.924e-03 spread 8.655 sigma 0.588
+  [shared] gen 11/150 best 1.397e-03 mean 3.680e-03 spread 13.959 sigma 0.577
+  [shared] gen 12/150 best 1.457e-03 mean 3.685e-03 spread 7.484 sigma 0.542
+  [shared] gen 13/150 best 1.389e-03 mean 3.212e-03 spread 5.309 sigma 0.573
+  [shared] gen 14/150 best 1.335e-03 mean 3.111e-03 spread 5.114 sigma 0.543
+  [shared] gen 15/150 best 1.413e-03 mean 3.009e-03 spread 3.688 sigma 0.470
+  [shared] gen 16/150 best 1.179e-03 mean 2.668e-03 spread 3.938 sigma 0.460
+  [shared] gen 17/150 best 1.274e-03 mean 2.623e-03 spread 3.205 sigma 0.428
+  [shared] gen 18/150 best 1.193e-03 mean 2.330e-03 spread 2.830 sigma 0.411
+  [shared] gen 19/150 best 1.129e-03 mean 2.178e-03 spread 4.523 sigma 0.389
+  [shared] gen 20/150 best 1.198e-03 mean 2.270e-03 spread 5.097 sigma 0.391
+  [shared] gen 21/150 best 1.203e-03 mean 2.150e-03 spread 2.157 sigma 0.355
+  [shared] gen 22/150 best 1.190e-03 mean 2.028e-03 spread 1.912 sigma 0.360
+  [shared] gen 23/150 best 1.160e-03 mean 2.060e-03 spread 2.911 sigma 0.330
+  [shared] gen 24/150 best 1.185e-03 mean 1.853e-03 spread 1.535 sigma 0.310
+  [shared] gen 25/150 best 1.185e-03 mean 1.896e-03 spread 3.263 sigma 0.288
+  [shared] gen 26/150 best 1.139e-03 mean 1.831e-03 spread 1.698 sigma 0.254
+  [shared] gen 27/150 best 1.190e-03 mean 1.758e-03 spread 1.286 sigma 0.237
+  [shared] gen 28/150 best 1.158e-03 mean 1.619e-03 spread 1.392 sigma 0.241
+  [shared] gen 29/150 best 1.186e-03 mean 1.601e-03 spread 1.291 sigma 0.260
+  [shared] gen 30/150 best 1.158e-03 mean 1.633e-03 spread 3.275 sigma 0.255
+  [shared] gen 31/150 best 1.136e-03 mean 1.670e-03 spread 1.345 sigma 0.258
+  [shared] gen 32/150 best 1.122e-03 mean 1.611e-03 spread 1.178 sigma 0.265
+  [shared] gen 33/150 best 1.167e-03 mean 1.545e-03 spread 1.116 sigma 0.265
+  [shared] gen 34/150 best 1.154e-03 mean 1.529e-03 spread 1.360 sigma 0.252
+  [shared] gen 35/150 best 1.139e-03 mean 1.556e-03 spread 3.117 sigma 0.258
+  [shared] gen 36/150 best 1.122e-03 mean 1.397e-03 spread 1.319 sigma 0.228
+  [shared] gen 37/150 best 1.135e-03 mean 1.405e-03 spread 1.786 sigma 0.237
+  [shared] gen 38/150 best 1.153e-03 mean 1.415e-03 spread 1.122 sigma 0.231
+  [shared] gen 39/150 best 1.135e-03 mean 1.436e-03 spread 1.664 sigma 0.241
+  [shared] gen 40/150 best 1.155e-03 mean 1.420e-03 spread 3.636 sigma 0.290
+  [shared] gen 41/150 best 1.177e-03 mean 1.417e-03 spread 4.573 sigma 0.258
+  [shared] gen 42/150 best 1.105e-03 mean 1.352e-03 spread 0.637 sigma 0.249
+  [shared] gen 43/150 best 1.130e-03 mean 1.404e-03 spread 3.294 sigma 0.216
+  [shared] gen 44/150 best 1.089e-03 mean 1.314e-03 spread 0.633 sigma 0.243
+  [shared] gen 45/150 best 1.106e-03 mean 1.288e-03 spread 0.613 sigma 0.232
+  [shared] gen 46/150 best 1.148e-03 mean 1.284e-03 spread 0.331 sigma 0.239
+  [shared] gen 47/150 best 1.162e-03 mean 1.351e-03 spread 2.505 sigma 0.225
+  [shared] gen 48/150 best 1.121e-03 mean 1.351e-03 spread 2.083 sigma 0.223
+  [shared] gen 49/150 best 1.138e-03 mean 1.313e-03 spread 0.692 sigma 0.193
+  [shared] gen 50/150 best 1.119e-03 mean 1.285e-03 spread 0.427 sigma 0.173
+  [shared] gen 51/150 best 1.162e-03 mean 1.313e-03 spread 1.401 sigma 0.180
+  [shared] gen 52/150 best 1.088e-03 mean 1.276e-03 spread 0.604 sigma 0.188
+  [shared] gen 53/150 best 1.093e-03 mean 1.289e-03 spread 0.500 sigma 0.158
+  [shared] gen 54/150 best 1.126e-03 mean 1.293e-03 spread 1.092 sigma 0.150
+  [shared] gen 55/150 best 1.128e-03 mean 1.271e-03 spread 0.449 sigma 0.134
+  [shared] gen 56/150 best 1.139e-03 mean 1.325e-03 spread 2.566 sigma 0.116
+  [shared] gen 57/150 best 1.133e-03 mean 1.286e-03 spread 0.515 sigma 0.108
+  [shared] gen 58/150 best 1.151e-03 mean 1.273e-03 spread 0.269 sigma 0.102
+  [shared] gen 59/150 best 1.132e-03 mean 1.266e-03 spread 0.270 sigma 0.101
+  [shared] gen 60/150 best 1.111e-03 mean 1.259e-03 spread 0.344 sigma 0.110
+  [shared] gen 61/150 best 1.139e-03 mean 1.268e-03 spread 0.638 sigma 0.122
+  [shared] gen 62/150 best 1.092e-03 mean 1.281e-03 spread 0.418 sigma 0.129
+  [shared] gen 63/150 best 1.133e-03 mean 1.308e-03 spread 0.659 sigma 0.140
+  [shared] gen 64/150 best 1.132e-03 mean 1.265e-03 spread 0.295 sigma 0.125
+  [shared] gen 65/150 best 1.139e-03 mean 1.260e-03 spread 0.274 sigma 0.113
+  [shared] gen 66/150 best 1.120e-03 mean 1.292e-03 spread 0.699 sigma 0.125
+  [shared] gen 67/150 best 1.081e-03 mean 1.279e-03 spread 0.359 sigma 0.127
+  [shared] gen 68/150 best 1.153e-03 mean 1.288e-03 spread 0.536 sigma 0.124
+  [shared] gen 69/150 best 1.108e-03 mean 1.279e-03 spread 0.526 sigma 0.114
+  [shared] gen 70/150 best 1.070e-03 mean 1.255e-03 spread 0.683 sigma 0.104
+  [shared] gen 71/150 best 1.123e-03 mean 1.268e-03 spread 0.401 sigma 0.106
+  [shared] gen 72/150 best 1.124e-03 mean 1.260e-03 spread 0.291 sigma 0.111
+  [shared] gen 73/150 best 1.117e-03 mean 1.281e-03 spread 0.647 sigma 0.108
+  [shared] gen 74/150 best 1.112e-03 mean 1.278e-03 spread 0.329 sigma 0.116
+  [shared] gen 75/150 best 1.105e-03 mean 1.278e-03 spread 0.370 sigma 0.128
+  [shared] gen 76/150 best 1.126e-03 mean 1.295e-03 spread 0.614 sigma 0.124
+  [shared] gen 77/150 best 1.096e-03 mean 1.284e-03 spread 1.048 sigma 0.119
+  [shared] gen 78/150 best 1.090e-03 mean 1.276e-03 spread 0.343 sigma 0.120
+  [shared] gen 79/150 best 1.117e-03 mean 1.345e-03 spread 2.894 sigma 0.115
+  [shared] gen 80/150 best 1.126e-03 mean 1.299e-03 spread 1.154 sigma 0.106
+  [shared] gen 81/150 best 1.098e-03 mean 1.273e-03 spread 0.606 sigma 0.107
+  [shared] gen 82/150 best 1.107e-03 mean 1.264e-03 spread 0.331 sigma 0.104
+  [shared] gen 83/150 best 1.125e-03 mean 1.301e-03 spread 1.358 sigma 0.098
+  [shared] gen 84/150 best 1.119e-03 mean 1.273e-03 spread 0.338 sigma 0.102
+  [shared] gen 85/150 best 1.106e-03 mean 1.267e-03 spread 0.555 sigma 0.116
+  [shared] gen 86/150 best 1.118e-03 mean 1.299e-03 spread 2.112 sigma 0.111
+  [shared] gen 87/150 best 1.099e-03 mean 1.259e-03 spread 0.311 sigma 0.101
+  [shared] gen 88/150 best 1.085e-03 mean 1.295e-03 spread 0.512 sigma 0.107
+  [shared] gen 89/150 best 1.098e-03 mean 1.269e-03 spread 0.553 sigma 0.120
+  [shared] gen 90/150 best 1.110e-03 mean 1.287e-03 spread 1.076 sigma 0.144
+  [shared] gen 91/150 best 1.071e-03 mean 1.258e-03 spread 0.438 sigma 0.151
+  [shared] gen 92/150 best 1.109e-03 mean 1.290e-03 spread 1.153 sigma 0.145
+  [shared] gen 93/150 best 1.156e-03 mean 1.268e-03 spread 0.283 sigma 0.149
+  [shared] gen 94/150 best 1.117e-03 mean 1.282e-03 spread 0.752 sigma 0.159
+  [shared] gen 95/150 best 1.102e-03 mean 1.284e-03 spread 0.452 sigma 0.159
+  [shared] gen 96/150 best 1.143e-03 mean 1.286e-03 spread 0.323 sigma 0.136
+  [shared] gen 97/150 best 1.099e-03 mean 1.266e-03 spread 0.578 sigma 0.120
+  [shared] gen 98/150 best 1.131e-03 mean 1.266e-03 spread 0.578 sigma 0.120
+  [shared] gen 99/150 best 1.118e-03 mean 1.244e-03 spread 0.390 sigma 0.123
+  [shared] gen 100/150 best 1.116e-03 mean 1.283e-03 spread 0.449 sigma 0.119
+  [shared] gen 101/150 best 1.081e-03 mean 1.275e-03 spread 0.708 sigma 0.115
+  [shared] gen 102/150 best 1.104e-03 mean 1.275e-03 spread 0.438 sigma 0.111
+  [shared] gen 103/150 best 1.131e-03 mean 1.263e-03 spread 0.355 sigma 0.107
+  [shared] gen 104/150 best 1.121e-03 mean 1.268e-03 spread 0.400 sigma 0.108
+  [shared] gen 105/150 best 1.110e-03 mean 1.285e-03 spread 0.457 sigma 0.112
+  [shared] gen 106/150 best 1.111e-03 mean 1.270e-03 spread 0.366 sigma 0.126
+  [shared] gen 107/150 best 1.138e-03 mean 1.268e-03 spread 0.406 sigma 0.126
+  [shared] gen 108/150 best 1.105e-03 mean 1.283e-03 spread 0.990 sigma 0.135
+  [shared] gen 109/150 best 1.131e-03 mean 1.261e-03 spread 0.295 sigma 0.131
+  [shared] gen 110/150 best 1.104e-03 mean 1.285e-03 spread 0.815 sigma 0.120
+  [shared] gen 111/150 best 1.087e-03 mean 1.254e-03 spread 0.413 sigma 0.132
+  [shared] gen 112/150 best 1.126e-03 mean 1.278e-03 spread 0.612 sigma 0.129
+  [shared] gen 113/150 best 1.107e-03 mean 1.278e-03 spread 0.697 sigma 0.130
+  [shared] gen 114/150 best 1.143e-03 mean 1.294e-03 spread 0.366 sigma 0.138
+  [shared] gen 115/150 best 1.135e-03 mean 1.276e-03 spread 0.465 sigma 0.130
+  [shared] gen 116/150 best 1.134e-03 mean 1.262e-03 spread 0.317 sigma 0.139
+  [shared] gen 117/150 best 1.106e-03 mean 1.273e-03 spread 0.450 sigma 0.130
+  [shared] gen 118/150 best 1.129e-03 mean 1.295e-03 spread 0.774 sigma 0.119
+  [shared] gen 119/150 best 1.154e-03 mean 1.258e-03 spread 0.291 sigma 0.119
+  [shared] gen 120/150 best 1.115e-03 mean 1.284e-03 spread 1.390 sigma 0.123
+  [shared] gen 121/150 best 1.103e-03 mean 1.261e-03 spread 0.327 sigma 0.132
+  [shared] gen 122/150 best 1.107e-03 mean 1.273e-03 spread 0.383 sigma 0.143
+  [shared] gen 123/150 best 1.091e-03 mean 1.310e-03 spread 1.630 sigma 0.137
+  [shared] gen 124/150 best 1.127e-03 mean 1.262e-03 spread 0.312 sigma 0.153
+  [shared] gen 125/150 best 1.131e-03 mean 1.261e-03 spread 0.328 sigma 0.185
+  [shared] gen 126/150 best 1.084e-03 mean 1.266e-03 spread 0.411 sigma 0.225
+  [shared] gen 127/150 best 1.131e-03 mean 1.281e-03 spread 0.553 sigma 0.229
+  [shared] gen 128/150 best 1.135e-03 mean 1.286e-03 spread 0.429 sigma 0.248
+  [shared] gen 129/150 best 1.081e-03 mean 1.265e-03 spread 0.392 sigma 0.241
+  [shared] gen 130/150 best 1.101e-03 mean 1.279e-03 spread 0.330 sigma 0.229
+  [shared] gen 131/150 best 1.114e-03 mean 1.263e-03 spread 0.284 sigma 0.226
+  [shared] gen 132/150 best 1.083e-03 mean 1.292e-03 spread 0.525 sigma 0.216
+  [shared] gen 133/150 best 1.148e-03 mean 1.279e-03 spread 1.336 sigma 0.253
+  [shared] gen 134/150 best 1.147e-03 mean 1.286e-03 spread 0.628 sigma 0.248
+  [shared] gen 135/150 best 1.056e-03 mean 1.280e-03 spread 0.437 sigma 0.246
+  [shared] gen 136/150 best 1.103e-03 mean 1.263e-03 spread 0.664 sigma 0.252
+  [shared] gen 137/150 best 1.110e-03 mean 1.292e-03 spread 0.478 sigma 0.256
+  [shared] gen 138/150 best 1.125e-03 mean 1.277e-03 spread 0.705 sigma 0.252
+  [shared] gen 139/150 best 1.147e-03 mean 1.281e-03 spread 0.309 sigma 0.227
+  [shared] gen 140/150 best 1.096e-03 mean 1.288e-03 spread 0.590 sigma 0.225
+  [shared] gen 141/150 best 1.069e-03 mean 1.288e-03 spread 0.712 sigma 0.218
+  [shared] gen 142/150 best 1.111e-03 mean 1.291e-03 spread 1.010 sigma 0.233
+  [shared] gen 143/150 best 1.154e-03 mean 1.277e-03 spread 0.242 sigma 0.261
+  [shared] gen 144/150 best 1.096e-03 mean 1.270e-03 spread 0.404 sigma 0.245
+  [shared] gen 145/150 best 1.102e-03 mean 1.295e-03 spread 0.983 sigma 0.227
+  [shared] gen 146/150 best 1.109e-03 mean 1.286e-03 spread 0.770 sigma 0.240
+  [shared] gen 147/150 best 1.124e-03 mean 1.271e-03 spread 0.536 sigma 0.249
+  [shared] gen 148/150 best 1.120e-03 mean 1.351e-03 spread 2.366 sigma 0.248
+  [shared] gen 149/150 best 1.104e-03 mean 1.265e-03 spread 0.378 sigma 0.237
+  [shared] gen 150/150 best 1.095e-03 mean 1.306e-03 spread 2.118 sigma 0.235
+building validation table (before/after replays) ...
+Servo-model fit report
+created: 2026-07-14T03:25:36
+sessions: ['/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-07-30_stand', '/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-04-06_stand']
+settings: {"mode": "both", "fit_names": ["kp", "kd", "damping", "armature", "frictionloss", "qd_knee", "qd_max", "delay_ms"], "generations": 150, "popsize": 64, "sigma0": 0.5, "seed": 0, "tau_max_pinned": 0.22, "sim_dt": 0.002, "settle_s": 1.0, "skip_ms": 300.0, "regime": "loaded_free_base_contact", "bounds": {"kp": [0.5, 20.0], "kd": [0.0, 1.0], "damping": [0.0, 0.4], "armature": [0.0, 0.02], "frictionloss": [0.0, 0.1], "qd_knee": [3.0, 10.0], "qd_max": [8.0, 14.0], "delay_ms": [20.0, 90.0]}}
+
+global delay: 20.3 ms
+
+per-joint fits (loss = MSE + 0.01*FFT-RMSE<10Hz):
+joint       loss_before  loss_after         kp         kd    damping   armature frictionloss    qd_knee     qd_max   delay_ms
+fl_hip        8.976e-03   1.498e-03    19.8118     0.1615     0.0000     0.0001     0.0000     3.8467     8.0000    20.2561
+fl_thigh      9.422e-03   2.218e-03    18.3659     0.9790     0.0019     0.0000     0.0000     5.1849     8.5262    20.0081
+fl_calf       6.853e-03   6.239e-04    13.4462     0.0767     0.0110     0.0000     0.0000     5.0004     8.0000    31.2738
+fr_hip        8.799e-03   1.604e-03    19.5244     0.6440     0.0000     0.0000     0.0000     9.0311     9.5311    20.0723
+fr_thigh      1.258e-02   2.170e-03    19.9530     0.3132     0.0000     0.0000     0.0000     9.8685    10.3685    20.1275
+fr_calf       7.337e-03   4.955e-04    19.3469     0.4214     0.0000     0.0002     0.0000     3.4029     8.0442    20.9787
+bl_hip        1.039e-02   1.584e-03    16.7261     0.0005     0.0000     0.0000     0.0001     7.8090     9.2585    20.0016
+bl_thigh      1.274e-02   4.943e-04    19.2016     0.4121     0.0000     0.0000     0.0000     6.8096     8.1988    20.3437
+bl_calf       1.019e-02   1.771e-03    18.1314     0.1612     0.0040     0.0000     0.0000     6.9176     8.6605    22.7153
+br_hip        1.011e-02   1.605e-03    19.9940     0.5367     0.0000     0.0000     0.0001     8.1334     8.6334    20.0008
+br_thigh      1.246e-02   4.783e-04    19.5804     0.4508     0.0001     0.0000     0.0000     4.9167    12.0237    20.3626
+br_calf       1.376e-02   1.972e-03    19.9407     0.1508     0.0042     0.0000     0.0048     9.4583     9.9583    21.3153
+
+shared-class fit (one parameter set for all 12 servos):
+  loss 1.009e-02 -> 1.056e-03; params {"kp": 19.91033, "kd": 0.04076, "damping": 0.01157, "armature": 0.0, "frictionloss": 0.00032, "qd_knee": 4.44065, "qd_max": 13.08133, "delay_ms": 38.29013, "tau_max": 0.22}
+
+per-segment sim-vs-real RMSE (rad), before -> after fit:
+file                         joint      segment                      before    after      amp r/s
+fl_hip__steps.npz            fl_hip     step to +0.10                0.0088   0.0097             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0326   0.0154             
+fl_hip__steps.npz            fl_hip     step to -0.10                0.0248   0.0180             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0195   0.0195             
+fl_hip__steps.npz            fl_hip     step to +0.20                0.0410   0.0234             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0749   0.0379             
+fl_hip__steps.npz            fl_hip     step to -0.20                0.0734   0.0195             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0652   0.0326             
+fl_hip__steps.npz            fl_hip     step to +0.40                0.0983   0.0541             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.2212   0.0302             
+fl_hip__steps.npz            fl_hip     step to -0.40                0.1357   0.0959             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.2124   0.0175             
+fl_thigh__steps.npz          fl_thigh   step to +0.10                0.0047   0.0552             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0166   0.0486             
+fl_thigh__steps.npz          fl_thigh   step to -0.10                0.0202   0.0438             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0498   0.0616             
+fl_thigh__steps.npz          fl_thigh   step to +0.20                0.0722   0.0736             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0735   0.0790             
+fl_thigh__steps.npz          fl_thigh   step to -0.20                0.0488   0.0565             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.1048   0.0425             
+fl_thigh__steps.npz          fl_thigh   step to +0.40                0.1787   0.1064             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.1750   0.0553             
+fl_thigh__steps.npz          fl_thigh   step to -0.40                0.1225   0.1282             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.2995   0.6933             
+fl_calf__steps.npz           fl_calf    step to +0.10                0.0123   0.0315             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0186   0.0260             
+fl_calf__steps.npz           fl_calf    step to -0.10                0.0209   0.0308             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0158   0.0443             
+fl_calf__steps.npz           fl_calf    step to +0.20                0.0339   0.0384             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0675   0.0389             
+fl_calf__steps.npz           fl_calf    step to -0.20                0.0477   0.0601             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0378   0.0544             
+fl_calf__steps.npz           fl_calf    step to +0.40                0.0870   0.0481             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.2080   0.0631             
+fl_calf__steps.npz           fl_calf    step to -0.40                0.1688   0.0369             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.1289   0.0875             
+fr_hip__steps.npz            fr_hip     step to +0.10                0.0037   0.0096             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0427   0.0129             
+fr_hip__steps.npz            fr_hip     step to -0.10                0.0437   0.0170             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0227   0.0201             
+fr_hip__steps.npz            fr_hip     step to +0.20                0.0415   0.0137             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0694   0.0286             
+fr_hip__steps.npz            fr_hip     step to -0.20                0.0689   0.0175             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0597   0.0151             
+fr_hip__steps.npz            fr_hip     step to +0.40                0.1073   0.0263             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.2295   0.0264             
+fr_hip__steps.npz            fr_hip     step to -0.40                0.1520   0.0547             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.2089   0.0324             
+fr_thigh__steps.npz          fr_thigh   step to +0.10                0.0203   0.0103             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0310   0.0101             
+fr_thigh__steps.npz          fr_thigh   step to -0.10                0.0226   0.0106             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0496   0.0120             
+fr_thigh__steps.npz          fr_thigh   step to +0.20                0.0740   0.0157             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0772   0.0132             
+fr_thigh__steps.npz          fr_thigh   step to -0.20                0.0538   0.0140             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.1010   0.0153             
+fr_thigh__steps.npz          fr_thigh   step to +0.40                0.1922   0.0347             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.2008   0.0440             
+fr_thigh__steps.npz          fr_thigh   step to -0.40                0.1270   0.0334             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.2843   0.0588             
+fr_calf__steps.npz           fr_calf    step to +0.10                0.0072   0.0158             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0205   0.0110             
+fr_calf__steps.npz           fr_calf    step to -0.10                0.0235   0.0083             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0145   0.0172             
+fr_calf__steps.npz           fr_calf    step to +0.20                0.0312   0.0191             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0592   0.0150             
+fr_calf__steps.npz           fr_calf    step to -0.20                0.0631   0.0145             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0435   0.0255             
+fr_calf__steps.npz           fr_calf    step to +0.40                0.0948   0.0386             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.1958   0.0155             
+fr_calf__steps.npz           fr_calf    step to -0.40                0.1627   0.0154             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.1512   0.0553             
+bl_hip__steps.npz            bl_hip     step to +0.10                0.0039   0.0092             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0429   0.0344             
+bl_hip__steps.npz            bl_hip     step to -0.10                0.0444   0.0201             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0207   0.0327             
+bl_hip__steps.npz            bl_hip     step to +0.20                0.0408   0.0353             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0703   0.0212             
+bl_hip__steps.npz            bl_hip     step to -0.20                0.0779   0.0266             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0623   0.0393             
+bl_hip__steps.npz            bl_hip     step to +0.40                0.1040   0.0571             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.2083   0.0789             
+bl_hip__steps.npz            bl_hip     step to -0.40                0.1893   0.0573             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.2087   0.0359             
+bl_thigh__steps.npz          bl_thigh   step to +0.10                0.0119   0.0372             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0259   0.0415             
+bl_thigh__steps.npz          bl_thigh   step to -0.10                0.0225   0.0440             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0405   0.0394             
+bl_thigh__steps.npz          bl_thigh   step to +0.20                0.0663   0.0645             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0792   0.0274             
+bl_thigh__steps.npz          bl_thigh   step to -0.20                0.0547   0.0805             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0731   0.0430             
+bl_thigh__steps.npz          bl_thigh   step to +0.40                0.2020   0.0613             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.2132   0.0613             
+bl_thigh__steps.npz          bl_thigh   step to -0.40                0.2314   0.0887             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.1933   0.0704             
+bl_calf__steps.npz           bl_calf    step to +0.10                0.0135   0.0541             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0261   0.0582             
+bl_calf__steps.npz           bl_calf    step to -0.10                0.0288   0.0761             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0187   0.0653             
+bl_calf__steps.npz           bl_calf    step to +0.20                0.0388   0.0503             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0747   0.0531             
+bl_calf__steps.npz           bl_calf    step to -0.20                0.0696   0.0791             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0471   0.0654             
+bl_calf__steps.npz           bl_calf    step to +0.40                0.0926   0.0854             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.2664   0.3209             
+bl_calf__steps.npz           bl_calf    step to -0.40                0.2086   0.0735             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.1471   0.0725             
+br_hip__steps.npz            br_hip     step to +0.10                0.0039   0.0289             
+br_hip__steps.npz            br_hip     step to +0.00                0.0479   0.0253             
+br_hip__steps.npz            br_hip     step to -0.10                0.0356   0.0295             
+br_hip__steps.npz            br_hip     step to +0.00                0.0252   0.0331             
+br_hip__steps.npz            br_hip     step to +0.20                0.0416   0.0327             
+br_hip__steps.npz            br_hip     step to +0.00                0.0860   0.0424             
+br_hip__steps.npz            br_hip     step to -0.20                0.0753   0.0334             
+br_hip__steps.npz            br_hip     step to +0.00                0.0642   0.0369             
+br_hip__steps.npz            br_hip     step to +0.40                0.1073   0.0542             
+br_hip__steps.npz            br_hip     step to +0.00                0.2264   0.0669             
+br_hip__steps.npz            br_hip     step to -0.40                0.1897   0.0447             
+br_hip__steps.npz            br_hip     step to +0.00                0.2071   0.0401             
+br_thigh__steps.npz          br_thigh   step to +0.10                0.0072   0.0447             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0234   0.0565             
+br_thigh__steps.npz          br_thigh   step to -0.10                0.0192   0.1181             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0344   0.0668             
+br_thigh__steps.npz          br_thigh   step to +0.20                0.0632   0.0439             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0834   0.0717             
+br_thigh__steps.npz          br_thigh   step to -0.20                0.0550   0.0756             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0727   0.0522             
+br_thigh__steps.npz          br_thigh   step to +0.40                0.1988   0.0588             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.2170   0.0418             
+br_thigh__steps.npz          br_thigh   step to -0.40                0.2322   0.0763             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.1918   0.0467             
+br_calf__steps.npz           br_calf    step to +0.10                0.0032   0.0392             
+br_calf__steps.npz           br_calf    step to +0.00                0.0397   0.0466             
+br_calf__steps.npz           br_calf    step to -0.10                0.0297   0.0646             
+br_calf__steps.npz           br_calf    step to +0.00                0.0182   0.0547             
+br_calf__steps.npz           br_calf    step to +0.20                0.0388   0.0317             
+br_calf__steps.npz           br_calf    step to +0.00                0.0906   0.0678             
+br_calf__steps.npz           br_calf    step to -0.20                0.0735   0.0614             
+br_calf__steps.npz           br_calf    step to +0.00                0.0485   0.0633             
+br_calf__steps.npz           br_calf    step to +0.40                0.0879   0.1004             
+br_calf__steps.npz           br_calf    step to +0.00                0.2978   0.2193             
+br_calf__steps.npz           br_calf    step to -0.40                0.2188   0.0649             
+br_calf__steps.npz           br_calf    step to +0.00                0.1541   0.0820             
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=0.5            0.0164   0.0146    0.86/1.00
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=1.0            0.0264   0.0141    0.89/0.98
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=2.0            0.0461   0.0129    0.89/1.02
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=4.0            0.0593   0.0159    0.89/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=0.5            0.0258   0.0144    0.87/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=1.0            0.0480   0.0133    0.90/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=2.0            0.0932   0.0148    0.95/0.98
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=4.0            0.1160   0.0171    0.96/0.98
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=0.5            0.0525   0.0200    0.91/1.00
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=1.0            0.1251   0.0261    0.87/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=2.0            0.1971   0.0273    0.99/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.18 f=4.0            0.1327   0.0300    0.94/0.98
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=0.5            0.0139   0.0718    0.80/1.37
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=1.0            0.0212   0.0635    0.83/1.42
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=2.0            0.0357   0.0561    0.90/1.41
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=4.0            0.0519   0.0579    0.80/1.20
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=0.5            0.0261   0.0626    0.87/1.29
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=1.0            0.0612   0.0672    0.89/1.13
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=2.0            0.0985   0.0668    0.95/1.17
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=4.0            0.1246   0.0743    0.94/0.78
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=0.5            0.0642   0.1114    0.96/1.28
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=1.0            0.1468   0.1200    0.95/1.11
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=2.0            0.2095   0.1456    0.97/0.87
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.18 f=4.0            0.1459   0.0887    0.94/0.92
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=0.5            0.0129   0.0311    0.83/1.11
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=1.0            0.0176   0.0386    0.80/1.12
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=2.0            0.0264   0.0296    0.86/1.09
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=4.0            0.0471   0.0321    0.86/0.90
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=0.5            0.0162   0.0327    0.89/0.97
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=1.0            0.0309   0.0323    0.90/1.02
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=2.0            0.0653   0.0307    0.92/0.91
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=4.0            0.0977   0.0452    0.92/0.87
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=0.5            0.0398   0.0317    0.95/1.08
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=1.0            0.1069   0.0278    0.95/1.02
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=2.0            0.1724   0.0373    0.96/0.98
+fl_calf__sine_grid.npz       fl_calf    sine a=0.18 f=4.0            0.1199   0.0543    0.91/0.84
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=0.5            0.0209   0.0166    0.96/1.06
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=1.0            0.0262   0.0186    0.86/1.00
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=2.0            0.0449   0.0176    0.95/0.94
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=4.0            0.0623   0.0236    0.96/0.79
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=0.5            0.0238   0.0169    0.85/0.97
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=1.0            0.0448   0.0179    0.87/0.96
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=2.0            0.0831   0.0220    0.90/0.91
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=4.0            0.1079   0.0299    0.92/0.76
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=0.5            0.0478   0.0294    0.85/0.95
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=1.0            0.1195   0.0187    0.91/0.93
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=2.0            0.1885   0.0309    0.95/0.89
+fr_hip__sine_grid.npz        fr_hip     sine a=0.18 f=4.0            0.1194   0.0412    0.91/0.76
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=0.5            0.0145   0.0178    0.93/1.10
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=1.0            0.0229   0.0193    0.89/1.01
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=2.0            0.0371   0.0183    0.89/1.03
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=4.0            0.0531   0.0277    0.86/0.97
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=0.5            0.0275   0.0184    0.90/1.03
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=1.0            0.0644   0.0191    0.92/0.98
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=2.0            0.1017   0.0234    0.90/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=4.0            0.1294   0.0343    0.90/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=0.5            0.0687   0.0190    0.96/1.02
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=1.0            0.1531   0.0202    0.97/1.01
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=2.0            0.2185   0.0236    0.99/0.97
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.18 f=4.0            0.1600   0.0316    0.99/0.97
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=0.5            0.0130   0.0220    0.77/1.03
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=1.0            0.0166   0.0214    0.80/1.00
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=2.0            0.0256   0.0159    0.80/1.00
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=4.0            0.0472   0.0164    0.80/0.91
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=0.5            0.0172   0.0169    0.89/0.98
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=1.0            0.0329   0.0179    0.90/0.95
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=2.0            0.0718   0.0145    0.92/0.97
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=4.0            0.1082   0.0230    0.99/0.86
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=0.5            0.0415   0.0162    0.95/0.99
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=1.0            0.1104   0.0170    0.95/0.98
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=2.0            0.1792   0.0243    0.95/0.96
+fr_calf__sine_grid.npz       fr_calf    sine a=0.18 f=4.0            0.1284   0.0403    0.99/0.82
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=0.5            0.0181   0.0199    0.83/1.02
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=1.0            0.0267   0.0190    0.80/1.03
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=2.0            0.0476   0.0208    0.83/1.02
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=4.0            0.0700   0.0269    0.99/1.06
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=0.5            0.0274   0.0187    0.94/0.98
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=1.0            0.0525   0.0214    0.94/1.01
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=2.0            0.0951   0.0263    0.97/1.01
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=4.0            0.1185   0.0444    0.97/1.02
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=0.5            0.0541   0.0212    0.97/0.99
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=1.0            0.1370   0.0277    0.98/0.99
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=2.0            0.2058   0.0455    1.00/1.00
+bl_hip__sine_grid.npz        bl_hip     sine a=0.18 f=4.0            0.1427   0.0439    1.00/1.02
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=0.5            0.0110   0.0445    0.83/1.65
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=1.0            0.0211   0.0437    0.89/1.60
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=2.0            0.0320   0.0428    0.87/1.59
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=4.0            0.0497   0.0349    0.93/1.43
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=0.5            0.0266   0.0569    0.89/1.47
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=1.0            0.0561   0.0446    0.92/1.34
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=2.0            0.0926   0.0541    0.94/1.32
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=4.0            0.1015   0.0443    0.87/1.19
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=0.5            0.0969   0.0609    0.93/1.18
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=1.0            0.1504   0.0518    0.95/1.15
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=2.0            0.2042   0.0634    0.98/1.10
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.18 f=4.0            0.1298   0.0495    0.91/1.08
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=0.5            0.0153   0.0636    0.80/1.85
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=1.0            0.0193   0.0641    0.86/1.29
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=2.0            0.0283   0.0596    0.86/1.21
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=4.0            0.0516   0.0581    0.80/1.02
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=0.5            0.0196   0.0581    0.89/1.30
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=1.0            0.0412   0.0615    0.92/0.91
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=2.0            0.0832   0.0540    0.92/1.17
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=4.0            0.1075   0.0607    0.92/0.99
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=0.5            0.0565   0.0573    0.95/1.04
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=1.0            0.1491   0.0586    0.94/1.08
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=2.0            0.1971   0.1187    0.94/1.01
+bl_calf__sine_grid.npz       bl_calf    sine a=0.18 f=4.0            0.1302   0.0708    0.91/0.87
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=0.5            0.0167   0.0354    0.80/1.54
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=1.0            0.0265   0.0386    0.83/1.47
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=2.0            0.0466   0.0386    0.93/1.37
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=4.0            0.0633   0.0430    0.94/1.27
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=0.5            0.0254   0.0355    0.92/1.24
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=1.0            0.0496   0.0389    0.92/1.25
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=2.0            0.0912   0.0405    0.94/1.05
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=4.0            0.1103   0.0395    0.92/0.95
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=0.5            0.0489   0.0322    0.94/1.05
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=1.0            0.1291   0.0314    0.98/1.01
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=2.0            0.1921   0.0405    0.98/0.99
+br_hip__sine_grid.npz        br_hip     sine a=0.18 f=4.0            0.1312   0.0419    0.97/0.94
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=0.5            0.0100   0.0961    0.77/2.50
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=1.0            0.0170   0.0759    0.77/2.08
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=2.0            0.0276   0.1136    0.80/2.07
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=4.0            0.0430   0.1115    0.83/2.05
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=0.5            0.0237   0.0888    0.87/1.48
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=1.0            0.0535   0.1020    0.84/1.54
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=2.0            0.0899   0.0956    0.90/1.56
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=4.0            0.0986   0.1098    0.92/1.25
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=0.5            0.0961   0.0863    0.94/1.27
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=1.0            0.1471   0.0780    0.95/1.15
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=2.0            0.1999   0.0636    0.95/1.10
+br_thigh__sine_grid.npz      br_thigh   sine a=0.18 f=4.0            0.1271   0.0849    0.90/1.16
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0580   0.1135             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0730   0.0712             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0583   0.1479             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0670   0.0627             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0594   0.0884             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0698   0.0554             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0546   0.1095             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0633   0.0621             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0523   0.1108             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0665   0.0747             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0577   0.1389             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0647   0.0668             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0555   0.1528             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0689   0.0719             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0580   0.1089             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0715   0.0556             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0558   0.1370             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0690   0.0595             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0605   0.1509             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0692   0.1082             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0543   0.1428             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0699   0.0880             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0555   0.1101             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0707   0.0572             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0572   0.0821             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0694   0.0374             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0556   0.1079             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0679   0.0776             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0550   0.1363             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0719   0.0648             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0562   0.1471             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0640   0.0700             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0539   0.1460             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0708   0.0668             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0570   0.0985             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0663   0.0785             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0564   0.1016             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0672   0.0725             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0534   0.1316             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0703   0.0653             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0616   0.1370             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0667   0.0646             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0542   0.1292             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0665   0.0712             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0545   0.1172             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0684   0.0959             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0547   0.1206             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0473   0.0755             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.00                0.0340   0.0397             
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=0.5            0.0141   0.0700    0.83/1.25
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=1.0            0.0212   0.0619    0.83/1.22
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=2.0            0.0354   0.0630    0.86/1.26
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=4.0            0.0503   0.0610    0.83/1.29
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=0.5            0.0264   0.0537    0.90/1.23
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=1.0            0.0630   0.0629    0.90/1.13
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=2.0            0.1032   0.0714    0.94/0.90
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=4.0            0.1265   0.0774    0.93/0.89
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=0.5            0.0666   0.1365    0.95/1.31
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=1.0            0.1518   0.1397    0.96/1.13
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=2.0            0.2186   0.1403    0.97/0.97
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.18 f=4.0            0.1551   0.0782    0.99/0.83
+
+small-amplitude (0.08 rad) attenuation check (real measured 0.77-0.91; Coulomb term should reproduce it):
+  fl_hip__sine_grid.npz fl_hip f=0.5: real 0.86 sim_before 0.83 sim_after 1.00
+  fl_hip__sine_grid.npz fl_hip f=1.0: real 0.89 sim_before 0.78 sim_after 0.98
+  fl_hip__sine_grid.npz fl_hip f=2.0: real 0.89 sim_before 0.67 sim_after 1.02
+  fl_hip__sine_grid.npz fl_hip f=4.0: real 0.89 sim_before 0.42 sim_after 0.99
+  fl_thigh__sine_grid.npz fl_thigh f=0.5: real 0.80 sim_before 0.84 sim_after 1.37
+  fl_thigh__sine_grid.npz fl_thigh f=1.0: real 0.83 sim_before 0.76 sim_after 1.42
+  fl_thigh__sine_grid.npz fl_thigh f=2.0: real 0.90 sim_before 0.65 sim_after 1.41
+  fl_thigh__sine_grid.npz fl_thigh f=4.0: real 0.80 sim_before 0.45 sim_after 1.20
+  fl_calf__sine_grid.npz fl_calf f=0.5: real 0.83 sim_before 0.85 sim_after 1.11
+  fl_calf__sine_grid.npz fl_calf f=1.0: real 0.80 sim_before 0.81 sim_after 1.12
+  fl_calf__sine_grid.npz fl_calf f=2.0: real 0.86 sim_before 0.77 sim_after 1.09
+  fl_calf__sine_grid.npz fl_calf f=4.0: real 0.86 sim_before 0.62 sim_after 0.90
+  fr_hip__sine_grid.npz fr_hip f=0.5: real 0.96 sim_before 0.83 sim_after 1.06
+  fr_hip__sine_grid.npz fr_hip f=1.0: real 0.86 sim_before 0.78 sim_after 1.00
+  fr_hip__sine_grid.npz fr_hip f=2.0: real 0.95 sim_before 0.67 sim_after 0.94
+  fr_hip__sine_grid.npz fr_hip f=4.0: real 0.96 sim_before 0.43 sim_after 0.79
+  fr_thigh__sine_grid.npz fr_thigh f=0.5: real 0.93 sim_before 0.84 sim_after 1.10
+  fr_thigh__sine_grid.npz fr_thigh f=1.0: real 0.89 sim_before 0.76 sim_after 1.01
+  fr_thigh__sine_grid.npz fr_thigh f=2.0: real 0.89 sim_before 0.65 sim_after 1.03
+  fr_thigh__sine_grid.npz fr_thigh f=4.0: real 0.86 sim_before 0.45 sim_after 0.97
+  fr_calf__sine_grid.npz fr_calf f=0.5: real 0.77 sim_before 0.85 sim_after 1.03
+  fr_calf__sine_grid.npz fr_calf f=1.0: real 0.80 sim_before 0.81 sim_after 1.00
+  fr_calf__sine_grid.npz fr_calf f=2.0: real 0.80 sim_before 0.78 sim_after 1.00
+  fr_calf__sine_grid.npz fr_calf f=4.0: real 0.80 sim_before 0.62 sim_after 0.91
+  bl_hip__sine_grid.npz bl_hip f=0.5: real 0.83 sim_before 0.83 sim_after 1.02
+  bl_hip__sine_grid.npz bl_hip f=1.0: real 0.80 sim_before 0.77 sim_after 1.03
+  bl_hip__sine_grid.npz bl_hip f=2.0: real 0.83 sim_before 0.65 sim_after 1.02
+  bl_hip__sine_grid.npz bl_hip f=4.0: real 0.99 sim_before 0.42 sim_after 1.06
+  bl_thigh__sine_grid.npz bl_thigh f=0.5: real 0.83 sim_before 0.83 sim_after 1.65
+  bl_thigh__sine_grid.npz bl_thigh f=1.0: real 0.89 sim_before 0.74 sim_after 1.60
+  bl_thigh__sine_grid.npz bl_thigh f=2.0: real 0.87 sim_before 0.65 sim_after 1.59
+  bl_thigh__sine_grid.npz bl_thigh f=4.0: real 0.93 sim_before 0.49 sim_after 1.43
+  bl_calf__sine_grid.npz bl_calf f=0.5: real 0.80 sim_before 0.84 sim_after 1.85
+  bl_calf__sine_grid.npz bl_calf f=1.0: real 0.86 sim_before 0.81 sim_after 1.29
+  bl_calf__sine_grid.npz bl_calf f=2.0: real 0.86 sim_before 0.75 sim_after 1.21
+  bl_calf__sine_grid.npz bl_calf f=4.0: real 0.80 sim_before 0.51 sim_after 1.02
+  br_hip__sine_grid.npz br_hip f=0.5: real 0.80 sim_before 0.83 sim_after 1.54
+  br_hip__sine_grid.npz br_hip f=1.0: real 0.83 sim_before 0.78 sim_after 1.47
+  br_hip__sine_grid.npz br_hip f=2.0: real 0.93 sim_before 0.64 sim_after 1.37
+  br_hip__sine_grid.npz br_hip f=4.0: real 0.94 sim_before 0.42 sim_after 1.27
+  br_thigh__sine_grid.npz br_thigh f=0.5: real 0.77 sim_before 0.83 sim_after 2.50
+  br_thigh__sine_grid.npz br_thigh f=1.0: real 0.77 sim_before 0.74 sim_after 2.08
+  br_thigh__sine_grid.npz br_thigh f=2.0: real 0.80 sim_before 0.65 sim_after 2.07
+  br_thigh__sine_grid.npz br_thigh f=4.0: real 0.83 sim_before 0.50 sim_after 2.05
+  fl_thigh__sine_grid.npz fl_thigh f=0.5: real 0.83 sim_before 0.85 sim_after 1.25
+  fl_thigh__sine_grid.npz fl_thigh f=1.0: real 0.83 sim_before 0.76 sim_after 1.22
+  fl_thigh__sine_grid.npz fl_thigh f=2.0: real 0.86 sim_before 0.65 sim_after 1.26
+  fl_thigh__sine_grid.npz fl_thigh f=4.0: real 0.83 sim_before 0.45 sim_after 1.29
+
+fit written to servo_fit_v1.json
+report written to servo_fit_v1.json.txt

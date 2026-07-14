@@ -679,3 +679,60 @@ def stand_still(
             reward *= scale
     return reward
 
+
+class joint_acc_control_rate_l2:
+  """``joint_acc_l2`` measured at CONTROL rate, not physics rate.
+
+  v19 v1/v2 postmortem (2026-07-14): the measured servo plant (kp 39.7,
+  kd 0.007, damping 0.011, armature 0, torque clamp +/-0.22 N*m) is a
+  stiff torque-saturated relay with almost no dissipation. At the 500 Hz
+  physics rate it dithers in a sub-milliradian limit cycle around the
+  target (the real servo's audible buzz; force sign flips on ~19% of
+  control steps, instantaneous qacc RMS ~900 rad/s^2 while standing
+  STILL). That dither is invisible at the 100 Hz telemetry the Stage-1
+  fit scored — physically-damped parameter variants replay the captures
+  3x WORSE, so the fit is right at gait frequencies and unconstrained
+  above them.
+
+  mjlab's ``joint_acc_l2`` reads the instantaneous ``qacc`` of the last
+  physics substep, so on this plant it taxes the policy ~-0.8/step for a
+  phenomenon it cannot influence; with is_terminated at -200 that made
+  dying (+bootstrap 0) cheaper than living and both v19 runs collapsed
+  into the 5-step suicide attractor (Episode_Reward/joint_acc_l2 was
+  -660 of the -704 mean episode reward at v2 iter 50).
+
+  Fix: finite-difference the joint velocity across CONTROL steps (50 Hz)
+  — the same acceleration the old soft plant effectively exposed and the
+  same signal the deployed observation stack could ever see. On smooth
+  plants this equals qacc; under physics-rate dither the >25 Hz content
+  aliases down bounded by the dither's velocity amplitude (~2 orders of
+  magnitude smaller penalty) instead of scaling with the 500 Hz rate.
+
+  First step after an env reset returns 0 (no previous velocity).
+  """
+
+  def __init__(self, cfg: RewardTermCfg, env: ManagerBasedRlEnv):
+    del cfg
+    self._prev_qd: torch.Tensor | None = None
+    self._valid = torch.zeros(env.num_envs, dtype=torch.bool, device=env.device)
+
+  def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
+    if env_ids is None:
+      env_ids = slice(None)
+    self._valid[env_ids] = False
+
+  def __call__(
+    self,
+    env: ManagerBasedRlEnv,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+  ) -> torch.Tensor:
+    asset: Entity = env.scene[asset_cfg.name]
+    qd = asset.data.joint_vel[:, asset_cfg.joint_ids]
+    if self._prev_qd is None:
+      self._prev_qd = qd.clone()
+    acc = (qd - self._prev_qd) / env.step_dt
+    self._prev_qd = qd.clone()
+    cost = torch.sum(torch.square(acc), dim=1) * self._valid.float()
+    self._valid[:] = True
+    return cost
+

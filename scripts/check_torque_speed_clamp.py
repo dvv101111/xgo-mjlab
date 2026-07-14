@@ -1,20 +1,27 @@
-"""Validation for the 2026-07-12 sim-fidelity fixes (torque-speed clamp +
-per-servo delay DR).
+"""Validation for the sim-fidelity torque-speed clamp (piecewise knee form,
+2026-07-14) + per-servo delay DR.
 
 Builds a small XGOLite-V18Draft env (both fixes on), drives square-wave
 extreme actions to sweep joint speeds through the servo envelope, and checks:
 
+0. KNEE FORM: piecewise_tau_line is flat at tau_max below qd_knee, tapers
+   linearly to zero at qd_max, and with qd_knee 0 reproduces the pre-v19
+   single line tau_max * clip(1 - |qd|/qd_max, 0, 1) EXACTLY — so the v18
+   presets (tau_max 0.22, qd_knee 0, qd_max 4.5) keep their old envelope.
 1. CLAMP FORMULA: the forcerange written by the step event matches
-   tau_line(qd) = tau_stall_i * clip(1 - |qd|/omega_nl_i, 0, 1) one-sidedly
-   (driving side droops, braking side stays at tau_stall_i).
+   tau_line(qd) = piecewise_tau_line(|qd|, tau_max_i, qd_knee, qd_max)
+   one-sidedly (driving side droops, braking side stays at tau_max_i).
 2. PHYSICS ENVELOPE: the applied actuator force never leaves the bounds
    that were active during the step's physics substeps, i.e. driving force
-   follows the torque-speed line while braking force can reach tau_stall.
+   follows the torque-speed curve while braking force can reach tau_max.
 3. ONE-SIDEDNESS: braking samples exceed the driving line at high |qd|
    (the clamp must NOT limit braking torque).
-4. STRENGTH COMPOSITION: per-servo tau_stall differs across servos within
+4. STRENGTH COMPOSITION: per-servo tau_max differs across servos within
    an env and across envs, consistent with the v17 strength DR ranges
-   (per-env 0.75-1.25 x per-servo 0.90-1.10 => 0.675..1.375 x 0.22).
+   (per-env 0.75-1.25 x per-servo 0.90-1.10 => 0.675..1.375 x 0.22);
+   the speed axis (qd_knee, qd_max) scales with the SAME strength factor
+   (DC motor: stall torque AND no-load speed are both proportional to
+   supply voltage, so the battery-sag proxy moves the whole envelope).
 5. PER-SERVO DELAY: the robot actuator is the per-servo variant and, after
    enough refresh ticks, lags differ across servos within one env.
 6. OPT-IN DEFAULT: XGOLite-Flat (v17) has no clamp event, keeps the plain
@@ -40,14 +47,16 @@ from src.tasks.velocity.mdp.actuators import (
   PerServoDelayedActuator,
   PerServoDelayedActuatorCfg,
 )
-from src.tasks.velocity.mdp.events import TorqueSpeedClamp
+from src.tasks.velocity.mdp.events import TorqueSpeedClamp, piecewise_tau_line
 
 NUM_ENVS = 64
 NUM_STEPS = 400          # 8 s at 50 Hz = 16 delay refresh ticks (0.5 s period)
 SQUARE_HALF_PERIOD = 10  # control steps; 0.4 s full period forces reversals
 ACTION_AMP = 3.0         # x0.25 scale = +/-0.75 rad target swings
-TAU_STALL = 0.22
-OMEGA_NL = 4.5
+# v18 envelope (sim_fidelity.V18_*): knee at 0 = the pre-v19 single line.
+TAU_MAX = 0.22
+QD_KNEE = 0.0
+QD_MAX = 4.5
 
 _failures: list[str] = []
 
@@ -63,6 +72,39 @@ def main() -> None:
   configure_torch_backends()
   device = "cuda:0" if torch.cuda.is_available() else "cpu"
   torch.manual_seed(0)
+
+  # ------------------------------------------- check 0: knee-form analytic --
+  qd = torch.linspace(0.0, 15.0, 3001)
+  # v18 equivalence: knee at 0 == the old single line. The two expressions
+  # are algebraically identical; float32 rounding leaves ~1e-8 N*m residue
+  # (7e-8 relative), far below sim force resolution.
+  knee0 = piecewise_tau_line(qd, TAU_MAX, QD_KNEE, QD_MAX)
+  old_line = TAU_MAX * (1.0 - qd / QD_MAX).clamp(0.0, 1.0)
+  eq_err = (knee0 - old_line).abs().max().item()
+  check(
+    "knee form with qd_knee 0 == old single line (v18 envelope preserved)",
+    eq_err < 1e-7,
+    f"max |knee0 - old| = {eq_err:.2e} over qd in [0, 15]",
+  )
+  # Measured v19 shape: flat to the knee, linear taper, zero past qd_max.
+  m_tau, m_knee, m_max = 0.22, 3.6468, 12.0939
+  line = piecewise_tau_line(qd, m_tau, m_knee, m_max)
+  below = qd <= m_knee
+  beyond = qd >= m_max
+  mid = (qd > m_knee) & (qd < m_max)
+  taper = m_tau * (m_max - qd) / (m_max - m_knee)
+  check(
+    "knee form: flat tau_max below knee, linear taper, zero past qd_max",
+    bool(
+      ((line[below] - m_tau).abs().max() < 1e-8)
+      and (line[beyond] == 0.0).all()
+      and ((line[mid] - taper[mid]).abs().max() < 1e-7)
+    ),
+    f"tau({m_knee:.2f})={piecewise_tau_line(torch.tensor(m_knee), m_tau, m_knee, m_max):.4f}, "
+    f"tau({0.5 * (m_knee + m_max):.2f})="
+    f"{piecewise_tau_line(torch.tensor(0.5 * (m_knee + m_max)), m_tau, m_knee, m_max):.4f}, "
+    f"tau({m_max:.2f})={piecewise_tau_line(torch.tensor(m_max), m_tau, m_knee, m_max):.4f}",
+  )
 
   # --------------------------------------------------------------- env A --
   cfg = load_env_cfg("XGOLite-V18Draft")
@@ -86,28 +128,28 @@ def main() -> None:
   action = torch.zeros(env.num_envs, env.action_manager.total_action_dim, device=device)
   env.step(action)
 
-  assert term._tau_stall is not None and term._omega_nl is not None
+  assert term._tau_max is not None
+  assert term._qd_knee is not None and term._qd_max is not None
   assert term._joint_ids is not None and term._ctrl_ids is not None
-  tau_stall_i = term._tau_stall  # (envs, 12)
-  omega_nl_i = term._omega_nl
+  tau_max_i = term._tau_max  # (envs, 12)
   joint_ids = term._joint_ids
   ctrl_ids = term._ctrl_ids
   all_envs = torch.arange(env.num_envs, device=device, dtype=torch.long)
 
   # ------------------------------------------------- check 4: strength DR --
-  strength = tau_stall_i / TAU_STALL
+  strength = tau_max_i / TAU_MAX
   within_env_spread = (
-    tau_stall_i.max(dim=1).values - tau_stall_i.min(dim=1).values
-  ) / tau_stall_i.mean(dim=1)
+    tau_max_i.max(dim=1).values - tau_max_i.min(dim=1).values
+  ) / tau_max_i.mean(dim=1)
   check(
-    "per-servo tau_stall differs across servos (strength DR composed)",
+    "per-servo tau_max differs across servos (strength DR composed)",
     bool((within_env_spread > 0.01).all()),
     f"within-env max/min spread: min {within_env_spread.min():.3f}, "
     f"median {within_env_spread.median():.3f}",
   )
-  env_means = tau_stall_i.mean(dim=1)
+  env_means = tau_max_i.mean(dim=1)
   check(
-    "per-env tau_stall differs across envs",
+    "per-env tau_max differs across envs",
     bool(((env_means.max() - env_means.min()) / env_means.mean()) > 0.02),
     f"env-mean range [{env_means.min():.4f}, {env_means.max():.4f}] N*m",
   )
@@ -117,8 +159,15 @@ def main() -> None:
     f"strength range [{strength.min():.3f}, {strength.max():.3f}]",
   )
   check(
-    "omega_nl scaled by the same strength factor",
-    bool(torch.allclose(omega_nl_i / OMEGA_NL, strength, atol=1e-5)),
+    "speed axis scales with the strength factor (DC motor: tau AND omega "
+    "proportional to voltage)",
+    isinstance(term._qd_knee, torch.Tensor)
+    and isinstance(term._qd_max, torch.Tensor)
+    and bool((term._qd_knee - strength * QD_KNEE).abs().max() < 1e-6)
+    and bool((term._qd_max - strength * QD_MAX).abs().max() < 1e-6),
+    f"qd_max/strength range "
+    f"[{(term._qd_max / strength).min():.3f}, "
+    f"{(term._qd_max / strength).max():.3f}] (nominal {QD_MAX})",
   )
 
   # ------------------------------------------- sweep with square-wave cmds --
@@ -150,9 +199,11 @@ def main() -> None:
 
     # Braking-above-the-line evidence: force opposing the velocity that set
     # the bounds, with magnitude above the driving line at that speed.
-    prev_line = tau_stall_i * (1.0 - prev_qd.abs() / omega_nl_i).clamp(0.0, 1.0)
+    prev_line = piecewise_tau_line(
+      prev_qd.abs(), tau_max_i, term._qd_knee, term._qd_max
+    )
     braking = (torch.sign(force) * torch.sign(prev_qd) < 0) & (prev_qd.abs() > 1.0)
-    above_line = braking & (force.abs() > prev_line + 0.10 * tau_stall_i)
+    above_line = braking & (force.abs() > prev_line + 0.10 * tau_max_i)
     n_brake_above_line += int(above_line.sum().item())
     if braking.any():
       brake_force_max = max(brake_force_max, force.abs()[braking].max().item())
@@ -175,9 +226,11 @@ def main() -> None:
     # Formula check on the freshly written bounds vs current qd.
     qd = robot.data.joint_vel[:, joint_ids]
     qd_abs_max = max(qd_abs_max, qd.abs().max().item())
-    tau_line = tau_stall_i * (1.0 - qd.abs() / omega_nl_i).clamp(0.0, 1.0)
-    exp_upper = torch.where(qd >= 0, tau_line, tau_stall_i)
-    exp_lower = torch.where(qd >= 0, -tau_stall_i, -tau_line)
+    tau_line = piecewise_tau_line(
+      qd.abs(), tau_max_i, term._qd_knee, term._qd_max
+    )
+    exp_upper = torch.where(qd >= 0, tau_line, tau_max_i)
+    exp_lower = torch.where(qd >= 0, -tau_max_i, -tau_line)
     lower = env.sim.model.actuator_forcerange[all_envs[:, None], ctrl_ids, 0]
     upper = env.sim.model.actuator_forcerange[all_envs[:, None], ctrl_ids, 1]
     err = torch.maximum((upper - exp_upper).abs(), (lower - exp_lower).abs())
@@ -188,7 +241,7 @@ def main() -> None:
     prev_qd = qd.clone()
 
   mid = 0.5 * (bins[:-1] + bins[1:])
-  line_env = TAU_STALL * (1.0 - mid / OMEGA_NL).clamp(0.0, 1.0)
+  line_env = piecewise_tau_line(mid, TAU_MAX, QD_KNEE, QD_MAX)
   print("\n|qd| bin mid [rad/s] | nominal line | max driving | max braking")
   for b in range(len(bins) - 1):
     print(
@@ -208,8 +261,8 @@ def main() -> None:
   )
   check(
     "joint speeds actually swept the droop region",
-    qd_abs_max > OMEGA_NL,
-    f"max |qd| = {qd_abs_max:.2f} rad/s (omega_nl = {OMEGA_NL})",
+    qd_abs_max > QD_MAX,
+    f"max |qd| = {qd_abs_max:.2f} rad/s (qd_max = {QD_MAX})",
   )
   check(
     "braking force exceeds the driving line (clamp is one-sided)",
@@ -227,15 +280,20 @@ def main() -> None:
     f"shape {tuple(lags.shape)}",
   )
   in_range = ((lags == 0) | ((lags >= 30) & (lags <= 50))).all()
+  # Envs that reset (fell) just before the end of the sweep have all lags
+  # back at the post-reset 0 — no refresh tick yet, nothing to compare;
+  # excluding them removes the falls-timing flakiness of this check.
+  refreshed = (lags > 0).any(dim=1)
   distinct = torch.tensor(
     [len(torch.unique(lags[e])) for e in range(NUM_ENVS)], dtype=torch.float
   )
-  frac_multi = (distinct >= 2).float().mean().item()
+  frac_multi = (distinct[refreshed.cpu()] >= 2).float().mean().item()
   nonzero_frac = (lags > 0).float().mean().item()
   check(
     "per-servo lag draws differ across servos within an env",
     frac_multi > 0.9,
-    f"{frac_multi * 100:.0f}% of envs have >=2 distinct lags; "
+    f"{frac_multi * 100:.0f}% of refreshed envs ({int(refreshed.sum())}/"
+    f"{NUM_ENVS}) have >=2 distinct lags; "
     f"{nonzero_frac * 100:.0f}% of servo lags refreshed (in 30..50)",
   )
   check("lags stay in the configured 30..50 range (or pre-refresh 0)", bool(in_range))

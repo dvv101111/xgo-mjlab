@@ -1,0 +1,420 @@
+Servo-model fit report
+created: 2026-07-14T14:41:46
+sessions: ['/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-07-30_stand', '/home/dvv/dev/bots/servo_id_data/servo_id/2026-07-13_18-04-06_stand']
+settings: {"mode": "per-joint", "fit_names": ["kp", "kd", "damping", "armature", "frictionloss", "qd_knee", "qd_max", "deadband", "delay_ms"], "generations": 150, "popsize": 64, "sigma0": 0.5, "seed": 0, "tau_max_pinned": 0.22, "sim_dt": 0.002, "settle_s": 1.0, "skip_ms": 300.0, "regime": "loaded_free_base_contact", "bounds": {"kp": [0.5, 40.0], "kd": [0.0, 2.0], "damping": [0.0, 0.4], "armature": [0.0, 0.02], "frictionloss": [0.0, 0.1], "qd_knee": [3.0, 10.0], "qd_max": [8.0, 14.0], "deadband": [0.0, 0.06], "delay_ms": [5.0, 90.0]}}
+
+global delay: 24.9 ms
+held-from (pass-2 held-joint values): servo_fit_v2_shared.json
+
+per-joint fits, pass 2, other joints held at the shared-fit values (loss = MSE + 0.01*FFT-RMSE<10Hz):
+joint       loss_before  loss_after         kp         kd    damping   armature frictionloss    qd_knee     qd_max   deadband   delay_ms
+fl_hip        5.829e-03   4.464e-04    37.0750     0.4775     0.0077     0.0009     0.0021     3.3717    11.2601     0.0024    21.4515
+fl_thigh      6.115e-03   1.379e-03    37.4369     0.7341     0.0143     0.0018     0.0053     5.5912    12.4199     0.0412     6.8151
+fl_calf       5.415e-03   3.399e-04    34.7535     0.7930     0.0016     0.0006     0.0013     5.5212    11.0796     0.0029    26.3169
+fr_hip        5.657e-03   3.829e-04    37.1327     0.7383     0.0030     0.0003     0.0066     4.2599    10.1451     0.0053    30.6405
+fr_thigh      6.777e-03   3.934e-04    35.7383     0.0384     0.0011     0.0000     0.0095     4.1103    11.6260     0.0005    39.6737
+fr_calf       6.264e-03   1.830e-04    35.1657     0.6590     0.0010     0.0009     0.0059     3.5373    10.7700     0.0049    21.1553
+bl_hip        6.388e-03   1.875e-04    34.2869     0.1798     0.0154     0.0004     0.0034     3.7236    11.2324     0.0070    25.5758
+bl_thigh      4.882e-03   2.271e-04    24.0956     0.4743     0.0020     0.0011     0.0012     4.3856    12.3300     0.0056    24.6328
+bl_calf       7.679e-03   1.143e-03    38.0386     1.0493     0.0018     0.0014     0.0056     3.5369    13.3081     0.0030     6.0539
+br_hip        5.952e-03   1.462e-04    36.8468     0.5065     0.0025     0.0004     0.0034     3.8997    11.7344     0.0060    27.5054
+br_thigh      5.241e-03   1.638e-04    28.6414     0.5637     0.0059     0.0011     0.0042     4.0689    11.6499     0.0049    25.1175
+br_calf       1.023e-02   9.053e-04    29.9289     0.5614     0.0000     0.0014     0.0049     3.8096     9.6443     0.0017     7.5568
+
+shared-class fit (one parameter set for all 12 servos):
+  loss 1.009e-02 -> 9.846e-04; params {"kp": 39.71293, "kd": 0.00676, "damping": 0.01114, "armature": 0.0, "frictionloss": 0.00046, "qd_knee": 3.64681, "qd_max": 12.09389, "deadband": 0.00098, "delay_ms": 41.38515, "tau_max": 0.22}
+
+per-segment sim-vs-real RMSE (rad); variants: baseline = current stack, shared = one fitted set on all 12 servos, per_joint = all fitted sets applied at once (deployment world):
+file                         joint      segment                    baseline   shared  per_jnt     amp r/pj
+fl_hip__steps.npz            fl_hip     step to +0.10                0.0088   0.0119   0.0101             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0326   0.0128   0.0077             
+fl_hip__steps.npz            fl_hip     step to -0.10                0.0248   0.0188   0.0073             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0195   0.0192   0.0135             
+fl_hip__steps.npz            fl_hip     step to +0.20                0.0410   0.0164   0.0142             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0749   0.0111   0.0299             
+fl_hip__steps.npz            fl_hip     step to -0.20                0.0734   0.0080   0.0405             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.0652   0.0214   0.0329             
+fl_hip__steps.npz            fl_hip     step to +0.40                0.0983   0.0311   0.0123             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.2212   0.0760   0.1240             
+fl_hip__steps.npz            fl_hip     step to -0.40                0.1357   0.0745   0.0787             
+fl_hip__steps.npz            fl_hip     step to +0.00                0.2124   0.0392   0.1283             
+fl_thigh__steps.npz          fl_thigh   step to +0.10                0.0047   0.0075   0.0358             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0166   0.0231   0.0359             
+fl_thigh__steps.npz          fl_thigh   step to -0.10                0.0202   0.0147   0.0318             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0498   0.0151   0.0536             
+fl_thigh__steps.npz          fl_thigh   step to +0.20                0.0722   0.0081   0.0656             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.0735   0.0191   0.0387             
+fl_thigh__steps.npz          fl_thigh   step to -0.20                0.0488   0.0188   0.0368             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.1048   0.0200   0.0621             
+fl_thigh__steps.npz          fl_thigh   step to +0.40                0.1787   0.0535   0.1038             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.1750   0.0347   0.0693             
+fl_thigh__steps.npz          fl_thigh   step to -0.40                0.1225   0.0223   0.0610             
+fl_thigh__steps.npz          fl_thigh   step to +0.00                0.2995   0.1286   0.1945             
+fl_calf__steps.npz           fl_calf    step to +0.10                0.0123   0.0162   0.0091             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0186   0.0149   0.0037             
+fl_calf__steps.npz           fl_calf    step to -0.10                0.0209   0.0163   0.0102             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0158   0.0221   0.0160             
+fl_calf__steps.npz           fl_calf    step to +0.20                0.0339   0.0128   0.0116             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0675   0.0215   0.0326             
+fl_calf__steps.npz           fl_calf    step to -0.20                0.0477   0.0394   0.0365             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.0378   0.0351   0.0188             
+fl_calf__steps.npz           fl_calf    step to +0.40                0.0870   0.0186   0.0131             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.2080   0.0615   0.1154             
+fl_calf__steps.npz           fl_calf    step to -0.40                0.1688   0.0431   0.0901             
+fl_calf__steps.npz           fl_calf    step to +0.00                0.1289   0.0471   0.0174             
+fr_hip__steps.npz            fr_hip     step to +0.10                0.0037   0.0081   0.0019             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0427   0.0137   0.0214             
+fr_hip__steps.npz            fr_hip     step to -0.10                0.0437   0.0170   0.0304             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0227   0.0122   0.0095             
+fr_hip__steps.npz            fr_hip     step to +0.20                0.0415   0.0190   0.0104             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0694   0.0107   0.0404             
+fr_hip__steps.npz            fr_hip     step to -0.20                0.0689   0.0139   0.0418             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.0597   0.0176   0.0283             
+fr_hip__steps.npz            fr_hip     step to +0.40                0.1073   0.0169   0.0170             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.2295   0.0512   0.1544             
+fr_hip__steps.npz            fr_hip     step to -0.40                0.1520   0.0490   0.0891             
+fr_hip__steps.npz            fr_hip     step to +0.00                0.2089   0.0524   0.1335             
+fr_thigh__steps.npz          fr_thigh   step to +0.10                0.0203   0.0132   0.0119             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0310   0.0172   0.0193             
+fr_thigh__steps.npz          fr_thigh   step to -0.10                0.0226   0.0161   0.0157             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0496   0.0160   0.0364             
+fr_thigh__steps.npz          fr_thigh   step to +0.20                0.0740   0.0210   0.0455             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.0772   0.0176   0.0396             
+fr_thigh__steps.npz          fr_thigh   step to -0.20                0.0538   0.0213   0.0286             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.1010   0.0197   0.0616             
+fr_thigh__steps.npz          fr_thigh   step to +0.40                0.1922   0.0298   0.0931             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.2008   0.0339   0.0882             
+fr_thigh__steps.npz          fr_thigh   step to -0.40                0.1270   0.0293   0.0350             
+fr_thigh__steps.npz          fr_thigh   step to +0.00                0.2843   0.1011   0.2383             
+fr_calf__steps.npz           fr_calf    step to +0.10                0.0072   0.0107   0.0026             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0205   0.0141   0.0037             
+fr_calf__steps.npz           fr_calf    step to -0.10                0.0235   0.0115   0.0058             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0145   0.0141   0.0073             
+fr_calf__steps.npz           fr_calf    step to +0.20                0.0312   0.0149   0.0081             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0592   0.0141   0.0224             
+fr_calf__steps.npz           fr_calf    step to -0.20                0.0631   0.0131   0.0274             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.0435   0.0153   0.0076             
+fr_calf__steps.npz           fr_calf    step to +0.40                0.0948   0.0185   0.0151             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.1958   0.0347   0.1008             
+fr_calf__steps.npz           fr_calf    step to -0.40                0.1627   0.0388   0.0770             
+fr_calf__steps.npz           fr_calf    step to +0.00                0.1512   0.0294   0.0145             
+bl_hip__steps.npz            bl_hip     step to +0.10                0.0039   0.0067   0.0004             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0429   0.0140   0.0218             
+bl_hip__steps.npz            bl_hip     step to -0.10                0.0444   0.0168   0.0317             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0207   0.0131   0.0145             
+bl_hip__steps.npz            bl_hip     step to +0.20                0.0408   0.0159   0.0101             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0703   0.0145   0.0352             
+bl_hip__steps.npz            bl_hip     step to -0.20                0.0779   0.0086   0.0502             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.0623   0.0156   0.0305             
+bl_hip__steps.npz            bl_hip     step to +0.40                0.1040   0.0100   0.0048             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.2083   0.0064   0.1299             
+bl_hip__steps.npz            bl_hip     step to -0.40                0.1893   0.0131   0.1166             
+bl_hip__steps.npz            bl_hip     step to +0.00                0.2087   0.0927   0.1376             
+bl_thigh__steps.npz          bl_thigh   step to +0.10                0.0119   0.0077   0.0066             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0259   0.0129   0.0148             
+bl_thigh__steps.npz          bl_thigh   step to -0.10                0.0225   0.0147   0.0094             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0405   0.0089   0.0193             
+bl_thigh__steps.npz          bl_thigh   step to +0.20                0.0663   0.0207   0.0289             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0792   0.0246   0.0480             
+bl_thigh__steps.npz          bl_thigh   step to -0.20                0.0547   0.0237   0.0140             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.0731   0.0263   0.0268             
+bl_thigh__steps.npz          bl_thigh   step to +0.40                0.2020   0.0144   0.0641             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.2132   0.0857   0.1341             
+bl_thigh__steps.npz          bl_thigh   step to -0.40                0.2314   0.0250   0.0362             
+bl_thigh__steps.npz          bl_thigh   step to +0.00                0.1933   0.0206   0.1020             
+bl_calf__steps.npz           bl_calf    step to +0.10                0.0135   0.0144   0.0096             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0261   0.0119   0.0089             
+bl_calf__steps.npz           bl_calf    step to -0.10                0.0288   0.0128   0.0105             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0187   0.0200   0.0100             
+bl_calf__steps.npz           bl_calf    step to +0.20                0.0388   0.0138   0.0121             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0747   0.0255   0.0437             
+bl_calf__steps.npz           bl_calf    step to -0.20                0.0696   0.0322   0.0390             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.0471   0.0242   0.0161             
+bl_calf__steps.npz           bl_calf    step to +0.40                0.0926   0.0304   0.0219             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.2664   0.1599   0.1856             
+bl_calf__steps.npz           bl_calf    step to -0.40                0.2086   0.0375   0.1054             
+bl_calf__steps.npz           bl_calf    step to +0.00                0.1471   0.0300   0.0266             
+br_hip__steps.npz            br_hip     step to +0.10                0.0039   0.0089   0.0014             
+br_hip__steps.npz            br_hip     step to +0.00                0.0479   0.0141   0.0266             
+br_hip__steps.npz            br_hip     step to -0.10                0.0356   0.0091   0.0207             
+br_hip__steps.npz            br_hip     step to +0.00                0.0252   0.0059   0.0065             
+br_hip__steps.npz            br_hip     step to +0.20                0.0416   0.0100   0.0061             
+br_hip__steps.npz            br_hip     step to +0.00                0.0860   0.0138   0.0469             
+br_hip__steps.npz            br_hip     step to -0.20                0.0753   0.0111   0.0444             
+br_hip__steps.npz            br_hip     step to +0.00                0.0642   0.0111   0.0306             
+br_hip__steps.npz            br_hip     step to +0.40                0.1073   0.0133   0.0102             
+br_hip__steps.npz            br_hip     step to +0.00                0.2264   0.0192   0.1444             
+br_hip__steps.npz            br_hip     step to -0.40                0.1897   0.0076   0.1076             
+br_hip__steps.npz            br_hip     step to +0.00                0.2071   0.0999   0.1296             
+br_thigh__steps.npz          br_thigh   step to +0.10                0.0072   0.0067   0.0015             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0234   0.0166   0.0139             
+br_thigh__steps.npz          br_thigh   step to -0.10                0.0192   0.0156   0.0080             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0344   0.0057   0.0149             
+br_thigh__steps.npz          br_thigh   step to +0.20                0.0632   0.0242   0.0277             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0834   0.0225   0.0637             
+br_thigh__steps.npz          br_thigh   step to -0.20                0.0550   0.0201   0.0170             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.0727   0.0242   0.0223             
+br_thigh__steps.npz          br_thigh   step to +0.40                0.1988   0.0145   0.0704             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.2170   0.0326   0.1416             
+br_thigh__steps.npz          br_thigh   step to -0.40                0.2322   0.0192   0.0271             
+br_thigh__steps.npz          br_thigh   step to +0.00                0.1918   0.0117   0.1076             
+br_calf__steps.npz           br_calf    step to +0.10                0.0032   0.0112   0.0019             
+br_calf__steps.npz           br_calf    step to +0.00                0.0397   0.0064   0.0146             
+br_calf__steps.npz           br_calf    step to -0.10                0.0297   0.0104   0.0116             
+br_calf__steps.npz           br_calf    step to +0.00                0.0182   0.0183   0.0105             
+br_calf__steps.npz           br_calf    step to +0.20                0.0388   0.0174   0.0120             
+br_calf__steps.npz           br_calf    step to +0.00                0.0906   0.0165   0.0460             
+br_calf__steps.npz           br_calf    step to -0.20                0.0735   0.0359   0.0332             
+br_calf__steps.npz           br_calf    step to +0.00                0.0485   0.0182   0.0200             
+br_calf__steps.npz           br_calf    step to +0.40                0.0879   0.0242   0.0241             
+br_calf__steps.npz           br_calf    step to +0.00                0.2978   0.2516   0.2107             
+br_calf__steps.npz           br_calf    step to -0.40                0.2188   0.0315   0.1039             
+br_calf__steps.npz           br_calf    step to +0.00                0.1541   0.0209   0.0179             
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=0.5            0.0164   0.0136   0.0115    0.86/0.95
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=1.0            0.0264   0.0127   0.0111    0.89/0.95
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=2.0            0.0461   0.0099   0.0098    0.89/0.94
+fl_hip__sine_grid.npz        fl_hip     sine a=0.08 f=4.0            0.0593   0.0134   0.0222    0.89/0.84
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=0.5            0.0258   0.0125   0.0116    0.87/0.98
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=1.0            0.0480   0.0111   0.0100    0.90/0.97
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=2.0            0.0932   0.0140   0.0136    0.95/0.96
+fl_hip__sine_grid.npz        fl_hip     sine a=0.15 f=4.0            0.1160   0.0270   0.0523    0.96/0.83
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=0.5            0.0525   0.0176   0.0155    0.91/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=1.0            0.1251   0.0238   0.0235    0.87/0.99
+fl_hip__sine_grid.npz        fl_hip     sine a=0.30 f=2.0            0.1971   0.0293   0.0837    0.99/0.92
+fl_hip__sine_grid.npz        fl_hip     sine a=0.18 f=4.0            0.1327   0.0320   0.0725    0.94/0.76
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=0.5            0.0139   0.0191   0.0237    0.80/0.47
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=1.0            0.0212   0.0166   0.0273    0.83/0.46
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=2.0            0.0357   0.0167   0.0290    0.90/0.43
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=4.0            0.0519   0.0154   0.0340    0.80/0.31
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=0.5            0.0261   0.0179   0.0245    0.87/0.72
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=1.0            0.0612   0.0160   0.0259    0.89/0.71
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=2.0            0.0985   0.0195   0.0331    0.95/0.68
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=4.0            0.1246   0.0300   0.0702    0.94/0.39
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=0.5            0.0642   0.0188   0.0249    0.96/0.86
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=1.0            0.1468   0.0182   0.0350    0.95/0.85
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=2.0            0.2095   0.0307   0.1091    0.97/0.73
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.18 f=4.0            0.1459   0.0517   0.0850    0.94/0.40
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=0.5            0.0129   0.0187   0.0120    0.83/0.93
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=1.0            0.0176   0.0213   0.0147    0.80/0.92
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=2.0            0.0264   0.0185   0.0112    0.86/0.90
+fl_calf__sine_grid.npz       fl_calf    sine a=0.08 f=4.0            0.0471   0.0201   0.0144    0.86/0.80
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=0.5            0.0162   0.0214   0.0112    0.89/0.96
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=1.0            0.0309   0.0181   0.0115    0.90/0.95
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=2.0            0.0653   0.0214   0.0129    0.92/0.92
+fl_calf__sine_grid.npz       fl_calf    sine a=0.15 f=4.0            0.0977   0.0287   0.0458    0.92/0.71
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=0.5            0.0398   0.0180   0.0104    0.95/0.98
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=1.0            0.1069   0.0198   0.0137    0.95/0.97
+fl_calf__sine_grid.npz       fl_calf    sine a=0.30 f=2.0            0.1724   0.0262   0.0620    0.96/0.93
+fl_calf__sine_grid.npz       fl_calf    sine a=0.18 f=4.0            0.1199   0.0363   0.0632    0.91/0.68
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=0.5            0.0209   0.0201   0.0153    0.96/0.89
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=1.0            0.0262   0.0185   0.0133    0.86/0.90
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=2.0            0.0449   0.0213   0.0187    0.95/0.87
+fr_hip__sine_grid.npz        fr_hip     sine a=0.08 f=4.0            0.0623   0.0241   0.0372    0.96/0.69
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=0.5            0.0238   0.0176   0.0119    0.85/0.95
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=1.0            0.0448   0.0193   0.0154    0.87/0.94
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=2.0            0.0831   0.0199   0.0232    0.90/0.90
+fr_hip__sine_grid.npz        fr_hip     sine a=0.15 f=4.0            0.1079   0.0327   0.0642    0.92/0.71
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=0.5            0.0478   0.0334   0.0290    0.85/0.98
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=1.0            0.1195   0.0243   0.0223    0.91/0.97
+fr_hip__sine_grid.npz        fr_hip     sine a=0.30 f=2.0            0.1885   0.0284   0.0679    0.95/0.89
+fr_hip__sine_grid.npz        fr_hip     sine a=0.18 f=4.0            0.1194   0.0524   0.0641    0.91/0.70
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=0.5            0.0145   0.0172   0.0144    0.93/0.98
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=1.0            0.0229   0.0159   0.0136    0.89/0.98
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=2.0            0.0371   0.0147   0.0143    0.89/0.98
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.08 f=4.0            0.0531   0.0205   0.0177    0.86/1.00
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=0.5            0.0275   0.0158   0.0149    0.90/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=1.0            0.0644   0.0166   0.0157    0.92/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=2.0            0.1017   0.0173   0.0226    0.90/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.15 f=4.0            0.1294   0.0231   0.0543    0.90/1.02
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=0.5            0.0687   0.0140   0.0190    0.96/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=1.0            0.1531   0.0140   0.0213    0.97/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.30 f=2.0            0.2185   0.0347   0.0538    0.99/0.99
+fr_thigh__sine_grid.npz      fr_thigh   sine a=0.18 f=4.0            0.1600   0.0204   0.0823    0.99/0.91
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=0.5            0.0130   0.0196   0.0115    0.77/0.92
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=1.0            0.0166   0.0169   0.0110    0.80/0.91
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=2.0            0.0256   0.0156   0.0098    0.80/0.89
+fr_calf__sine_grid.npz       fr_calf    sine a=0.08 f=4.0            0.0472   0.0152   0.0107    0.80/0.81
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=0.5            0.0172   0.0153   0.0094    0.89/0.96
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=1.0            0.0329   0.0148   0.0088    0.90/0.95
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=2.0            0.0718   0.0142   0.0085    0.92/0.92
+fr_calf__sine_grid.npz       fr_calf    sine a=0.15 f=4.0            0.1082   0.0214   0.0435    0.99/0.75
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=0.5            0.0415   0.0160   0.0090    0.95/0.98
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=1.0            0.1104   0.0158   0.0096    0.95/0.97
+fr_calf__sine_grid.npz       fr_calf    sine a=0.30 f=2.0            0.1792   0.0246   0.0586    0.95/0.94
+fr_calf__sine_grid.npz       fr_calf    sine a=0.18 f=4.0            0.1284   0.0277   0.0571    0.99/0.73
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=0.5            0.0181   0.0171   0.0126    0.83/0.89
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=1.0            0.0267   0.0146   0.0112    0.80/0.89
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=2.0            0.0476   0.0130   0.0160    0.83/0.89
+bl_hip__sine_grid.npz        bl_hip     sine a=0.08 f=4.0            0.0700   0.0219   0.0458    0.99/0.71
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=0.5            0.0274   0.0133   0.0115    0.94/0.94
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=1.0            0.0525   0.0148   0.0155    0.94/0.94
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=2.0            0.0951   0.0172   0.0299    0.97/0.93
+bl_hip__sine_grid.npz        bl_hip     sine a=0.15 f=4.0            0.1185   0.0278   0.0614    0.97/0.71
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=0.5            0.0541   0.0134   0.0137    0.97/0.98
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=1.0            0.1370   0.0189   0.0311    0.98/0.97
+bl_hip__sine_grid.npz        bl_hip     sine a=0.30 f=2.0            0.2058   0.0307   0.1174    1.00/0.80
+bl_hip__sine_grid.npz        bl_hip     sine a=0.18 f=4.0            0.1427   0.0400   0.0801    1.00/0.69
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=0.5            0.0110   0.0188   0.0108    0.83/0.91
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=1.0            0.0211   0.0174   0.0104    0.89/0.90
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=2.0            0.0320   0.0142   0.0099    0.87/0.87
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.08 f=4.0            0.0497   0.0157   0.0146    0.93/0.80
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=0.5            0.0266   0.0179   0.0113    0.89/0.95
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=1.0            0.0561   0.0163   0.0112    0.92/0.94
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=2.0            0.0926   0.0163   0.0157    0.94/0.92
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.15 f=4.0            0.1015   0.0236   0.0754    0.87/0.68
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=0.5            0.0969   0.0172   0.0194    0.93/0.98
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=1.0            0.1504   0.0168   0.0957    0.95/0.96
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.30 f=2.0            0.2042   0.0199   0.1852    0.98/0.83
+bl_thigh__sine_grid.npz      bl_thigh   sine a=0.18 f=4.0            0.1298   0.0255   0.0798    0.91/0.75
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=0.5            0.0153   0.0212   0.0149    0.80/0.94
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=1.0            0.0193   0.0204   0.0138    0.86/0.92
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=2.0            0.0283   0.0180   0.0133    0.86/0.87
+bl_calf__sine_grid.npz       bl_calf    sine a=0.08 f=4.0            0.0516   0.0202   0.0188    0.80/0.69
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=0.5            0.0196   0.0189   0.0120    0.89/0.96
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=1.0            0.0412   0.0190   0.0131    0.92/0.95
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=2.0            0.0832   0.0149   0.0161    0.92/0.90
+bl_calf__sine_grid.npz       bl_calf    sine a=0.15 f=4.0            0.1075   0.0481   0.0684    0.92/0.54
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=0.5            0.0565   0.0167   0.0133    0.95/0.98
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=1.0            0.1491   0.0177   0.0294    0.94/0.96
+bl_calf__sine_grid.npz       bl_calf    sine a=0.30 f=2.0            0.1971   0.1580   0.1542    0.94/0.73
+bl_calf__sine_grid.npz       bl_calf    sine a=0.18 f=4.0            0.1302   0.0640   0.0914    0.91/0.49
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=0.5            0.0167   0.0166   0.0117    0.80/0.91
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=1.0            0.0265   0.0147   0.0112    0.83/0.90
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=2.0            0.0466   0.0111   0.0128    0.93/0.89
+br_hip__sine_grid.npz        br_hip     sine a=0.08 f=4.0            0.0633   0.0113   0.0318    0.94/0.72
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=0.5            0.0254   0.0131   0.0090    0.92/0.95
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=1.0            0.0496   0.0124   0.0110    0.92/0.95
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=2.0            0.0912   0.0145   0.0183    0.94/0.93
+br_hip__sine_grid.npz        br_hip     sine a=0.15 f=4.0            0.1103   0.0195   0.0523    0.92/0.75
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=0.5            0.0489   0.0133   0.0103    0.94/0.98
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=1.0            0.1291   0.0149   0.0195    0.98/0.97
+br_hip__sine_grid.npz        br_hip     sine a=0.30 f=2.0            0.1921   0.0243   0.0848    0.98/0.86
+br_hip__sine_grid.npz        br_hip     sine a=0.18 f=4.0            0.1312   0.0337   0.0641    0.97/0.66
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=0.5            0.0100   0.0210   0.0137    0.77/0.92
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=1.0            0.0170   0.0177   0.0105    0.77/0.90
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=2.0            0.0276   0.0168   0.0081    0.80/0.87
+br_thigh__sine_grid.npz      br_thigh   sine a=0.08 f=4.0            0.0430   0.0166   0.0240    0.83/0.70
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=0.5            0.0237   0.0188   0.0112    0.87/0.96
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=1.0            0.0535   0.0171   0.0100    0.84/0.95
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=2.0            0.0899   0.0176   0.0368    0.90/0.90
+br_thigh__sine_grid.npz      br_thigh   sine a=0.15 f=4.0            0.0986   0.0263   0.0751    0.92/0.61
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=0.5            0.0961   0.0167   0.0150    0.94/0.98
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=1.0            0.1471   0.0172   0.0795    0.95/0.97
+br_thigh__sine_grid.npz      br_thigh   sine a=0.30 f=2.0            0.1999   0.0203   0.1644    0.95/0.84
+br_thigh__sine_grid.npz      br_thigh   sine a=0.18 f=4.0            0.1271   0.0262   0.0768    0.90/0.71
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0580   0.0776   0.0403             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0730   0.0972   0.0546             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0583   0.0926   0.0436             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0670   0.0948   0.0500             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0594   0.0851   0.0446             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0698   0.0892   0.0486             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0546   0.0822   0.0404             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0633   0.0883   0.0451             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0523   0.0823   0.0402             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0665   0.0900   0.0486             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0577   0.0889   0.0454             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0647   0.0863   0.0457             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0555   0.0880   0.0417             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0689   0.0953   0.0500             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0580   0.0828   0.0449             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0715   0.0917   0.0529             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0558   0.0841   0.0422             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0690   0.0896   0.0498             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0605   0.0872   0.0457             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0692   0.0922   0.0503             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0543   0.0810   0.0410             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0699   0.0835   0.0458             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0555   0.0842   0.0409             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0707   0.0918   0.0501             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0572   0.0835   0.0421             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0694   0.0983   0.0502             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0556   0.0848   0.0415             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0679   0.0912   0.0500             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0550   0.0841   0.0419             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0719   0.0927   0.0504             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0562   0.0859   0.0424             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0640   0.0834   0.0451             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0539   0.0784   0.0408             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0708   0.0941   0.0520             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0570   0.0855   0.0430             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0663   0.0939   0.0476             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0564   0.0824   0.0408             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0672   0.0869   0.0490             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0534   0.0845   0.0408             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0703   0.0923   0.0497             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0616   0.0886   0.0465             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0667   0.0878   0.0480             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0542   0.0878   0.0411             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0665   0.0926   0.0490             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0545   0.0837   0.0417             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0684   0.0939   0.0496             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.05                0.0547   0.0893   0.0427             
+fl_thigh__latency_probe.npz  fl_thigh   step to -0.05                0.0473   0.0628   0.0234             
+fl_thigh__latency_probe.npz  fl_thigh   step to +0.00                0.0340   0.0267   0.0191             
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=0.5            0.0141   0.0209   0.0239    0.83/0.47
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=1.0            0.0212   0.0179   0.0260    0.83/0.46
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=2.0            0.0354   0.0169   0.0281    0.86/0.43
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.08 f=4.0            0.0503   0.0176   0.0330    0.83/0.31
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=0.5            0.0264   0.0168   0.0249    0.90/0.72
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=1.0            0.0630   0.0160   0.0261    0.90/0.71
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=2.0            0.1032   0.0148   0.0369    0.94/0.68
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.15 f=4.0            0.1265   0.0239   0.0713    0.93/0.39
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=0.5            0.0666   0.0164   0.0259    0.95/0.86
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=1.0            0.1518   0.0137   0.0374    0.96/0.85
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.30 f=2.0            0.2186   0.0289   0.1188    0.97/0.71
+fl_thigh__sine_grid.npz      fl_thigh   sine a=0.18 f=4.0            0.1551   0.0265   0.0980    0.99/0.36
+
+small-amplitude (0.08 rad) attenuation check (real measured 0.77-0.91; the deadband term should reproduce it):
+  fl_hip__sine_grid.npz fl_hip f=0.5: real 0.86 sim: baseline 0.83 shared 1.01 per_joint 0.95
+  fl_hip__sine_grid.npz fl_hip f=1.0: real 0.89 sim: baseline 0.78 shared 1.00 per_joint 0.95
+  fl_hip__sine_grid.npz fl_hip f=2.0: real 0.89 sim: baseline 0.67 shared 1.00 per_joint 0.94
+  fl_hip__sine_grid.npz fl_hip f=4.0: real 0.89 sim: baseline 0.42 shared 1.03 per_joint 0.84
+  fl_thigh__sine_grid.npz fl_thigh f=0.5: real 0.80 sim: baseline 0.84 shared 1.03 per_joint 0.47
+  fl_thigh__sine_grid.npz fl_thigh f=1.0: real 0.83 sim: baseline 0.76 shared 1.00 per_joint 0.46
+  fl_thigh__sine_grid.npz fl_thigh f=2.0: real 0.90 sim: baseline 0.65 shared 1.00 per_joint 0.43
+  fl_thigh__sine_grid.npz fl_thigh f=4.0: real 0.80 sim: baseline 0.45 shared 0.98 per_joint 0.31
+  fl_calf__sine_grid.npz fl_calf f=0.5: real 0.83 sim: baseline 0.85 shared 1.03 per_joint 0.93
+  fl_calf__sine_grid.npz fl_calf f=1.0: real 0.80 sim: baseline 0.81 shared 1.09 per_joint 0.92
+  fl_calf__sine_grid.npz fl_calf f=2.0: real 0.86 sim: baseline 0.77 shared 1.04 per_joint 0.90
+  fl_calf__sine_grid.npz fl_calf f=4.0: real 0.86 sim: baseline 0.62 shared 1.08 per_joint 0.80
+  fr_hip__sine_grid.npz fr_hip f=0.5: real 0.96 sim: baseline 0.83 shared 1.00 per_joint 0.89
+  fr_hip__sine_grid.npz fr_hip f=1.0: real 0.86 sim: baseline 0.78 shared 1.00 per_joint 0.90
+  fr_hip__sine_grid.npz fr_hip f=2.0: real 0.95 sim: baseline 0.67 shared 1.01 per_joint 0.87
+  fr_hip__sine_grid.npz fr_hip f=4.0: real 0.96 sim: baseline 0.43 shared 0.99 per_joint 0.69
+  fr_thigh__sine_grid.npz fr_thigh f=0.5: real 0.93 sim: baseline 0.84 shared 1.01 per_joint 0.98
+  fr_thigh__sine_grid.npz fr_thigh f=1.0: real 0.89 sim: baseline 0.76 shared 0.99 per_joint 0.98
+  fr_thigh__sine_grid.npz fr_thigh f=2.0: real 0.89 sim: baseline 0.65 shared 0.99 per_joint 0.98
+  fr_thigh__sine_grid.npz fr_thigh f=4.0: real 0.86 sim: baseline 0.45 shared 1.02 per_joint 1.00
+  fr_calf__sine_grid.npz fr_calf f=0.5: real 0.77 sim: baseline 0.85 shared 1.10 per_joint 0.92
+  fr_calf__sine_grid.npz fr_calf f=1.0: real 0.80 sim: baseline 0.81 shared 1.05 per_joint 0.91
+  fr_calf__sine_grid.npz fr_calf f=2.0: real 0.80 sim: baseline 0.78 shared 1.05 per_joint 0.89
+  fr_calf__sine_grid.npz fr_calf f=4.0: real 0.80 sim: baseline 0.62 shared 1.01 per_joint 0.81
+  bl_hip__sine_grid.npz bl_hip f=0.5: real 0.83 sim: baseline 0.83 shared 0.99 per_joint 0.89
+  bl_hip__sine_grid.npz bl_hip f=1.0: real 0.80 sim: baseline 0.77 shared 0.99 per_joint 0.89
+  bl_hip__sine_grid.npz bl_hip f=2.0: real 0.83 sim: baseline 0.65 shared 1.00 per_joint 0.89
+  bl_hip__sine_grid.npz bl_hip f=4.0: real 0.99 sim: baseline 0.42 shared 0.99 per_joint 0.71
+  bl_thigh__sine_grid.npz bl_thigh f=0.5: real 0.83 sim: baseline 0.83 shared 1.03 per_joint 0.91
+  bl_thigh__sine_grid.npz bl_thigh f=1.0: real 0.89 sim: baseline 0.74 shared 1.04 per_joint 0.90
+  bl_thigh__sine_grid.npz bl_thigh f=2.0: real 0.87 sim: baseline 0.65 shared 1.04 per_joint 0.87
+  bl_thigh__sine_grid.npz bl_thigh f=4.0: real 0.93 sim: baseline 0.49 shared 1.05 per_joint 0.80
+  bl_calf__sine_grid.npz bl_calf f=0.5: real 0.80 sim: baseline 0.84 shared 1.05 per_joint 0.94
+  bl_calf__sine_grid.npz bl_calf f=1.0: real 0.86 sim: baseline 0.81 shared 1.05 per_joint 0.92
+  bl_calf__sine_grid.npz bl_calf f=2.0: real 0.86 sim: baseline 0.75 shared 1.03 per_joint 0.87
+  bl_calf__sine_grid.npz bl_calf f=4.0: real 0.80 sim: baseline 0.51 shared 1.09 per_joint 0.69
+  br_hip__sine_grid.npz br_hip f=0.5: real 0.80 sim: baseline 0.83 shared 1.00 per_joint 0.91
+  br_hip__sine_grid.npz br_hip f=1.0: real 0.83 sim: baseline 0.78 shared 0.99 per_joint 0.90
+  br_hip__sine_grid.npz br_hip f=2.0: real 0.93 sim: baseline 0.64 shared 0.99 per_joint 0.89
+  br_hip__sine_grid.npz br_hip f=4.0: real 0.94 sim: baseline 0.42 shared 0.99 per_joint 0.72
+  br_thigh__sine_grid.npz br_thigh f=0.5: real 0.77 sim: baseline 0.83 shared 1.06 per_joint 0.92
+  br_thigh__sine_grid.npz br_thigh f=1.0: real 0.77 sim: baseline 0.74 shared 1.00 per_joint 0.90
+  br_thigh__sine_grid.npz br_thigh f=2.0: real 0.80 sim: baseline 0.65 shared 0.98 per_joint 0.87
+  br_thigh__sine_grid.npz br_thigh f=4.0: real 0.83 sim: baseline 0.50 shared 1.02 per_joint 0.70
+  fl_thigh__sine_grid.npz fl_thigh f=0.5: real 0.83 sim: baseline 0.85 shared 1.06 per_joint 0.47
+  fl_thigh__sine_grid.npz fl_thigh f=1.0: real 0.83 sim: baseline 0.76 shared 1.01 per_joint 0.46
+  fl_thigh__sine_grid.npz fl_thigh f=2.0: real 0.86 sim: baseline 0.65 shared 1.02 per_joint 0.43
+  fl_thigh__sine_grid.npz fl_thigh f=4.0: real 0.83 sim: baseline 0.45 shared 1.04 per_joint 0.31
+
+segment RMSE summary per variant (rad):
+  baseline   mean 0.0804 median 0.0623 (n=337)
+  shared     mean 0.0327 median 0.0191 (n=337)
+  per_joint  mean 0.0403 median 0.0289 (n=337)

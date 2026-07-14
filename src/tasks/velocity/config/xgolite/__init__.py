@@ -13,6 +13,7 @@ from .precision import xgolite_precision_env_cfg
 from .range_curriculum import xgolite_v18range_env_cfg
 from .rl_cfg import xgolite_ppo_runner_cfg
 from .sim_fidelity import xgolite_precision2_env_cfg, xgolite_v18draft_env_cfg
+from .v19 import xgolite_v19_env_cfg, xgolite_v19_ppo_runner_cfg
 
 register_mjlab_task(
   task_id="XGOLite-Flat",
@@ -94,5 +95,18 @@ register_mjlab_task(
   env_cfg=xgolite_precision2_env_cfg(),
   play_env_cfg=xgolite_precision2_env_cfg(play=True),
   rl_cfg=xgolite_aggressive_ppo_runner_cfg("xgolite_precision2"),
+  runner_cls=VelocityOnPolicyRunner,
+)
+# V18Range on the MEASURED servo plant (Stage-1 system-ID fit, 2026-07-14):
+# fitted joint dynamics/PD gains, piecewise torque-speed knee, measured
+# delay DR, wide deadband + friction DR, shrunk strength DR. Rewards,
+# curriculum and obs identical to V18Range; PPO identical except init
+# noise std sized to the stiff plant (v1 suicide-collapse postmortem) —
+# see v19.py.
+register_mjlab_task(
+  task_id="XGOLite-V19",
+  env_cfg=xgolite_v19_env_cfg(),
+  play_env_cfg=xgolite_v19_env_cfg(play=True),
+  rl_cfg=xgolite_v19_ppo_runner_cfg(),
   runner_cls=VelocityOnPolicyRunner,
 )

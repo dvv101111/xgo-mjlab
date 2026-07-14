@@ -119,37 +119,54 @@ def actuator_gains_and_strength(
     )
 
 
+def piecewise_tau_line(
+  qd_abs: torch.Tensor,
+  tau_max: torch.Tensor | float,
+  qd_knee: torch.Tensor | float,
+  qd_max: torch.Tensor | float,
+) -> torch.Tensor:
+  """Driving-torque ceiling of the piecewise servo torque-speed curve.
+
+  Flat at ``tau_max`` for ``|qd| <= qd_knee``, then linear taper to zero at
+  ``qd_max``. With ``qd_knee == 0`` this reduces exactly to the pre-v19
+  single line ``tau_max * clip(1 - |qd|/qd_max, 0, 1)``.
+  """
+  return tau_max * ((qd_max - qd_abs) / (qd_max - qd_knee)).clamp(0.0, 1.0)
+
+
 class TorqueSpeedClamp(ManagerTermBase):
   """Per-step one-sided torque-speed clamp for hobby serial-bus servos.
 
   Sim autopsy (2026-07-11/12): the plain forcerange model delivers the full
   stall torque at ANY joint speed, so aggressive policies exploit "superhero
   torque" far above the real DC-motor line (measured up to 84% above it) and
-  stall on hardware. Real cheap servos droop linearly to zero torque at the
-  no-load speed:
+  stall on hardware. The 2026-07-14 Stage-1 servo fit measured the real
+  curve as PIECEWISE: full torque up to a knee speed, then a linear taper to
+  zero (see ``piecewise_tau_line``):
 
-      tau_max(qd) = tau_stall * clip(1 - |qd| / omega_nl, 0, 1)
+      tau_line(qd) = tau_max * clip((qd_max - |qd|) / (qd_max - qd_knee), 0, 1)
 
   The clamp is ONE-SIDED: it only limits DRIVING torque (same sign as the
   joint velocity); BRAKING torque (opposite sign, i.e. the motor plugging /
-  back-EMF regime) keeps the full +/-tau_stall authority. MuJoCo's per-
+  back-EMF regime) keeps the full +/-tau_max authority. MuJoCo's per-
   actuator ``forcerange`` is an independent [min, max] pair, so asymmetric
   per-step limits implement this exactly:
 
-      qd > 0:  max = +tau_line(|qd|),  min = -tau_stall
-      qd < 0:  min = -tau_line(|qd|),  max = +tau_stall
-      qd = 0:  +/-tau_stall  (tau_line(0) == tau_stall, continuous)
+      qd > 0:  max = +tau_line(|qd|),  min = -tau_max
+      qd < 0:  min = -tau_line(|qd|),  max = +tau_max
+      qd = 0:  +/-tau_max  (tau_line(0) == tau_max, continuous)
 
   Composition with strength DR: on the first fire (which happens strictly
   after all startup events) the term reads back the DR'd forcerange written
   by ``actuator_gains_and_strength`` and recovers each servo's per-env x
   per-servo strength factor s = forcerange_max / default_forcerange_max.
-  Both tau_stall AND omega_nl are scaled by s — a weak (low-voltage / worn)
-  servo has proportionally lower stall torque and lower no-load speed. The
-  captured factors are cached: strength DR is a startup-only event, so they
-  are constant for the whole run. (Any other event that rewrites forcerange
-  after startup would be silently overwritten by this term — keep forcerange
-  DR in startup mode when the clamp is enabled.)
+  Both axes scale with s — a DC motor's stall torque AND no-load speed are
+  proportional to supply voltage, so the strength (voltage-proxy) factor
+  multiplies tau_max, qd_knee and qd_max together. The captured factors are
+  cached: strength DR is a startup-only event, so they are constant for the
+  whole run. (Any other event that rewrites forcerange after startup would
+  be silently overwritten by this term — keep forcerange DR in startup mode
+  when the clamp is enabled.)
 
   Wire with ``mode="step"`` so the bounds refresh every control step (50 Hz)
   from the current joint velocities; the bounds then hold for the next
@@ -172,16 +189,23 @@ class TorqueSpeedClamp(ManagerTermBase):
     self._joint_ids: torch.Tensor | None = None
     self._ctrl_ids: torch.Tensor | None = None
     self._all_env_ids: torch.Tensor | None = None
-    self._tau_stall: torch.Tensor | None = None
-    self._omega_nl: torch.Tensor | None = None
+    self._tau_max: torch.Tensor | None = None
+    self._qd_knee: torch.Tensor | None = None
+    self._qd_max: torch.Tensor | None = None
 
   def _lazy_init(
     self,
     env: ManagerBasedRlEnv,
-    tau_stall: float,
-    omega_nl: float,
+    tau_max: float,
+    qd_knee: float,
+    qd_max: float,
     asset_cfg: SceneEntityCfg,
   ) -> None:
+    if not 0.0 <= qd_knee < qd_max:
+      raise ValueError(
+        f"TorqueSpeedClamp requires 0 <= qd_knee < qd_max, got "
+        f"qd_knee={qd_knee}, qd_max={qd_max}"
+      )
     asset: Entity = env.scene[asset_cfg.name]
     joint_ids: list[torch.Tensor] = []
     ctrl_ids: list[torch.Tensor] = []
@@ -213,31 +237,36 @@ class TorqueSpeedClamp(ManagerTermBase):
       self._all_env_ids[:, None], self._ctrl_ids, 1
     ]
     strength = current_upper / default_upper
-    self._tau_stall = (strength * tau_stall).clone()
-    self._omega_nl = (strength * omega_nl).clamp_min(1e-6).clone()
+    self._tau_max = (strength * tau_max).clone()
+    self._qd_knee = (strength * qd_knee).clone()
+    self._qd_max = (strength * qd_max).clone()
 
   def __call__(
     self,
     env: ManagerBasedRlEnv,
     env_ids: torch.Tensor | None,
-    tau_stall: float = 0.22,
-    omega_nl: float = 4.5,
+    tau_max: float,
+    qd_knee: float,
+    qd_max: float,
     asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
   ) -> None:
     del env_ids  # mode="step" fires unconditionally on all envs.
     if not self._initialized:
-      self._lazy_init(env, tau_stall, omega_nl, asset_cfg)
+      self._lazy_init(env, tau_max, qd_knee, qd_max, asset_cfg)
       self._initialized = True
-    assert self._tau_stall is not None and self._omega_nl is not None
+    assert self._tau_max is not None
+    assert self._qd_knee is not None and self._qd_max is not None
     assert self._joint_ids is not None and self._ctrl_ids is not None
     assert self._all_env_ids is not None
 
     asset: Entity = env.scene[asset_cfg.name]
     qd = asset.data.joint_vel[:, self._joint_ids]
-    tau_line = self._tau_stall * (1.0 - qd.abs() / self._omega_nl).clamp(0.0, 1.0)
+    tau_line = piecewise_tau_line(
+      qd.abs(), self._tau_max, self._qd_knee, self._qd_max
+    )
     driving_pos = qd >= 0
-    upper = torch.where(driving_pos, tau_line, self._tau_stall)
-    lower = torch.where(driving_pos, -self._tau_stall, -tau_line)
+    upper = torch.where(driving_pos, tau_line, self._tau_max)
+    lower = torch.where(driving_pos, -self._tau_max, -tau_line)
 
     fr = env.sim.model.actuator_forcerange
     fr[self._all_env_ids[:, None], self._ctrl_ids, 0] = lower
