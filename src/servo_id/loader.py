@@ -1,15 +1,19 @@
 """Capture-session loading for servo system ID.
 
-Input format: ``xgo-servo-id-session/v1`` directories written by the parent
+Input format: ``xgo-servo-id-session/v2`` directories written by the parent
 repo's ``tools/servo_id_capture.py`` — a ``manifest.json`` plus one npz per
-(joint, test). Everything this module returns lives on the FIRMWARE clock
-(ms), the only clock shared by commands and telemetry:
+(joint, test). v1 sessions were captured on the v2.3 firmware (broken
+per-servo refresh cadence, dropped commands) and are invalid by design:
+they are rejected, never migrated. Everything this module returns lives on
+the FIRMWARE clock (ms), the only clock shared by commands and telemetry:
 
-* Telemetry rows arrive at ~100 Hz (``t_ms`` push clock) but each servo's
-  position is only refreshed every ~20-34 ms; ``sample_t_ms[:, j]`` is the
-  firmware time the value in ``q[:, j]`` was actually sampled. Rows between
-  refreshes repeat the value, so per-joint streams must be DEDUPED on
-  ``sample_t_ms`` (see :func:`dedupe_joint_samples`).
+* Telemetry frames are fresh-sweep-gated on the v2.4 firmware: one frame
+  per completed coherent full-15 read sweep, ~75-80 Hz under load, all 15
+  servos sharing one sweep timestamp window. ``sample_t_ms[:, j]`` is the
+  firmware time the value in ``q[:, j]`` was actually sampled
+  (``t_ms - pos_age``); a servo that failed a sweep keeps its stale value,
+  so per-joint streams are still DEDUPED on ``sample_t_ms``
+  (see :func:`dedupe_joint_samples`).
 * Commands are stamped on the HOST clock (``cmd_t_host``, monotonic s).
   Each telemetry row carries ``cmd_ms``, the firmware receipt time of the
   most recently received command. :func:`align_commands` reconstructs the
@@ -94,6 +98,16 @@ class TestCapture:
   alignment: AlignmentDiag
   gravity_body: np.ndarray | None  # (3,) m/s^2 in the base frame
   meta: dict = field(repr=False, default_factory=dict)
+  # Replay regime (2026-07-15), stamped from the session manifest by
+  # load_session: fixed_base selects the bench replay world (welded base,
+  # no floor, gravity from the IMU); stand sessions keep the free base.
+  fixed_base: bool = False
+
+  @property
+  def temp_c(self) -> list | None:
+    """Per-servo temperature (deg C, canonical order, None per failed
+    read) taken right before the test, or None for captures without it."""
+    return self.meta.get("temp_c")
 
 
 @dataclass
@@ -102,13 +116,15 @@ class Session:
 
   path: Path
   manifest: dict
-  base_pose_name: str  # "stand" (loaded) or "folded" (unloaded)
+  base_pose_name: str  # "stand" (loaded), "folded"/"midrange" (free legs)
+  orientation: str  # free-form physical-setup label from the capture CLI
+  payload_g: float  # weighed mass attached to the feet, grams
   tests: list[TestCapture]
 
   @property
   def loaded(self) -> bool:
     """True when the robot stood on the floor (ground-contact regime)."""
-    return self.base_pose_name != "folded"
+    return self.base_pose_name not in ("folded", "midrange")
 
 
 def dedupe_joint_samples(
@@ -301,12 +317,19 @@ def load_session(
   if not manifest_path.exists():
     raise CaptureFormatError(f"{session_dir}: no manifest.json")
   manifest = json.loads(manifest_path.read_text())
-  if manifest.get("schema") != "xgo-servo-id-session/v1":
+  if manifest.get("schema") != "xgo-servo-id-session/v2":
     raise CaptureFormatError(
-      f"{session_dir}: unknown schema {manifest.get('schema')!r}"
+      f"{session_dir}: schema {manifest.get('schema')!r} is not "
+      "xgo-servo-id-session/v2 (v1 sessions are v2.3-firmware-poisoned "
+      "and invalid by design; recapture on v2.4)"
     )
   tests: list[TestCapture] = []
   for rec in manifest.get("tests", []):
+    if rec["kind"] == "decay":
+      # Torque-off pendulum captures carry passive telemetry only (no
+      # command stream to clock-align); they are analyzed by dedicated
+      # tooling, not the fit loader.
+      continue
     if kinds and rec["kind"] not in kinds:
       continue
     if joints and rec["label"] not in joints and rec["label"] not in (
@@ -319,9 +342,18 @@ def load_session(
             file=sys.stderr)
       continue
     tests.append(load_test(npz))
-  return Session(
+  sess = Session(
     path=session_dir,
     manifest=manifest,
     base_pose_name=str(manifest.get("base_pose", "unknown")),
+    orientation=str(manifest["orientation"]),
+    payload_g=float(manifest["payload_g"]),
     tests=tests,
   )
+  # Stamp the replay regime from the manifest: bench sessions
+  # (folded/midrange base pose, robot fixtured, legs free) replay
+  # fixed-base with IMU gravity; stand sessions keep the free base +
+  # floor world.
+  for cap in sess.tests:
+    cap.fixed_base = not sess.loaded
+  return sess

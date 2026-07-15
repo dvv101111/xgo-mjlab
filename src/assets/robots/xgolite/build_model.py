@@ -13,6 +13,10 @@ from it instead of hand-transcription:
                                                the driver's own JointMapper
   - actuators                               -> kp/kv identified from step
                                                responses (2026-07-05)
+  - inertials                               -> CAD-derived mass model
+                                               (assets/robots/lite2/mass_model,
+                                               calibrated to the measured
+                                               577 g total, 2026-07-15)
 
 It then validates the generated model: joint anchors, axes and foot points
 must match the URDF to < 0.5 mm at 25 random poses.
@@ -23,6 +27,7 @@ Usage:
 
 from __future__ import annotations
 
+import json
 import shutil
 import sys
 from pathlib import Path
@@ -49,13 +54,17 @@ LEGS = ("fl", "fr", "bl", "br")
 KP, KV = 5.0, 0.12
 FORCERANGE = 0.22
 JOINT_DEFAULTS = 'damping="0.05" frictionloss="0.001" armature="0.002"'
-# mass model: URDF inertials are plastic shells only (85 g total, unusable).
-# Explicit masses summing to the ~0.63 kg estimate; servo mass sits in the
-# thigh. CoM is then shifted to +15 mm, the midpoint of the empirically
-# bracketed range (candidate-C stance stood -> CoM < +23 mm; v1 default
-# tipped -> CoM > +9 mm).
-MASS = {"base": 0.320, "hip": 0.015, "thigh": 0.045, "calf": 0.015}
-TARGET_COM_X = 0.015
+# mass model: CAD-derived per-link inertials (STEP assembly segmented against
+# the URDF, calibrated to the measured 577 g total; see
+# assets/robots/lite2/mass_model/MASS_MODEL.md). The URDF's own inertials are
+# known-garbage (plastic shells at water density, 85 g) and stay ignored.
+# Every body gets an explicit <inertial> (mass + CoM + full tensor) from
+# mass_model.json; geoms carry no mass. The arm (Link_53/52) is rigidly
+# composed into the base at the URDF-zero pose == the folded locomotion hold
+# the driver streams (openfw/arm.py: (shoulder, elbow) = (0, 0)).
+MASS_MODEL = (QUADRUPED / "assets" / "robots" / "lite2" / "mass_model"
+              / "mass_model.json")
+TOTAL_MASS = 0.577  # kg, measured (kitchen scale 2026-07-15) == json total
 FOOT_RADIUS = 0.006
 
 
@@ -140,11 +149,50 @@ def fmt(x, nd=6):
     return "0" if s in ("-0", "") else s
 
 
+def fmtg(x, sig=9):
+    """Significant-figure formatting (inertias span 1e-7..1e-3)."""
+    if isinstance(x, (list, tuple, np.ndarray)):
+        return " ".join(fmtg(v, sig) for v in x)
+    s = f"{x:.{sig}g}"
+    return "0" if float(s) == 0 else s
+
+
+def link_inertial(mm, link, lb_p, lb_R, origin):
+    """Mass-model inertial of `link`, re-expressed in a world-aligned frame
+    anchored at `origin` (the MJCF bodies all use identity orientation).
+    Returns (mass, com, inertia-about-com)."""
+    e = mm["links"][link]
+    mass = float(e["mass_kg"])
+    com = lb_p + lb_R @ np.asarray(e["com_link_m"]) - origin
+    inertia = lb_R @ np.asarray(e["inertia_link_kgm2"]) @ lb_R.T
+    return mass, com, inertia
+
+
+def compose_inertials(parts):
+    """Rigidly combine (mass, com, inertia-about-com) tuples in one frame."""
+    m_tot = sum(p[0] for p in parts)
+    com = sum(p[0] * p[1] for p in parts) / m_tot
+    inertia = np.zeros((3, 3))
+    for mass, c, ic in parts:
+        d = c - com
+        inertia += ic + mass * (d @ d * np.eye(3) - np.outer(d, d))
+    return m_tot, com, inertia
+
+
+def inertial_xml(inertial):
+    mass, com, inertia = inertial
+    full = (inertia[0, 0], inertia[1, 1], inertia[2, 2],
+            inertia[0, 1], inertia[0, 2], inertia[1, 2])
+    return (f'<inertial pos="{fmt(com, 8)}" mass="{fmtg(mass, 7)}" '
+            f'fullinertia="{fmtg(full, 7)}" />')
+
+
 def build() -> str:
     m, d = load_urdf()
     mapper = JointMapper(QUADRUPED / "config" / "servo_calibration.json",
                          QUADRUPED / "config" / "lite2_joint_map.yaml")
     lims = mapper.limits_rad()
+    mm = json.loads(MASS_MODEL.read_text())
 
     OUT_MESHDIR.mkdir(exist_ok=True)
     used_meshes = set()
@@ -183,11 +231,15 @@ def build() -> str:
             # visual meshes with their world-frame placements at zero,
             # re-expressed relative to the identity-orientation joint frames
             "meshes": {},
+            # CAD mass-model inertials, re-expressed in the same frames
+            "inertial": {},
         }
         for part, link_body, jkey in (("hip", f"Link_{n}3", "hip"),
                                       ("thigh", f"Link_{n}2", "thigh"),
                                       ("calf", f"Link_{n}1", "calf")):
             lb_p, lb_R = body_frame(m, d, link_body)
+            legs[leg]["inertial"][part] = link_inertial(
+                mm, link_body, lb_p, lb_R, j[jkey][0])
             entries = []
             for mesh, gp, gq, mid in mesh_geoms(m, link_body):
                 Rq = np.zeros(9); mujoco.mju_quat2Mat(Rq, gq)
@@ -215,6 +267,22 @@ def build() -> str:
             base_meshes.append((mesh, p_wr, quat))
             used_meshes.add(mesh)
 
+    # base inertial: body + arm links rigidly composed at the frozen arm
+    # pose (URDF zero == the folded locomotion hold streamed by the driver;
+    # claw jaws are already folded into Link_52 in the mass model)
+    parts = [link_inertial(mm, "base_link", *body_frame(m, d, "base_link"),
+                           np.zeros(3))]
+    for body in ("Link_53", "Link_52"):
+        lb_p, lb_R = body_frame(m, d, body)
+        parts.append(link_inertial(mm, body, lb_p, lb_R, np.zeros(3)))
+    base_inertial = compose_inertials(parts)
+    # cross-check against the json's precomposed aggregate (base_weld_deploy
+    # was composed at the same URDF-zero arm pose)
+    ref = mm["links"]["base_weld_deploy"]
+    assert abs(base_inertial[0] - ref["mass_kg"]) < 1e-6, base_inertial[0]
+    com_err = np.linalg.norm(base_inertial[1] - np.asarray(ref["com_link_m"]))
+    assert com_err < 2e-4, f"base weld CoM off by {com_err*1e3:.3f} mm"
+
     # collision primitives from mesh bboxes
     base_v = np.vstack([mesh_verts_in_body(m, d, b)
                         for b in ("base_link",)])
@@ -231,6 +299,7 @@ def build() -> str:
 
     def leg_xml(leg):
         L = legs[leg]
+        inr = L["inertial"]
         lo_h, hi_h = lims[f"{leg}_hip"]
         lo_t, hi_t = lims[f"{leg}_thigh"]
         lo_c, hi_c = lims[f"{leg}_calf"]
@@ -246,17 +315,20 @@ def build() -> str:
         return f"""
       <body name="{leg}_hip" pos="{fmt(L['hip_pos'])}">
         <joint name="{leg}_hip_joint" pos="0 0 0" axis="{fmt(L['hip_axis'], 4)}" range="{fmt(lo_h, 4)} {fmt(hi_h, 4)}" actuatorfrcrange="-{FORCERANGE} {FORCERANGE}" />
+        {inertial_xml(inr['hip'])}
         {vis('hip')}
-        <geom name="{leg}_hip_col" type="box" size="0.015 0.022 0.013" pos="0 0 0" mass="{MASS['hip']}" class="collision_off" />
+        <geom name="{leg}_hip_col" type="box" size="0.015 0.022 0.013" pos="0 0 0" class="collision_off" />
         <body name="{leg}_thigh" pos="{fmt(L['thigh_pos'])}">
           <joint name="{leg}_thigh_joint" pos="0 0 0" axis="{fmt(L['thigh_axis'], 4)}" range="{fmt(lo_t, 4)} {fmt(hi_t, 4)}" actuatorfrcrange="-{FORCERANGE} {FORCERANGE}" />
+          {inertial_xml(inr['thigh'])}
           {vis('thigh')}
-          <geom name="{leg}_thigh" type="capsule" fromto="0 0 0 {fmt(L['calf_pos'])}" size="0.010" mass="{MASS['thigh']}" contype="1" conaffinity="0" condim="1" group="3" />
+          <geom name="{leg}_thigh" type="capsule" fromto="0 0 0 {fmt(L['calf_pos'])}" size="0.010" density="0" contype="1" conaffinity="0" condim="1" group="3" />
           <body name="{leg}_calf" pos="{fmt(L['calf_pos'])}">
             <joint name="{leg}_calf_joint" pos="0 0 0" axis="{fmt(L['calf_axis'], 4)}" range="{fmt(lo_c, 4)} {fmt(hi_c, 4)}" actuatorfrcrange="-{FORCERANGE} {FORCERANGE}" />
+            {inertial_xml(inr['calf'])}
             {vis('calf')}
-            <geom name="{leg}_calf" type="capsule" fromto="0 0 0 {fmt(f)}" size="0.006" mass="{MASS['calf']}" class="collision_off" />
-            <geom name="{leg}_foot_pad" type="sphere" size="{FOOT_RADIUS}" pos="{fmt(f)}" contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
+            <geom name="{leg}_calf" type="capsule" fromto="0 0 0 {fmt(f)}" size="0.006" class="collision_off" />
+            <geom name="{leg}_foot_pad" type="sphere" size="{FOOT_RADIUS}" pos="{fmt(f)}" density="0" contype="1" conaffinity="0" condim="3" rgba="0.3 0.3 0.3 1" />
             <site name="{leg}" pos="{fmt(f)}" type="sphere" size="0.004" />
           </body>
         </body>
@@ -284,7 +356,10 @@ def build() -> str:
        (the URDF zero has the calf swept ~63 deg forward - that is how the
        real linkage is built, NOT straight down).
        Arm (Link_5x) is frozen at its calibrated zero and welded to the
-       base; locomotion action space = 12 leg joints. -->
+       base; locomotion action space = 12 leg joints.
+       Inertials: CAD-derived mass model (assets/robots/lite2/mass_model,
+       calibrated to the measured 577 g total); geoms carry no mass. The
+       arm mass/inertia is composed into the base at the frozen pose. -->
   <compiler angle="radian" meshdir="meshes" />
   <option timestep="0.002" />
 
@@ -297,7 +372,7 @@ def build() -> str:
       <geom contype="0" conaffinity="0" density="0" group="1" />
     </default>
     <default class="collision_off">
-      <geom contype="0" conaffinity="0" group="3" />
+      <geom contype="0" conaffinity="0" density="0" group="3" />
     </default>
   </default>
 
@@ -317,9 +392,10 @@ def build() -> str:
   <worldbody>
     <body name="base" pos="0 0 0.14">
       <joint name="floating_base" type="free" />
+      {inertial_xml(base_inertial)}
       {base_mesh_xml}
       <geom name="base" type="box" size="{fmt(base_size)}" pos="{fmt(base_center)}"
-            mass="{MASS['base']}" contype="1" conaffinity="0" condim="1" group="3" />
+            density="0" contype="1" conaffinity="0" condim="1" group="3" />
       <site name="imu" pos="0 0 0" quat="1 0 0 0" />
 {''.join(leg_xml(leg) for leg in LEGS)}
     </body>
@@ -413,14 +489,39 @@ def validate(xml: str) -> None:
     assert worst_mesh < 1e-3, "visual mesh placement mismatch"
     print("  PASS")
 
-    # report mass/CoM
-    mujoco.mj_resetData(mx, dx)
-    dx.qpos[3] = 1
-    mujoco.mj_forward(mx, dx)
+    # mass/inertia checks against the CAD mass model
+    mm = json.loads(MASS_MODEL.read_text())
+    for leg in LEGS:
+        n = LEG_NUM[leg]
+        for part in ("hip", "thigh", "calf"):
+            want = mm["links"][f"Link_{n}{PART_NUM[part]}"]["mass_kg"]
+            got = float(mx.body(f"{leg}_{part}").mass[0])
+            assert abs(got - want) < 1e-6, (leg, part, got, want)
+    base_mass = float(mx.body("base").mass[0])
+    want_base = mm["links"]["base_weld_deploy"]["mass_kg"]
+    assert abs(base_mass - want_base) < 1e-6, (base_mass, want_base)
     tot = float(mx.body_subtreemass[mx.body("base").id])
-    com = dx.subtree_com[mx.body("base").id]
-    print(f"  total mass {tot:.3f} kg, CoM x {com[0]*1000:+.1f} mm "
-          f"(target {TARGET_COM_X*1000:+.0f}, empirical bracket +9..+23)")
+    assert abs(tot - TOTAL_MASS) < 1e-3, tot
+
+    mujoco.mj_resetData(mx, dx)
+    mujoco.mj_forward(mx, dx)
+    bid = mx.body("base").id
+    com0 = dx.subtree_com[bid] - dx.xpos[bid]
+    want_com = np.asarray(mm["meta"]["com_base_at_urdf_zero_m"])
+    assert np.linalg.norm(com0 - want_com) < 2e-4, (com0, want_com)
+
+    # stance CoM: stand keyframe pose; empirical tip-test bracket +9..+23 mm
+    for leg in LEGS:
+        dx.qpos[mx.joint(f"{leg}_thigh_joint").qposadr[0]] = -0.90
+        dx.qpos[mx.joint(f"{leg}_calf_joint").qposadr[0]] = 0.28
+    mujoco.mj_forward(mx, dx)
+    com_s = dx.subtree_com[bid] - dx.xpos[bid]
+    print(f"  total mass {tot:.4f} kg (measured {TOTAL_MASS}); "
+          f"per-body masses match mass_model.json to <1e-6 kg")
+    print(f"  CoM at URDF zero : x {com0[0]*1000:+.1f} mm "
+          f"(CAD {want_com[0]*1000:+.1f})")
+    print(f"  CoM at stand pose: x {com_s[0]*1000:+.1f} mm "
+          f"(empirical tip-test bracket +9..+23)")
 
 
 def main() -> None:

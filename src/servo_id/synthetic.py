@@ -1,6 +1,6 @@
 """Synthetic capture-session generation from a KNOWN parameter set.
 
-Produces a session directory in the exact ``xgo-servo-id-session/v1``
+Produces a session directory in the exact ``xgo-servo-id-session/v2``
 format (manifest.json + per-test npz with every key the real capture tool
 writes), by rolling out the same replay backend under truth parameters and
 then re-sampling the trajectory the way the firmware telemetry does:
@@ -108,6 +108,9 @@ def _synthetic_capture(
     },
     "base_pose_rad": STAND_POSE_15.tolist(),
     "rate_hz": spec.rate_hz,
+    "orientation": "synthetic",
+    "payload_g": 0.0,
+    "temp_c": [None] * 15,
     "vbat_start_mv": 7400,
     "vbat_end_mv": 7400,
     "overruns": 0,
@@ -267,7 +270,7 @@ def generate_synthetic_session(
     )
 
   manifest = {
-    "schema": "xgo-servo-id-session/v1",
+    "schema": "xgo-servo-id-session/v2",
     "created": datetime.now().isoformat(timespec="seconds"),
     "synthetic": True,
     "params_true": params_true.as_dict(),
@@ -275,9 +278,10 @@ def generate_synthetic_session(
     "base_pose_source": "synthetic",
     "base_pose_rad": STAND_POSE_15.tolist(),
     "rate_hz": spec.rate_hz,
+    "orientation": "synthetic",
+    "payload_g": 0.0,
     "planned_tests": len(tests_meta),
     "skips": [],
-    "telemetry_version": "v2.3",
     "vbat_start_mv": 7400,
     "vbat_end_mv": 7400,
     "tests": tests_meta,

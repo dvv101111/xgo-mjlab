@@ -43,7 +43,7 @@ import numpy as np
 from src.servo_id import LEG_JOINTS
 from src.servo_id.actuator_model import (
   DEFAULT_PARAMS,
-  JOINT_PARAM_NAMES,
+  SERVO_PARAM_NAMES,
   ServoParams,
   denormalize,
 )
@@ -69,12 +69,11 @@ PLATEAU_RTOL = 0.01
 
 @dataclass
 class FitConfig:
-  fit_names: list[str]  # subset of JOINT_PARAM_NAMES (+ "delay_ms")
+  fit_names: list[str]  # subset of SERVO_PARAM_NAMES (+ "delay_ms")
   fixed: dict[str, float] = field(default_factory=dict)  # pinned overrides
   sim_dt: float = SIM_DT
   settle_s: float = SETTLE_S
   skip_ms: float = LOSS_SKIP_MS
-  fixed_base: bool = False
 
 
 class Evaluator:
@@ -86,6 +85,11 @@ class Evaluator:
   ``held_values[joint]`` when present (pass-1 shared-fit values in the
   block-coordinate scheme). The candidate delay applies globally — held
   joints have constant targets, so the delay is irrelevant to them.
+
+  The replay regime is selected PER CAPTURE from its session manifest
+  (2026-07-15): one ReplayModel per distinct fixed_base value among the
+  captures — free base + floor for stand sessions, welded base + IMU
+  gravity for bench sessions.
   """
 
   def __init__(
@@ -99,18 +103,37 @@ class Evaluator:
     self.cfg = cfg
     self.target_joint = target_joint
     self.held_values = held_values
-    self.rm: ReplayModel = build_replay_model(fixed_base=cfg.fixed_base)
+    regimes = sorted({cap.fixed_base for cap, _ in captures})
+    self.rms: dict[bool, ReplayModel] = {
+      fixed_base: build_replay_model(fixed_base=fixed_base)
+      for fixed_base in regimes
+    }
     self._data_pid: int | None = None
-    self._data = None
+    self._data: dict[bool, object] = {}
 
-  def _mjdata(self):
+  @property
+  def rm(self) -> ReplayModel:
+    """The single replay model (single-regime capture sets only)."""
+    if len(self.rms) != 1:
+      raise ValueError(
+        f"evaluator spans {len(self.rms)} replay regimes "
+        f"{sorted(self.rms)}; there is no single model"
+      )
+    return next(iter(self.rms.values()))
+
+  def rm_for(self, capture: TestCapture) -> ReplayModel:
+    return self.rms[capture.fixed_base]
+
+  def _mjdata(self, rm: ReplayModel):
     import mujoco
 
     pid = os.getpid()
-    if self._data is None or self._data_pid != pid:
-      self._data = mujoco.MjData(self.rm.model)
+    if self._data_pid != pid:
+      self._data = {}
       self._data_pid = pid
-    return self._data
+    if rm.fixed_base not in self._data:
+      self._data[rm.fixed_base] = mujoco.MjData(rm.model)
+    return self._data[rm.fixed_base]
 
   def params_from_values(
     self, values: dict[str, float]
@@ -126,9 +149,7 @@ class Evaluator:
 
     def mk(d: dict[str, float]) -> ServoParams:
       return ServoParams(
-        **{k: d[k] for k in (*JOINT_PARAM_NAMES, "delay_ms")},
-        **({"tau_max": self.cfg.fixed["tau_max"]}
-           if "tau_max" in self.cfg.fixed else {}),
+        **{k: d[k] for k in (*SERVO_PARAM_NAMES, "delay_ms")}
       )
 
     if self.target_joint is None:
@@ -140,7 +161,7 @@ class Evaluator:
         d = dict(base)
         d.update(
           {k: v for k, v in held.get(name, {}).items()
-           if k in JOINT_PARAM_NAMES}
+           if k in SERVO_PARAM_NAMES}
         )
         return d
 
@@ -164,11 +185,11 @@ class Evaluator:
     params, delay = self.params_from_values(values)
     losses = []
     for capture, joints in self.captures:
+      rm = self.rm_for(capture)
       traj = replay_capture(
-        self.rm, capture, params, delay,
+        rm, capture, params, delay,
         sim_dt=self.cfg.sim_dt, settle_s=self.cfg.settle_s,
-        data=self._mjdata(),
-        gravity_from_imu=self.cfg.fixed_base,
+        data=self._mjdata(rm),
       )
       losses.append(
         capture_loss(traj, capture, joints, skip_ms=self.cfg.skip_ms)

@@ -1,17 +1,16 @@
 """Fixed-timestep MuJoCo replay of recorded servo-ID excitations.
 
-Primary regime (all 2026-07-13 sessions): LOADED — the robot standing on
-the floor. The replay therefore uses the full robot with a FREE base and a
-ground plane; every non-swept joint is PD-held at the recorded base pose
-while the swept joint follows the recorded targets ZOH, exactly like the
-capture. Before the scored window the sim settles for ``settle_s`` at the
-base pose from the stand keyframe height, mirroring the capture tool's
-settle phase, so contacts and posture reach their equilibrium under the
-candidate parameters.
+Two regimes, selected PER CAPTURE from the session manifest (2026-07-15;
+``TestCapture.fixed_base``):
 
-A fixed-base variant (no floor, gravity vector overridable from the IMU
-reading) is kept for a possible future unloaded (folded / on-back)
-regime, but is not the default.
+* stand (loaded): full robot, FREE base + ground plane; every non-swept
+  joint is PD-held at the recorded base pose while the swept joint
+  follows the recorded targets ZOH, exactly like the capture. Before the
+  scored window the sim settles for ``settle_s`` at the base pose from
+  the stand keyframe height, mirroring the capture tool's settle phase.
+* bench (folded/midrange base pose, e.g. the 2026-07-15 belly-down
+  fixture): base welded at the XML pose, no floor, contacts disabled,
+  gravity taken from the capture's IMU reading (fixture orientation).
 
 Timeline: everything runs on the firmware clock (ms). The command stream
 is ZOH: at sim time t the target is the last command with
@@ -83,7 +82,8 @@ def build_replay_model(fixed_base: bool = False) -> ReplayModel:
 
   free base (default): keeps the floating joint and adds a ground plane.
   fixed base: deletes the floating joint (base welded at the XML height)
-  and disables all contacts; used only for unloaded captures.
+  and disables all contacts; used for bench (fixtured, legs-free)
+  captures.
   """
   spec = mujoco.MjSpec.from_file(str(XGOLITE_XML))
   for act in list(spec.actuators):
@@ -176,17 +176,24 @@ def replay_capture(
   sim_dt: float = SIM_DT,
   settle_s: float = SETTLE_S,
   data: mujoco.MjData | None = None,
-  gravity_from_imu: bool = False,
 ) -> SimTraj:
   """Roll out one capture under the given per-joint parameters.
 
   ``params`` is the 12-entry canonical-order list; ``delay_ms`` is the
-  single global command delay (firmware receipt -> actuation).
+  single global command delay (firmware receipt -> actuation). The model
+  must match the capture's regime (the caller selects/builds the right
+  ``ReplayModel``); on a fixed-base model the gravity vector is taken
+  from the capture's IMU reading automatically (fixture orientation).
   """
   from src.servo_id.actuator_model import pd_clamped_torque
 
+  assert rm.fixed_base == capture.fixed_base, (
+    f"{capture.path.name}: capture regime (fixed_base="
+    f"{capture.fixed_base}) does not match the replay model "
+    f"(fixed_base={rm.fixed_base})"
+  )
   model = rm.model
-  if gravity_from_imu and rm.fixed_base and capture.gravity_body is not None:
+  if rm.fixed_base and capture.gravity_body is not None:
     model.opt.gravity[:] = capture.gravity_body
   kp, kd, deadband, tau_max, qd_knee, qd_max = set_joint_dynamics(rm, params)
 

@@ -5,8 +5,10 @@ whole CMA-ES generation — popsize x captures items — is one batched call,
 chunked to ``max_envs`` worlds when larger. Semantics mirror
 :mod:`src.servo_id.replay` exactly:
 
-* same MJCF/MjModel (free base + ground plane, position actuators
-  deleted), same XML sim options (Euler, Newton, pyramidal cone);
+* same MJCF/MjModel (free base + ground plane for stand captures;
+  welded base, contacts off, per-world IMU gravity for bench captures —
+  one regime per batch; position actuators deleted), same XML sim
+  options (Euler, Newton, pyramidal cone);
 * torque via ``qfrc_applied``: the ToddlerBot PD + asymmetric
   torque-speed clamp is a warp kernel (:func:`_servo_pd_kernel`) fused
   into the step graph — no MuJoCo actuators, so no gainprm/biasprm
@@ -165,6 +167,7 @@ class _CaptureRec:
   n_replay: int
   cmd_t: np.ndarray  # (n_cmd,) float64, firmware clock
   base12: np.ndarray  # (12,) float32
+  gravity: np.ndarray | None = None  # (3,) f32, IMU gravity (bench regime)
 
 
 class WarpReplayBatch:
@@ -193,9 +196,6 @@ class WarpReplayBatch:
 
     self._mjw = mjw
     self.rm = rm or build_replay_model(fixed_base=False)
-    if self.rm.fixed_base:
-      raise NotImplementedError("warp backend supports the free-base "
-                                "(loaded) regime only")
     self.max_envs = int(max_envs)
     self.sim_dt = float(sim_dt)
     self.dt_ms = self.sim_dt * 1000.0
@@ -215,6 +215,12 @@ class WarpReplayBatch:
     self._caps: dict[int, _CaptureRec] = {}
     n_cmd_max, self.n_replay_max = 1, 1
     for i, cap in enumerate(captures):
+      if cap.fixed_base != self.rm.fixed_base:
+        raise ValueError(
+          f"{cap.path.name}: capture regime (fixed_base={cap.fixed_base}) "
+          f"does not match this batch's model (fixed_base="
+          f"{self.rm.fixed_base}); one WarpReplayBatch spans one regime"
+        )
       t_lo, t_hi = capture_window(cap)
       n_replay = int(np.ceil((t_hi - t_lo) / self.dt_ms)) + 1
       self._caps[id(cap)] = _CaptureRec(
@@ -223,15 +229,21 @@ class WarpReplayBatch:
         n_replay=n_replay,
         cmd_t=np.asarray(cap.cmd_time_ms, dtype=float),
         base12=np.asarray(cap.base_pose[:12], dtype=np.float32),
+        gravity=(
+          np.asarray(cap.gravity_body, dtype=np.float32)
+          if self.rm.fixed_base and cap.gravity_body is not None else None
+        ),
       )
       n_cmd_max = max(n_cmd_max, cap.cmd_pose.shape[0])
       self.n_replay_max = max(self.n_replay_max, n_replay)
 
     # Representative standing state so put_data's nconmax/njmax heuristics
-    # see realistic contact/constraint counts.
+    # see realistic contact/constraint counts (free-base regime only; the
+    # fixed-base bench model has contacts disabled).
     mjd = mujoco.MjData(model)
-    mjd.qpos[2] = 0.1159
-    mjd.qpos[3] = 1.0
+    if not self.rm.fixed_base:
+      mjd.qpos[2] = 0.1159
+      mjd.qpos[3] = 1.0
     if self._caps:
       first = captures[0]
       mjd.qpos[self.rm.qadr] = first.base_pose[:12]
@@ -243,6 +255,18 @@ class WarpReplayBatch:
         model, mjd, nworld=self.max_envs, nconmax=nconmax, njmax=njmax
       )
       expand_model_fields(self._wm, self.max_envs, list(_DOF_FIELDS))
+      # Per-world gravity (2026-07-15, bench regime): fixed-base captures
+      # replay under their own IMU gravity vector. Expanded and installed
+      # BEFORE the CUDA graph capture so the graph holds the final array;
+      # per-chunk writes go through .assign (pointer-stable).
+      self._gravity_default = np.asarray(
+        model.opt.gravity, dtype=np.float32
+      ).copy()
+      if self.rm.fixed_base:
+        grav = np.tile(self._gravity_default, (self.max_envs, 1))
+        self._wm.opt.gravity = wp.array(grav, dtype=wp.vec3)
+      else:
+        self._gravity_default = None  # free base: XML gravity, not per-world
 
       ne, nc = self.max_envs, max(len(captures), 1)
       f32, i32 = wp.float32, wp.int32
@@ -332,8 +356,12 @@ class WarpReplayBatch:
     cmd_idx = np.full((ne, self.n_replay_max), -1, dtype=np.int32)
     dof = {f: np.tile(self._dof_defaults[f], (ne, 1)) for f in _DOF_FIELDS}
     qpos0 = np.zeros((ne, nq), dtype=np.float32)
-    qpos0[:, 2] = 0.1159
-    qpos0[:, 3] = 1.0
+    gravity = None
+    if self.rm.fixed_base:
+      gravity = np.tile(self._gravity_default, (ne, 1))
+    else:
+      qpos0[:, 2] = 0.1159
+      qpos0[:, 3] = 1.0
 
     n_replay_chunk = 1
     for e, item_i in enumerate(chunk):
@@ -343,6 +371,8 @@ class WarpReplayBatch:
       cap_of_env[e] = rec.index
       base[e] = rec.base12
       qpos0[e, self.rm.qadr] = rec.base12
+      if gravity is not None and rec.gravity is not None:
+        gravity[e] = rec.gravity
       idx = zoh_cmd_indices(
         rec.cmd_t, rec.t_lo, rec.n_replay, self.dt_ms, item.delay_ms
       )
@@ -356,8 +386,11 @@ class WarpReplayBatch:
       dof["dof_armature"][e, dadr] = [pj.armature for pj in p]
       dof["dof_frictionloss"][e, dadr] = [pj.frictionloss for pj in p]
     if len(chunk) < ne:  # idle worlds copy row 0 (valid params)
-      for arr in (cap_of_env, base, qpos0, cmd_idx, *gains.values(),
-                  *dof.values()):
+      arrays = [cap_of_env, base, qpos0, cmd_idx, *gains.values(),
+                *dof.values()]
+      if gravity is not None:
+        arrays.append(gravity)
+      for arr in arrays:
         arr[len(chunk) :] = arr[0]
 
     with wp.ScopedDevice(self.wp_device):
@@ -368,6 +401,8 @@ class WarpReplayBatch:
         self._gains[n].assign(arr)
       for f in _DOF_FIELDS:
         getattr(self._wm, f).assign(dof[f].astype(np.float32))
+      if gravity is not None:
+        self._wm.opt.gravity.assign(gravity.astype(np.float32))
 
       # Fresh start, like mj_resetData + explicit qpos on the CPU path.
       self._mjw.reset_data(self._wm, self._wd)
@@ -429,10 +464,9 @@ class WarpEvaluator(_Evaluator):
     max_envs: int = DEFAULT_MAX_ENVS,
     device: str | None = None,
   ):
-    if cfg.fixed_base:
-      raise NotImplementedError("warp backend supports the free-base "
-                                "(loaded) regime only")
     super().__init__(captures, cfg, target_joint, held_values=held_values)
+    # One batch = one compiled model = one regime; mixed-regime fits must
+    # use the CPU backend (self.rm raises when captures span regimes).
     # self.rm is freshly compiled by the base class; WarpReplayBatch
     # snapshots its dof defaults before anything can mutate them.
     self.batch = WarpReplayBatch(

@@ -5,12 +5,16 @@ Fits the ToddlerBot actuator model (PD gains + deadband + piecewise
 torque-speed clamp + MJCF damping/armature/frictionloss) plus ONE global
 command delay to recorded excitation sessions, with PACE-style CMA-ES
 (population = parallel replays, params normalized to [-1, 1], sigma0 0.5,
-early stop on relative population score spread < 1e-2). The loaded
-(stand) regime is replayed honestly: free base + ground plane, non-swept
-joints PD-held at the recorded base pose, swept joint following the
-recorded targets ZOH on the firmware clock. tau_max is PINNED (default
-0.22 N*m) as the torque scale anchor — never co-fit it with
-kp/damping/armature (spec pitfall).
+early stop on relative population score spread < 1e-2). The replay
+regime is selected per session from its manifest (2026-07-15): stand
+sessions replay free base + ground plane; bench sessions (folded /
+midrange base pose) replay fixed-base with IMU gravity. Non-swept
+joints are PD-held at the recorded base pose, the swept joint follows
+the recorded targets ZOH on the firmware clock. tau_max is pinned by
+default (0.22 N*m, torque scale anchor); fitting it — or qd_knee —
+requires a loaded (stand) session among the inputs (enforced), because
+both are unidentifiable on unloaded bench data. For unloaded-only fits
+pin qd_knee via --pin qd_knee=3.65.
 
 Block-coordinate scheme (fit v2): --mode both runs the shared-class fit
 FIRST, then per-joint fits with the other 11 joints HELD at the
@@ -55,6 +59,7 @@ from src.servo_id.actuator_model import (
   DEFAULT_PARAMS,
   JOINT_PARAM_NAMES,
   PARAM_BOUNDS,
+  SERVO_PARAM_NAMES,
   normalize,
 )
 from src.servo_id.fitting import Evaluator, FitConfig, FitResult, run_cma_fit
@@ -104,8 +109,6 @@ def validation_table(
   """
   from src.servo_id.actuator_model import ServoParams
 
-  rm = evaluator.rm
-
   def mk_params(values_by_joint: dict[str, dict[str, float]]):
     plist = []
     for name in LEG_JOINTS:
@@ -113,10 +116,10 @@ def validation_table(
       d.update(evaluator.cfg.fixed)
       d.update(
         {k: v for k, v in values_by_joint.get(name, {}).items()
-         if k in JOINT_PARAM_NAMES or k == "delay_ms"}
+         if k in SERVO_PARAM_NAMES or k == "delay_ms"}
       )
       plist.append(
-        ServoParams(**{k: d[k] for k in (*JOINT_PARAM_NAMES, "delay_ms")})
+        ServoParams(**{k: d[k] for k in (*SERVO_PARAM_NAMES, "delay_ms")})
       )
     return plist
 
@@ -150,7 +153,10 @@ def validation_table(
     }
     metrics = {
       v: segment_metrics(
-        replay_capture(rm, cap, variant_params[v], variant_delay[v]), cap
+        replay_capture(
+          evaluator.rm_for(cap), cap, variant_params[v], variant_delay[v]
+        ),
+        cap,
       )
       for v in VALIDATION_VARIANTS
     }
@@ -289,7 +295,15 @@ def main() -> int:
   ap.add_argument("--seed", type=int, default=0)
   ap.add_argument("--workers", type=int, default=None)
   ap.add_argument("--tau-max", type=float, default=0.22,
-                  help="PINNED stall torque (identifiability anchor)")
+                  help="pinned stall torque (identifiability anchor); "
+                       "ignored when tau_max is in --fit-params, which "
+                       "requires a loaded (stand) session in the inputs")
+  ap.add_argument("--pin", action="append", default=[],
+                  metavar="NAME=VALUE",
+                  help="pin a model parameter at a non-default value for "
+                       "the whole fit (repeatable), e.g. --pin "
+                       "qd_knee=3.65 for unloaded-only fits where the "
+                       "torque-speed knee is unidentifiable")
   ap.add_argument("--sim-dt", type=float, default=0.002)
   ap.add_argument("--settle", type=float, default=1.0)
   ap.add_argument("--skip-ms", type=float, default=300.0)
@@ -305,6 +319,18 @@ def main() -> int:
   for name in fit_names:
     if name not in PARAM_BOUNDS:
       ap.error(f"unknown fit param {name!r}")
+  pins: dict[str, float] = {}
+  for spec in args.pin:
+    name, _, value = spec.partition("=")
+    name = name.strip()
+    if name not in DEFAULT_PARAMS:
+      ap.error(f"--pin {spec!r}: unknown parameter {name!r}")
+    if name in fit_names:
+      ap.error(f"--pin {spec!r}: {name} is also in --fit-params")
+    try:
+      pins[name] = float(value)
+    except ValueError:
+      ap.error(f"--pin {spec!r}: value is not a number")
   kinds = tuple(
     s.strip() for s in args.kinds.split(",")) if args.kinds else None
   joints = tuple(
@@ -343,13 +369,32 @@ def main() -> int:
   sessions = []
   for sdir in args.sessions:
     sess = load_session(Path(sdir), kinds=kinds, joints=joints)
-    regime = "LOADED (stand)" if sess.loaded else "unloaded (folded)"
+    regime = (
+      "LOADED (stand, free base + floor)" if sess.loaded
+      else "bench (fixed base, legs free)"
+    )
     print(f"session {sess.path}: {regime}, {len(sess.tests)} tests")
     sessions.append(sess)
   captures = collect_captures(sessions)
   if not captures:
     print("no captures to fit", file=sys.stderr)
     return 1
+
+  # Identifiability guards (2026-07-15): tau_max and qd_knee only become
+  # observable when a known external torque sits on the torque-speed
+  # line — on this platform that is the robot's own weight, i.e. a
+  # LOADED (stand) session in the fit input. Fail fast otherwise.
+  has_loaded = any(s.loaded for s in sessions)
+  for name in ("tau_max", "qd_knee"):
+    if name in fit_names and not has_loaded:
+      ap.error(
+        f"{name} is in --fit-params but no loaded (stand) session is "
+        "among the inputs — it is unidentifiable on unloaded bench data "
+        "(any common {armature, damping, kp, tau_max} scaling is "
+        "trajectory-invariant; nothing sits on the torque-speed taper). "
+        "Pin it instead (tau_max via --tau-max, qd_knee via "
+        "--pin qd_knee=3.65)."
+      )
   for cap, ej in captures:
     a = cap.alignment
     print(
@@ -358,13 +403,15 @@ def main() -> int:
       f"(absmax {a.jitter_absmax_ms:.1f})"
     )
 
+  fixed = dict(pins)
+  if "tau_max" not in fit_names:
+    fixed.setdefault("tau_max", args.tau_max)
   cfg = FitConfig(
     fit_names=fit_names,
-    fixed={"tau_max": args.tau_max},
+    fixed=fixed,
     sim_dt=args.sim_dt,
     settle_s=args.settle,
     skip_ms=args.skip_ms,
-    fixed_base=False,
   )
 
   def make_evaluator(caps, target_joint, held_values=None):
@@ -478,11 +525,14 @@ def main() -> int:
       "popsize": args.popsize,
       "sigma0": args.sigma0,
       "seed": args.seed,
-      "tau_max_pinned": args.tau_max,
+      "pinned": dict(cfg.fixed),
       "sim_dt": args.sim_dt,
       "settle_s": args.settle,
       "skip_ms": args.skip_ms,
-      "regime": "loaded_free_base_contact",
+      "regimes": [
+        {"fixed_base": fb}
+        for fb in sorted({c.fixed_base for c, _ in captures})
+      ],
       "bounds": {k: PARAM_BOUNDS[k] for k in fit_names},
     },
     "alignment": {

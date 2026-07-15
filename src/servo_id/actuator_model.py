@@ -22,8 +22,13 @@ torque law: they are the native MJCF ``frictionloss`` / ``damping`` /
 ``armature`` joint fields, set on the model per candidate.
 
 Identifiability (spec 2026-07-12): any common scaling of {armature,
-damping, kp, tau_max} is trajectory-invariant, so ``tau_max`` is PINNED
-(default 0.22 N*m, the hardware-truth XML forcerange) and never fitted.
+damping, kp, tau_max} is trajectory-invariant on UNLOADED data, so
+``tau_max`` is PINNED by default (0.22 N*m, the hardware-truth XML
+forcerange). 2026-07-15: tau_max is now in PARAM_BOUNDS so it CAN be
+freed, but only when LOADED (stand, on-floor) sessions are in the fit
+input — the robot's own weight is the known external torque that breaks
+the scaling degeneracy (foot payload cuffs are physically impossible on
+this platform). The fit CLI enforces this (scripts/fit_servo_model.py).
 """
 
 from __future__ import annotations
@@ -51,15 +56,39 @@ PARAM_BOUNDS: dict[str, tuple[float, float]] = {
   "kp": (0.5, 40.0),
   "kd": (0.0, 2.0),
   "damping": (0.0, 0.4),
-  "armature": (0.0, 0.02),
+  # armature lower bound 0 -> 5e-4 (2026-07-15): reflected rotor inertia is
+  # physically nonzero (literature scale ~1e-3 for this servo class) and the
+  # 2026-07-15 decay session showed ZERO backdrive, so armature cannot fit
+  # to a measured floor; the old fitted 0 (v3: 3.9e-7) produced a 500 Hz
+  # dither plant in training. Vendor datasheet (2026-07-15) confirms an
+  # IRON-CORE motor: several times the rotor inertia of a coreless unit, so
+  # through the ~250:1 gearing the reflected armature is plausibly order
+  # 1e-3 kg*m^2 -- the 5e-4 floor is conservative. If a fit pins at the
+  # floor, a 1e-3 floor is the physically motivated variant to try.
+  "armature": (5e-4, 0.02),
   "frictionloss": (0.0, 0.1),
+  # qd_knee: bounds kept, but UNIDENTIFIABLE without load (nothing in an
+  # unloaded session sits on the torque-speed taper below saturation). For
+  # unloaded-only fits pin it at 3.65 (the v3 fitted value) pending
+  # stance-loading data; the fit CLI enforces the pin (2026-07-15).
   "qd_knee": (3.0, 10.0),
-  "qd_max": (8.0, 14.0),
+  # qd_max (8.0, 14.0) -> (8.5, 10.5) (2026-07-15): measured unloaded ramp
+  # plateaus are 8.9-10.1 rad/s per joint at full charge (v2.4 bench
+  # session 2026-07-15_14-24-44_midrange).
+  "qd_max": (8.5, 10.5),
   "deadband": (0.0, 0.06),
   "delay_ms": (5.0, 90.0),
+  # tau_max FITTABLE bounds (2026-07-15): stall torque may be freed ONLY
+  # when loaded (stand) sessions are among the fit inputs (identifiability
+  # anchor otherwise — see module docstring). Default fit configs keep it
+  # pinned at 0.22.
+  "tau_max": (0.15, 0.35),
 }
 JOINT_PARAM_NAMES = ("kp", "kd", "damping", "armature", "frictionloss",
                      "qd_knee", "qd_max", "deadband")
+# Full per-servo constructor key set (JOINT_PARAM_NAMES + the torque-scale
+# anchor). delay_ms is handled separately (single global convention).
+SERVO_PARAM_NAMES = (*JOINT_PARAM_NAMES, "tau_max")
 DEFAULT_PARAMS: dict[str, float] = {
   # The CURRENT training stack = the "before fit" baseline: XML position
   # gains + MJCF joint defaults + the one-sided TorqueSpeedClamp with
@@ -74,6 +103,7 @@ DEFAULT_PARAMS: dict[str, float] = {
   "qd_max": 4.5,
   "deadband": 0.0,  # current stack has no lost-motion term
   "delay_ms": 54.0,  # measured median onset latency
+  "tau_max": TAU_MAX_DEFAULT,
 }
 
 
