@@ -1,0 +1,8 @@
+[chain] 2026-07-15T18:35:02 v20 chain pid 2876792 starting
+[chain] 2026-07-15T18:35:02 START XGOLite-V20 (2500 iters, 4096 envs) -> train_v20_v1.log
+[chain] 2026-07-15T19:17:17 END XGOLite-V20 rc=0
+[chain] 2026-07-15T19:17:17 EVAL v20_v1 ckpt=logs/rsl_rl/xgolite_v20/2026-07-15_18-35-05_v20_v1/model_2499.pt
+[chain] 2026-07-15T19:20:15 EVAL-END v20_v1 rc=0
+[chain] 2026-07-15T19:20:15 DIAG v20_v1 ckpt=logs/rsl_rl/xgolite_v20/2026-07-15_18-35-05_v20_v1/model_2499.pt
+[chain] 2026-07-15T19:21:17 DIAG-END v20_v1 rc=0
+[chain] 2026-07-15T19:21:17 CHAIN COMPLETE (V20_DONE written)

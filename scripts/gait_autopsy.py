@@ -113,6 +113,18 @@ PRESETS = {
      ("fwd_030", 0.30, 0.0), ("back_010", -0.10, 0.0),
      ("turn_015_08", 0.15, 0.8)],
   ),
+  # v20 autopsied on its own task id (fit-v4 measured plant): the grid
+  # sampler is disabled in main() (same fix as eval_policy_buckets.py) so
+  # the cfg.ranges pinning below is effective. Buckets = the v18range_v2
+  # set for like-for-like comparison + fwd_040 (the new frontier where the
+  # bucket eval showed falls: 7/256 envs).
+  "v20": (
+    "XGOLite-V20",
+    "logs/rsl_rl/xgolite_v20/2026-07-15_18-35-05_v20_v1/model_2499.pt",
+    [("fwd_006", 0.06, 0.0), ("fwd_010", 0.10, 0.0), ("fwd_015", 0.15, 0.0),
+     ("fwd_030", 0.30, 0.0), ("fwd_040", 0.40, 0.0), ("back_010", -0.10, 0.0),
+     ("turn_015_08", 0.15, 0.8)],
+  ),
   "sprint": (
     "XGOLite-Sprint",
     "logs/rsl_rl/xgolite_sprint/2026-07-11_21-41-50_sprint_v1/model_1499.pt",
@@ -166,6 +178,10 @@ def main() -> None:
   env_cfg = load_env_cfg(task, play=False)
   env_cfg.scene.num_envs = NUM_ENVS
   env_cfg.events.pop("push_robot", None)  # see module docstring
+  # Grid tasks: the adaptive curriculum would ignore cfg.ranges pinning
+  # (eval_policy_buckets.py fix, 2026-07-12); drop it and disable the
+  # sampler's grid mode + standing envs after build (below).
+  env_cfg.curriculum.pop("command_grid", None)
   agent_cfg = load_rl_cfg(task)
 
   env = ManagerBasedRlEnv(cfg=env_cfg, device=device, render_mode=None)
@@ -203,6 +219,10 @@ def main() -> None:
 
   # Pin the command sampler to a constant twist at nominal pose.
   term = uenv.command_manager.get_term("twist")
+  if getattr(term, "grid_enabled", False):
+    term.grid_enabled = False
+    term.cfg.rel_standing_envs = 0.0
+    term.is_standing_env[:] = False
   term.cfg.axis_focus_probs = None
   term.cfg.pose_mode_probs = (1.0, 0.0, 0.0)
   term.cfg.nominal_pose = NOMINAL_POSE
