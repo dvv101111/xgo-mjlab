@@ -14,6 +14,7 @@ from .range_curriculum import xgolite_v18range_env_cfg
 from .rl_cfg import xgolite_ppo_runner_cfg
 from .sim_fidelity import xgolite_precision2_env_cfg, xgolite_v18draft_env_cfg
 from .v19 import xgolite_v19_env_cfg, xgolite_v19_ppo_runner_cfg
+from .v20 import xgolite_v20_env_cfg, xgolite_v20_ppo_runner_cfg
 
 register_mjlab_task(
   task_id="XGOLite-Flat",
@@ -108,5 +109,16 @@ register_mjlab_task(
   env_cfg=xgolite_v19_env_cfg(),
   play_env_cfg=xgolite_v19_env_cfg(play=True),
   rl_cfg=xgolite_v19_ppo_runner_cfg(),
+  runner_cls=VelocityOnPolicyRunner,
+)
+# V18Range on the fit-v4 CORRECTED plant (soft damped spring — the v3
+# stiff relay was a v2.3 data artifact): keeps v19's measured-plant
+# wiring + deploy-aligned control-rate obs/penalty, reverts the two
+# relay-sized knobs (init_std 1.0, gates 0.70/0.55) — see v20.py.
+register_mjlab_task(
+  task_id="XGOLite-V20",
+  env_cfg=xgolite_v20_env_cfg(),
+  play_env_cfg=xgolite_v20_env_cfg(play=True),
+  rl_cfg=xgolite_v20_ppo_runner_cfg(),
   runner_cls=VelocityOnPolicyRunner,
 )

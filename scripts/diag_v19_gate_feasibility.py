@@ -61,7 +61,9 @@ TASK = "XGOLite-V19"
 DEFAULT_CKPT = "logs/rsl_rl/xgolite_v19/2026-07-14_19-43-17_v19_v3_ext/model_4998.pt"
 GATES = (0.70, 0.55)  # gamma_lin, gamma_ang shipped in range_curriculum.py
 
-_args = argparse.Namespace(ckpt=DEFAULT_CKPT, obs="inst", zero_actions=False)
+_args = argparse.Namespace(
+  ckpt=DEFAULT_CKPT, obs="inst", zero_actions=False, task=TASK
+)
 
 # Seed-region buckets (the only commands v3_ext ever trained on) + stand.
 BUCKETS = {
@@ -77,7 +79,7 @@ DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 
 def make_cfg(variant: str):
-  cfg = load_env_cfg(TASK, play=False)
+  cfg = load_env_cfg(_args.task, play=False)
   cfg.scene.num_envs = NUM_ENVS
   if _args.obs == "inst":
     # Reproduce the v3/v3_ext training world: instantaneous joint_vel obs.
@@ -280,6 +282,7 @@ def run_variant(variant: str, natural_rolls: bool) -> None:
 if __name__ == "__main__":
   parser = argparse.ArgumentParser()
   parser.add_argument("--ckpt", default=DEFAULT_CKPT)
+  parser.add_argument("--task", default=TASK)
   parser.add_argument("--obs", choices=("inst", "control"), default="inst")
   parser.add_argument(
     "--variants", default="asis,deadband_off,deadband_fit,friction_1"
@@ -287,8 +290,11 @@ if __name__ == "__main__":
   parser.add_argument("--zero-actions", action="store_true")
   ns = parser.parse_args()
   _args.ckpt, _args.obs = ns.ckpt, ns.obs
-  _args.zero_actions = ns.zero_actions
-  print(f"# ckpt={ns.ckpt} obs={ns.obs} zero_actions={ns.zero_actions}")
+  _args.zero_actions, _args.task = ns.zero_actions, ns.task
+  print(
+    f"# task={ns.task} ckpt={ns.ckpt} obs={ns.obs} "
+    f"zero_actions={ns.zero_actions}"
+  )
   # asis first (gate feasibility is the headline), then the ablations.
   for i, variant in enumerate(ns.variants.split(",")):
     run_variant(variant.strip(), natural_rolls=(i == 0))
