@@ -7,6 +7,7 @@ from setuptools import setup, find_packages
 INSTALL_REQUIRES = [
     "mjlab==1.2.0",
     "mujoco==3.6.0",
+    "mujoco-mjx==3.6.0",
     "mujoco-warp==3.6.0",
     "warp-lang==1.12.1",
     "scipy>=1.17.0",

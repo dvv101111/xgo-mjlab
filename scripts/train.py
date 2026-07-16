@@ -31,6 +31,13 @@ class TrainConfig:
   enable_nan_guard: bool = False
   torchrunx_log_dir: str | None = None
   gpu_ids: list[int] | Literal["all"] | None = field(default_factory=lambda: [0])
+  env_device: str | None = None
+  """Optional simulator device, independent of the learner device.
+
+  This is useful on ROCm systems: MuJoCo-Warp can run the environment on CPU
+  while RSL-RL runs the actor, critic, rollout storage, and PPO updates on the
+  AMD GPU. If unset, the environment uses the learner device as before.
+  """
   warm_start_actor: str | None = None
   """Checkpoint whose ACTOR initializes this run (critic/optimizer fresh).
 
@@ -157,7 +164,11 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
   cfg.agent.seed = seed
   cfg.env.seed = seed
 
-  print(f"[INFO] Training with: device={device}, seed={seed}, rank={rank}")
+  env_device = cfg.env_device or device
+  print(
+    f"[INFO] Training with: learner_device={device}, "
+    f"env_device={env_device}, seed={seed}, rank={rank}"
+  )
 
   # Check if this is a tracking task by checking for motion command.
   is_tracking_task = "motion" in cfg.env.commands and isinstance(
@@ -188,7 +199,9 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
     print(f"[INFO] Logging experiment in directory: {log_dir}")
 
   env = ManagerBasedRlEnv(
-    cfg=cfg.env, device=device, render_mode="rgb_array" if cfg.video else None
+    cfg=cfg.env,
+    device=env_device,
+    render_mode="rgb_array" if cfg.video else None,
   )
 
   log_root_path = log_dir.parent  # Go up from specific run dir to experiment dir.

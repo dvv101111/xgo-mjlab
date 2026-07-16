@@ -53,6 +53,29 @@ joint order, default pose, action scale, kp/kv). The parent repo's
 `tools/run_policy.py` deploys it to the robot at 50 Hz over the
 open-firmware link.
 
+## AMD GPU (ROCm)
+
+The normal trainer uses MuJoCo Warp for physics. Its GPU backend is CUDA-only,
+so selecting the AMD device there does not provide GPU simulation. The local
+AMD path uses MuJoCo MJX/JAX over ROCm instead:
+
+    # Exact V21B model, top-difficulty random-rough tile, 512 rollouts.
+    MUJOCO_GL=egl .venv/bin/python scripts/bench_mjx_rocm.py
+
+    # Top-difficulty stairs (the dominant V21B terrain family).
+    MUJOCO_GL=egl .venv/bin/python scripts/bench_mjx_rocm.py --row 9 --col 3
+
+The script requires matching `jax`, `jaxlib`, `jax-rocm7-plugin`, and
+`jax-rocm7-pjrt` installations and refuses to benchmark a CPU fallback. It
+also applies the required gfx1151 XLA workaround before importing JAX.
+
+V21B's generated model contains a 10x10 terrain atlas. MJX performs poorly if
+all 100 mutually-exclusive tiles remain in one static collision graph, so the
+benchmark enables only the selected row/column tile. A full AMD training port
+should use the same one-active-tile-per-rollout layout and implement the task
+managers and PPO loop in JAX; this benchmark is the physics acceptance test,
+not an RSL-RL training command.
+
 ## Contract summary
 
 245-dim observation (v16): 5-frame history of the 49-dim frame
