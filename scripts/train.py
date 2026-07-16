@@ -31,12 +31,110 @@ class TrainConfig:
   enable_nan_guard: bool = False
   torchrunx_log_dir: str | None = None
   gpu_ids: list[int] | Literal["all"] | None = field(default_factory=lambda: [0])
+  warm_start_actor: str | None = None
+  """Checkpoint whose ACTOR initializes this run (critic/optimizer fresh).
+
+  Loads ONLY ``actor_state_dict`` (MLP weights, action std and the actor
+  obs-normalizer state) via rsl-rl's native partial load
+  (``runner.load(..., load_cfg={"actor": True}, strict=True)``) after runner
+  construction and before ``learn()``. Every actor tensor must match the
+  fresh model's keys and shapes exactly or the run aborts. Use case: start
+  a task whose CRITIC obs contract differs (e.g. V21B adds a critic-only
+  height_scan) from a flat checkpoint whose actor contract is identical —
+  a plain ``--agent.resume`` strict load cannot do that. Incompatible with
+  ``--agent.resume``."""
 
   @staticmethod
   def from_task(task_id: str) -> "TrainConfig":
     env_cfg = load_env_cfg(task_id)
     agent_cfg = load_rl_cfg(task_id)
     return TrainConfig(env=env_cfg, agent=agent_cfg)
+
+
+def _tensor_checksum(t) -> float:
+  """Order-stable scalar fingerprint of a tensor (float64 sum on CPU)."""
+  return float(t.detach().cpu().double().sum().item())
+
+
+def warm_start_actor_from_checkpoint(
+  runner: MjlabOnPolicyRunner, ckpt_path: Path, device: str
+) -> None:
+  """Load ONLY the actor (weights + obs-normalizer state) from a checkpoint.
+
+  Strictly shape-checked: every key of the fresh actor's state dict must be
+  present in the checkpoint's ``actor_state_dict`` with an identical shape
+  (and vice versa) or this raises before touching the model. The critic,
+  optimizer, RND and iteration counter are NOT loaded — the actual load goes
+  through rsl-rl 5.x's native partial load
+  (``OnPolicyRunner.load(..., load_cfg={"actor": True}, strict=True)``,
+  the same path the eval scripts use), which only calls
+  ``self.actor.load_state_dict``.
+  """
+  import torch
+
+  if not ckpt_path.exists():
+    raise FileNotFoundError(f"--warm-start-actor checkpoint not found: {ckpt_path}")
+  loaded = torch.load(str(ckpt_path), weights_only=False, map_location=device)
+  if "actor_state_dict" not in loaded:
+    raise KeyError(
+      f"--warm-start-actor checkpoint has no 'actor_state_dict' "
+      f"(keys: {sorted(loaded.keys())}): {ckpt_path}"
+    )
+  ckpt_actor = loaded["actor_state_dict"]
+  model_actor = runner.alg.actor.state_dict()
+
+  missing = sorted(set(model_actor) - set(ckpt_actor))
+  unexpected = sorted(set(ckpt_actor) - set(model_actor))
+  mismatched = [
+    f"{k}: checkpoint {tuple(ckpt_actor[k].shape)} vs model "
+    f"{tuple(model_actor[k].shape)}"
+    for k in sorted(set(model_actor) & set(ckpt_actor))
+    if tuple(ckpt_actor[k].shape) != tuple(model_actor[k].shape)
+  ]
+  if missing or unexpected or mismatched:
+    raise ValueError(
+      "--warm-start-actor: actor state dict is not shape-compatible with "
+      f"the fresh model (checkpoint: {ckpt_path}).\n"
+      f"  missing from checkpoint: {missing}\n"
+      f"  unexpected in checkpoint: {unexpected}\n"
+      f"  shape mismatches: {mismatched}"
+    )
+
+  actor_before = _tensor_checksum(runner.alg.actor.state_dict()["mlp.0.weight"])
+  critic_before = _tensor_checksum(runner.alg.critic.state_dict()["mlp.0.weight"])
+
+  # Native rsl-rl partial load: actor only; critic/optimizer/rnd untouched,
+  # iteration not restored (training starts at 0).
+  runner.load(str(ckpt_path), load_cfg={"actor": True}, strict=True, map_location=device)
+
+  actor_after = _tensor_checksum(runner.alg.actor.state_dict()["mlp.0.weight"])
+  critic_after = _tensor_checksum(runner.alg.critic.state_dict()["mlp.0.weight"])
+  ckpt_sum = _tensor_checksum(ckpt_actor["mlp.0.weight"])
+
+  print(
+    f"[INFO] Warm-start actor from: {ckpt_path} "
+    f"(checkpoint iter {loaded.get('iter', '?')})"
+  )
+  for k in sorted(ckpt_actor):
+    print(f"[INFO]   loaded actor tensor {k}: {tuple(ckpt_actor[k].shape)}")
+  print(
+    f"[INFO]   actor mlp.0.weight checksum: fresh {actor_before:.6f} -> "
+    f"loaded {actor_after:.6f} (checkpoint {ckpt_sum:.6f})"
+  )
+  print(
+    f"[INFO]   critic mlp.0.weight checksum: {critic_before:.6f} -> "
+    f"{critic_after:.6f} (must be unchanged; critic/optimizer stay fresh)"
+  )
+  if actor_after == actor_before:
+    print(
+      "[WARN] Warm-start actor checksum did not change (checkpoint identical "
+      "to the fresh init?)"
+    )
+  if critic_after != critic_before:
+    raise RuntimeError(
+      "--warm-start-actor: critic state changed during the actor-only load; "
+      "refusing to continue."
+    )
 
 
 def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
@@ -137,6 +235,16 @@ def run_train(task_id: str, cfg: TrainConfig, log_dir: Path) -> None:
   if resume_path is not None:
     print(f"[INFO]: Loading model checkpoint from: {resume_path}")
     runner.load(str(resume_path))
+
+  if cfg.warm_start_actor is not None:
+    if resume_path is not None:
+      raise ValueError(
+        "--warm-start-actor is incompatible with --agent.resume (resume "
+        "loads the full training state, including the actor)."
+      )
+    warm_start_actor_from_checkpoint(
+      runner, Path(cfg.warm_start_actor).expanduser().resolve(), device
+    )
 
   runner.learn(
     num_learning_iterations=cfg.agent.max_iterations, init_at_random_ep_len=True

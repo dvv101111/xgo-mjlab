@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from typing import TYPE_CHECKING
 
 import torch
@@ -13,6 +14,22 @@ if TYPE_CHECKING:
   from mjlab.envs import ManagerBasedRlEnv
 
 _DEFAULT_ASSET_CFG = SceneEntityCfg("robot")
+
+
+def piecewise_linear(
+  x: torch.Tensor, xs: torch.Tensor, ys: torch.Tensor
+) -> torch.Tensor:
+  """Piecewise-linear interpolation over ascending knots, clamped outside.
+
+  Same knot-interpolation pattern as the pose_height_band lookup in
+  ``velocity_command.py``; factored here because the scheduled phase clock
+  and its check script both need it.
+  """
+  idx = torch.clamp(torch.searchsorted(xs, x.contiguous()), 1, len(xs) - 1)
+  x0, x1 = xs[idx - 1], xs[idx]
+  y0, y1 = ys[idx - 1], ys[idx]
+  w = ((x - x0) / (x1 - x0)).clamp(0.0, 1.0)
+  return y0 + w * (y1 - y0)
 
 
 class joint_vel_control_rate_rel:
@@ -111,4 +128,85 @@ def phase(env: ManagerBasedRlEnv, period: float, command_name: str) -> torch.Ten
     stand_mask = torch.linalg.norm(env.command_manager.get_command(command_name)[:, :3], dim=1) < 0.05
     phase = torch.where(stand_mask.unsqueeze(1), torch.zeros_like(phase), phase)
     return phase
+
+
+class phase_scheduled:
+  """Speed-scheduled per-env gait phase clock (XGOLite-V21A, 2026-07-15).
+
+  Replaces the global episode clock of ``phase`` with a per-env stateful
+  accumulator whose stepping frequency is a deterministic function of the
+  commanded twist:
+
+    speed_equiv = ||cmd_xy|| + wz_equiv * |cmd_wz|
+    f = piecewise_linear(speed_equiv, freq_knots)   [Hz, clamped at the ends]
+    phase <- (phase + f * step_dt) mod 1            each control step
+
+  Rationale (docs/research/v21-terrain-gait-litreview-2026-07-15.md):
+  nobody in 2023-2026 rough-terrain work keeps a fixed unmodulatable clock —
+  the field schedules or modulates it (WTW arXiv:2212.03238 commands
+  f in 1.5-4.0 Hz; Singh arXiv:2504.13619 learns a phase increment; PGTT
+  arXiv:2510.18348 randomizes U[1,3] Hz). At our Froude number (~0.1-0.2
+  across the envelope) dynamic similarity puts the robot in the WALK band,
+  so the schedule anchors LOW near stand-adjacent speeds and rises to the
+  validated 2.5 Hz trot clock at the envelope edge; the low band also
+  shrinks the 41-120 ms actuation-latency fraction of the cycle (lit review
+  section 2.1 verdict: "argue for the lower band, not higher").
+
+  Contract kept from ``phase`` (the deploy obs frame is frozen at 49 dims):
+  output is the same 2-dim (sin, cos); when the twist norm (slice [:3]) is
+  below ``stand_norm`` the accumulator FREEZES (does not advance) and the
+  output is zeroed exactly like the global-clock term. Resets to phase 0.
+
+  Deploy parity: the schedule is exported as ONNX metadata
+  ``phase_schedule`` (rl/runner.py); the hardware loop replays
+  "phase += f(cmd) * dt per 50 Hz tick, reset to 0, freeze+zero below
+  stand_norm". The gait rewards read this term's ``phase``/``freq`` buffers
+  so reward and observation share one clock.
+  """
+
+  def __init__(self, cfg: ObservationTermCfg, env: ManagerBasedRlEnv):
+    knots = sorted(tuple(k) for k in cfg.params["freq_knots"])
+    if len(knots) < 2:
+      raise ValueError("phase_scheduled needs at least 2 freq_knots.")
+    self._knot_speed = torch.tensor(
+      [k[0] for k in knots], dtype=torch.float32, device=env.device
+    )
+    self._knot_freq = torch.tensor(
+      [k[1] for k in knots], dtype=torch.float32, device=env.device
+    )
+    # Per-env accumulator state; ``freq`` holds the last scheduled frequency
+    # (0 while frozen) for the gait rewards and the check script.
+    self.phase = torch.zeros(env.num_envs, device=env.device)
+    self.freq = torch.zeros(env.num_envs, device=env.device)
+
+  def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
+    if env_ids is None:
+      env_ids = slice(None)
+    self.phase[env_ids] = 0.0
+    self.freq[env_ids] = 0.0
+
+  def __call__(
+    self,
+    env: ManagerBasedRlEnv,
+    command_name: str,
+    freq_knots: tuple[tuple[float, float], ...],
+    wz_equiv: float,
+    stand_norm: float,
+  ) -> torch.Tensor:
+    del freq_knots  # Consumed in __init__.
+    command = env.command_manager.get_command(command_name)
+    speed = (
+      torch.linalg.norm(command[:, :2], dim=1) + wz_equiv * command[:, 2].abs()
+    )
+    f = piecewise_linear(speed, self._knot_speed, self._knot_freq)
+    # Twist slice [:3] only (see ``phase``): the v14 pose channels must not
+    # keep the clock ticking during pose_hold episodes.
+    active = torch.linalg.norm(command[:, :3], dim=1) >= stand_norm
+    self.freq = torch.where(active, f, torch.zeros_like(f))
+    self.phase = torch.where(
+      active, (self.phase + f * env.step_dt) % 1.0, self.phase
+    )
+    angle = self.phase * (2.0 * math.pi)
+    out = torch.stack([torch.sin(angle), torch.cos(angle)], dim=1)
+    return torch.where(active.unsqueeze(1), out, torch.zeros_like(out))
 

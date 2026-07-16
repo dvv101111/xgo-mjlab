@@ -1,0 +1,8 @@
+[chain] 2026-07-15T22:16:32 v21a chain pid 4060833 starting
+[chain] 2026-07-15T22:16:32 START XGOLite-V21A (2500 iters, 4096 envs) -> train_v21a_v1ext.log
+[chain] 2026-07-15T22:56:40 END XGOLite-V21A rc=0
+[chain] 2026-07-15T22:56:40 EVAL v21a_v1ext ckpt=logs/rsl_rl/xgolite_v21a/2026-07-15_22-16-35_v21a_v1ext/model_4998.pt
+[chain] 2026-07-15T23:00:40 EVAL-END v21a_v1ext rc=0
+[chain] 2026-07-15T23:00:40 DIAG v21a_v1ext ckpt=logs/rsl_rl/xgolite_v21a/2026-07-15_22-16-35_v21a_v1ext/model_4998.pt
+[chain] 2026-07-15T23:01:45 DIAG-END v21a_v1ext rc=0
+[chain] 2026-07-15T23:01:45 CHAIN COMPLETE (V21A_EXT_DONE written)

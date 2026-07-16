@@ -106,6 +106,31 @@ class UniformVelocityCommand(CommandTerm):
       # Last logged seed-region tracking fraction (kept across curriculum
       # calls with no attributable envs so the log stays continuous).
       self.grid_seed_tracking_last = 0.0
+      if gc.unlock_min_vel_ratio is not None and not (
+        0.0 < gc.unlock_min_vel_ratio <= 1.0
+      ):
+        raise ValueError(
+          f"grid_curriculum.unlock_min_vel_ratio must be in (0, 1], got "
+          f"{gc.unlock_min_vel_ratio} (ratios are clipped to [0, 1])."
+        )
+
+    # v21b-v3 achieved-velocity ratio gate (opt-in; see GridCurriculumCfg.
+    # unlock_min_vel_ratio). When armed, per-env EPISODE SUMS of the achieved
+    # base twist are accumulated once per control step in _update_metrics
+    # (the exact root_link velocities the tracking rewards read) and zeroed
+    # on episode reset — the same hooks/semantics as the reward manager's
+    # _episode_sums the frac gates divide. command_grid_adaptive divides by
+    # episode_length_buf to get the episode-mean achieved velocity.
+    self.grid_ratio_enabled = (
+      self.grid_enabled
+      and cfg.grid_curriculum is not None
+      and cfg.grid_curriculum.unlock_min_vel_ratio is not None
+    )
+    if self.grid_ratio_enabled:
+      self.grid_achieved_lin_sum = torch.zeros(
+        self.num_envs, 2, device=self.device
+      )
+      self.grid_achieved_ang_sum = torch.zeros(self.num_envs, device=self.device)
 
     # v14 body-pose channels: when pose_mode_probs is set, the command grows
     # from [vx, vy, wz] to [vx, vy, wz, body_pitch, base_height].
@@ -155,7 +180,27 @@ class UniformVelocityCommand(CommandTerm):
   def command(self) -> torch.Tensor:
     return self.vel_command_b
 
+  def reset(self, env_ids: torch.Tensor | slice | None) -> dict[str, float]:
+    if self.grid_ratio_enabled:
+      # Zero the achieved-velocity episode sums for the envs that reset —
+      # mirrors the reward manager zeroing its _episode_sums in the same
+      # _reset_idx pass (AFTER command_grid_adaptive has read them).
+      assert isinstance(env_ids, torch.Tensor)
+      self.grid_achieved_lin_sum[env_ids] = 0.0
+      self.grid_achieved_ang_sum[env_ids] = 0.0
+    return super().reset(env_ids)
+
   def _update_metrics(self) -> None:
+    if self.grid_ratio_enabled:
+      # Episode sums of the achieved base twist (same source tensors the
+      # tracking rewards read); command_grid_adaptive turns them into
+      # episode means. Accumulated once per control step, like the reward
+      # episode sums (one-step window offset: the manager computes commands
+      # after _reset_idx, so the sum includes the post-reset sample and
+      # excludes the final pre-reset one — same sample count, negligible
+      # for an episode-mean).
+      self.grid_achieved_lin_sum += self.robot.data.root_link_lin_vel_b[:, :2]
+      self.grid_achieved_ang_sum += self.robot.data.root_link_ang_vel_b[:, 2]
     max_command_time = self.cfg.resampling_time_range[1]
     max_command_step = max_command_time / self._env.step_dt
     self.metrics["error_vel_xy"] += (
@@ -271,6 +316,32 @@ class UniformVelocityCommand(CommandTerm):
           torch.rand(len(turn_ids), device=self.device) < 0.5, -1.0, 1.0
         )
         self.vel_command_b[turn_ids, 2] = wz_mag * wz_sign
+    lateral_focus = torch.zeros(len(env_ids), dtype=torch.bool, device=self.device)
+    if self.cfg.lateral_focus_prob > 0.0:
+      # v21a pure-lateral focus episodes, GRID-COMPATIBLE (unlike the
+      # exclusive axis_focus lottery, which the grid sampler forbids): with
+      # probability lateral_focus_prob the (vx, wz) draw — grid or uniform —
+      # is overridden by a pure-lateral command, |vy| ~ U(lateral_focus_band),
+      # sign uniform. Rationale: the grid owns (vx, wz) but vy is an
+      # independent box draw, so pure-lateral commands (the deployable
+      # strafe) are measure-zero without a focus mode; the v21 lit review
+      # (section 2.5) makes relaxed-offset lateral gaits a headline goal.
+      # These envs are excluded from grid cell attribution below (they
+      # demonstrate no (vx, wz) competence). No RNG is consumed when the
+      # probability is 0 — pre-v21a presets sample bit-identically.
+      lateral_focus = (
+        torch.rand(len(env_ids), device=self.device) < self.cfg.lateral_focus_prob
+      )
+      lat_ids = env_ids[lateral_focus]
+      mag = torch.empty(len(lat_ids), device=self.device).uniform_(
+        *self.cfg.lateral_focus_band
+      )
+      sign = torch.where(
+        torch.rand(len(lat_ids), device=self.device) < 0.5, -1.0, 1.0
+      )
+      self.vel_command_b[lat_ids, 0] = 0.0
+      self.vel_command_b[lat_ids, 1] = mag * sign
+      self.vel_command_b[lat_ids, 2] = 0.0
     if self.pose_enabled:
       # v14 pose-mode mix, applied at resample like axis_focus. Modes
       # (probabilities in cfg.pose_mode_probs, summing to 1):
@@ -352,7 +423,9 @@ class UniformVelocityCommand(CommandTerm):
       )
       cell = ix * self._grid_n_wz + iz
       zeroed = torch.norm(self.vel_command_b[env_ids, :3], dim=1) == 0.0
-      cell[zeroed | self.is_standing_env[env_ids]] = -1
+      # lateral_focus episodes track vy only ((vx, wz) forced to zero) and
+      # must not unlock (vx, wz) cells any more than standing envs do.
+      cell[zeroed | self.is_standing_env[env_ids] | lateral_focus] = -1
       self.grid_cell_index[env_ids] = cell
 
     init_vel_mask = r.uniform_(0.0, 1.0) < self.cfg.init_velocity_prob
@@ -555,6 +628,15 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   turn_at_speed_prob: float = 0.0
   turn_vx_band: tuple[float, float] = (0.15, 0.45)
   turn_wz_band: tuple[float, float] = (0.5, 1.5)
+  # v21a pure-lateral focus (2026-07-15), grid-COMPATIBLE: applied AFTER the
+  # (vx, wz) draw (grid or uniform), overriding it with vx = wz = 0 and
+  # |vy| ~ U(lateral_focus_band) (sign uniform) on a lateral_focus_prob
+  # fraction of resamples. Unlike axis_focus_probs this composes with
+  # grid_curriculum: the affected envs are excluded from cell attribution.
+  # Band lower edge must exceed the 0.05 stand gate. 0.0 = off (default,
+  # no RNG consumed — pre-v21a presets sample bit-identically).
+  lateral_focus_prob: float = 0.0
+  lateral_focus_band: tuple[float, float] = (0.08, 0.20)
   # v14 body-pose channels (opt-in; all None = upstream 3-dim behavior).
   # (p_nominal, p_pose_hold, p_posed_walk) applied at resample; must sum to 1.
   # When set, the command is [vx, vy, wz, body_pitch, base_height] and
@@ -599,6 +681,24 @@ class UniformVelocityCommandCfg(CommandTermCfg):
     # v17's known-trackable band.
     seed_lin_vel_x: tuple[float, float] = (-0.15, 0.25)
     seed_ang_vel_z: tuple[float, float] = (-0.5, 0.5)
+    # v21b-v3 achieved-velocity AND-gate (opt-in; None = pre-existing
+    # frac-only behavior, bit-identical for every task that leaves it
+    # unset). The v21b 10k postmortem (docs/research/
+    # v19-postmortem-v4-plant-2026-07-15.md, gate-metric fix): idle
+    # episodes on lethal terrain pass the frac gates on cells nobody
+    # actually tracks (the v19-v5 idle-inversion), unlocking 100% of the
+    # grid by iter 2000 while the policy stands still. When set, a cell
+    # unlock ADDITIONALLY requires the cell's mean achieved/commanded
+    # velocity ratio >= this threshold on EVERY commanded axis:
+    #   - linear (episodes with |cmd_xy| >= 0.05): episode-mean of
+    #     dot(achieved_v_xy, cmd_xy) / |cmd_xy|^2, clipped to [0, 1]
+    #     (directional — reverse motion scores 0);
+    #   - angular (episodes with |wz| >= 0.1): analogous on wz;
+    #   - cells commanding neither axis (stand cells) are exempt (frac
+    #     gates only).
+    # Ratios are averaged per cell over the episodes attributed to it in
+    # the reset batch (same attribution/reset hooks as the frac gates).
+    unlock_min_vel_ratio: float | None = None
 
   # None = off: the sampler is bit-identical to the pre-grid code (all grid
   # code is behind `if self.grid_enabled` and consumes no RNG when off).
@@ -649,6 +749,13 @@ class UniformVelocityCommandCfg(CommandTermCfg):
         raise ValueError("grid_curriculum is incompatible with heading_command.")
       if self.grid_curriculum.vx_cell_size <= 0 or self.grid_curriculum.wz_cell_size <= 0:
         raise ValueError("grid_curriculum cell sizes must be positive.")
+      if self.grid_curriculum.unlock_min_vel_ratio is not None and not (
+        0.0 < self.grid_curriculum.unlock_min_vel_ratio <= 1.0
+      ):
+        raise ValueError(
+          f"grid_curriculum.unlock_min_vel_ratio must be in (0, 1], got "
+          f"{self.grid_curriculum.unlock_min_vel_ratio}."
+        )
     if self.slow_vx_prob or self.fast_vx_prob or self.turn_at_speed_prob:
       if self.axis_focus_probs is None:
         raise ValueError(
@@ -669,6 +776,19 @@ class UniformVelocityCommandCfg(CommandTermCfg):
         raise ValueError(
           f"slow_vx_band must be ascending and sit above the 0.05 stand "
           f"gate, got {self.slow_vx_band}."
+        )
+    if self.lateral_focus_prob:
+      if not (0.0 < self.lateral_focus_prob <= 1.0):
+        raise ValueError(
+          f"lateral_focus_prob must be in (0, 1], got {self.lateral_focus_prob}."
+        )
+      if (
+        self.lateral_focus_band[0] <= 0.05
+        or self.lateral_focus_band[1] <= self.lateral_focus_band[0]
+      ):
+        raise ValueError(
+          f"lateral_focus_band must be ascending and sit above the 0.05 "
+          f"stand gate, got {self.lateral_focus_band}."
         )
     if self.fast_vx_prob:
       if self.fast_vx_band_fwd is None or self.fast_vx_band_back is None:

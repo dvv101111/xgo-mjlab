@@ -6,3 +6,11 @@ wandb
 .venv/
 __pycache__/
 *.pyc
+# Campaign temp assets (2026-07-16): bulky per-run artifacts stay out of git.
+# Small chain/eval/diag text logs remain committable as campaign records.
+train_*.log
+autopsy_*/
+benchmark_*
+*.time
+.ipynb_checkpoints/
+V21B_*_DONE

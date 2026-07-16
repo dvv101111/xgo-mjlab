@@ -119,6 +119,339 @@ def actuator_gains_and_strength(
     )
 
 
+def _terrain_level_severity(
+  env: ManagerBasedRlEnv, env_ids: torch.Tensor
+) -> torch.Tensor:
+  """Per-env hazard-DR severity fraction from the terrain curriculum (V21B).
+
+  s = terrain_level / top_row in [0, 1]: envs on difficulty row 0 get benign
+  physics, envs on the top row the full configured DR severity, linear in
+  between — curriculum-coupled DR (v21b-v4 postmortem: full-severity hazards
+  on ALL rows from iteration 0 crashed the warm-started flat gait before
+  terrain skill could form, teaching "walking = crashing = bad").
+
+  The authoritative per-env level source is the terrain entity's
+  ``terrain_levels`` tensor (moved by ``terrain_levels_reward_gated`` at the
+  top of ``_reset_idx``, i.e. BEFORE reset-mode events fire, so redraws see
+  the episode's new level). ``max_terrain_level`` is the row COUNT
+  (terrain_entity.py), so the top reachable row is ``max_terrain_level - 1``.
+  Requires generator terrain with curriculum env origins — fails fast
+  otherwise.
+  """
+  terrain = env.scene.terrain
+  if terrain is None or getattr(terrain, "terrain_levels", None) is None:
+    raise ValueError(
+      "severity_by_terrain_level requires generator terrain with curriculum "
+      "env origins (no terrain_levels on this scene)."
+    )
+  top_row = int(terrain.max_terrain_level) - 1
+  if top_row <= 0:
+    raise ValueError(
+      "severity_by_terrain_level needs at least 2 terrain difficulty rows."
+    )
+  return terrain.terrain_levels[env_ids].float() / float(top_row)
+
+
+@requires_model_fields("geom_solref", "geom_solimp")
+def foot_contact_compliance(
+  env: ManagerBasedRlEnv,
+  env_ids: torch.Tensor | None,
+  timeconst_range: tuple[float, float],
+  solimp_d0_range: tuple[float, float],
+  solimp_dmax_range: tuple[float, float],
+  solimp_width_range: tuple[float, float],
+  severity_by_terrain_level: bool = False,
+  benign_timeconst_max: float = 0.05,
+  benign_solimp: tuple[float, float, float] = (0.9, 0.95, 0.001),
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> None:
+  """Per-env contact-compliance DR on the foot-pad geoms (V21B).
+
+  Singh et al. (arXiv:2504.13619, Humanoids 2024) fake soft household
+  ground (foam / mattress / grass, real transfer) purely by randomizing the
+  MuJoCo contact ``solref`` time constant in (0.02, 0.4) — "completely
+  stiff to spring-like". This event transplants that recipe per ENV: one
+  compliance draw per environment at startup, written to the foot-pad
+  geoms' ``geom_solref``/``geom_solimp`` model rows (mjwarp carries both
+  per-world once expanded — collision_core.py indexes them with
+  ``worldid % shape[0]``).
+
+  Why the FOOT side carries the ground's compliance: the foot pads have
+  ``priority = 1`` (v19_spec) vs the terrain's 0, and MuJoCo resolves
+  differing priorities by taking the HIGHER-priority geom's solref/solimp
+  outright (mix = 1.0) — so writing the pads is exactly equivalent to
+  writing every terrain geom, at 4 writes/env instead of ~100, and it
+  composes with the same priority rule that makes the low foot friction
+  win (the max-mixing fix).
+
+  Ranges, anchored at the ~1.4 kPa foot pressure (577 g / 4 pads):
+  - ``timeconst`` U(0.02, 0.4) s — Singh's verbatim band (>= 2 * the
+    0.002 s physics timestep, MuJoCo's stability floor).
+  - ``solimp`` d0 U(0.6, 0.9), dmax U(0.9, 0.97), width U(0.001, 0.010) m
+    — brackets the (0.9, 0.95, 0.001) default from "hard tile" toward
+    "carpet pile": at 1.4 kPa real rugs/foam deflect mm-scale, so the
+    mushy low-impedance zone (width) is capped at 1 cm. d0 is clamped
+    below dmax (MuJoCo requires d0 <= dmax).
+  Midpoint/power (solimp[3:5]) stay at model defaults.
+
+  ``severity_by_terrain_level`` (opt-in, v21b-v5, wire with ``mode="reset"``
+  so the draw tracks the env's current level): the ranges above are the
+  FULL-severity (s=1, top difficulty row) endpoints; per env they are
+  linearly interpolated toward benign anchors with
+  s = level / top_row (``_terrain_level_severity``):
+  - timeconst upper endpoint: ``benign_timeconst_max`` (0.05 s, near-rigid)
+    at s=0 -> ``timeconst_range[1]`` at s=1; the lower endpoint stays.
+  - each solimp endpoint: the ``benign_solimp`` anchor (the MuJoCo model
+    default (d0, dmax, width) = (0.9, 0.95, 0.001)) at s=0 -> the
+    configured endpoint at s=1, so row-0 draws collapse to default
+    contacts and top-row draws are exactly the ranges above.
+  Default False keeps the original single-severity draw bit-identical.
+  """
+  asset: Entity = env.scene[asset_cfg.name]
+  if env_ids is None:
+    env_ids = torch.arange(env.num_envs, device=env.device, dtype=torch.long)
+  else:
+    env_ids = env_ids.to(device=env.device, dtype=torch.long)
+  geom_ids = asset.indexing.geom_ids[asset_cfg.geom_ids].to(torch.long)
+
+  def _u(lo: float, hi: float) -> torch.Tensor:
+    # One draw per env, shared across the selected geoms (compliance is a
+    # property of the ground the whole robot stands on).
+    return torch.empty(len(env_ids), 1, device=env.device).uniform_(lo, hi)
+
+  if severity_by_terrain_level:
+    if not timeconst_range[0] <= benign_timeconst_max <= timeconst_range[1]:
+      raise ValueError(
+        f"benign_timeconst_max must lie inside timeconst_range, got "
+        f"{benign_timeconst_max} vs {timeconst_range}."
+      )
+    s = _terrain_level_severity(env, env_ids).unsqueeze(1)  # [n, 1]
+
+    def _rand() -> torch.Tensor:
+      return torch.rand(len(env_ids), 1, device=env.device)
+
+    def _u_sev(rng: tuple[float, float], anchor: float) -> torch.Tensor:
+      # Per-env range endpoints interpolated benign-anchor -> full range.
+      eff_lo = anchor + s * (rng[0] - anchor)
+      eff_hi = anchor + s * (rng[1] - anchor)
+      return eff_lo + _rand() * (eff_hi - eff_lo)
+
+    eff_tc_hi = benign_timeconst_max + s * (timeconst_range[1] - benign_timeconst_max)
+    timeconst = timeconst_range[0] + _rand() * (eff_tc_hi - timeconst_range[0])
+    dmax = _u_sev(solimp_dmax_range, benign_solimp[1])
+    d0 = torch.minimum(_u_sev(solimp_d0_range, benign_solimp[0]), dmax - 1e-3)
+    width = _u_sev(solimp_width_range, benign_solimp[2])
+  else:
+    timeconst = _u(*timeconst_range)
+    dmax = _u(*solimp_dmax_range)
+    d0 = torch.minimum(_u(*solimp_d0_range), dmax - 1e-3)
+    width = _u(*solimp_width_range)
+
+  env_grid, geom_grid = torch.meshgrid(env_ids, geom_ids, indexing="ij")
+  shape = env_grid.shape
+  model = env.sim.model
+  model.geom_solref[env_grid, geom_grid, 0] = timeconst.expand(shape)
+  # solref[1] (dampratio) stays at the default 1.0: Singh randomizes the
+  # time constant only, and underdamped contacts bounce.
+  model.geom_solimp[env_grid, geom_grid, 0] = d0.expand(shape)
+  model.geom_solimp[env_grid, geom_grid, 1] = dmax.expand(shape)
+  model.geom_solimp[env_grid, geom_grid, 2] = width.expand(shape)
+
+
+class foot_slip_event(ManagerTermBase):
+  """Transient per-foot slip events (V21B): rug-edge / tile-strip slips.
+
+  Miki et al. (arXiv:2201.08117, Science Robotics 2022) inject transient
+  slip by "occasionally setting the feet's friction low"; the lit review
+  ranks it (with the friction low tail) as the evidenced slippery-surface
+  recipe. Each environment, at random intervals drawn from
+  ``interval_range_s``, has ONE random foot's sliding friction dropped to
+  an absolute U(``mu_range``) for U(``duration_range_s``) seconds, then
+  restored to the exact pre-slip (startup-DR'd) value.
+
+  The drop is effective against every terrain geom because the foot pads
+  carry ``priority = 1``: MuJoCo's friction combination takes the
+  higher-priority geom's friction outright instead of the element-wise MAX
+  (the "ice tile is a silent no-op" gotcha), so a 0.02 foot beats the
+  1.0-friction terrain.
+
+  Implementation note (why ``mode="step"`` and not ``mode="interval"``):
+  mjlab interval events fire a callback when a per-env timer expires but
+  provide no delayed second callback, and the RESTORE must happen a
+  precise 0.2-0.5 s after the drop. The term therefore runs as a step-mode
+  state machine that reproduces interval semantics internally: per-env
+  start timer (resampled from ``interval_range_s`` after each slip and on
+  reset) plus per-env active-slip countdown. Envs that reset mid-slip get
+  their saved friction restored in ``reset()`` when ``restore_on_reset``
+  is True (the right semantics when the base friction DR is startup-only
+  and never re-runs on episode resets).
+
+  ``severity_by_terrain_level`` (opt-in, v21b-v5): the drawn slip friction
+  is interpolated per env between the foot's CURRENT (pre-slip) value and
+  the drawn ``mu_range`` low, mu_eff = saved + s * (drawn - saved) with
+  s = level / top_row (``_terrain_level_severity``). Row 0 slips are exact
+  no-ops (benign physics for beginners), top-row slips are the full Miki
+  drop — the pre-severity behavior bit-for-bit.
+
+  ``restore_on_reset=False`` (v21b-v5, REQUIRED when the base friction is
+  re-randomized by a reset-mode event): ``_reset_idx`` applies reset-mode
+  events BEFORE calling ``event_manager.reset`` (manager_based_rl_env.py),
+  so restoring the stale saved value here would overwrite the fresh
+  friction draw on the slipped pad. With the flag off, reset only
+  deactivates the slip and resamples the timer; the reset-mode friction
+  event owns the value.
+  """
+
+  # Read by EventManager._prepare_terms: geom_friction must be a per-world
+  # tensor even if no other friction DR term is active.
+  model_fields = ("geom_friction",)
+
+  def __init__(self, cfg: EventTermCfg, env: ManagerBasedRlEnv):
+    super().__init__(env)
+    # Remaining params arrive via __call__ kwargs; reset() has no kwargs,
+    # so the reset-behavior switch is consumed here.
+    self._restore_on_reset = bool(cfg.params.get("restore_on_reset", True))
+    self._initialized = False
+    self._geom_ids: torch.Tensor | None = None
+    self._interval_range: tuple[float, float] = (0.0, 0.0)
+    n = env.num_envs
+    dev = env.device
+    self._active = torch.zeros(n, dtype=torch.bool, device=dev)
+    self._slip_foot = torch.zeros(n, dtype=torch.long, device=dev)
+    self._slip_left = torch.zeros(n, device=dev)
+    self._time_to_next = torch.zeros(n, device=dev)
+    self._saved_mu = torch.zeros(n, device=dev)
+
+  def _sample_interval(self, n: int) -> torch.Tensor:
+    lo, hi = self._interval_range
+    return torch.empty(n, device=self.device).uniform_(lo, hi)
+
+  def _restore(self, env_ids: torch.Tensor) -> None:
+    if len(env_ids) == 0:
+      return
+    gids = self._geom_ids[self._slip_foot[env_ids]]  # type: ignore[index]
+    self._env.sim.model.geom_friction[env_ids, gids, 0] = self._saved_mu[env_ids]
+    self._active[env_ids] = False
+    self._time_to_next[env_ids] = self._sample_interval(len(env_ids))
+
+  def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
+    if not self._initialized:
+      return
+    if env_ids is None:
+      env_ids = torch.arange(self.num_envs, device=self.device)
+    elif isinstance(env_ids, slice):
+      env_ids = torch.arange(self.num_envs, device=self.device)[env_ids]
+    if self._restore_on_reset:
+      self._restore(env_ids[self._active[env_ids]])
+    else:
+      # A reset-mode friction event already redrew the base friction for
+      # these envs (it fires before this reset hook); just drop the slip.
+      self._active[env_ids] = False
+    self._time_to_next[env_ids] = self._sample_interval(len(env_ids))
+
+  def __call__(
+    self,
+    env: ManagerBasedRlEnv,
+    env_ids: torch.Tensor | None,
+    interval_range_s: tuple[float, float],
+    duration_range_s: tuple[float, float],
+    mu_range: tuple[float, float],
+    severity_by_terrain_level: bool = False,
+    restore_on_reset: bool = True,
+    asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+  ) -> None:
+    del env_ids  # mode="step" fires unconditionally on all envs.
+    del restore_on_reset  # Consumed in __init__ (reset() has no kwargs).
+    if not self._initialized:
+      asset: Entity = env.scene[asset_cfg.name]
+      self._geom_ids = asset.indexing.geom_ids[asset_cfg.geom_ids].to(torch.long)
+      self._interval_range = tuple(interval_range_s)  # type: ignore[assignment]
+      self._time_to_next = self._sample_interval(env.num_envs)
+      self._initialized = True
+    assert self._geom_ids is not None
+    dt = env.step_dt
+    friction = env.sim.model.geom_friction
+
+    # 1. Expire running slips and restore the saved friction.
+    self._slip_left = torch.where(
+      self._active, self._slip_left - dt, self._slip_left
+    )
+    expired = self._active & (self._slip_left <= 0.0)
+    self._restore(expired.nonzero().flatten())
+
+    # 2. Tick the start timers of inactive envs; fire due slips.
+    inactive = ~self._active
+    self._time_to_next = torch.where(
+      inactive, self._time_to_next - dt, self._time_to_next
+    )
+    start_ids = (inactive & (self._time_to_next <= 0.0)).nonzero().flatten()
+    if len(start_ids) > 0:
+      n = len(start_ids)
+      foot = torch.randint(0, len(self._geom_ids), (n,), device=self.device)
+      gids = self._geom_ids[foot]
+      self._saved_mu[start_ids] = friction[start_ids, gids, 0]
+      slip_mu = torch.empty(n, device=self.device).uniform_(*mu_range)
+      if severity_by_terrain_level:
+        # s=0: mu_eff == the saved value, an exact no-op slip; s=1: the
+        # full drawn drop (pre-severity behavior, bit-for-bit).
+        s = _terrain_level_severity(env, start_ids)
+        saved = self._saved_mu[start_ids]
+        slip_mu = saved + s * (slip_mu - saved)
+      friction[start_ids, gids, 0] = slip_mu
+      self._slip_foot[start_ids] = foot
+      self._slip_left[start_ids] = torch.empty(
+        n, device=self.device
+      ).uniform_(*duration_range_s)
+      self._active[start_ids] = True
+
+
+@requires_model_fields("geom_friction")
+def foot_friction_terrain_scaled(
+  env: ManagerBasedRlEnv,
+  env_ids: torch.Tensor | None,
+  friction_range: tuple[float, float],
+  benign_low: float,
+  asset_cfg: SceneEntityCfg = _DEFAULT_ASSET_CFG,
+) -> None:
+  """Per-env foot friction DR with a terrain-level-scaled low tail (V21B).
+
+  Replaces the startup ``dr.geom_friction`` draw for v21b (other tasks keep
+  the upstream event untouched): the (0.05, 2.0) ice tail at FULL severity
+  from iteration 0 on ALL terrain rows crashed the warm-started flat gait
+  before terrain skill could form (v21b-v4 postmortem). Wire with
+  ``mode="reset"`` so the draw tracks the env's CURRENT terrain level (the
+  curriculum moves levels at the top of ``_reset_idx``, before reset-mode
+  events fire). The LOW endpoint interpolates with severity,
+
+    mu ~ U(benign_low + s * (lo - benign_low), hi),  s = level / top_row,
+
+  so row 0 draws mu >= ``benign_low`` (no ice under beginners) and the top
+  row draws the full configured range. The high end stays fixed — high
+  friction is not a hazard. One tangential draw per env, shared across the
+  selected pads (the ``shared_random=True`` contract of the event this
+  replaces); torsional/rolling components stay at model defaults. Requires
+  generator terrain with the level curriculum (fails fast otherwise).
+  Composes with ``foot_slip_event``: set its ``restore_on_reset=False``
+  (see that docstring for the ``_reset_idx`` ordering).
+  """
+  lo, hi = friction_range
+  if not lo <= benign_low <= hi:
+    raise ValueError(
+      f"benign_low must lie inside friction_range, got {benign_low} vs "
+      f"{friction_range}."
+    )
+  asset: Entity = env.scene[asset_cfg.name]
+  if env_ids is None:
+    env_ids = torch.arange(env.num_envs, device=env.device, dtype=torch.long)
+  else:
+    env_ids = env_ids.to(device=env.device, dtype=torch.long)
+  geom_ids = asset.indexing.geom_ids[asset_cfg.geom_ids].to(torch.long)
+  s = _terrain_level_severity(env, env_ids)
+  eff_lo = benign_low + s * (lo - benign_low)
+  mu = eff_lo + torch.rand(len(env_ids), device=env.device) * (hi - eff_lo)
+  env.sim.model.geom_friction[env_ids[:, None], geom_ids, 0] = mu.unsqueeze(1)
+
+
 def piecewise_tau_line(
   qd_abs: torch.Tensor,
   tau_max: torch.Tensor | float,

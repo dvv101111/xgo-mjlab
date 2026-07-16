@@ -125,6 +125,19 @@ PRESETS = {
      ("fwd_030", 0.30, 0.0), ("fwd_040", 0.40, 0.0), ("back_010", -0.10, 0.0),
      ("turn_015_08", 0.15, 0.8)],
   ),
+  # v21a extension (gait family + scheduled clock): v20 buckets for
+  # like-for-like + the lateral frontier this preset exists for. NOTE:
+  # lateral buckets exercise the WALK member (lateral-dominant command
+  # switches offsets/duty), so trot-phase template stats only apply to
+  # the fwd/turn buckets.
+  "v21a": (
+    "XGOLite-V21A",
+    "logs/rsl_rl/xgolite_v21a/2026-07-15_22-16-35_v21a_v1ext/model_4998.pt",
+    [("fwd_006", 0.06, 0.0), ("fwd_010", 0.10, 0.0), ("fwd_015", 0.15, 0.0),
+     ("fwd_030", 0.30, 0.0), ("fwd_040", 0.40, 0.0), ("back_010", -0.10, 0.0),
+     ("turn_015_08", 0.15, 0.8), ("lat_015", (0.0, 0.15), 0.0),
+     ("lat_020", (0.0, 0.20), 0.0)],
+  ),
   "sprint": (
     "XGOLite-Sprint",
     "logs/rsl_rl/xgolite_sprint/2026-07-11_21-41-50_sprint_v1/model_1499.pt",
@@ -235,8 +248,11 @@ def main() -> None:
 
   results = {}
   for bucket_name, vx, wz in buckets:
+    # vx may be a scalar (vy pinned 0) or a (vx, vy) tuple for lateral
+    # buckets (v21a walk member).
+    vx, vy = vx if isinstance(vx, tuple) else (vx, 0.0)
     term.cfg.ranges.lin_vel_x = (vx, vx)
-    term.cfg.ranges.lin_vel_y = (0.0, 0.0)
+    term.cfg.ranges.lin_vel_y = (vy, vy)
     term.cfg.ranges.ang_vel_z = (wz, wz)
 
     obs, _ = wrapped.reset()
@@ -380,7 +396,7 @@ def main() -> None:
       }
 
     res = {
-      "cmd": [vx, 0.0, wz],
+      "cmd": [vx, vy, wz],
       "n_clean_envs": n_clean,
       "falls": falls,
       "vx_ach": float(arr["vxb"][:, clean].mean()),

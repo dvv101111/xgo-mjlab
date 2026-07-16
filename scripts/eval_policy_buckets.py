@@ -11,7 +11,12 @@ task_id defaults to XGOLite-Flat (the v17 baseline env). Pass the preset's
 own task id (e.g. XGOLite-Precision) to evaluate under that preset's plant —
 the Precision acceptance gates (speed-accuracy-analysis.md 3.7) run under
 full DR including the preset's stiction/damping DR.
+
+EVAL_LATERAL_BUCKETS=1 (env var) appends the v21a wide-lateral buckets
+(vy 0.10/0.15/0.20 both signs). Opt-in so pre-v21a evals keep their exact
+output.
 """
+import os
 import sys
 from dataclasses import asdict
 
@@ -70,6 +75,18 @@ BUCKETS = {
     "pose_high": (0.0, 0.0, 0.0, 0.0, 0.138),
 }
 
+# v21a wide-lateral buckets (walk-member regime, vy range +-0.20): opt-in
+# via EVAL_LATERAL_BUCKETS=1 so other tasks' eval output is unchanged.
+if os.environ.get("EVAL_LATERAL_BUCKETS"):
+    BUCKETS.update({
+        "left_10":  (0.0, 0.10, 0.0) + NOMINAL_POSE,
+        "right_10": (0.0, -0.10, 0.0) + NOMINAL_POSE,
+        "left_15":  (0.0, 0.15, 0.0) + NOMINAL_POSE,
+        "right_15": (0.0, -0.15, 0.0) + NOMINAL_POSE,
+        "left_20":  (0.0, 0.20, 0.0) + NOMINAL_POSE,
+        "right_20": (0.0, -0.20, 0.0) + NOMINAL_POSE,
+    })
+
 configure_torch_backends()
 device = "cuda:0"
 
@@ -93,6 +110,9 @@ uenv = env.unwrapped
 term = uenv.command_manager.get_term("twist")
 # Axis-focus resampling would zero components of the forced commands.
 term.cfg.axis_focus_probs = None
+# v21a lateral-focus resampling would override the forced commands with
+# pure-lateral draws; off for the same reason (no-op pre-v21a).
+term.cfg.lateral_focus_prob = 0.0
 # Pose-mode override: force every resample into nominal mode, which uses
 # cfg.nominal_pose verbatim and leaves the sampled twist untouched (pose_hold
 # would zero the twist, posed_walk would scale it by 0.5). The pose is then

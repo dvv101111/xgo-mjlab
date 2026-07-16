@@ -15,6 +15,8 @@ from .rl_cfg import xgolite_ppo_runner_cfg
 from .sim_fidelity import xgolite_precision2_env_cfg, xgolite_v18draft_env_cfg
 from .v19 import xgolite_v19_env_cfg, xgolite_v19_ppo_runner_cfg
 from .v20 import xgolite_v20_env_cfg, xgolite_v20_ppo_runner_cfg
+from .v21a import xgolite_v21a_env_cfg, xgolite_v21a_ppo_runner_cfg
+from .v21b import xgolite_v21b_env_cfg, xgolite_v21b_ppo_runner_cfg
 
 register_mjlab_task(
   task_id="XGOLite-Flat",
@@ -120,5 +122,33 @@ register_mjlab_task(
   env_cfg=xgolite_v20_env_cfg(),
   play_env_cfg=xgolite_v20_env_cfg(play=True),
   rl_cfg=xgolite_v20_ppo_runner_cfg(),
+  runner_cls=VelocityOnPolicyRunner,
+)
+# V20 + the v21 gait-discovery stack (2026-07-15 lit review, shortlist B):
+# ORC phase-contact reward on a speed-scheduled per-env phase clock with a
+# lateral-dominant walk member, morphological-symmetry REWARD instead of
+# the trot-only mirror loss/augmentation (symmetry=False), feet_air_time
+# guard, vy widened to +-0.2 with grid-compatible lateral focus episodes.
+# See v21a.py for parameter provenance.
+register_mjlab_task(
+  task_id="XGOLite-V21A",
+  env_cfg=xgolite_v21a_env_cfg(),
+  play_env_cfg=xgolite_v21a_env_cfg(play=True),
+  rl_cfg=xgolite_v21a_ppo_runner_cfg(),
+  runner_cls=VelocityOnPolicyRunner,
+)
+# V21A + the v21 terrain stack (2026-07-15 lit review, shortlist A2-A5):
+# scaled procedural terrain grid (10 difficulty rows, HIM-leaning stair
+# weighting, steps <= 0.5 leg lengths), critic-only height scan (actor
+# stays the blind 49-dim deploy contract), terrain-relative base-height +
+# foot-clearance rewards, per-env contact-compliance DR, friction low tail
+# (0.05) + transient per-foot slip events, reward-gated terrain-level
+# curriculum with the low-speed demotion guard. 3000-iter default (fresh
+# terrain run). See v21b.py for parameter provenance.
+register_mjlab_task(
+  task_id="XGOLite-V21B",
+  env_cfg=xgolite_v21b_env_cfg(),
+  play_env_cfg=xgolite_v21b_env_cfg(play=True),
+  rl_cfg=xgolite_v21b_ppo_runner_cfg(),
   runner_cls=VelocityOnPolicyRunner,
 )
