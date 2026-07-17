@@ -1,0 +1,10 @@
+[chain] 2026-07-16T19:04:49 v21b_v6 chain pid 2323990 starting
+[chain] 2026-07-16T19:04:49 START XGOLite-V21B (10000 iters, 4096 envs) -> train_v21b_v6.log
+[chain] 2026-07-16T23:44:36 END XGOLite-V21B rc=0
+[chain] 2026-07-16T23:44:36 EVAL v21b_v6_flat ckpt=logs/rsl_rl/xgolite_v21b/2026-07-16_19-04-52_v21b_v6/model_9999.pt task=XGOLite-V21A
+[chain] 2026-07-16T23:48:40 EVAL-END v21b_v6_flat rc=0
+[chain] 2026-07-16T23:48:40 DIAG v21b_v6 ckpt=logs/rsl_rl/xgolite_v21b/2026-07-16_19-04-52_v21b_v6/model_9999.pt
+[chain] 2026-07-16T23:49:45 DIAG-END v21b_v6 rc=0
+[chain] 2026-07-16T23:49:45 TERRAIN-EVAL v21b_v6 ckpt=logs/rsl_rl/xgolite_v21b/2026-07-16_19-04-52_v21b_v6/model_9999.pt
+[chain] 2026-07-16T23:52:50 TERRAIN-EVAL-END v21b_v6 rc=0
+[chain] 2026-07-16T23:52:50 CHAIN COMPLETE (V21B_V6_DONE written)
