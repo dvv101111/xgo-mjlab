@@ -57,7 +57,9 @@ def apply_measured_joint_dynamics(spec) -> None:
   """
   for joint, p in MEASURED_JOINTS.items():
     j = spec.joint(joint + "_joint")
-    j.damping = p["damping"]
+    # mujoco >= 3.10: MjsJoint damping is a per-DOF array (a hinge uses
+    # element 0); armature/frictionloss stay scalar.
+    j.damping[0] = p["damping"]
     j.armature = p["armature"]
     j.frictionloss = p["frictionloss"]
     a = spec.actuator(joint + "_joint")

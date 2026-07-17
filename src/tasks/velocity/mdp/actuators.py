@@ -1,7 +1,8 @@
 """Local actuator extensions for the XGO velocity tasks.
 
 Per-servo response-delay DR (2026-07-12 sim-fidelity fix #2): mjlab's
-``DelayedActuator`` draws ONE lag per environment, so all 12 servos of a
+built-in command delay (``ActuatorCfg.delay_*`` + ``Actuator._delay_buffer``
+since mjlab 1.5) draws ONE lag per environment, so all 12 servos of a
 robot share the same command delay. Real hobby serial-bus servos have
 per-servo, load-dependent lag, and it is the DIFFERENTIAL lag between the
 loaded and unloaded legs that desynchronizes gaits on hardware (front/rear
@@ -19,13 +20,14 @@ as err_eff = err - clip(err, -deadband, +deadband); the training-stack
 equivalent lives on ``PerServoDelayedActuator`` as a first-class field (see
 its docstring), applied to the post-delay position target.
 
-Opt-in: the default robot config keeps mjlab's ``DelayedActuatorCfg``
+Opt-in: the default robot config keeps mjlab's built-in per-env delay
 untouched; presets switch via ``enable_per_servo_delay`` /
 ``enable_servo_deadband`` in ``config/xgolite/sim_fidelity.py``.
 """
 
 from __future__ import annotations
 
+import dataclasses
 from collections.abc import Sequence
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
@@ -34,8 +36,8 @@ import mujoco
 import mujoco_warp as mjwarp
 import torch
 
-from mjlab.actuator.actuator import Actuator, ActuatorCmd
-from mjlab.actuator.delayed_actuator import DelayedActuator, DelayedActuatorCfg
+from mjlab.actuator.actuator import ActuatorCmd
+from mjlab.actuator.xml_actuator import XmlActuator, XmlActuatorCfg
 
 if TYPE_CHECKING:
   from mjlab.entity import Entity
@@ -241,8 +243,8 @@ class PerServoDelayBuffer:
 
 
 @dataclass(kw_only=True)
-class PerServoDelayedActuatorCfg(DelayedActuatorCfg):
-  """DelayedActuatorCfg whose lags are drawn independently per servo."""
+class PerServoDelayedActuatorCfg(XmlActuatorCfg):
+  """XmlActuatorCfg whose command-delay lags are drawn independently per servo."""
 
   deadband_range: tuple[float, float] = (0.0, 0.0)
   """Lost-motion (backlash) half-width range [rad].
@@ -264,16 +266,18 @@ class PerServoDelayedActuatorCfg(DelayedActuatorCfg):
   def build(
     self, entity: Entity, target_ids: list[int], target_names: list[str]
   ) -> PerServoDelayedActuator:
-    base_actuator = self.base_cfg.build(entity, target_ids, target_names)
-    return PerServoDelayedActuator(self, base_actuator)
+    return PerServoDelayedActuator(self, entity, target_ids, target_names)
 
 
-class PerServoDelayedActuator(DelayedActuator):
-  """DelayedActuator with an independent delay AND deadband per (env, servo).
+class PerServoDelayedActuator(XmlActuator):
+  """XmlActuator with an independent delay AND deadband per (env, servo).
 
-  Delay: identical to the parent except ``initialize`` builds
-  ``PerServoDelayBuffer`` instances; ``set_lags`` is inherited (the buffer
-  API is interchangeable).
+  Delay: identical to the base ``Actuator`` command delay except
+  ``_init_delay_buffer`` builds a ``PerServoDelayBuffer`` (lag shape
+  ``(num_envs, num_servos)`` instead of ``(num_envs,)``); ``set_lags`` and
+  ``apply_delay``/``delay_command`` are inherited — the buffer API is
+  interchangeable, and the stacked ``(envs, servos, 3)`` command frames
+  pass through the per-(env, servo) gather unchanged.
 
   Deadband (lost motion / gear backlash, 2026-07-13 servo-ID finding): the
   post-delay position target is shrunk toward the current measured joint
@@ -287,12 +291,13 @@ class PerServoDelayedActuator(DelayedActuator):
   (``src/servo_id/actuator_model.pd_clamped_torque``): inside the band the
   position error produces no torque, outside it the response is shifted-
   linear. Order matches the physical signal path: serial-bus delay first,
-  then backlash at the gear output — so the deadband is applied AFTER the
-  delay buffer selects the lagged target. ``compute`` runs once per physics
-  substep (``Entity.write_data_to_sim`` inside the decimation loop), so the
-  shrunk target is refreshed from the current ``q`` at physics rate; the
-  written ctrl then holds for that one substep, the same one-step-hold
-  compromise as ``TorqueSpeedClamp``.
+  then backlash at the gear output — so the deadband is applied in
+  ``apply_delay`` AFTER the buffer selects the lagged target and before
+  ``compute`` writes the ctrl. ``apply_delay``/``compute`` run once per
+  physics substep (``Entity._apply_actuator_controls`` inside the
+  decimation loop), so the shrunk target is refreshed from the current
+  ``q`` at physics rate; the written ctrl then holds for that one substep,
+  the same one-step-hold compromise as ``TorqueSpeedClamp``.
 
   ``db`` is drawn per (env, servo) from ``cfg.deadband_range`` at
   ``initialize`` and redrawn for reset envs in ``reset``. A ``(0.0, 0.0)``
@@ -300,9 +305,29 @@ class PerServoDelayedActuator(DelayedActuator):
   per-servo delayed actuator, no extra RNG consumption).
   """
 
-  def __init__(self, cfg: PerServoDelayedActuatorCfg, base_actuator: Actuator) -> None:
-    super().__init__(cfg, base_actuator)
+  def __init__(
+    self,
+    cfg: PerServoDelayedActuatorCfg,
+    entity: Entity,
+    target_ids: list[int],
+    target_names: list[str],
+  ) -> None:
+    super().__init__(cfg, entity, target_ids, target_names)
     self._deadband: torch.Tensor | None = None
+
+  def _init_delay_buffer(self, num_envs: int, device: str) -> None:
+    if not self.has_delay:
+      return
+    self._delay_buffer = PerServoDelayBuffer(  # type: ignore[assignment]
+      min_lag=self.cfg.delay_min_lag,
+      max_lag=self.cfg.delay_max_lag,
+      batch_size=num_envs,
+      num_targets=len(self._target_ids_list),
+      device=device,
+      hold_prob=self.cfg.delay_hold_prob,
+      update_period=self.cfg.delay_update_period,
+      per_env_phase=self.cfg.delay_per_env_phase,
+    )
 
   def initialize(
     self,
@@ -311,71 +336,27 @@ class PerServoDelayedActuator(DelayedActuator):
     data: mjwarp.Data,
     device: str,
   ) -> None:
-    self._base_actuator.initialize(mj_model, model, data, device)
-
-    self._target_ids = self._base_actuator._target_ids
-    self._ctrl_ids = self._base_actuator._ctrl_ids
-    self._global_ctrl_ids = self._base_actuator._global_ctrl_ids
-
-    targets = (
-      (self.cfg.delay_target,)
-      if isinstance(self.cfg.delay_target, str)
-      else self.cfg.delay_target
-    )
-    num_targets = len(self._base_actuator._target_ids_list)
-
-    for target in targets:
-      self._delay_buffers[target] = PerServoDelayBuffer(  # type: ignore[assignment]
-        min_lag=self.cfg.delay_min_lag,
-        max_lag=self.cfg.delay_max_lag,
-        batch_size=data.nworld,
-        num_targets=num_targets,
-        device=device,
-        hold_prob=self.cfg.delay_hold_prob,
-        update_period=self.cfg.delay_update_period,
-        per_env_phase=self.cfg.delay_per_env_phase,
-      )
-
+    super().initialize(mj_model, model, data, device)
     if self.cfg.deadband_range[1] > 0.0:
       self._deadband = torch.empty(
-        (data.nworld, num_targets), dtype=torch.float32, device=device
+        (data.nworld, len(self._target_ids_list)),
+        dtype=torch.float32,
+        device=device,
       ).uniform_(*self.cfg.deadband_range)
 
-  def compute(self, cmd: ActuatorCmd) -> torch.Tensor:
+  def apply_delay(self, cmd: ActuatorCmd) -> ActuatorCmd:
+    cmd = super().apply_delay(cmd)
     if self._deadband is None:
-      return super().compute(cmd)
-
-    position_target = cmd.position_target
-    velocity_target = cmd.velocity_target
-    effort_target = cmd.effort_target
-
-    if "position" in self._delay_buffers:
-      self._delay_buffers["position"].append(cmd.position_target)
-      position_target = self._delay_buffers["position"].compute()
-    if "velocity" in self._delay_buffers:
-      self._delay_buffers["velocity"].append(cmd.velocity_target)
-      velocity_target = self._delay_buffers["velocity"].compute()
-    if "effort" in self._delay_buffers:
-      self._delay_buffers["effort"].append(cmd.effort_target)
-      effort_target = self._delay_buffers["effort"].compute()
+      return cmd
 
     # Lost motion at the gear output: applied AFTER the (bus) delay, on the
     # position target only. Written clamp-style to mirror the Stage-1 model
     # expression-for-expression.
-    err = position_target - cmd.pos
+    err = cmd.position_target - cmd.pos
     position_target = cmd.pos + (
       err - err.clamp(min=-self._deadband, max=self._deadband)
     )
-
-    return self._base_actuator.compute(
-      ActuatorCmd(
-        position_target=position_target,
-        velocity_target=velocity_target,
-        effort_target=effort_target,
-        pos=cmd.pos,
-        vel=cmd.vel,
-      )
-    )
+    return dataclasses.replace(cmd, position_target=position_target)
 
   def reset(self, env_ids: torch.Tensor | slice | None = None) -> None:
     super().reset(env_ids)

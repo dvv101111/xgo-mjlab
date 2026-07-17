@@ -19,7 +19,7 @@ Three OPT-IN fixes, each a pure add-on (existing tasks stay bit-identical):
    single-line envelope exactly: tau_max = 0.22 N*m (XML forcerange),
    qd_knee = 0 (droop starts at qd 0), qd_max = 4.5 rad/s (bench line fit).
 
-2. ``enable_per_servo_delay``: swaps the robot's ``DelayedActuatorCfg``
+2. ``enable_per_servo_delay``: swaps the robot's delayed ``XmlActuatorCfg``
    for the local ``PerServoDelayedActuatorCfg`` — same 60-100 ms range,
    hold probability and staggered 0.5 s refresh, but each servo draws its
    lag independently (see ``mdp.actuators``).
@@ -46,7 +46,7 @@ preset, call the helpers on its cfg after construction, e.g.::
 
 import dataclasses
 
-from mjlab.actuator import DelayedActuatorCfg
+from mjlab.actuator import XmlActuatorCfg
 from mjlab.envs import ManagerBasedRlEnvCfg
 from mjlab.managers.event_manager import EventTermCfg
 from mjlab.managers.scene_entity_config import SceneEntityCfg
@@ -101,17 +101,16 @@ def enable_per_servo_delay(cfg: ManagerBasedRlEnvCfg) -> None:
   assert robot.articulation is not None
   new_actuators = []
   for act_cfg in robot.articulation.actuators:
-    if isinstance(act_cfg, DelayedActuatorCfg) and not isinstance(
-      act_cfg, local_mdp.PerServoDelayedActuatorCfg
+    if (
+      isinstance(act_cfg, XmlActuatorCfg)
+      and act_cfg.delay_max_lag > 0
+      and not isinstance(act_cfg, local_mdp.PerServoDelayedActuatorCfg)
     ):
       act_cfg = local_mdp.PerServoDelayedActuatorCfg(
-        base_cfg=act_cfg.base_cfg,
-        delay_target=act_cfg.delay_target,
-        delay_min_lag=act_cfg.delay_min_lag,
-        delay_max_lag=act_cfg.delay_max_lag,
-        delay_hold_prob=act_cfg.delay_hold_prob,
-        delay_update_period=act_cfg.delay_update_period,
-        delay_per_env_phase=act_cfg.delay_per_env_phase,
+        **{
+          f.name: getattr(act_cfg, f.name)
+          for f in dataclasses.fields(act_cfg)
+        }
       )
     new_actuators.append(act_cfg)
   articulation = dataclasses.replace(
@@ -142,7 +141,7 @@ def enable_servo_deadband(
     if isinstance(act_cfg, local_mdp.PerServoDelayedActuatorCfg):
       act_cfg = dataclasses.replace(act_cfg, deadband_range=deadband_range)
       found = True
-    elif isinstance(act_cfg, DelayedActuatorCfg):
+    elif isinstance(act_cfg, XmlActuatorCfg) and act_cfg.delay_max_lag > 0:
       raise TypeError(
         "enable_servo_deadband requires the per-servo delayed actuator; "
         "call enable_per_servo_delay(cfg) first."

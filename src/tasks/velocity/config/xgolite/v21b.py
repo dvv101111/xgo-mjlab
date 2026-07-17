@@ -184,7 +184,9 @@ from .v21a import xgolite_v21a_env_cfg
 # --- Terrain geometry (see module docstring point 1 for the leg math). ---
 V21B_TILE_SIZE = (2.0, 2.0)          # m; mid-size 8 m tile scaled ~/4
 V21B_NUM_ROWS = 10                   # difficulty levels
-V21B_NUM_COLS = 10                   # terrain type columns
+V21B_NUM_COLS = 10                   # ignored by mjlab >= 1.5 curriculum mode
+                                     # (one column per family; proportions
+                                     # weight spawning only)
 V21B_MAX_INIT_LEVEL = 2              # initial spawns on rows 0-2 only
 V21B_STEP_HEIGHT_RANGE = (0.005, 0.030)  # m; max = 0.5 x 0.06 m leg link
 V21B_STEP_WIDTH = 0.08               # m tread run
@@ -266,8 +268,10 @@ class HfDifficultyRandomUniformTerrainCfg(terrain_gen.HfRandomUniformTerrainCfg)
 def xgolite_v21b_terrain_gen_cfg() -> TerrainGeneratorCfg:
   """Scaled-for-577g terrain grid (fresh cfg — ROUGH_TERRAINS_CFG untouched).
 
-  Column allocation at 10 columns (cumulative-proportion rule): flat 2,
-  rough 1, stairs 2, inverted stairs 2, slope 1, inverted slope 1, wave 1.
+  mjlab >= 1.5 curriculum mode: ONE column per family in sub_terrains order
+  (flat, rough, stairs, inv stairs, slope, inv slope, wave); the proportion
+  fields weight robot spawning across columns, matching the old 10-column
+  cumulative-proportion allocation in expectation.
   """
   return TerrainGeneratorCfg(
     size=V21B_TILE_SIZE,

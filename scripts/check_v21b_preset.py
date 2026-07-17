@@ -118,9 +118,13 @@ SMOKE_STEPS = 20
 SEED = 0
 DEVICE = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-# Column layout of xgolite_v21b_terrain_gen_cfg (cumulative proportions):
-COL_FLAT = 0          # cols 0-1 flat
-COL_STAIRS = 3        # cols 3-4 pyramid stairs
+# Column layout of xgolite_v21b_terrain_gen_cfg. mjlab >= 1.5 generates ONE
+# column per sub-terrain family in sub_terrains dict order (num_cols is
+# ignored in curriculum mode; proportions only weight robot spawning):
+# 0 flat, 1 random_rough, 2 pyramid_stairs, 3 pyramid_stairs_inv,
+# 4 pyramid_slope, 5 pyramid_slope_inv, 6 wave.
+COL_FLAT = 0
+COL_STAIRS = 2
 
 _failures: list[str] = []
 
@@ -208,10 +212,11 @@ def main() -> None:
   terrain = env.scene.terrain
   gen_cfg = cfg.scene.terrain.terrain_generator
   check(
-    "terrain generator active: 7 families, 10 rows x 10 cols",
+    "terrain generator active: 7 families, 10 rows x 1 column each",
     cfg.scene.terrain.terrain_type == "generator"
     and len(gen_cfg.sub_terrains) == 7
-    and tuple(terrain.terrain_origins.shape[:2]) == (V21B_NUM_ROWS, V21B_NUM_COLS),
+    and tuple(terrain.terrain_origins.shape[:2])
+    == (V21B_NUM_ROWS, len(gen_cfg.sub_terrains)),
     f"origins {tuple(terrain.terrain_origins.shape)}",
   )
   init_max = int(terrain.terrain_levels.max())

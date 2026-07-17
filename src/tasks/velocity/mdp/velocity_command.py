@@ -601,6 +601,11 @@ class UniformVelocityCommandCfg(CommandTermCfg):
   heading_control_stiffness: float = 1.0
   rel_standing_envs: float = 0.0
   rel_heading_envs: float = 1.0
+  # mjlab 1.5 upstream fields, accepted so the dataclasses.fields copy from
+  # the registry default cfg keeps working. The fork sampler does not
+  # implement them; __post_init__ rejects non-zero values.
+  rel_world_envs: float = 0.0
+  rel_forward_envs: float = 0.0
   init_velocity_prob: float = 0.0
   # (p_pure_rotation, p_pure_lateral, p_backward_only) applied at resample;
   # None = plain independent uniform sampling (upstream behavior).
@@ -727,6 +732,11 @@ class UniformVelocityCommandCfg(CommandTermCfg):
     return UniformVelocityCommand(self, env)
 
   def __post_init__(self):
+    if self.rel_world_envs or self.rel_forward_envs:
+      raise ValueError(
+        "rel_world_envs/rel_forward_envs are mjlab-upstream features the "
+        "fork's UniformVelocityCommand does not implement; keep them 0.0."
+      )
     if self.heading_command and self.ranges.heading is None:
       raise ValueError(
         "The velocity command has heading commands active (heading_command=True) but "

@@ -9,7 +9,7 @@ from pathlib import Path
 import mujoco
 
 from src import SRC_PATH
-from mjlab.actuator import DelayedActuatorCfg, XmlPositionActuatorCfg
+from mjlab.actuator import XmlActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
 
 ##
@@ -39,11 +39,13 @@ def get_spec() -> mujoco.MjSpec:
 # can only shave the ~15-25 ms network share, so the policy must own the
 # rest: position-target delay 60-100 ms (30-50 physics steps at 2 ms),
 # slowly varying per env.
-XGOLITE_XML_ACTUATOR = DelayedActuatorCfg(
-  base_cfg=XmlPositionActuatorCfg(
-    target_names_expr=(".*",),
-  ),
-  delay_target="position",
+# mjlab >= 1.5: command delay lives on the base ActuatorCfg (position,
+# velocity and effort targets are stacked through one buffer; the XGO XML
+# position servos only consume the position target, so this matches the old
+# position-only delay exactly).
+XGOLITE_XML_ACTUATOR = XmlActuatorCfg(
+  target_names_expr=(".*",),
+  command_field="position",
   delay_min_lag=30,
   delay_max_lag=50,
   delay_hold_prob=0.8,

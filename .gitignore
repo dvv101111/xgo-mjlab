@@ -9,6 +9,8 @@ __pycache__/
 # Campaign temp assets (2026-07-16): bulky per-run artifacts stay out of git.
 # Small chain/eval/diag text logs remain committable as campaign records.
 train_*.log
+probe_*.log
+fixprobe_*.log
 autopsy_*/
 benchmark_*
 *.time

@@ -5,9 +5,8 @@ from pathlib import Path
 import mujoco
 
 from src import SRC_PATH
-from mjlab.actuator import XmlPositionActuatorCfg
+from mjlab.actuator import XmlActuatorCfg
 from mjlab.entity import EntityArticulationInfoCfg, EntityCfg
-from mjlab.utils.os import update_assets
 
 ##
 # MJCF and assets.
@@ -21,10 +20,14 @@ assert XGOMINI_XML.exists()
 
 def get_assets(meshdir: str) -> dict[str, bytes]:
   """Load mesh assets for XGOMINI from the mesh directory referenced by meshdir."""
+  # mjlab.utils.os.update_assets was removed in mjlab 1.5; keys keep the
+  # meshdir prefix so MjSpec resolves them like file references.
   assets: dict[str, bytes] = {}
   meshdir_clean = meshdir.rstrip("/")
   mesh_path = (XGOMINI_XML.parent / meshdir_clean).resolve()
-  update_assets(assets, mesh_path, meshdir_clean)
+  for f in mesh_path.glob("*"):
+    if f.is_file():
+      assets[f"{meshdir_clean}/{f.name}"] = f.read_bytes()
   return assets
 
 
@@ -38,8 +41,9 @@ def get_spec() -> mujoco.MjSpec:
 # Actuator config.
 ##
 
-XGOMINI_XML_ACTUATOR = XmlPositionActuatorCfg(
+XGOMINI_XML_ACTUATOR = XmlActuatorCfg(
   target_names_expr=(".*",),
+  command_field="position",
 )
 
 ##

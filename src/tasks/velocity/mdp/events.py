@@ -6,8 +6,7 @@ from typing import TYPE_CHECKING
 
 import torch
 
-from mjlab.actuator import BuiltinPositionActuator, XmlPositionActuator
-from mjlab.actuator.delayed_actuator import DelayedActuator
+from mjlab.actuator import BuiltinPositionActuator, XmlActuator
 from mjlab.entity import Entity
 from mjlab.managers.event_manager import EventTermCfg, requires_model_fields
 from mjlab.managers.manager_base import ManagerTermBase
@@ -28,8 +27,17 @@ def _resolve_actuators(asset: Entity, asset_cfg: SceneEntityCfg) -> list:
   return [asset.actuators[asset_cfg.actuator_ids]]
 
 
+# actuator_acc0 is not randomized here — it is expanded per-world to
+# neutralize an upstream mujoco-warp bug (3.10.0.2, still on main):
+# io._compute_actuator_acc0 writes actuator_acc0_out[worldid, actid]
+# WITHOUT the `% shape[0]` guard every sibling kernel uses, so any
+# set_const() recompute (fired after DR events) with nworld > 1 writes
+# out of bounds past the (1, nu) allocation and corrupts neighboring
+# device arrays (illegal-memory-access crashes above ~128 envs).
+# Expanding the field makes the write in-bounds and per-world correct.
 @requires_model_fields(
-  "actuator_gainprm", "actuator_biasprm", "actuator_forcerange"
+  "actuator_gainprm", "actuator_biasprm", "actuator_forcerange",
+  "actuator_acc0",
 )
 def actuator_gains_and_strength(
   env: ManagerBasedRlEnv,
@@ -75,10 +83,6 @@ def actuator_gains_and_strength(
     actuators = asset.actuators[asset_cfg.actuator_ids]
   else:
     actuators = [asset.actuators[asset_cfg.actuator_ids]]
-  actuators = [
-    a.base_actuator if isinstance(a, DelayedActuator) else a for a in actuators
-  ]
-
   def _uniform(lo: float, hi: float, shape: tuple[int, ...]) -> torch.Tensor:
     return torch.empty(shape, device=env.device).uniform_(lo, hi)
 
@@ -89,7 +93,13 @@ def actuator_gains_and_strength(
   default_forcerange = env.sim.get_default_field("actuator_forcerange")
 
   for actuator in actuators:
-    if not isinstance(actuator, (BuiltinPositionActuator, XmlPositionActuator)):
+    if not (
+      isinstance(actuator, BuiltinPositionActuator)
+      or (
+        isinstance(actuator, XmlActuator)
+        and actuator.command_field == "position"
+      )
+    ):
       raise TypeError(
         "actuator_gains_and_strength only supports position actuators "
         f"(optionally delayed), got {type(actuator).__name__}"
@@ -543,8 +553,6 @@ class TorqueSpeedClamp(ManagerTermBase):
     joint_ids: list[torch.Tensor] = []
     ctrl_ids: list[torch.Tensor] = []
     for actuator in _resolve_actuators(asset, asset_cfg):
-      # DelayedActuator proxies target_ids/global_ctrl_ids of its base, and
-      # both index the same joints, so no unwrapping is needed.
       joint_ids.append(actuator.target_ids)
       ctrl_ids.append(actuator.global_ctrl_ids)
     self._joint_ids = torch.cat(joint_ids)
