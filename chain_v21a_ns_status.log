@@ -1,0 +1,23 @@
+[chain] 2026-07-17T14:53:16 v21a_ns chain pid 403254 starting
+[chain] 2026-07-17T14:53:23 preset checker PASS
+[chain] 2026-07-17T14:53:23 START XGOLite-V21A (2500 iters, 4096 envs) -> train_v21a_ns1.log
+[chain] 2026-07-17T15:18:12 END XGOLite-V21A rc=0
+[chain] 2026-07-17T15:18:12 EVAL v21a_ns1 ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_14-53-25_v21a_ns1/model_2499.pt
+[chain] 2026-07-17T15:21:53 EVAL-END v21a_ns1 rc=0
+[chain] 2026-07-17T15:21:53 DIAG v21a_ns1 ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_14-53-25_v21a_ns1/model_2499.pt
+[chain] 2026-07-17T15:22:52 DIAG-END v21a_ns1 rc=0
+[chain] 2026-07-17T15:22:52 START XGOLite-V21A (5000 iters, 4096 envs) -> train_v21a_ns1ext.log
+[chain] 2026-07-17T16:11:44 END XGOLite-V21A rc=0
+[chain] 2026-07-17T16:11:44 EVAL v21a_ns1ext ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_15-22-55_v21a_ns1ext/model_7498.pt
+[chain] 2026-07-17T16:15:23 EVAL-END v21a_ns1ext rc=0
+[chain] 2026-07-17T16:15:23 DIAG v21a_ns1ext ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_15-22-55_v21a_ns1ext/model_7498.pt
+[chain] 2026-07-17T16:16:22 DIAG-END v21a_ns1ext rc=0
+[chain] 2026-07-17T16:16:22 CHAIN COMPLETE (V21A_NS_DONE written)
+[chain] 2026-07-17T16:17:51 v21a_ns_ext2 corrective stage pid 857770 starting
+[chain] 2026-07-17T16:17:51 START XGOLite-V21A (2500 iters, 4096 envs) -> train_v21a_ns1ext2.log
+[chain] 2026-07-17T16:42:28 END XGOLite-V21A rc=0
+[chain] 2026-07-17T16:42:28 EVAL v21a_ns1ext2 ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_16-17-54_v21a_ns1ext2/model_4998.pt
+[chain] 2026-07-17T16:46:07 EVAL-END v21a_ns1ext2 rc=0
+[chain] 2026-07-17T16:46:07 DIAG v21a_ns1ext2 ckpt=logs/rsl_rl/xgolite_v21a/2026-07-17_16-17-54_v21a_ns1ext2/model_4998.pt
+[chain] 2026-07-17T16:47:06 DIAG-END v21a_ns1ext2 rc=0
+[chain] 2026-07-17T16:47:06 EXT2 COMPLETE (V21A_NS_EXT2_DONE written)

@@ -11,8 +11,10 @@ __pycache__/
 train_*.log
 probe_*.log
 fixprobe_*.log
+check_*.log
+gate_*.log
 autopsy_*/
 benchmark_*
 *.time
 .ipynb_checkpoints/
-V21B_*_DONE
+V21*_DONE
