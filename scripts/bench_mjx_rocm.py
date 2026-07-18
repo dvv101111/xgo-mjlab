@@ -19,42 +19,19 @@ from __future__ import annotations
 import argparse
 import json
 import os
-import shlex
 import time
 from collections.abc import Sequence
 
+import jax
+import jax.numpy as jp
+import mujoco
+import numpy as np
+from mujoco import mjx
 
-# gfx1151's current Triton GEMM autotuner cannot compile a small batched GEMM
-# used by MJX.  These flags select the stable XLA/ROCm code-generation path.
-# They must be installed before importing JAX.
-_REQUIRED_XLA_FLAGS = {
-  "--xla_gpu_enable_triton_gemm": "false",
-  "--xla_gpu_triton_gemm_any": "false",
-  "--xla_gpu_autotune_level": "0",
-}
-
-
-def _configure_rocm_environment() -> None:
-  os.environ.setdefault("AMD_COMGR_NAMESPACE", "1")
-  tokens = shlex.split(os.environ.get("XLA_FLAGS", ""))
-  keys = tuple(f"{key}=" for key in _REQUIRED_XLA_FLAGS)
-  tokens = [token for token in tokens if not token.startswith(keys)]
-  tokens.extend(f"{key}={value}" for key, value in _REQUIRED_XLA_FLAGS.items())
-  os.environ["XLA_FLAGS"] = " ".join(tokens)
-
-
-_configure_rocm_environment()
-
-import jax  # noqa: E402  (XLA flags must be set first)
-import jax.numpy as jp  # noqa: E402
-import mujoco  # noqa: E402
-import numpy as np  # noqa: E402
-from mujoco import mjx  # noqa: E402
-
-import mjlab.tasks  # noqa: E402,F401  (registry)
-import src.tasks  # noqa: E402,F401  (local task registry)
-from mjlab.envs import ManagerBasedRlEnv  # noqa: E402
-from mjlab.tasks.registry import load_env_cfg  # noqa: E402
+import mjlab.tasks  # noqa: F401  (registry)
+import src.tasks  # noqa: F401  (local task registry)
+from mjlab.envs import ManagerBasedRlEnv
+from mjlab.tasks.registry import load_env_cfg
 
 
 def _parse_args() -> argparse.Namespace:
@@ -201,7 +178,7 @@ def main() -> None:
   device, platform_version = _require_rocm()
   print(
     f"[ROCm] device={device.device_kind!r}, platform={platform_version!r}, "
-    f"XLA_FLAGS={os.environ['XLA_FLAGS']!r}",
+    f"XLA_FLAGS={os.environ.get('XLA_FLAGS', '')!r}",
     flush=True,
   )
 

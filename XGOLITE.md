@@ -66,8 +66,9 @@ AMD path uses MuJoCo MJX/JAX over ROCm instead:
     MUJOCO_GL=egl .venv/bin/python scripts/bench_mjx_rocm.py --row 9 --col 3
 
 The script requires matching `jax`, `jaxlib`, `jax-rocm7-plugin`, and
-`jax-rocm7-pjrt` installations and refuses to benchmark a CPU fallback. It
-also applies the required gfx1151 XLA workaround before importing JAX.
+`jax-rocm7-pjrt` installations and refuses to benchmark a CPU fallback.
+(The gfx1151 Triton-GEMM XLA workaround that jax 0.9.2 needed is obsolete
+since jax 0.10.2; the default XLA pipeline is used as-is.)
 
 V21B's generated model contains a 10x10 terrain atlas. MJX performs poorly if
 all 100 mutually-exclusive tiles remain in one static collision graph, so the
